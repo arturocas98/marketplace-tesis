@@ -120,5 +120,8 @@
       }
     }
   },
-  "defaultProject": "marketplace-tesis"
+  "defaultProject": "marketplace-tesis",
+  "cli": {
+    "analytics": "12ebf6f9-b3ed-41e4-b9df-dca8e9e6f91f"
+  }
 }
