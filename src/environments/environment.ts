@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  url_image : "http://localhost:4200/assets/",
+  url_api:"https://marketplace-tesis.firebaseio.com",
 };
 
 /*

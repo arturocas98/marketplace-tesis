@@ -1,18 +1,32 @@
 <!--=====================================
 	Header Promotion
-	======================================-->
-
-<div class="ps-block--promotion-header bg--cover" style="background: url(img/banner/top/header-promotion.jpg);">
-    <div class="container">
-        <div class="ps-block__left">
-            <h3>20%</h3>
-            <figure>
-                <p>Discount</p>
-                <h4>For Books Of March</h4>
-            </figure>
+    ======================================-->
+<div *ngIf="!preload && top_banner!= null" >
+    <div class="ps-block--promotion-header bg--cover" style="background: url({{url_image}}img/banner/top/{{top_banner['IMG tag']}});">
+        <div class="container">
+            <div class="ps-block__left">
+                <h3>{{top_banner['H3 tag']}}</h3>
+                <figure>
+                    <p>{{top_banner['P1 tag']}}</p>
+                    <h4>{{top_banner['H4 tag']}}</h4>
+                </figure>
+            </div>
+            <div class="ps-block__center">
+                <p>{{top_banner['P2 tag']}}<span>{{top_banner['Span tag']}}</span></p>
+            </div><a class="ps-btn ps-btn--sm" href="#">{{top_banner['Button tag']}}</a>
         </div>
-        <div class="ps-block__center">
-            <p>Enter Promotion<span>Sale2019</span></p>
-        </div><a class="ps-btn ps-btn--sm" href="#">Shop now</a>
     </div>
+
+    
 </div>
+
+
+<!--=====================================
+Preload
+======================================-->
+<div *ngIf="preload && top_banner==null"  class="d-flex justify-content-center">
+    
+    <div class="spinner-border text-success my-3"></div>
+
+</div>
+

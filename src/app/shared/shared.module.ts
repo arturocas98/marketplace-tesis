@@ -5,6 +5,7 @@ import { HeaderPromotionComponent } from './components/header-promotion/header-p
 import { HeaderMobileComponent } from './components/header-mobile/header-mobile.component';
 import { NewletterComponent } from './components/newletter/newletter.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -12,6 +13,7 @@ import { FooterComponent } from './components/footer/footer.component';
   declarations: [HeaderComponent, HeaderPromotionComponent, HeaderMobileComponent, NewletterComponent, FooterComponent],
   imports: [
     CommonModule,
+    RouterModule
   ],
   exports:[
     HeaderComponent,
