@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 import { LayoutComponent } from './layout/layout.component';
 // import { DemoComponent } from './demo/demo.component';
@@ -14,44 +15,48 @@ const routes: Routes = [
     component: LayoutComponent,
     children:[
 
-    //   {
-    //     path:'',
-    //     redirectTo:'/home',
-    //     pathMatch:'full'
-    //   },
-    //   {
-    //     path:'home',
-    //     loadChildren:()=> import ('./home/home.module').then(m=>m.HomeModule)
+      {
+        path:'',
+        redirectTo:'/home',
+        pathMatch:'full'
+      },
+      {
+        path:'home',
+        loadChildren:()=> import ('./components/home/home.module').then(m=>m.HomeModule)
 
-    //   },
-    
-    //   {
-    //     path:'products',
+      },
+      {
+        path:'producto',
         
-    //     loadChildren:()=> import ('./product/products.module').then(m=> m.ProductsModule)
-    //     //para que cargar un modulo hijo 
-    //   },
-    //   {
-    //     path:'contact',
-    //     // canActivate:[AdminGuard],
-    //     component: ContactComponent
-    //   },
-    //   {
-    //     path:'order',
+        loadChildren:()=> import ('./components/producto/producto.module').then(m=> m.ProductoModule)
+        //para que cargar un modulo hijo 
+      },
+      {
+        path:'productos',
+        // canActivate:[AdminGuard],
+        loadChildren:()=> import ('./components/productos/productos.module').then(m=> m.ProductosModule)
+      },
+      {
+        path:'search',
         
-    //     loadChildren:()=> import ('./order/order.module').then(m=> m.OrderModule)
-    //     //para que cargar un modulo hijo 
-    //   },
-    //   {
-    //     path:'auth',
+        loadChildren:()=> import ('./components/search/search.module').then(m=> m.SearchModule)
+        //para que cargar un modulo hijo 
+      },
+
+      // {
+      //   path:'auth',
         
-    //     loadChildren:()=> import ('./auth/auth.module').then(m=> m.AuthModule)
-    //     //para que cargar un modulo hijo 
-    //   },
+      //   loadChildren:()=> import ('./auth/auth.module').then(m=> m.AuthModule)
+      //   //para que cargar un modulo hijo 
+      // },
       
 
     ]
   },
+  {
+    path:'**',
+    component: PageNotFoundComponent
+  }
 //   {
 //     path:'demo',
 //     component: DemoComponent
@@ -61,10 +66,7 @@ const routes: Routes = [
 //     canActivate:[AdminGuard],
 //     loadChildren:()=> import ('./admin/admin-routing.module').then(m=> m.AdminRoutingModule)
 //   },
-//   {
-//     path:'**',
-//     component: PageNotFoundComponent
-//   }
+
 
 ];
 
