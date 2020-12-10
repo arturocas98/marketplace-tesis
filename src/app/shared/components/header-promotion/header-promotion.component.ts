@@ -12,13 +12,14 @@ export class HeaderPromotionComponent implements OnInit {
   public top_banner:any;
   public preload:boolean;
   public categoria:any;
-
+  public url:any;
   constructor(
     private productoService:ProductoService,
   ) {
     this.top_banner = {};
 	this.preload = false;
 	this.categoria = {};
+	this.url= {};
   }
 
   ngOnInit(): void {
@@ -57,6 +58,8 @@ export class HeaderPromotionComponent implements OnInit {
 
 			this.top_banner = JSON.parse(resp[Object.keys(resp)[index]].top_banner);
 			this.categoria = resp[Object.keys(resp)[index]].category;
+			this.url = resp[Object.keys(resp)[index]].url;
+
 			console.log(resp);
 			this.preload = false;
 		

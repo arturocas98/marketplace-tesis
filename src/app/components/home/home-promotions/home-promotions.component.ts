@@ -1,35 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductoService } from 'src/app/core/producto/producto.service';
 import { environment } from 'src/environments/environment';
-import { OwlCarouselConfig,backgroundImage } from '../../../functions';
+
 @Component({
-  selector: 'app-home-banner',
-  templateUrl: './home-banner.component.html',
-  styleUrls: ['./home-banner.component.css']
+  selector: 'app-home-promotions',
+  templateUrl: './home-promotions.component.html',
+  styleUrls: ['./home-promotions.component.css']
 })
-export class HomeBannerComponent implements OnInit {
-  public url_image:String;
-  public banner_home:Array<any>;
+export class HomePromotionsComponent implements OnInit {
+  public url_image: string;
+  public banner_default:Array<any>;
   public categoria:any;
   public url:any;
-  public render:boolean;
   public preload:boolean;
-
 
   constructor(
     private productoService:ProductoService,
 
-  ) { 
+  ) {
     this.url_image = environment.url_image;
-    this.banner_home = [];
+    this.banner_default = [];
     this.categoria = [];
     this.url = [];
-    this.render =true;
-    this.preload  =false;
   }
 
   ngOnInit(): void {
-    this.preload =true;
     this.getData();
   }
   getData(){
@@ -46,29 +41,21 @@ export class HomeBannerComponent implements OnInit {
 
       }
       if (size > 5) {
-        index = Math.floor(Math.random()*size-5);
+        index = Math.floor(Math.random()*size-2);
 
       }
-      this.productoService.getLimit( Object.keys(resp)[index],5).subscribe(
-        res=>{
+      this.productoService.getLimit( Object.keys(resp)[index],2).subscribe(
+        res=>{ console.log("banner_default:",res);
           for (const i in res) {
             
-            this.banner_home.push(JSON.parse(res[i].horizontal_slider));
+            this.banner_default.push(res[i].default_banner);
             this.categoria.push(res[i].category);
             this.url.push(res[i].url);
           }
         }
       )
+     
     })
-  }
-
-
-  getPlugins(){
-    if (this.render) {
-      this.render = false;
-      OwlCarouselConfig.fnc();
-      backgroundImage.fnc();
-    }
   }
 
 }
