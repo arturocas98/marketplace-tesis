@@ -45,7 +45,8 @@ export class HomePromotionsComponent implements OnInit {
 
       }
       this.productoService.getLimit( Object.keys(resp)[index],2).subscribe(
-        res=>{ console.log("banner_default:",res);
+        res=>{ 
+          // console.log("banner_default:",res);
           for (const i in res) {
             
             this.banner_default.push(res[i].default_banner);

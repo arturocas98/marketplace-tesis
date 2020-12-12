@@ -60,7 +60,6 @@ export class HeaderPromotionComponent implements OnInit {
 			this.categoria = resp[Object.keys(resp)[index]].category;
 			this.url = resp[Object.keys(resp)[index]].url;
 
-			console.log(resp);
 			this.preload = false;
 		
 

@@ -1,9 +1,9 @@
 .header--market-place-4 .ps-dropdown a:hover {
-  color: #ffffff;
+  color: #000000;
 }
 
 .header--market-place-4 .header__extra span {
-  background-color: #000;
+  background-color: #5fa30f;
 }
 
 .header--market-place-4 .header__extra span i {
@@ -11,11 +11,11 @@
 }
 
 .header--market-place-4 .ps-block--user-header a:hover {
-  color: #fff;
+  color: #5fa30f;
 }
 
 .header--market-place-4 .header__top {
-  background-color: #dba500;
+  background-color: #5fa30f;
 }
 
 .header--market-place-4 .header__top .header__left p {
@@ -29,9 +29,9 @@
 .header--market-place-4 .header__top .header__top-links li > a {
   color: #000;
 }
-
+/* cambiar color al header */
 .header--market-place-4 .header__content {
-  background-color: #fcb800;
+  background-color: #ffffff;
 }
 
 .header--market-place-4 .header__content .container {
@@ -52,7 +52,7 @@
 }
 
 .header--market-place-4 .header__content-center .ps-form--quick-search button {
-  background-color: #000;
+  background-color: #5fa30f;
   color: #fff;
 }
 

@@ -1761,7 +1761,7 @@ button {
   border: none;
   font-weight: 600;
   border-radius: 4px;
-  background-color: #fcb800;
+  background-color: #5fa30f;
   -webkit-transition: all .4s ease;
   transition: all .4s ease;
   cursor: pointer;
@@ -3838,7 +3838,7 @@ textarea.form-control {
 
 .ps-block--site-features .ps-block__left i {
   font-size: 40px;
-  color: #fcb800;
+  color: #5fa30f;
 }
 
 .ps-block--site-features .ps-block__right {
@@ -4990,7 +4990,7 @@ textarea.form-control {
 .ps-block--container-hightlight .ps-section__header {
   padding: 16px 0;
   text-align: center;
-  background-color: #fcb800;
+  background-color: #5fa30f;
 }
 
 .ps-block--container-hightlight .ps-section__header h3 {
@@ -5155,7 +5155,7 @@ textarea.form-control {
 }
 
 .ps-block--menu-categories .ps-list--menu-cateogories .sub-menu > li > a:hover {
-  background-color: #fcb800;
+  background-color: #5fa30f;
 }
 
 @media (max-width: 1199px) {
@@ -5411,7 +5411,7 @@ textarea.form-control {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background-color: #fcb800;
+  background-color: #5fa30f;
   visibility: hidden;
   opacity: 0;
 }
@@ -5544,7 +5544,7 @@ textarea.form-control {
   transform: translateX(-50%);
   height: 100%;
   width: 2px;
-  background-color: #fcb800;
+  background-color: #5fa30f;
 }
 
 .ps-block--vendor-milestone .ps-block__left, .ps-block--vendor-milestone .ps-block__right {
@@ -5836,8 +5836,8 @@ textarea.form-control {
 }
 
 .ps-block--bought-toggether .ps-block__total .ps-btn--outline:hover {
-  background-color: #fcb800;
-  border-color: #fcb800;
+  background-color: #5fa30f;
+  border-color: #5fa30f;
 }
 
 .ps-block--bought-toggether .ps-btn--outline {
@@ -6005,14 +6005,14 @@ textarea.form-control {
 }
 
 .ps-block--promotion-header .ps-btn {
-  background-color: #f14705;
+  background-color: #529209;
   color: #ffffff;
   font-size: 14px;
   padding: 8px 20px;
 }
 
 .ps-block--promotion-header .ps-btn:hover {
-  background-color: #fcb800;
+  background-color: #5fa30f;
 }
 
 .ps-block--promotion-header .ps-block__left {
@@ -7245,7 +7245,7 @@ textarea.form-control {
 }
 
 .widget_contact-us .widget_content h3 {
-  color: #fcb800;
+  color: #5fa30f;
 }
 
 .widget_contact-us .widget_content .ps-list--social {
@@ -11899,7 +11899,7 @@ textarea.form-control {
 .ps-form--search-mobile button {
   width: 40px;
   height: 40px;
-  background-color: #000;
+  background-color: #5fa30f;
   border: none;
 }
 
@@ -15529,7 +15529,7 @@ textarea.form-control {
 }
 
 .header .header__extra:hover i {
-  color: #ffffff;
+  color: #5fa30f;
 }
 
 .header .header__actions {
@@ -15862,7 +15862,7 @@ textarea.form-control {
   z-index: 9999;
   text-align: center;
   border-bottom: 0 none;
-  background-color: #fcb800;
+  background-color: #ffffff;
   -webkit-transition: all 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955);
   transition: all 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955);
 }
@@ -15887,7 +15887,8 @@ textarea.form-control {
 }
 
 .header--mobile .header__extra span {
-  background-color: #fcb800;
+  /* background-color: #fcb800; */
+  background-color:#5fa30f;
 }
 
 .header--mobile .header__actions i {
@@ -15951,7 +15952,7 @@ textarea.form-control {
 }
 
 .header--mobile .header__extra span {
-  background-color: #000;
+  background-color: #5fa30f;
 }
 
 .header--mobile .header__extra span i {
