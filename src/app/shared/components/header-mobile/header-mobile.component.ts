@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CategoriaService } from 'src/app/core/categoria/categoria.service';
 import { SubcategoriaService } from 'src/app/core/categoria/sub_categoria.service';
 import { environment } from 'src/environments/environment';
+import { SiteToggleAction } from '../../../functions';
+
 declare var jQuery:any;
 declare var $:any;
 @Component({
@@ -78,6 +80,7 @@ export class HeaderMobileComponent implements OnInit {
           }
         )
       });
+      SiteToggleAction.fnc();
     }
   }
 

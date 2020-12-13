@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductoService } from 'src/app/core/producto/producto.service';
 import { environment } from 'src/environments/environment';
-import { OwlCarouselConfig, ProductLightbox, carouselNavigation,SlickConfig } from '../../../functions';
+import { CountDown, ProductLightbox, carouselNavigation,SlickConfig } from '../../../functions';
 declare var jQuery: any;
 declare var $: any;
 
@@ -103,11 +103,54 @@ export class HomeHotTodayComponent implements OnInit {
         }
       }
 
+      
+      let offer_1 = $(".offer_1");
+      let offer_2 = $(".offer_2");
+      let offer_3 = $(".offer_3");
+      for (let i = 0; i < offer_1.length; i++) {
+        let offer = JSON.parse($(offer_1[i]).attr("offer"));
+        let price = JSON.parse($(offer_1[i]).attr("price"));
+        if(offer[0] =='Descuento'){
+          $(offer_1[i]).html(
+
+						`<span>Save <br> $${(price * offer[1]/100).toFixed(2) }</span>`
+
+					)
+
+					$(offer_2[i]).html(`$${(price-(price * offer[1]/100)).toFixed(2)}`)	
+        }
+
+        if(offer[0] == "Fijo"){
+
+					$(offer_1[i]).html(
+
+						`<span>Save <br> $${(price-offer[1]).toFixed(2) }</span>`
+
+					)
+
+					$(offer_2[i]).html(`$${offer[1]}`)	
+
+        }
+        
+        $(offer_3[i]).attr("data-time", 
+
+						new Date(
+
+						parseInt(offer[2].split("-")[0]),
+						parseInt(offer[2].split("-")[1])-1,
+						parseInt(offer[2].split("-")[2])
+
+					)
+
+				)	
+
+      }
+
       // OwlCarouselConfig.fnc();
       ProductLightbox.fnc();
       SlickConfig.fnc();
       carouselNavigation.fnc();
-      
+      CountDown.fnc();
 
     }
   }
