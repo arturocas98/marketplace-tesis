@@ -404,21 +404,21 @@ export class AppComponent implements OnInit {
         });
       }
 
-      function rating() {
-        $('select.ps-rating').each(function () {
-          var readOnly;
-          if ($(this).attr('data-read-only') == 'true') {
-            readOnly = true
-          } else {
-            readOnly = false;
-          }
-          $(this).barrating({
-            theme: 'fontawesome-stars',
-            readonly: readOnly,
-            emptyValue: '0'
-          });
-        });
-      }
+      // function rating() {
+      //   $('select.ps-rating').each(function () {
+      //     var readOnly;
+      //     if ($(this).attr('data-read-only') == 'true') {
+      //       readOnly = true
+      //     } else {
+      //       readOnly = false;
+      //     }
+      //     $(this).barrating({
+      //       theme: 'fontawesome-stars',
+      //       readonly: readOnly,
+      //       emptyValue: '0'
+      //     });
+      //   });
+      // }
 
       // function productLightbox() {
       //   var product = $('.ps-product--detail');
@@ -737,7 +737,7 @@ export class AppComponent implements OnInit {
         tabs();
         // slickConfig();
         // productLightbox();
-        rating();
+        // rating();
         backToTop();
         stickyHeader();
         filterSlider();

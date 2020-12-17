@@ -23,4 +23,9 @@ export class ProductoService {
     let url = this.url_api+ `/producto.json?orderBy="$key"&startAt="${startAt}"&limitToFirst=${limitToFirst}&print=pretty`;
     return this.http.get(url);
   }
+
+  getByFilter(order:string,equal:string){
+    let url = this.url_api+ `/producto.json?orderBy="${order}"&equalTo="${equal}"&print=pretty`;
+    return this.http.get(url);
+  }
 }

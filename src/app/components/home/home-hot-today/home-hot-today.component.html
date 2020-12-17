@@ -18,7 +18,7 @@
 
                     <div class="ps-block__header">
 
-                        <h3>Deal hot today</h3>
+                        <h3>Ofertas del día</h3>
 
                         <div class="ps-block__navigation">
                             <a class="ps-carousel__prev" href=".ps-carousel--deal-hot">
@@ -85,30 +85,30 @@
                                             <h4 class="ps-product__price sale">
                                                 <span class="offer_2" >$36.78 </span> 
                                                 <del> 
-                                                    {{ products[index].name}}
+                                                    {{ products[index].price}}
 
                                                 </del>
                                             </h4>
 
-                                            <div class="ps-product__rating">
+                                            <div [attr.reviews]="products[i].reviews"  class="ps-product__rating review_1 ">
 
-                                                <select class="ps-rating" data-read-only="true">
+                                                <select class="ps-rating review_2" data-read-only="true">
 
-                                                    <option value="1">1</option>
+                                                    <!-- <option value="1">1</option>
                                                     <option value="1">2</option>
                                                     <option value="1">3</option>
                                                     <option value="1">4</option>
-                                                    <option value="2">5</option>
+                                                    <option value="2">5</option> -->
 
                                                 </select>
 
-                                                <span>(1 review)</span>
+                                                <span class="review_3" ></span>
 
                                             </div>
 
                                             <div class="ps-product__specification">
 
-                                                <p>Status:<strong class="in-stock"> In Stock</strong></p>
+                                                <p>Estado:<strong class="in-stock"> En Stock</strong></p>
 
                                             </div>
 
@@ -116,16 +116,16 @@
 
                                         <div class="ps-product__expires">
 
-                                            <p>Expires In</p>
+                                            <p>Expira en </p>
 
                                             <ul class="ps-countdown offer_3" [attr.data-time]="">
 
                                                 <li><span class="days"></span>
-                                                    <p>Days</p>
+                                                    <p>Días</p>
                                                 </li>
 
                                                 <li><span class="hours"></span>
-                                                    <p>Hours</p>
+                                                    <p>Horas</p>
                                                 </li>
 
                                                 <li><span class="minutes"></span>
@@ -142,11 +142,11 @@
 
                                         <div class="ps-product__processs-bar">
 
-                                            <div class="ps-progress" data-value="10">
+                                            <div class="ps-progress" [attr.data-value]="products[i].stock">
                                                 <span class="ps-progress__value"></span>
                                             </div>
 
-                                            <p><strong>4/79</strong> Sold</p>
+                                            <p><strong>{{ 100 - products[i].stock }}/100</strong> Vendidos</p>
 
                                         </div>
 
@@ -185,320 +185,31 @@
 
                 <aside class="widget widget_best-sale" data-mh="dealhot">
 
-                    <h3 class="widget-title">Top 20 Best Seller</h3>
+                    <h3 class="widget-title">Top 20 mejores vendidos</h3>
 
                     <div class="widget__content">
 
-                        <div class="owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="5000"
-                            data-owl-gap="0" data-owl-nav="false" data-owl-dots="false" data-owl-item="1"
+                        <div class="owl-slider" data-owl-auto="true" data-owl-loop="false" data-owl-speed="5000"
+                            data-owl-gap="0" data-owl-nav="false" data-owl-dots="true" data-owl-item="1"
                             data-owl-item-xs="1" data-owl-item-sm="1" data-owl-item-md="1" data-owl-item-lg="1"
                             data-owl-duration="1000" data-owl-mousedrag="on">
 
-                            <div class="ps-product-group">
+                            <div *ngFor="let block of topSalesBlock;let lastIndex = last;"  class="ps-product-group topSaleBlock">
+                                
 
-                                <!--=====================================
-										Product
-    									======================================-->
+                                {{ lastIndex?callbackBestSeller(topSales):"" }}
+                            
+                            </div>
 
-                                <div class="ps-product--horizontal">
-
-                                    <div class="ps-product__thumbnail">
-                                        <a href="product-default.html">
-                                            <img src="{{url_image}}img/products/technology/1.jpg" alt="">
-                                        </a>
-                                    </div>
-
-                                    <div class="ps-product__content">
-
-                                        <a class="ps-product__title" href="product-default.html">Sound Intone I65
-                                            Earphone White Version</a>
-
-                                        <div class="ps-product__rating">
-
-                                            <select class="ps-rating" data-read-only="true">
-                                                <option value="1">1</option>
-                                                <option value="1">2</option>
-                                                <option value="1">3</option>
-                                                <option value="1">4</option>
-                                                <option value="2">5</option>
-                                            </select>
-
-                                            <span>01</span>
-
-                                        </div>
-
-                                        <p class="ps-product__price">105.30</p>
-
-                                    </div>
-
-                                </div><!-- End Product -->
-
-                                <!--=====================================
-										Product
-    									======================================-->
-
-                                <div class="ps-product--horizontal">
-
-                                    <div class="ps-product__thumbnail">
-
-                                        <a href="product-default.html">
-                                            <img src="{{url_image}}img/products/technology/2.jpg" alt="">
-                                        </a>
-
-                                    </div>
-
-                                    <div class="ps-product__content">
-
-                                        <a class="ps-product__title" href="product-default.html">Beat Spill 2.0 Wireless
-                                            Speaker – White</a>
-
-                                        <div class="ps-product__rating">
-
-                                            <select class="ps-rating" data-read-only="true">
-                                                <option value="1">1</option>
-                                                <option value="1">2</option>
-                                                <option value="1">3</option>
-                                                <option value="1">4</option>
-                                                <option value="2">5</option>
-                                            </select>
-                                            <span>01</span>
-
-                                        </div>
-
-                                        <p class="ps-product__price">$125.00 <del>$135.00 </del></p>
-
-                                    </div>
-
-                                </div><!-- End Product -->
-
-                                <!--=====================================
-										Product
-    									======================================-->
-
-                                <div class="ps-product--horizontal">
-
-                                    <div class="ps-product__thumbnail">
-
-                                        <a href="product-default.html">
-                                            <img src="{{url_image}}img/products/technology/3.jpg" alt="">
-                                        </a>
-
-                                    </div>
-
-                                    <div class="ps-product__content">
-
-                                        <a class="ps-product__title" href="product-default.html">ASUS Chromebook Flip –
-                                            10.2 Inch</a>
-
-                                        <div class="ps-product__rating">
-
-                                            <select class="ps-rating" data-read-only="true">
-                                                <option value="1">1</option>
-                                                <option value="1">2</option>
-                                                <option value="1">3</option>
-                                                <option value="1">4</option>
-                                                <option value="2">5</option>
-                                            </select>
-                                            <span>02</span>
-
-                                        </div>
-
-                                        <p class="ps-product__price sale">$990.00 <del>$1250.00 </del></p>
-
-                                    </div>
-
-                                </div><!-- End Product -->
-
-                                <!--=====================================
-										Product
-    									======================================-->
-
-                                <div class="ps-product--horizontal">
-
-                                    <div class="ps-product__thumbnail">
-                                        <a href="product-default.html">
-                                            <img src="{{url_image}}img/products/technology/4.jpg" alt="">
-                                        </a>
-                                    </div>
-
-                                    <div class="ps-product__content">
-                                        <a class="ps-product__title" href="product-default.html">Apple Macbook Retina
-                                            Display 12”</a>
-
-                                        <div class="ps-product__rating">
-
-                                            <select class="ps-rating" data-read-only="true">
-                                                <option value="1">1</option>
-                                                <option value="1">2</option>
-                                                <option value="1">3</option>
-                                                <option value="1">4</option>
-                                                <option value="2">5</option>
-                                            </select>
-
-                                            <span>04</span>
-
-                                        </div>
-
-                                        <p class="ps-product__price">$1090.00 <del>$1550.00 </del></p>
-
-                                    </div>
-
-                                </div><!-- End Product -->
-
-                            </div><!-- End Product Group -->
-
-                            <div class="ps-product-group">
-
-                                <!--=====================================
-										Product
-    									======================================-->
-
-                                <div class="ps-product--horizontal">
-
-                                    <div class="ps-product__thumbnail">
-                                        <a href="product-default.html"><img
-                                                src="{{url_image}}img/products/technology/3.jpg" alt=""></a>
-                                    </div>
-
-                                    <div class="ps-product__content">
-
-                                        <a class="ps-product__title" href="product-default.html">ASUS Chromebook Flip –
-                                            10.2 Inch</a>
-
-                                        <div class="ps-product__rating">
-
-                                            <select class="ps-rating" data-read-only="true">
-                                                <option value="1">1</option>
-                                                <option value="1">2</option>
-                                                <option value="1">3</option>
-                                                <option value="1">4</option>
-                                                <option value="2">5</option>
-                                            </select>
-
-                                            <span>02</span>
-
-                                        </div>
-
-                                        <p class="ps-product__price sale">$990.00 <del>$1250.00 </del></p>
-
-                                    </div>
-
-                                </div><!-- End Product -->
-
-                                <!--=====================================
-										Product
-    									======================================-->
-
-                                <div class="ps-product--horizontal">
-
-                                    <div class="ps-product__thumbnail">
-
-                                        <a href="product-default.html">
-                                            <img src="{{url_image}}img/products/technology/4.jpg" alt="">
-                                        </a>
-
-                                    </div>
-
-                                    <div class="ps-product__content">
-
-                                        <a class="ps-product__title" href="product-default.html">Apple Macbook Retina
-                                            Display 12”</a>
-
-                                        <div class="ps-product__rating">
-
-                                            <select class="ps-rating" data-read-only="true">
-                                                <option value="1">1</option>
-                                                <option value="1">2</option>
-                                                <option value="1">3</option>
-                                                <option value="1">4</option>
-                                                <option value="2">5</option>
-                                            </select>
-
-                                            <span>04</span>
-                                        </div>
-
-                                        <p class="ps-product__price">$1090.00 <del>$1550.00 </del></p>
-
-                                    </div>
-
-                                </div><!-- End Product -->
-
-                                <!--=====================================
-										Product
-    									======================================-->
-
-                                <div class="ps-product--horizontal">
-
-                                    <div class="ps-product__thumbnail">
-
-                                        <a href="product-default.html">
-                                            <img src="{{url_image}}img/products/technology/5.jpg" alt="">
-                                        </a>
-
-                                    </div>
-
-                                    <div class="ps-product__content">
-                                        <a class="ps-product__title" href="product-default.html">Samsung Gear VR Virtual
-                                            Reality Headset</a>
-
-                                        <div class="ps-product__rating">
-                                            <select class="ps-rating" data-read-only="true">
-                                                <option value="1">1</option>
-                                                <option value="1">2</option>
-                                                <option value="1">3</option>
-                                                <option value="1">4</option>
-                                                <option value="2">5</option>
-                                            </select>
-                                            <span>01</span>
-                                        </div>
-
-                                        <p class="ps-product__price">$85.00</p>
-
-                                    </div>
-
-                                </div><!-- End Product -->
-
-                                <!--=====================================
-										Product
-    									======================================-->
-
-                                <div class="ps-product--horizontal">
-
-                                    <div class="ps-product__thumbnail">
-                                        <a href="product-default.html">
-                                            <img src="{{url_image}}img/products/technology/6.jpg" alt="">
-                                        </a>
-                                    </div>
-
-                                    <div class="ps-product__content">
-                                        <a class="ps-product__title" href="product-default.html">Apple iPhone Retina 6s
-                                            Plus 64GB</a>
-
-                                        <div class="ps-product__rating">
-                                            <select class="ps-rating" data-read-only="true">
-                                                <option value="1">1</option>
-                                                <option value="1">2</option>
-                                                <option value="1">3</option>
-                                                <option value="1">4</option>
-                                                <option value="2">5</option>
-                                            </select><span>01</span>
-                                        </div>
-
-                                        <p class="ps-product__price">$950.60</p>
-
-                                    </div>
-
-                                </div><!-- End Product -->
-
-                            </div><!-- End Product Group -->
+                            
 
                         </div>
 
                     </div>
 
-                </aside><!-- End Aside -->
+                </aside>
 
-            </div><!-- End Columns -->
+            </div>
 
         </div>
 

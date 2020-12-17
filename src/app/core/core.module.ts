@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ProductoService } from './producto/producto.service';
 import { CategoriaService } from './categoria/categoria.service';
 import { SubcategoriaService } from './categoria/sub_categoria.service';
+import { VentaService } from './venta/venta.service';
 
 
 
@@ -14,7 +15,8 @@ import { SubcategoriaService } from './categoria/sub_categoria.service';
   providers:[
     ProductoService,
     CategoriaService,
-    SubcategoriaService
+    SubcategoriaService,
+    VentaService
   ]
 })
 export class CoreModule { }
