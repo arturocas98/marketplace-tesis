@@ -281,4 +281,33 @@ export let CountDown = {
     }
 }
 
+export let Rating = {
+    fnc:function(){
+        $('select.ps-rating').each(function () {
+            var readOnly;
+            if ($(this).attr('data-read-only') == 'true') {
+                readOnly = true
+            } else {
+                readOnly = false;
+            }
+            $(this).barrating({
+                theme: 'fontawesome-stars',
+                readonly: readOnly,
+                emptyValue: '0'
+            });
+        });
+    }
+}
+export let ProgressBar ={
+    fnc:function(){
+        var progress = $('.ps-progress');
+        progress.each(function (e) {
+          var value = $(this).data('value');
+          $(this).find('span').css({
+            width: value + "%"
+          })
+        });
+    }
+}
+
 

@@ -90,19 +90,19 @@
                                                 </del>
                                             </h4>
 
-                                            <div class="ps-product__rating">
+                                            <div [attr.reviews]="products[i].reviews"  class="ps-product__rating review_1 ">
 
-                                                <select class="ps-rating" data-read-only="true">
+                                                <select class="ps-rating review_2" data-read-only="true">
 
-                                                    <option value="1">1</option>
+                                                    <!-- <option value="1">1</option>
                                                     <option value="1">2</option>
                                                     <option value="1">3</option>
                                                     <option value="1">4</option>
-                                                    <option value="2">5</option>
+                                                    <option value="2">5</option> -->
 
                                                 </select>
 
-                                                <span>(1 review)</span>
+                                                <span class="review_3" ></span>
 
                                             </div>
 
@@ -142,11 +142,11 @@
 
                                         <div class="ps-product__processs-bar">
 
-                                            <div class="ps-progress" data-value="10">
+                                            <div class="ps-progress" [attr.data-value]="products[i].stock">
                                                 <span class="ps-progress__value"></span>
                                             </div>
 
-                                            <p><strong>4/79</strong> Sold</p>
+                                            <p><strong>{{ 100 - products[i].stock }}/100</strong> Vendidos</p>
 
                                         </div>
 
