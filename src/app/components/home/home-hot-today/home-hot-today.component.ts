@@ -49,7 +49,7 @@ export class HomeHotTodayComponent implements OnInit {
       // console.log(res);
       let i;
       for (const i in res) {
-        
+
         this.getProducts.push(
           {
             "offer": JSON.parse(res[i].offer),
@@ -133,6 +133,8 @@ export class HomeHotTodayComponent implements OnInit {
 
         })
 
+        console.log("ventas_filter:", ventas_filter);
+
         /*=============================================
         Filtramos la data de productos buscando coincidencias con las ventas
         =============================================*/
@@ -164,36 +166,38 @@ export class HomeHotTodayComponent implements OnInit {
 
           }
 
-          /*=============================================
-          Enviamos el máximo de bloques para mostrar 4 productos por bloque
-          =============================================*/
-          console.log("block:", block);
-          let count = 0;
-
-          for (let i = 0; i < Math.ceil(block / 4); i++) {
-
-            count++;
-
-            this.topSalesBlock.push(i);
-
-          }
-          if (count == this.topSalesBlock.length) {
-
-            this.topSalesBlock.pop();
-          }
-
-          console.log("top_sales_block:",this.topSalesBlock);
-
-
         })
+
+        /*=============================================
+         Enviamos el máximo de bloques para mostrar 4 productos por bloque
+         =============================================*/
+        let count = 0;
+
+        for (let i = 0; i < Math.round(15/ 4); i++) {
+
+          count++;
+
+          this.topSalesBlock.push(i);
+
+        }
+        console.log("this.topSalesBlock",this.topSalesBlock);
+        if (count == this.topSalesBlock.length) {
+
+          this.topSalesBlock.pop();
+        }
+
+        console.log("block", block);
+
       })
   }
 
 
   callbackBestSeller(topSales) {
+
     if (this.render_bestseller) {
+
       this.render_bestseller = false;
-      // console.log("callbackbestseller:", topSales);
+
       /*=============================================
       Capturamos la cantidad de bloques que existe en el DOM
       =============================================*/
@@ -229,10 +233,10 @@ export class HomeHotTodayComponent implements OnInit {
             topSales.slice(i * topSaleBlock.length, (i * topSaleBlock.length) + topSaleBlock.length)
 
           )
-
           /*=============================================
           Hacemos un recorrido por el nuevo array de objetos
           =============================================*/
+
           let f;
 
           for (f in top20Array[i]) {
@@ -245,42 +249,25 @@ export class HomeHotTodayComponent implements OnInit {
             let type;
             let value;
             let offer;
-            let offerDate;
-            let today = new Date();
-
 
             if (top20Array[i][f].offer != "") {
 
-              offerDate = new Date(
+              type = JSON.parse(top20Array[i][f].offer)[0];
+              value = JSON.parse(top20Array[i][f].offer)[1];
 
-                parseInt(JSON.parse(top20Array[i][f].offer)[2].split("-")[0]),
-                parseInt(JSON.parse(top20Array[i][f].offer)[2].split("-")[1]) - 1,
-                parseInt(JSON.parse(top20Array[i][f].offer)[2].split("-")[2])
+              if (type == "Descuento") {
 
-              )
+                offer = (top20Array[i][f].price - (top20Array[i][f].price * value / 100)).toFixed(2)
 
-              if (today < offerDate) {
-
-                type = JSON.parse(top20Array[i][f].offer)[0];
-                value = JSON.parse(top20Array[i][f].offer)[1];
-
-                if (type == "Descuento") {
-
-                  offer = (top20Array[i][f].price - (top20Array[i][f].price * value / 100)).toFixed(2)
-
-                }
-
-                if (type == "Fijo") {
-
-                  offer = value
-
-                }
-                price = `<p class="ps-product__price sale">$${offer} <del>$${top20Array[i][f].price} </del></p>`;
-
-              } else {
-
-                price = `<p class="ps-product__price">$${top20Array[i][f].price} </p>`;
               }
+
+              if (type == "Fijo") {
+
+                offer = value
+
+              }
+
+              price = `<p class="ps-product__price sale">$${offer} <del>$${top20Array[i][f].price} </del></p>`;
 
             } else {
 
@@ -294,7 +281,7 @@ export class HomeHotTodayComponent implements OnInit {
 
             $(topSaleBlock[i]).append(`
 
-						   <div class="ps-product--horizontal" style="z-index:10000">
+						  <div class="ps-product--horizontal" style="z-index:10000">
 
                 <div class="ps-product__thumbnail">
                   <a href="product/${top20Array[i][f].url}">
@@ -318,16 +305,14 @@ export class HomeHotTodayComponent implements OnInit {
 
         }
 
-        // console.log("agrupado_4:",topSales);
-
-
         /*=============================================
         Modificamos el estilo del plugin OWL Carousel
         =============================================*/
         $(".owl-dots").css({ "bottom": "0" })
         $(".owl-dot").css({ "background": "#ddd" })
 
-      }, topSaleBlock.length * 500)
+      }, topSaleBlock.length * 1000)
+
     }
 
   }
@@ -440,15 +425,14 @@ export class HomeHotTodayComponent implements OnInit {
             $(review_2[i]).children('option').val(1)
 
           }
-          console.log("hola");
         }
 
         // console.log(total_review);
       }
-
-      ProductLightbox.fnc();
-      SlickConfig.fnc();
+      // OwlCarouselConfig.fnc();
       carouselNavigation.fnc();
+      SlickConfig.fnc();
+      ProductLightbox.fnc();
       CountDown.fnc();
       Rating.fnc();
       ProgressBar.fnc();

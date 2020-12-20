@@ -36,6 +36,7 @@ export class HomeBannerComponent implements OnInit {
     let index = 0; 
     this.productoService.getAll()
 		.subscribe(resp =>{
+      console.log("productos:",resp);
       this.preload =false;
       let i;
 			let size = 0;
@@ -45,18 +46,22 @@ export class HomeBannerComponent implements OnInit {
 				size++			
 
       }
+      console.log("size:",size);
       if (size > 5) {
-        index = Math.floor(Math.random()*size-5);
+        index = Math.floor(Math.random()*(size-5));
 
       }
+      console.log("indice:",index);
       this.productoService.getLimit( Object.keys(resp)[index],5).subscribe(
         res=>{
+          console.log("res_home_banner:",res);
           for (const i in res) {
             
             this.banner_home.push(JSON.parse(res[i].horizontal_slider));
             this.categoria.push(res[i].category);
             this.url.push(res[i].url);
           }
+          console.log("categorias:",this.categoria);
         }
       )
     })

@@ -678,15 +678,15 @@ export class AppComponent implements OnInit {
         });
       }
 
-      function progressBar() {
-        var progress = $('.ps-progress');
-        progress.each(function (e) {
-          var value = $(this).data('value');
-          $(this).find('span').css({
-            width: value + "%"
-          })
-        });
-      }
+      // function progressBar() {
+      //   var progress = $('.ps-progress');
+      //   progress.each(function (e) {
+      //     var value = $(this).data('value');
+      //     $(this).find('span').css({
+      //       width: value + "%"
+      //     })
+      //   });
+      // }
 
       function customScrollbar() {
         $('.ps-custom-scrollbar').each(function () {
@@ -749,7 +749,7 @@ export class AppComponent implements OnInit {
         parallax();
         // stickySidebar();
         accordion();
-        progressBar();
+        // progressBar();
         customScrollbar();
         select2Cofig();
         // carouselNavigation();

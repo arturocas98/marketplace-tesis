@@ -57,7 +57,8 @@
 
                                                 <div class="ps-product__gallery galleryMix_2" data-arrow="true"></div>
 
-                                                <div [attr.offer]="products[i].offer" [attr.price]="products[i].price" class="ps-product__badge offer_1">
+                                                <div [attr.offer]="products[i].offer" [attr.price]="products[i].price"
+                                                    class="ps-product__badge offer_1">
                                                     <span>Save <br> $280.000</span>
                                                 </div>
 
@@ -83,14 +84,15 @@
                                         <div class="ps-product__meta">
 
                                             <h4 class="ps-product__price sale">
-                                                <span class="offer_2" >$36.78 </span> 
-                                                <del> 
+                                                <span class="offer_2">$36.78 </span>
+                                                <del>
                                                     {{ products[index].price}}
 
                                                 </del>
                                             </h4>
 
-                                            <div [attr.reviews]="products[i].reviews"  class="ps-product__rating review_1 ">
+                                            <div [attr.reviews]="products[i].reviews"
+                                                class="ps-product__rating review_1 ">
 
                                                 <select class="ps-rating review_2" data-read-only="true">
 
@@ -102,7 +104,7 @@
 
                                                 </select>
 
-                                                <span class="review_3" ></span>
+                                                <span class="review_3"></span>
 
                                             </div>
 
@@ -185,31 +187,38 @@
 
                 <aside class="widget widget_best-sale" data-mh="dealhot">
 
-                    <h3 class="widget-title">Top 20 mejores vendidos</h3>
+                    <h3 class="widget-title">Top 20 Best Seller</h3>
 
                     <div class="widget__content">
 
-                        <div class="owl-slider" data-owl-auto="true" data-owl-loop="false" data-owl-speed="5000"
-                            data-owl-gap="0" data-owl-nav="false" data-owl-dots="true" data-owl-item="1"
-                            data-owl-item-xs="1" data-owl-item-sm="1" data-owl-item-md="1" data-owl-item-lg="1"
-                            data-owl-duration="1000" data-owl-mousedrag="on">
+                        <div class="d-flex justify-content-center preload">
+                            <div class="spinner-border text-muted my-5"></div>
+                        </div>
 
-                            <div *ngFor="let block of topSalesBlock;let lastIndex = last;"  class="ps-product-group topSaleBlock">
-                                
 
-                                {{ lastIndex?callbackBestSeller(topSales):"" }}
-                            
-                            </div>
+                        <div class="ps-carousel--product-box owl-slider" data-owl-auto="true" data-owl-loop="false"
+                            data-owl-speed="5000" data-owl-gap="0" data-owl-nav="false" data-owl-dots="true"
+                            data-owl-item="1" data-owl-item-xs="1" data-owl-item-sm="1" data-owl-item-md="1"
+                            data-owl-item-lg="1" data-owl-duration="1000" data-owl-mousedrag="on">
 
-                            
+                            <!--            <div  [attr.top20]> -->
+
+                            <div *ngFor="let block of topSalesBlock; let lastIndex = last"
+                                class="ps-product-group topSaleBlock">
+
+
+                                {{ lastIndex ? callbackBestSeller(topSales) : ""}}
+                            </div><!-- End Product Group -->
+
+
 
                         </div>
 
                     </div>
 
-                </aside>
+                </aside><!-- End Aside -->
 
-            </div>
+            </div><!-- End Columns -->
 
         </div>
 
