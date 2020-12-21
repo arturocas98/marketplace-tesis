@@ -11,12 +11,16 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { LoginComponent } from './components/login/login.component';
+import { RegistroComponent } from './components/registro/registro.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LayoutComponent,
     PageNotFoundComponent,
+    LoginComponent,
+    RegistroComponent,
   ],
   imports: [
     BrowserModule,

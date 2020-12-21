@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { LoginComponent } from './components/login/login.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { RegistroComponent } from './components/registro/registro.component';
 
 import { LayoutComponent } from './layout/layout.component';
 // import { DemoComponent } from './demo/demo.component';
@@ -42,6 +44,12 @@ const routes: Routes = [
         loadChildren:()=> import ('./components/search/search.module').then(m=> m.SearchModule)
         //para que cargar un modulo hijo 
       },
+      {
+        path:'login',component:LoginComponent
+      },
+      {
+        path:'registro',component:RegistroComponent
+      }
 
       // {
       //   path:'auth',
