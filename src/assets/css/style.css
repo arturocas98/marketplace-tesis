@@ -15970,7 +15970,7 @@ textarea.form-control {
   top: 0;
   width: 100%;
   z-index: 1000;
-  background-color: #fcb800;
+  background-color: #fff ;
   -ms-box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.12);
   box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.12);
 }

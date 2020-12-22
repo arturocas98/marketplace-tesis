@@ -18,11 +18,11 @@
 
 </div>
 
-<div class="ps-my-account">
+<div  class="ps-my-account">
 
     <div class="container">
 
-        <form class="ps-form--account ps-tab-root" action="link.html" method="get">
+        <form [formGroup]="form"  (ngSubmit)="onSubmit()"   class="ps-form--account ps-tab-root" >
 
             <ul class="ps-tab-list">
 
@@ -55,31 +55,57 @@
 
                         <div class="form-group">
 
-                            <input class="form-control" type="text" placeholder="Nombres">
+                            <input class="form-control" type="text" formControlName="nombres"   placeholder="Nombres">
+                            <div *ngIf="validatorErrorField('nombres') " >
+                                <!-- <p *ngIf="form.get('nombres').hasError('price_invalid')" >Este no es valido </p> -->
+                                <p class="text-danger" *ngIf="form.get('nombres').hasError('required')" >El campo es requerido </p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+
+                            <input class="form-control" type="text" formControlName="apellidos"  placeholder="Apellidos">
+                            <div *ngIf="validatorErrorField('apellidos') " >
+                                <p class="text-danger" *ngIf="form.get('apellidos').hasError('required')" >El campo es requerido </p>
+
+                            </div>
 
                         </div>
 
                         <div class="form-group">
 
-                            <input class="form-control" type="text" placeholder="Apellidos">
+                            <input class="form-control"  type="email" formControlName="email"  [(ngModel)]="usuario.email" placeholder="Correo">
+                            <div *ngIf="validatorErrorField('email') " >
+                                <p class="text-danger" *ngIf="form.get('email').hasError('required')" >El campo es requerido </p>
+                                <p class="text-danger" *ngIf="form.get('email').hasError('pattern')" >Email incorrecto </p>
+
+                            </div>
+
 
                         </div>
 
                         <div class="form-group">
 
-                            <input class="form-control" type="text" placeholder="Username">
+                            <input class="form-control" type="text" formControlName="username"  placeholder="Username">
+                            <div *ngIf="validatorErrorField('username') " >
+                                
+                                <p class="text-danger" *ngIf="form.get('username').hasError('required')" >El campo es requerido </p>
+
+                            </div>
 
                         </div>
 
-                        <div class="form-group">
-
-                            <input class="form-control" type="email" placeholder="Correo">
-
-                        </div>
+                        
 
                         <div class="form-group">
 
-                            <input class="form-control" type="text" placeholder="Contraseña">
+                            <input class="form-control" type="password"  maxlength="16" formControlName="password"  placeholder="Contraseña">
+                            <div *ngIf="validatorErrorField('password') " >
+                                <p class="text-danger" *ngIf="form.get('password').hasError('required')" >El campo es requerido </p>
+                                <p class="text-danger" *ngIf="form.get('password').hasError('pattern')" >Ingresa una contraseña segura </p>
+                                <!-- <p class="text-danger" *ngIf="form.get('password').hasError('maxLenght')" >El tamaño maximo permitido es 16 caracteres</p> -->
+
+                            </div>
 
                         </div>
 
