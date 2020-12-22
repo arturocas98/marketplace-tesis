@@ -183,13 +183,16 @@
 
                 <div class="ps-block--user-header">
 
-                    <div class="ps-block__left">
+                    <!-- <div class="ps-block__left">
                         <i class="icon-user"></i>
                     </div>
                     <div class="ps-block__right">
-                        <a href="my-account.html">Login</a>
-                        <a href="my-account.html">Register</a>
-                    </div>
+                        <a routerLink="login">Login</a>
+                        <a routerLink="registro">Register</a>
+                    </div> -->
+                    <a class="header__extra" routerLink="login">
+                        <i class="icon-user"></i>
+                    </a>
 
                 </div>
 
@@ -207,7 +210,7 @@
 
         <form class="ps-form--search-mobile" action="index.html" method="get">
             <div class="form-group--nest">
-                <input class="form-control" type="text" placeholder="Search something...">
+                <input class="form-control" type="text" placeholder="Estoy buscando...">
                 <button><i class="icon-magnifier"></i></button>
             </div>
         </form>

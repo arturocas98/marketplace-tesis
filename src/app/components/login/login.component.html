@@ -26,7 +26,7 @@
 
     <div class="container">
 
-        <form class="ps-form--account ps-tab-root"  action="link.html" method="get">
+        <form  [formGroup]="form"  (ngSubmit)="onSubmit()"  class="ps-form--account ps-tab-root needs-validation" novalidate>
 
             <!-- <ul class="ps-tab-list">
 
@@ -66,14 +66,22 @@
 
                         <div class="form-group">
 
-                            <input class="form-control" type="text" placeholder="Username o email">
+                            <input class="form-control" maxlength="40"  required type="email" formControlName="email"  [(ngModel)]="usuario.email"  placeholder="Correo electrónico">
+                            <div *ngIf="validatorErrorField('email') " >
+                                <p class="text-danger" *ngIf="form.get('email').hasError('required')" >El campo es requerido </p>
+                                <p class="text-danger" *ngIf="form.get('email').hasError('pattern')" >Email incorrecto </p>
 
+                            </div>
                         </div>
 
                         <div class="form-group form-forgot">
 
-                            <input class="form-control" type="text" placeholder="Contraseña">
+                            <input class="form-control" type="password" required pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$" maxlength="16" formControlName="password" placeholder="Contraseña">
+                            <div *ngIf="validatorErrorField('password') " >
+                                <p class="text-danger" *ngIf="form.get('password').hasError('required')" >El campo es requerido </p>
+                                <!-- <p class="text-danger" *ngIf="form.get('password').hasError('pattern')" >Ingresa una contraseña segura </p> -->
 
+                            </div>
                             <a href="">olvido contraseña?</a>
 
                         </div>

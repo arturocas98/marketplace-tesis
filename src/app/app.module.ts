@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { RegistroComponent } from './components/registro/registro.component';
     PageNotFoundComponent,
     LoginComponent,
     RegistroComponent,
+   
   ],
   imports: [
     BrowserModule,
@@ -30,7 +32,8 @@ import { RegistroComponent } from './components/registro/registro.component';
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

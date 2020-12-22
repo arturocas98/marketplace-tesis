@@ -1,3 +1,5 @@
+import Swal from "sweetalert2";
+
 export let OwlCarouselConfig = {
 
     fnc: function () {
@@ -282,7 +284,7 @@ export let CountDown = {
 }
 
 export let Rating = {
-    fnc:function(){
+    fnc: function () {
         $('select.ps-rating').each(function () {
             var readOnly;
             if ($(this).attr('data-read-only') == 'true') {
@@ -298,16 +300,188 @@ export let Rating = {
         });
     }
 }
-export let ProgressBar ={
-    fnc:function(){
+export let ProgressBar = {
+    fnc: function () {
         var progress = $('.ps-progress');
         progress.each(function (e) {
-          var value = $(this).data('value');
-          $(this).find('span').css({
-            width: value + "%"
-          })
+            var value = $(this).data('value');
+            $(this).find('span').css({
+                width: value + "%"
+            })
         });
     }
+}
+
+
+/*=============================================
+Capitalize
+=============================================*/
+
+export let Capitalize = {
+
+    fnc: function (value) {
+
+        value = value.toLowerCase();
+
+        let names = value.split(' ');
+
+        names = names.map(name => {
+
+            return name[0].toUpperCase() + name.substr(1)
+
+        })
+
+        return names.join(' ');
+
+    }
+
+}
+
+/*=============================================
+Sweetalert
+=============================================*/
+
+export let Sweetalert = {
+
+    fnc:function(type, text, url){
+
+        switch (type) {
+
+            case "error":
+
+            if(url == null){
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: text,
+                    width: '46rem',
+                    
+                }) 
+
+            }else{
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: text,
+                    width: '46rem',
+                }).then((result) => {
+
+                    if (result.value) { 
+
+                        window.open(url, "_top")
+                    }
+
+                })
+
+            } 
+
+            break; 
+
+            case "success":
+
+            if(url == null){
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Se ha registrado correctamente la información',
+                    text: text,
+                    width: '46rem',
+
+                }) 
+
+            }else{
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Se ha registrado correctamente la información',
+                    text: text,
+                    width: '46rem',
+
+                }).then((result) => {
+
+                    if (result.value) { 
+
+                        window.open(url, "_top")
+                    }
+
+                })
+
+            } 
+
+            break; 
+
+            case "success-confirm":
+
+            if(url == null){
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Se ha confirmado correctamente la información',
+                    text: text,
+                    width: '46rem',
+
+                }) 
+
+            }else{
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Se ha confirmado correctamente la información',
+                    text: text,
+                    width: '46rem',
+
+                }).then((result) => {
+
+                    if (result.value) { 
+
+                        window.open(url, "_top")
+                    }
+
+                })
+
+            } 
+
+            break; 
+
+            case "loading":
+
+              Swal.fire({
+                allowOutsideClick: false,
+                type: 'info',
+                text:text,
+                width: '60rem',
+
+              })
+              Swal.showLoading()
+
+            break; 
+
+            case "close":
+
+                Swal.close()
+
+            break;
+
+        }
+
+
+    }
+
+}
+
+/*=============================================
+Tooltip
+=============================================*/
+
+export let Tooltip = {
+
+    fnc: function () {
+
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+
 }
 
 

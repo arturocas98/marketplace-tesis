@@ -45,6 +45,12 @@ const routes: Routes = [
         //para que cargar un modulo hijo 
       },
       {
+        path:'cuenta-usuario',
+        
+        loadChildren:()=> import ('./components/cuenta-usuario/cuenta-usuario.module').then(m=> m.CuentaUsuarioModule)
+        //para que cargar un modulo hijo 
+      },
+      {
         path:'login',component:LoginComponent
       },
       {

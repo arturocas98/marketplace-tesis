@@ -14,7 +14,13 @@ export const environment = {
     storageBucket: "marketplace-tesis.appspot.com",
     messagingSenderId: "205223564127",
     appId: "1:205223564127:web:d8923a287be60d1ee95cea"
-  }
+  },
+  sign_in:"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg",
+  register:"https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg",
+  login:'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg',
+  sendEmailVerification:'https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg',
+  confirmEmailVerification:"https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg",
+  getUserData: 'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg'
 };
 
 /*
