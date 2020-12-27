@@ -114,7 +114,6 @@ export class LoginComponent implements OnInit {
   setValues() {
     this.usuario.email = this.form.controls['email'].value;
     this.usuario.password = this.form.controls['password'].value;
-    this.usuario.token = true;
 
   }
 
@@ -131,6 +130,7 @@ export class LoginComponent implements OnInit {
           if (res1[i].confirmar_correo) {
 
             this.setValues();
+            this.usuario.return_secure_token = true;
             this.usuarioService.loginAuth(this.usuario).subscribe(res2 => {
               console.log(res2);
 

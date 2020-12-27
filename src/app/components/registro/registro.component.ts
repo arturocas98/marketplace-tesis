@@ -56,7 +56,7 @@ export class RegistroComponent implements OnInit {
     this.usuario.email = this.form.controls['email'].value;
     this.usuario.username = this.form.controls['username'].value;
     this.usuario.password = this.form.controls['password'].value;
-    this.usuario.token = true;
+    this.usuario.return_secure_token = true;
 
   }
 
