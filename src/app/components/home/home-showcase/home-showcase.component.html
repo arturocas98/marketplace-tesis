@@ -1,0 +1,72 @@
+<!--=====================================
+	Section Gray
+	======================================-->
+
+<div class="ps-section--gray">
+
+    <div *ngIf="!cargando" class="container">
+
+        <!--=====================================
+			Products of category
+			======================================-->
+
+        <div *ngFor="let categoria of categorias;let lastIndex= last;let i = index" class="ps-block--products-of-category">
+
+            <!--=====================================
+				Menu subcategory
+				======================================-->
+
+            <div class="ps-block__categories">
+
+                <h3>{{categoria.nombre}}</h3>
+
+                <ul [attr.categoria-showcase]="categoria.nombre" >
+                  
+                </ul>
+
+                <a class="ps-block__more-link" routerLink="/producto/{{categoria.url}}">Ver todas</a>
+
+            </div>
+
+            <!--=====================================
+				Vertical Slider Category
+				======================================-->
+
+            <div class="ps-block__slider">
+
+                <div [attr.categoria-sl]="categoria.url" >
+
+                   
+
+                </div>
+
+            </div>
+
+            <!--=====================================
+				Block Product Box
+				======================================-->
+
+            <div class="ps-block__product-box" [attr.categoria-pb]="categoria.url" >
+
+                <!--=====================================
+					Product Simple
+					======================================-->
+
+                
+                <!-- End Product Simple -->
+
+            </div><!-- End Block Product Box -->
+            {{lastIndex ?callback(i):''}}
+
+        </div><!-- End Products of category -->
+
+
+
+
+    </div><!-- End Container-->
+
+</div><!-- End Section Gray-->
+
+<div *ngIf="cargando" class="d-flex justify-content-center">
+    <div class="spinner-border text-muted my-5"></div>
+</div>

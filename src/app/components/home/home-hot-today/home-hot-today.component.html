@@ -47,8 +47,8 @@
 
                                 <div class="ps-product__header">
 
-                                    <div [attr.gallery]="products[index].gallery"
-                                        [attr.category]="products[index].category"
+                                    <div [attr.galeria]="products[index].galeria"
+                                        [attr.categoria]="products[index].categoria"
                                         class="ps-product__thumbnail galleryMix_1" data-vertical="true">
 
                                         <figure>
@@ -57,8 +57,8 @@
 
                                                 <div class="ps-product__gallery galleryMix_2" data-arrow="true"></div>
 
-                                                <div [attr.offer]="products[i].offer" [attr.price]="products[i].price"
-                                                    class="ps-product__badge offer_1">
+                                                <div [attr.oferta]="products[i].oferta" [attr.precio]="products[i].precio"
+                                                    class="ps-product__badge oferta_1">
                                                     <span>Save <br> $280.000</span>
                                                 </div>
 
@@ -67,7 +67,7 @@
                                         </figure>
 
                                         <div class="ps-product__variants galleryMix_3" data-item="4" data-md="3"
-                                            data-sm="3" data-arrow="false">
+                                            data-sm="3" data-arrow="true">
 
 
 
@@ -77,16 +77,16 @@
 
                                     <div class="ps-product__info">
 
-                                        <h5>{{ products[index].category }}</h5>
+                                        <h5>{{ products[index].categoria }}</h5>
 
-                                        <h3 class="ps-product__name">{{ products[index].name }}</h3>
+                                        <h3 class="ps-product__name">{{ products[index].nombre }}</h3>
 
                                         <div class="ps-product__meta">
 
                                             <h4 class="ps-product__price sale">
-                                                <span class="offer_2">$36.78 </span>
+                                                <span class="oferta_2">$36.78 </span>
                                                 <del>
-                                                    {{ products[index].price}}
+                                                    {{ products[index].precio}}
 
                                                 </del>
                                             </h4>
@@ -120,7 +120,7 @@
 
                                             <p>Expira en </p>
 
-                                            <ul class="ps-countdown offer_3" [attr.data-time]="">
+                                            <ul class="ps-countdown oferta_3" [attr.data-time]="">
 
                                                 <li><span class="days"></span>
                                                     <p>Días</p>

@@ -57,7 +57,7 @@ export class HeaderPromotionComponent implements OnInit {
 			=============================================*/
 
 			this.top_banner = JSON.parse(resp[Object.keys(resp)[index]].top_banner);
-			this.categoria = resp[Object.keys(resp)[index]].category;
+			this.categoria = resp[Object.keys(resp)[index]].categoria;
 			this.url = resp[Object.keys(resp)[index]].url;
 
 			this.preload = false;

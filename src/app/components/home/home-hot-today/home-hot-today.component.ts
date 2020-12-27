@@ -43,6 +43,7 @@ export class HomeHotTodayComponent implements OnInit {
     this.preload = true;
     this.getProductos();
     this.getVentas();
+    // this.function();
   }
   getProductos() {
     this.productoService.getAll().subscribe(res => {
@@ -52,7 +53,7 @@ export class HomeHotTodayComponent implements OnInit {
 
         this.getProducts.push(
           {
-            "offer": JSON.parse(res[i].offer),
+            "oferta": JSON.parse(res[i].oferta),
             "stock": res[i].stock
           }
 
@@ -60,12 +61,12 @@ export class HomeHotTodayComponent implements OnInit {
         this.products.push(res[i]);
 
       }
-
+      console.log("get products:",this.products);
       for (const i in this.getProducts) {
         this.fecha_oferta = new Date(
-          parseInt(this.getProducts[i]['offer'][2].split("-")[0]),
-          parseInt(this.getProducts[i]['offer'][2].split("-")[1]) - 1,
-          parseInt(this.getProducts[i]['offer'][2].split("-")[2]),
+          parseInt(this.getProducts[i]['oferta'][2].split("-")[0]),
+          parseInt(this.getProducts[i]['oferta'][2].split("-")[1]) - 1,
+          parseInt(this.getProducts[i]['oferta'][2].split("-")[2]),
 
         )
         if (this.now < this.fecha_oferta && this.getProducts[i]["stock"] > 0) {
@@ -77,6 +78,8 @@ export class HomeHotTodayComponent implements OnInit {
 
     })
   }
+
+
 
 
   getVentas() {
@@ -120,20 +123,19 @@ export class HomeHotTodayComponent implements OnInit {
         Sacamos del arreglo los productos repetidos dejando los de mayor venta
         =============================================*/
 
-        let ventas_filter = [];
+        let filterSales = [];
+
         getSales.forEach(sale => {
 
-          if (!ventas_filter.find(resp => resp.producto == sale.producto)) {
+          if (!filterSales.find(resp => resp.producto == sale.producto)) {
 
             const { producto, cantidad } = sale;
 
-            ventas_filter.push({ producto, cantidad })
+            filterSales.push({ producto, cantidad })
 
           }
 
         })
-
-        console.log("ventas_filter:", ventas_filter);
 
         /*=============================================
         Filtramos la data de productos buscando coincidencias con las ventas
@@ -141,7 +143,7 @@ export class HomeHotTodayComponent implements OnInit {
 
         let block = 0;
 
-        ventas_filter.forEach((sale, index) => {
+        filterSales.forEach((sale, index) => {
 
           /*=============================================
           Filtramos hasta 20 ventas
@@ -150,47 +152,36 @@ export class HomeHotTodayComponent implements OnInit {
           if (index < 20) {
 
             block++;
-            this.productoService.getByFilter("name", sale.producto)
+
+            this.productoService.getByFilter("nombre", sale.producto)
               .subscribe(resp => {
+
                 let i;
 
                 for (i in resp) {
 
                   this.topSales.push(resp[i])
 
-
                 }
-
 
               })
 
           }
 
         })
-
         /*=============================================
-         Enviamos el máximo de bloques para mostrar 4 productos por bloque
-         =============================================*/
-        let count = 0;
-
-        for (let i = 0; i < Math.round(15/ 4); i++) {
-
-          count++;
+        Enviamos el máximo de bloques para mostrar 4 productos por bloque
+        =============================================*/
+        // Math.ceil(block/4)
+        for (let i = 0; i < Math.floor(15 / 4); i++) {
 
           this.topSalesBlock.push(i);
 
         }
-        console.log("this.topSalesBlock",this.topSalesBlock);
-        if (count == this.topSalesBlock.length) {
-
-          this.topSalesBlock.pop();
-        }
-
-        console.log("block", block);
 
       })
-  }
 
+  }
 
   callbackBestSeller(topSales) {
 
@@ -245,33 +236,33 @@ export class HomeHotTodayComponent implements OnInit {
             Definimos si el precio del producto tiene oferta o no
             =============================================*/
 
-            let price;
+            let precio;
             let type;
             let value;
-            let offer;
+            let oferta;
 
-            if (top20Array[i][f].offer != "") {
+            if (top20Array[i][f].oferta != "") {
 
-              type = JSON.parse(top20Array[i][f].offer)[0];
-              value = JSON.parse(top20Array[i][f].offer)[1];
+              type = JSON.parse(top20Array[i][f].oferta)[0];
+              value = JSON.parse(top20Array[i][f].oferta)[1];
 
               if (type == "Descuento") {
 
-                offer = (top20Array[i][f].price - (top20Array[i][f].price * value / 100)).toFixed(2)
+                oferta = (top20Array[i][f].precio - (top20Array[i][f].precio * value / 100)).toFixed(2)
 
               }
 
               if (type == "Fijo") {
 
-                offer = value
+                oferta = value
 
               }
 
-              price = `<p class="ps-product__price sale">$${offer} <del>$${top20Array[i][f].price} </del></p>`;
+              precio = `<p class="ps-product__price sale">$${oferta} <del>$${top20Array[i][f].precio} </del></p>`;
 
             } else {
 
-              price = `<p class="ps-product__price">$${top20Array[i][f].price} </p>`;
+              precio = `<p class="ps-product__price">$${top20Array[i][f].precio} </p>`;
 
             }
 
@@ -285,15 +276,15 @@ export class HomeHotTodayComponent implements OnInit {
 
                 <div class="ps-product__thumbnail">
                   <a href="product/${top20Array[i][f].url}">
-                    <img src="assets/img/products/categorias/${top20Array[i][f].category}/${top20Array[i][f].image}">
+                    <img src="assets/img/products/categorias/${top20Array[i][f].categoria}/${top20Array[i][f].imagen}">
                   </a>
                 </div>
 
                 <div class="ps-product__content">
 
-                  <a class="ps-product__title" href="product/${top20Array[i][f].url}">${top20Array[i][f].name}</a>
+                  <a class="ps-product__title" href="product/${top20Array[i][f].url}">${top20Array[i][f].nombre}</a>
 
-                    ${price}
+                    ${precio}
 
                 </div>
 
@@ -330,18 +321,18 @@ export class HomeHotTodayComponent implements OnInit {
       let review_2 = $(".review_2");
       let review_3 = $(".review_3");
 
-      let offer_1 = $(".offer_1");
-      let offer_2 = $(".offer_2");
-      let offer_3 = $(".offer_3");
+      let oferta_1 = $(".oferta_1");
+      let oferta_2 = $(".oferta_2");
+      let oferta_3 = $(".oferta_3");
 
       //recorremos todos los productos cumpla la condicion de hot today
       for (let i = 0; i < galleryMix_1.length; i++) {
         // recorremos las fotografias de la galeria de cada producto
-        for (let j = 0; j < JSON.parse($(galleryMix_1[i]).attr("gallery")).length; j++) {
+        for (let j = 0; j < JSON.parse($(galleryMix_1[i]).attr("galeria")).length; j++) {
           $(galleryMix_2[i]).append(
             `<div class="item" >
-              <a href="assets/img/products/categorias/${$(galleryMix_1[i]).attr("category")}/gallery/${JSON.parse($(galleryMix_1[i]).attr("gallery"))[j]}" >
-                <img src="assets/img/products/categorias/${$(galleryMix_1[i]).attr("category")}/gallery/${JSON.parse($(galleryMix_1[i]).attr("gallery"))[j]}" alt = "" >
+              <a href="assets/img/products/categorias/${$(galleryMix_1[i]).attr("categoria")}/gallery/${JSON.parse($(galleryMix_1[i]).attr("galeria"))[j]}" >
+                <img src="assets/img/products/categorias/${$(galleryMix_1[i]).attr("categoria")}/gallery/${JSON.parse($(galleryMix_1[i]).attr("galeria"))[j]}" alt = "" >
               </a>
             </div>`
 
@@ -350,43 +341,43 @@ export class HomeHotTodayComponent implements OnInit {
           )
           $(galleryMix_3[i]).append(
             ` <div class="item">
-              <img src="assets/img/products/categorias/${$(galleryMix_1[i]).attr("category")}/gallery/${JSON.parse($(galleryMix_1[i]).attr("gallery"))[j]}" alt="">
+              <img src="assets/img/products/categorias/${$(galleryMix_1[i]).attr("categoria")}/gallery/${JSON.parse($(galleryMix_1[i]).attr("galeria"))[j]}" alt="">
             </div>`
           )
 
         }
 
-        let offer = JSON.parse($(offer_1[i]).attr("offer"));
-        let price = JSON.parse($(offer_1[i]).attr("price"));
-        if (offer[0] == 'Descuento') {
-          $(offer_1[i]).html(
+        let oferta = JSON.parse($(oferta_1[i]).attr("oferta"));
+        let precio = JSON.parse($(oferta_1[i]).attr("precio"));
+        if (oferta[0] == 'Descuento') {
+          $(oferta_1[i]).html(
 
-            `<span>Save <br> $${(price * offer[1] / 100).toFixed(2)}</span>`
-
-          )
-
-          $(offer_2[i]).html(`$${(price - (price * offer[1] / 100)).toFixed(2)}`)
-        }
-
-        if (offer[0] == "Fijo") {
-
-          $(offer_1[i]).html(
-
-            `<span>Save <br> $${(price - offer[1]).toFixed(2)}</span>`
+            `<span>Save <br> $${(precio * oferta[1] / 100).toFixed(2)}</span>`
 
           )
 
-          $(offer_2[i]).html(`$${offer[1]}`)
+          $(oferta_2[i]).html(`$${(precio - (precio * oferta[1] / 100)).toFixed(2)}`)
+        }
+
+        if (oferta[0] == "Fijo") {
+
+          $(oferta_1[i]).html(
+
+            `<span>Save <br> $${(precio - oferta[1]).toFixed(2)}</span>`
+
+          )
+
+          $(oferta_2[i]).html(`$${oferta[1]}`)
 
         }
 
-        $(offer_3[i]).attr("data-time",
+        $(oferta_3[i]).attr("data-time",
 
           new Date(
 
-            parseInt(offer[2].split("-")[0]),
-            parseInt(offer[2].split("-")[1]) - 1,
-            parseInt(offer[2].split("-")[2])
+            parseInt(oferta[2].split("-")[0]),
+            parseInt(oferta[2].split("-")[1]) - 1,
+            parseInt(oferta[2].split("-")[2])
 
           )
 
@@ -430,12 +421,82 @@ export class HomeHotTodayComponent implements OnInit {
         // console.log(total_review);
       }
       // OwlCarouselConfig.fnc();
+      // this.carousel();
       carouselNavigation.fnc();
       SlickConfig.fnc();
       ProductLightbox.fnc();
       CountDown.fnc();
       Rating.fnc();
       ProgressBar.fnc();
+    }
+  }
+
+  carousel() {
+    var target = $('.owl-slider');
+    if (target.length > 0) {
+      target.each(function () {
+        var el = $(this),
+          dataAuto = el.data('owl-auto'),
+          dataLoop = el.data('owl-loop'),
+          dataSpeed = el.data('owl-speed'),
+          dataGap = el.data('owl-gap'),
+          dataNav = el.data('owl-nav'),
+          dataDots = el.data('owl-dots'),
+          dataAnimateIn = (el.data('owl-animate-in')) ? el.data('owl-animate-in') : '',
+          dataAnimateOut = (el.data('owl-animate-out')) ? el.data('owl-animate-out') : '',
+          dataDefaultItem = el.data('owl-item'),
+          dataItemXS = el.data('owl-item-xs'),
+          dataItemSM = el.data('owl-item-sm'),
+          dataItemMD = el.data('owl-item-md'),
+          dataItemLG = el.data('owl-item-lg'),
+          dataItemXL = el.data('owl-item-xl'),
+          dataNavLeft = (el.data('owl-nav-left')) ? el.data('owl-nav-left') : "<i class='icon-chevron-left'></i>",
+          dataNavRight = (el.data('owl-nav-right')) ? el.data('owl-nav-right') : "<i class='icon-chevron-right'></i>",
+          duration = el.data('owl-duration'),
+          datamouseDrag = (el.data('owl-mousedrag') == 'on') ? true : false;
+        if (target.children('div, span, a, img, h1, h2, h3, h4, h5, h5').length >= 2) {
+          el.owlCarousel({
+            animateIn: dataAnimateIn,
+            animateOut: dataAnimateOut,
+            margin: dataGap,
+            autoplay: dataAuto,
+            autoplayTimeout: dataSpeed,
+            autoplayHoverPause: true,
+            loop: dataLoop,
+            nav: dataNav,
+            mouseDrag: datamouseDrag,
+            touchDrag: true,
+            autoplaySpeed: duration,
+            navSpeed: duration,
+            dotsSpeed: duration,
+            dragEndSpeed: duration,
+            navText: [dataNavLeft, dataNavRight],
+            dots: dataDots,
+            items: dataDefaultItem,
+            responsive: {
+              0: {
+                items: dataItemXS
+              },
+              480: {
+                items: dataItemSM
+              },
+              768: {
+                items: dataItemMD
+              },
+              992: {
+                items: dataItemLG
+              },
+              1200: {
+                items: dataItemXL
+              },
+              1680: {
+                items: dataDefaultItem
+              }
+            }
+          });
+        }
+
+      });
     }
   }
 

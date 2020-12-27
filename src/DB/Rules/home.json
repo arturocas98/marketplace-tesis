@@ -1,0 +1,49 @@
+{
+    "rules": {
+        "categoria": {
+            ".read": true,
+            ".write": "auth != null && auth.email == 'admin@hotmail.com' "
+        },
+        "subcategoria": {
+            ".read": true,
+            ".write": "auth != null",
+            ".indexOn": [
+                "titulo_lista",
+                "url",
+                "categoria"
+            ]
+        },
+        "producto": {
+            ".read": true,
+            ".write": "auth != null",
+            ".indexOn": [
+                "name",
+                "category"
+            ]
+        },
+        "usuario": {
+            ".read": true,
+            ".write": "true"
+        },
+        "tienda": {
+            ".read": true,
+            ".write": "auth != null"
+        },
+        "orden": {
+            ".read": true,
+            ".write": "auth != null"
+        },
+        "disputa": {
+            ".read": true,
+            ".write": "auth != null"
+        },
+        "mensaje": {
+            ".read": true,
+            ".write": "auth != null"
+        },
+        "venta": {
+            ".read": true,
+            ".write": "auth != null"
+        }
+    }
+}

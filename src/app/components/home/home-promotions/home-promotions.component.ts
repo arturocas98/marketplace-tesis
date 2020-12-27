@@ -50,7 +50,7 @@ export class HomePromotionsComponent implements OnInit {
           for (const i in res) {
             
             this.banner_default.push(res[i].default_banner);
-            this.categoria.push(res[i].category);
+            this.categoria.push(res[i].categoria);
             this.url.push(res[i].url);
           }
         }
