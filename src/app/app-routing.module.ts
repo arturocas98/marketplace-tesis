@@ -3,6 +3,7 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { RegistroComponent } from './components/registro/registro.component';
+import { AuthGuard } from './guards/auth.guard';
 
 import { LayoutComponent } from './layout/layout.component';
 // import { DemoComponent } from './demo/demo.component';
@@ -47,7 +48,9 @@ const routes: Routes = [
       {
         path:'cuenta-usuario',
         
-        loadChildren:()=> import ('./components/cuenta-usuario/cuenta-usuario.module').then(m=> m.CuentaUsuarioModule)
+        loadChildren:()=> import ('./components/cuenta-usuario/cuenta-usuario.module').then(m=> m.CuentaUsuarioModule),
+        canActivate:[AuthGuard]
+        
         //para que cargar un modulo hijo 
       },
       {

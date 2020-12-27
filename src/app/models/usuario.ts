@@ -5,7 +5,7 @@ export class Usuario{
     username:string;
     email:string;
     password:string;
-    token:boolean;
+    return_secure_token:boolean;
     metodo_registro:string;
     idToken:string;
     confirmar_correo:boolean;

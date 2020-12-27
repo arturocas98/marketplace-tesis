@@ -9,6 +9,8 @@ import { CoreModule } from './core/core.module';
 import { HttpClientModule } from '@angular/common/http';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from 'src/environments/environment';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { LoginComponent } from './components/login/login.component';
@@ -31,6 +33,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CoreModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFireStorageModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     FormsModule,
     ReactiveFormsModule

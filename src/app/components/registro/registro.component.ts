@@ -4,6 +4,12 @@ import { UsuarioService } from 'src/app/core/usuario/usuario.service';
 import { Usuario } from 'src/app/models/usuario';
 import { MyValidators } from '../utils/MyValidators';
 import { Capitalize, Sweetalert } from '../../functions';
+// import * as firebase from "firebase/app";
+import firebase from "firebase/app";
+
+import  "firebase/auth";
+import { AngularFireAuth } from '@angular/fire/auth';
+import { environment } from 'src/environments/environment';
 
 declare var $;
 @Component({
@@ -13,21 +19,25 @@ declare var $;
 })
 export class RegistroComponent implements OnInit {
   public usuario: Usuario;
+
   public form: FormGroup;
   public validators: MyValidators;
   public needValidation: any;
   constructor(
     public usuarioService: UsuarioService,
     public formBuilder: FormBuilder,
+    private afAuth: AngularFireAuth
   ) {
     this.usuario = new Usuario();
     this.validators = new MyValidators();
+   
   }
 
   ngOnInit(): void {
     this.needValidation = this.validators.needValidation();
 
     this.initForm();
+    // console.log("console.log:",resp);
 
   }
 
@@ -56,7 +66,6 @@ export class RegistroComponent implements OnInit {
     this.usuario.email = this.form.controls['email'].value;
     this.usuario.username = this.form.controls['username'].value;
     this.usuario.password = this.form.controls['password'].value;
-    this.usuario.token = true;
 
   }
 
@@ -76,6 +85,7 @@ export class RegistroComponent implements OnInit {
           return;
         } else {
           this.setValues();
+          this.usuario.return_secure_token = true;
           this.usuarioService.registerAuth(this.usuario).subscribe(res => {
             if (res["email"] == this.usuario.email) {
               let body = {
@@ -120,5 +130,27 @@ export class RegistroComponent implements OnInit {
     return this.validators.validatorErrorField(field, this.form);
   }
 
+  googleRegister(){
+
+    // https://firebase.google.com/docs/web/setup
+    // Crea una nueva APP en Settings
+    // npm install --save firebase
+    // Agregar import * as firebase from "firebase/app";
+    // import "firebase/auth";
+
+    /*=============================================
+    Inicializa Firebase en tu proyecto web
+    =============================================*/
+
+    
+
+    // Initialize Firebase
+    firebase.initializeApp(environment.firebase);
+  
+    this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider);
+
+    
+
+  }
 
 }

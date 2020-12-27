@@ -14,6 +14,9 @@ export class UsuarioService {
   private sendEmail;
   private confirmEmail;
   private getUserData;
+  private SendPasswordResetEmail;
+  private confirmChangePassword;
+  private sendNewPassword;
   constructor(
     private http: HttpClient
   ) {
@@ -23,6 +26,9 @@ export class UsuarioService {
     this.sendEmail = environment.sendEmailVerification;
     this.confirmEmail = environment.confirmEmailVerification;
     this.getUserData = environment.getUserData;
+    this.SendPasswordResetEmail = environment.SendPasswordResetEmail;
+    this.confirmChangePassword = environment.VerifyPasswordResetCode;
+    this.sendNewPassword = environment.ConfirmPasswordReset;
   }
 
   getAll() {
@@ -37,7 +43,7 @@ export class UsuarioService {
 
   registerDatabase(usuario: Usuario) {
     delete usuario.password;
-    delete usuario.token;
+    delete usuario.return_secure_token;
     return this.http.post(`${this.url_api}/usuario.json`, usuario);
   }
 
@@ -140,6 +146,35 @@ export class UsuarioService {
       }
 
     })
+
+  }
+  	/*=============================================
+	Resetear la contraseña
+	=============================================*/
+
+  sendPasswordResetEmail(body:object){
+
+    return this.http.post(`${this.SendPasswordResetEmail}`, body)
+
+  }
+
+  	/*=============================================
+	Confirmar el cambio de la contraseña
+  =============================================*/
+  
+  verifyPasswordResetCode(body:object){
+
+    return this.http.post(`${this.confirmChangePassword}`, body)
+
+  }
+
+  /*=============================================
+	Enviar la contraseña
+	=============================================*/
+
+  confirmPasswordReset(body:object){
+
+    return this.http.post(`${this.sendNewPassword}`, body)
 
   }
 

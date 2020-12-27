@@ -5,7 +5,8 @@ import { MyValidators } from '../utils/MyValidators';
 import { Capitalize, Sweetalert } from '../../functions';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-
+declare var jQuery: any;
+declare var $: any;
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -16,6 +17,8 @@ export class LoginComponent implements OnInit {
   public needValidation;
   public validators: MyValidators;
   public form: FormGroup;
+  public recuerdame: boolean = false;
+
   constructor(
     public usuarioService: UsuarioService,
     public formBuilder: FormBuilder,
@@ -26,16 +29,33 @@ export class LoginComponent implements OnInit {
     this.usuario = new Usuario();
     this.validators = new MyValidators();
 
-
   }
 
   ngOnInit(): void {
-    this.needValidation = this.validators.needValidation();
+    console.log("email:", localStorage.getItem("email"));
     this.initForm();
+    if (localStorage.getItem("rememberMe") && localStorage.getItem("rememberMe") == 'yes') {
+      this.usuario.email = localStorage.getItem("email");
+      this.recuerdame = true;
+      this.setValueForm();
+    }
+
+    this.needValidation = this.validators.needValidation();
+
     this.confirmarCorreo();
+    this.changePassword();
 
 
+  }
 
+  setValueForm() {
+    this.form.setValue({
+      email: this.usuario.email,
+      recuerdame: this.recuerdame,
+      password: '',
+      email_forgot: '',
+      password_reset: ''
+    });
   }
 
   confirmarCorreo() {
@@ -96,12 +116,44 @@ export class LoginComponent implements OnInit {
         })
 
     }
+
+  }
+
+  changePassword() {
+    /*=============================================
+    Confirmar cambio de contraseña
+    =============================================*/
+
+    if (this.activatedRouter.snapshot.queryParams["oobCode"] != undefined &&
+      this.activatedRouter.snapshot.queryParams["mode"] == "resetPassword") {
+
+      let body = {
+
+        oobCode: this.activatedRouter.snapshot.queryParams["oobCode"]
+      }
+
+      this.usuarioService.verifyPasswordResetCode(body)
+        .subscribe(resp => {
+          console.log("change_password:", resp);
+          if (resp["requestType"] == "PASSWORD_RESET") {
+
+            $("#newPassword").modal()
+
+          }
+
+        })
+
+    }
+
   }
 
   initForm() {
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)]],
       password: ['', [Validators.required, Validators.pattern(/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/)]],
+      recuerdame: [''],
+      email_forgot: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)]],
+      password_reset: ['', [Validators.required, Validators.pattern(/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/)]],
 
     });
   }
@@ -114,14 +166,15 @@ export class LoginComponent implements OnInit {
   setValues() {
     this.usuario.email = this.form.controls['email'].value;
     this.usuario.password = this.form.controls['password'].value;
-    this.usuario.token = true;
-
+    this.recuerdame = this.form.controls['recuerdame'].value;
   }
+
+
 
   onSubmit() {
     // console.log(f);
     // console.log(this.usuario);
-    if (this.form.valid) {
+    if (this.form.controls['email'].valid && this.form.controls['password'].valid ) {
       Sweetalert.fnc("loading", "Cargando ... ", null);
 
       this.usuarioService.getFilterData("email", this.usuario.email).subscribe(res1 => {
@@ -131,6 +184,7 @@ export class LoginComponent implements OnInit {
           if (res1[i].confirmar_correo) {
 
             this.setValues();
+            this.usuario.return_secure_token = true;
             this.usuarioService.loginAuth(this.usuario).subscribe(res2 => {
               console.log(res2);
 
@@ -140,14 +194,23 @@ export class LoginComponent implements OnInit {
                 idToken: res2['idToken']
               }
 
-              this.usuarioService.update(id,value).subscribe(res3=>{
-                if (res3['idToken'] != '' ) {
+              this.usuarioService.update(id, value).subscribe(res3 => {
+                if (res3['idToken'] != '') {
                   Sweetalert.fnc("close", null, null);
-                  localStorage.setItem("idToken",res3['idToken']);
-                  localStorage.setItem("email",res2['email']);
+                  localStorage.setItem("idToken", res3['idToken']);
+                  localStorage.setItem("email", res2['email']);
                   let today = new Date();
                   today.setSeconds(res2['expiresIn']);
-                  localStorage.setItem("expiresIn",today.getTime().toString());
+                  localStorage.setItem("expiresIn", today.getTime().toString());
+
+                  //almacenamos recuerdame en el storage
+                  console.log("recuerdame:", this.recuerdame);
+                  if (!this.recuerdame) {
+                    localStorage.setItem("rememberMe", "no");
+                  } else {
+                    localStorage.setItem("rememberMe", "yes");
+                  }
+
                   this.router.navigate(['/cuenta-usuario/cuenta']);
 
                 }
@@ -179,122 +242,55 @@ export class LoginComponent implements OnInit {
 
   }
 
-  // onSubmit() {
+  reestablecerPassword() {
+    if (this.form.controls['email_forgot'].valid) {
+      Sweetalert.fnc('loading', 'Cargando...', null);
+      let body = {
+        requestType: "PASSWORD_RESET",
+        email: this.form.controls['email_forgot'].value
+      }
 
-  //   if (this.form.invalid) {
+      this.usuarioService.sendPasswordResetEmail(body).subscribe(res => {
+        console.log("reestablecer:",res);
+        Sweetalert.fnc('success', 'Revisa tu correo para cambiar tu contraseña', "login");
 
-  //     return;
+      })
+    }else{
+      return;
+    }
 
-  //   }
+  }
 
-  //   /*=============================================
-  //     Alerta suave mientras se registra el usuario
-  //     =============================================*/
+  newPassword() {
+    if (this.form.controls['password_reset'].valid) {
+      if (this.form.controls['password_reset'].value != "") {
 
-  //   Sweetalert.fnc("loading", "Loading...", null)
+        Sweetalert.fnc("loading", "Cargando...", null)
+  
+        let body = {
+  
+          oobCode: this.activatedRouter.snapshot.queryParams["oobCode"],
+          newPassword: this.form.controls['password_reset'].value
+  
+        }
+  
+        this.usuarioService.confirmPasswordReset(body)
+          .subscribe(resp => {
+            console.log("confirmar_cambio_contraseña:",resp);
+            if (resp["requestType"] == "PASSWORD_RESET") {
+  
+              Sweetalert.fnc("success", "Contraseña cambiada correctamente,Iniciar sesión nuevamente!", "login")
+  
+            }
+  
+          })
+  
+      }
+    }else{
+      return;
+    }
+    
 
-  //   /*=============================================
-  //     Validar que el correo esté verificado
-  //   =============================================*/
-
-  //   this.usuarioService.getFilterData("email", this.usuario.email)
-  //     .subscribe(resp1 => {
-  //       console.log("resp1:", resp1);
-  //       for (const i in resp1) {
-
-  //         if (resp1[i].confirmar_correo) {
-
-  //           /*=============================================
-  //         Login en Firebase Authentication
-  //         =============================================*/
-
-  //           this.setValues();
-
-  //           this.usuarioService.loginAuth(this.usuario)
-  //             .subscribe(resp2 => {
-  //               console.log("resp2:", resp2);
-  //               /*=============================================
-  //               Almacenar id Token en Firebase Database
-  //               =============================================*/
-
-  //               let id = Object.keys(resp1).toString();
-
-  //               let value = {
-
-  //                 idToken: resp2["idToken"]
-  //               }
-
-  //               this.usuarioService.update(id, value)
-  //                 .subscribe(resp3 => {
-  //                   console.log("resp3:", resp3);
-  //                   console.log("expire in:",resp2["exp"]);
-
-  //                   if (resp3["idToken"] != "") {
-
-  //                     Sweetalert.fnc("close", null, null)
-
-  //                     /*=============================================
-  //                   Almacenamos el Token de seguridad en el localstorage
-  //                   =============================================*/
-
-  //                     localStorage.setItem("idToken", resp3["idToken"]);
-
-  //                     /*=============================================
-  //                     Almacenamos el email en el localstorage
-  //                     =============================================*/
-
-  //                     localStorage.setItem("email", resp2["email"]);
-
-  //                     /*=============================================
-  //                     Almacenamos la fecha de expiración localstorage
-  //                     =============================================*/
-
-  //                     let today = new Date();
-
-  //                     today.setSeconds(resp2["expiresIn"]);
-
-  //                     localStorage.setItem("expiresIn", today.getTime().toString());
-
-  //                     /*=============================================
-  //                     Almacenamos recordar email en el localStorage
-  //                     =============================================*/
-
-  //                     // if(this.rememberMe){
-
-  //                     // 	localStorage.setItem("rememberMe", "yes");
-
-  //                     // }else{
-
-  //                     // 	localStorage.setItem("rememberMe", "no");
-  //                     // }
-
-
-  //                     /*=============================================
-  //                     Redireccionar al usuario a la página de su cuenta
-  //                     =============================================*/
-
-  //                     // this.router.navigate(['/cuenta-usuario/cuenta']);
-
-  //                   }
-
-  //                 })
-
-  //             }, err => {
-
-  //               Sweetalert.fnc("error", err.error.error.message, null)
-
-  //             })
-
-  //         } else {
-
-  //           Sweetalert.fnc("error", 'Necesita confirmar su correo', null)
-
-  //         }
-
-  //       }
-
-  //     })
-
-  // }
+  }
 
 }
