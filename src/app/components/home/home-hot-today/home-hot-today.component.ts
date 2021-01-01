@@ -61,7 +61,7 @@ export class HomeHotTodayComponent implements OnInit {
         this.products.push(res[i]);
 
       }
-      console.log("get products:",this.products);
+      console.log("get products:", this.products);
       for (const i in this.getProducts) {
         this.fecha_oferta = new Date(
           parseInt(this.getProducts[i]['oferta'][2].split("-")[0]),
@@ -172,8 +172,9 @@ export class HomeHotTodayComponent implements OnInit {
         /*=============================================
         Enviamos el máximo de bloques para mostrar 4 productos por bloque
         =============================================*/
+        // cambiar
         // Math.ceil(block/4)
-        for (let i = 0; i < Math.floor(15 / 4); i++) {
+        for (let i = 0; i < Math.ceil(10 / 4); i++) {
 
           this.topSalesBlock.push(i);
 
@@ -240,25 +241,39 @@ export class HomeHotTodayComponent implements OnInit {
             let type;
             let value;
             let oferta;
+            let offerDate;
+            let today = new Date();
 
             if (top20Array[i][f].oferta != "") {
 
-              type = JSON.parse(top20Array[i][f].oferta)[0];
-              value = JSON.parse(top20Array[i][f].oferta)[1];
+              offerDate = new Date(
 
-              if (type == "Descuento") {
+                parseInt(JSON.parse(top20Array[i][f].oferta)[2].split("-")[0]),
+                parseInt(JSON.parse(top20Array[i][f].oferta)[2].split("-")[1]) - 1,
+                parseInt(JSON.parse(top20Array[i][f].oferta)[2].split("-")[2])
 
-                oferta = (top20Array[i][f].precio - (top20Array[i][f].precio * value / 100)).toFixed(2)
-
+              )
+              if (today < offerDate) {
+                type = JSON.parse(top20Array[i][f].oferta)[0];
+                value = JSON.parse(top20Array[i][f].oferta)[1];
+  
+                if (type == "Descuento") {
+  
+                  oferta = (top20Array[i][f].precio - (top20Array[i][f].precio * value / 100)).toFixed(2)
+  
+                }
+  
+                if (type == "Fijo") {
+  
+                  oferta = value
+  
+                }
+  
+                precio = `<p class="ps-product__price sale">$${oferta} <del>$${top20Array[i][f].precio} </del></p>`;
+              }else{
+                precio = `<p class="ps-product__price">$${top20Array[i][f].precio} </p>`;
               }
-
-              if (type == "Fijo") {
-
-                oferta = value
-
-              }
-
-              precio = `<p class="ps-product__price sale">$${oferta} <del>$${top20Array[i][f].precio} </del></p>`;
+             
 
             } else {
 

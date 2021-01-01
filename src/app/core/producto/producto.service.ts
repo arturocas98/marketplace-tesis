@@ -33,4 +33,14 @@ export class ProductoService {
     let url = this.url_api+ `/producto.json?orderBy="${order}"&equalTo="${equal}"&limitToFirst=${limitToFirst}&print=pretty`;
     return this.http.get(url);
   }
+
+  getSearchData(order:string,param:string){
+    return this.http.get(`${this.url_api}/producto.json?orderBy="${order}"&startAt="${param}"&endAt="${param}\uf8ff"&print=pretty`);
+  }
+
+  patchData(id:String, value:Object){
+
+		return this.http.patch(`${this.url_api}/producto/${id}.json`,value);
+
+	}
 }

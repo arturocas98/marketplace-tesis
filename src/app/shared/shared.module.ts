@@ -6,11 +6,12 @@ import { HeaderMobileComponent } from './components/header-mobile/header-mobile.
 import { NewletterComponent } from './components/newletter/newletter.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RouterModule } from '@angular/router';
+import { UrlsecurePipe } from './pipes/urlsecure.pipe';
 
 
 
 @NgModule({
-  declarations: [HeaderComponent, HeaderPromotionComponent, HeaderMobileComponent, NewletterComponent, FooterComponent],
+  declarations: [HeaderComponent, HeaderPromotionComponent, HeaderMobileComponent, NewletterComponent, FooterComponent, UrlsecurePipe],
   imports: [
     CommonModule,
     RouterModule
@@ -20,7 +21,8 @@ import { RouterModule } from '@angular/router';
     HeaderPromotionComponent,
     HeaderMobileComponent,
     NewletterComponent,
-    FooterComponent
+    FooterComponent,
+    UrlsecurePipe
   ]
 })
 export class SharedModule { }

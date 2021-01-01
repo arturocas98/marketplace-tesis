@@ -49,7 +49,7 @@ export class HomeTopCategoriesComponent implements OnInit {
 
 			getCategories.sort(function (a, b) {
 
-				return (b.view - a.view)
+				return (b.vistas - a.vistas)
 
 			})
 

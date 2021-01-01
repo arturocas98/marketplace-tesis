@@ -18,6 +18,8 @@ export const environment = {
   confirmEmailVerification:'https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg',
   getUserData: 'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg',
   SendPasswordResetEmail: "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg",
-
+  VerifyPasswordResetCode:'https://identitytoolkit.googleapis.com/v1/accounts:resetPassword?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg',
+  ConfirmPasswordReset: 'https://identitytoolkit.googleapis.com/v1/accounts:resetPassword?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg',
+  ChangePassword:'https://identitytoolkit.googleapis.com/v1/accounts:update?key=[YOUR-API-KEY]'
 
 };

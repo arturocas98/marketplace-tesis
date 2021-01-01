@@ -1,0 +1,73 @@
+<div class="ps-block--bought-toggether">
+
+    <h4>Combos frecuentes</h4>
+
+    <div class="ps-block__content">
+
+        <div class="ps-block__items">
+
+            <div *ngFor="let product of products;let i = index;let lastIndex = last; " class="ps-block__item">
+
+                <div class="ps-product ps-product--simple">
+
+                    <div class="ps-product__thumbnail">
+
+                        <a href="producto/{{product.url}}">
+                            <img src="{{path}}img/products/{{product.categoria}}/{{product.imagen}}" alt="{{product.nombre}}">
+                        </a>
+
+                    </div>
+
+                    <div class="ps-product__container">
+
+                        <div class="ps-product__content">
+                            <a class="ps-product__title" href="producto/{{product.url}}">
+                                {{product.nombre}}</a>
+
+                            <p  class="endPrice" [innerHTML]="price[i][0]" ></p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                {{lastIndex?callback():''}}
+            </div>
+
+            
+
+            <div class="ps-block__item ps-block__total">
+
+                <p>Precio total:<strong></strong></p>
+
+                <a class="ps-btn" href="#">Añadir todo al carrito</a>
+                <a class="ps-btn ps-btn--gray ps-btn--outline" href="#">Añadir todo a la lista de deseos</a>
+
+            </div>
+
+        </div>
+
+        <!-- <div class="ps-block__footer">
+
+            <div class="ps-checkbox">
+
+                <input class="form-control" type="checkbox" id="product-bought-1" name="product-bought" checked>
+
+                <label for="product-bought-1"><strong>This item: </strong> Korea Long Sofa Fabric In Blue
+                    Navy Color <span>$679.80</span></label>
+
+            </div>
+
+            <div class="ps-checkbox">
+
+                <input class="form-control" type="checkbox" id="product-bought-2" name="product-bought" checked>
+
+                <label for="product-bought-2">Fabric Chair In Brown Color <span>$120.80</span></label>
+
+            </div>
+
+        </div> -->
+
+    </div>
+
+</div>

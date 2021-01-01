@@ -17,4 +17,10 @@ export class SubcategoriaService {
     let url = this.url_api+ `/subcategoria.json?orderBy="${order}"&equalTo="${equal}"&print=pretty`;
     return this.http.get(url);
   }
+
+  patchData(id:String, value:Object){
+
+		return this.http.patch(`${this.url_api}/subcategoria/${id}.json`,value);
+
+	}
 }

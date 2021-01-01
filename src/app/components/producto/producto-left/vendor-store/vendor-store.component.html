@@ -1,0 +1,11 @@
+<div *ngFor="let st of store" class="media p-3">
+
+    <img src="{{path}}img/stores/{{st.url}}/{{st.logo}}" alt="{{st.nombre}}" class="mr-5 mt-1 rounded-circle"
+        style="width:120px;">
+
+    <div class="media-body">
+        <h4>{{st.nombre}}</h4>
+        <p>{{st.abstract}}</p>
+        <a class="ps-btn" href="store/{{st.url}}">Visita la tienda</a>
+    </div>
+</div>
