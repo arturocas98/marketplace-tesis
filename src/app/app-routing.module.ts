@@ -29,18 +29,18 @@ const routes: Routes = [
 
       },
       {
-        path:'producto',
+        path:'producto/:param',
         
         loadChildren:()=> import ('./components/producto/producto.module').then(m=> m.ProductoModule)
         //para que cargar un modulo hijo 
       },
       {
-        path:'productos',
+        path:'productos/:param',
         // canActivate:[AdminGuard],
         loadChildren:()=> import ('./components/productos/productos.module').then(m=> m.ProductosModule)
       },
       {
-        path:'search',
+        path:'search/:param',
         
         loadChildren:()=> import ('./components/search/search.module').then(m=> m.SearchModule)
         //para que cargar un modulo hijo 

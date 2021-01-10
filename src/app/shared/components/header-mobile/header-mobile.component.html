@@ -55,8 +55,8 @@
 
             <div class="menu--product-categories">
 
-                <div class="ps-shop__filter-mb mt-4" id="filter-sidebar">
-                    <i class="icon-menu "></i>
+                <div class="ps-shop__filter-mb mr-4 mt-4"  id="filter-sidebar">
+                    <i  class="icon-menu "></i>
                 </div>
 
                 <div class="ps-filter--sidebar">
@@ -95,7 +95,7 @@
             </div><!-- End menu-->
 
             <a class="ps-logo pl-3 pl-sm-5" href="index.html">
-                <img src="{{url_image}}img/template/logo_organic.png" class="pt-3" alt="">
+                <img src="{{url_image}}img/template/logo_organic_2.png" class="pt-3" alt="">
             </a>
 
         </div>
@@ -208,10 +208,10 @@
 
     <div class="ps-search--mobile">
 
-        <form class="ps-form--search-mobile" action="index.html" method="get">
+        <form class="ps-form--search-mobile">
             <div class="form-group--nest">
-                <input class="form-control" type="text" placeholder="Estoy buscando...">
-                <button><i class="icon-magnifier"></i></button>
+                <input  (keyup.enter)="goSearch(search.value)" #search class="form-control" type="text" placeholder="Estoy buscando...">
+                <button type="button" (click)="goSearch(search.value)" #search ><i class="icon-magnifier"></i></button>
             </div>
         </form>
 

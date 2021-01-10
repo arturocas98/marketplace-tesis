@@ -1,0 +1,60 @@
+{
+  "categoria": {
+    ".read": true,
+    "$custom": {
+      ".validate": "newData.child('nombre').isString() && newData.child('nombre').val().length < 100 && newData.child('nombre').val().matches(/^([0-9a-zñáéíóú ]+)$/i)",
+      "vistas": {
+        ".write": true
+      },
+      "nombre": {
+        ".write": "auth != null && auth.email == 'admin@hotmail.com' "
+      }
+    },
+    ".indexOn": [
+      "url"
+    ]
+  },
+  "subcategoria": {
+    ".read": true,
+    "$custom": {
+      "vistas": {
+        ".write": true
+      },
+      "nombre": {
+        ".write": "auth != null && auth.email == 'admin@hotmail.com'"
+      }
+    },
+    ".indexOn": [
+      "grupo",
+      "url",
+      "categoria"
+    ]
+  },
+  "producto": {
+    ".read": true,
+    "$custom": {
+      "vistas": {
+        ".write": true
+      },
+      "nombre": {
+        ".write": "auth != null"
+      }
+    },
+    ".indexOn": [
+      "nombre",
+      "categoria",
+      "subcategoria",
+      "etiquetas",
+      "grupo",
+      "url",
+      "tienda"
+    ]
+  },
+  "tienda": {
+    ".read": true,
+    ".write": "auth != null",
+    ".indexOn": [
+      "tienda"
+    ]
+  }
+}

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CategoriaService } from 'src/app/core/categoria/categoria.service';
 import { SubcategoriaService } from 'src/app/core/categoria/sub_categoria.service';
 import { environment } from 'src/environments/environment';
+import { Search } from '../../../functions';
+
 declare var jQuery:any;
 declare var $:any;
 @Component({
@@ -34,13 +36,12 @@ export class HeaderComponent implements OnInit {
   getAll() {
     this.categoriaService.getAll().subscribe(
       res => {
-        console.log(res);
         this.categorias = res;
-        // console.log(this.categorias);
         for (const i in this.categorias) {
-          this.title_list.push(JSON.parse(this.categorias[i].titulo_lista));
+          this.title_list.push(JSON.parse(this.categorias[i].grupo));
           // console.log("title_list:",this.title_list);
         }
+       
       }, err => {
         console.log(err);
       }
@@ -58,7 +59,7 @@ export class HeaderComponent implements OnInit {
 
         for (let i = 0; i < list.length; i++) {
 
-          this.subcategoriaService.getByFilter("titulo_lista", list[i]).subscribe(
+          this.subcategoriaService.getByFilter("grupo", list[i]).subscribe(
             res => {
               subcategorias.push(res);
 
@@ -76,7 +77,7 @@ export class HeaderComponent implements OnInit {
   
                   title_name.push({
   
-                    "titulo_lista": subcategorias[f][g].titulo_lista,
+                    "grupo": subcategorias[f][g].grupo,
                     "subcategoria": subcategorias[f][g].nombre,
                     "url": subcategorias[f][g].url,
   
@@ -88,7 +89,7 @@ export class HeaderComponent implements OnInit {
 
               for(const z in title_name){
 
-                if(list[i] == title_name[z].titulo_lista){
+                if(list[i] == title_name[z].grupo){
                   
                   /*=============================================
                   Imprimir el nombre de subcategoría debajo de el listado correspondiente
@@ -114,6 +115,15 @@ export class HeaderComponent implements OnInit {
       });
 
     }
+  }
+
+
+  goSearch(value:string){
+    if (value.length == 0 || Search.fnc(value) == undefined ) {
+      return;
+    }
+
+    window.open(`search/${Search.fnc(value)}`  ,'_top')
   }
 
 }

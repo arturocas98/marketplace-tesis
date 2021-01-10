@@ -1,0 +1,98 @@
+<div class="ps-section--default ps-customer-bought">
+
+    <div class="ps-section__header">
+
+        <h3>Los clientes también compraron estos productos</h3>
+
+    </div>
+
+    <div class="ps-section__content">
+
+        <div class="row">
+
+            <div 
+			 *ngFor="let product of products; let i = index; let lastIndex = last"
+            class="col-lg-2 col-md-4 col-6 ">
+
+                <div class="ps-product">
+
+                   <div class="ps-product__thumbnail">
+
+		            	<a href="producto/{{product.url}}">
+		            		<img src="{{path}}img/products/{{product.categoria}}/{{product.imagen}}" alt="{{product.nombre}}">
+		            	</a>
+
+		                <div [innerHTML]="price[i][1]"></div>
+
+		                <ul class="ps-product__actions">
+
+		                    <li>
+		                    	<a href="#" data-toggle="tooltip" data-placement="top" title="Leer más">
+		                        	<i class="icon-bag2"></i>
+		                        </a>
+		                    </li>
+
+		                    <li>
+		                    	<a href="producto/{{product.url}}" data-toggle="tooltip" data-placement="top" title="Vista rápida">
+		                    		<i class="icon-eye"></i>
+		                    	</a>
+		                    </li>
+
+		                    <li>
+		                    	<a href="#" data-toggle="tooltip" data-placement="top" title="Añadir a la lista de deseos">
+		                    		<i class="icon-heart"></i>
+		                    	</a>
+		                    </li>
+
+		                </ul>
+
+		            </div>
+
+		            <div class="ps-product__container">
+
+		            	<a class="ps-product__vendor" href="#">{{product.tienda}}</a>
+
+		                <div class="ps-product__content">
+
+		                	<a class="ps-product__title" href="producto/{{product.url}}">{{product.nombre}}</a>
+
+		                    <div class="ps-product__rating">
+
+		                        <select class="ps-rating" data-read-only="true">
+
+		                            <option 
+		                            *ngFor="let review of reviews[i]; let f = index"
+		                            [value]="review">{{f+1}}</option>
+
+		                        </select>
+
+		                        <span>{{rating[i]}}</span>
+
+		                    </div>
+
+		                     <div [innerHTML]="price[i][0]"></div>
+
+		                </div>
+
+		                <div class="ps-product__content hover">
+
+		                	<a class="ps-product__title" href="producto/{{product.url}}">{{product.nombre}}</a>
+
+		                    <div [innerHTML]="price[i][0]"></div>
+
+		                </div>
+
+		            </div>
+
+		        {{lastIndex ? callback() : ""}}
+
+                </div>
+
+            </div>
+
+  
+        </div>
+
+    </div>
+
+</div><!--  End Customers who bought -->

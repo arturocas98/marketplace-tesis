@@ -1,0 +1,39 @@
+<header class="header header--product header--sticky" data-sticky="true">
+
+    <nav class="navigation">
+
+        <div class="container">
+
+            <article *ngFor="let product of call_to_action; let i = index;" class="ps-product--header-sticky">
+
+                <div class="ps-product__thumbnail">
+
+                    <img src="{{path}}img/products/{{product.categoria}}/{{product.imagen}}" alt="{{product.nombre}}">
+
+                </div>
+
+                <div class="ps-product__wrapper">
+
+                    <div class="ps-product__content">
+
+                        <a class="ps-product__title" routerLink="#">{{ product.nombre }}</a>
+
+                    </div>
+
+                    <div class="ps-product__shopping">
+
+                        <div  class="mr-4" [innerHTML]="price[i]" >  </div>
+
+                        <a  class="ps-btn" href="#"> Añadir al carrito</a>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </nav>
+
+</header>
