@@ -9,7 +9,7 @@
         <div class="row">
 
             <div *ngFor="let banner of banner_default;let i = index"  class="col-md-6 col-12 ">
-                <a class="ps-collection" routerLink="producto/{{url[i]}}" >
+                <a class="ps-collection" href="producto/{{url[i]}}" >
                     <img src="{{url_image}}img/products/categorias/{{categoria[i]}}/default/{{banner}}" alt="">
                 </a>
             </div>

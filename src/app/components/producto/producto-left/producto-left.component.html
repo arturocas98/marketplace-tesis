@@ -1,0 +1,300 @@
+<!--=====================================
+    			Left Column
+    			======================================-->
+
+
+
+<div class="ps-product--detail ps-product--fullwidth">
+
+    <!--=====================================
+    					Product Header
+    					======================================-->
+
+    <div class="ps-product__header">
+
+        <!--=====================================
+    						Gallery
+    						======================================-->
+
+        <div class="ps-product__thumbnail" data-vertical="true">
+
+            <figure>
+
+                <div class="ps-wrapper">
+
+                    <div class="ps-product__gallery" data-arrow="true">
+
+                        <div *ngFor="let image of gallery[0];let i = index;" class="item">
+                            <a href="{{path}}img/products/{{product[0].categoria}}/{{image}}">
+                                <img src="{{path}}img/products/{{product[0].categoria}}/{{image }}"
+                                    alt="{{product[0].nombre}}">
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </figure>
+
+            <div class="ps-product__variants" data-item="4" data-md="4" data-sm="4" data-arrow="false">
+
+                <div *ngFor="let image of gallery[0];let lastIndex = last;" class="item">
+                    <img src="{{path}}img/products/{{product[0].categoria}}/{{image}}" alt="{{product[0].nombre}}">
+
+                    {{lastIndex?callbackGallery():''}}
+                </div>
+
+
+            </div>
+
+        </div><!-- End Gallery -->
+
+        <!--=====================================
+        Product Info
+        ======================================-->
+
+        <div *ngFor="let p of product;let i = index;" class="ps-product__info">
+
+            <h1>{{p.nombre }}</h1>
+
+            <div class="ps-product__meta">
+
+
+                <div class="ps-product__rating">
+
+                    <select class="ps-rating" data-read-only="true">
+
+                        <option *ngFor="let review of reviews[i]; let f = index" [value]="review">{{f+1}}</option>
+
+
+                    </select>
+
+                    <span> {{ rating[i] }}</span>
+
+                </div>
+
+            </div>
+
+            <div [innerHTML]="price[i][0]"></div>
+
+
+            <div class="ps-product__desc">
+
+                <p>
+
+                    Vendedor: <a class="mr-20" href="shop-default.html"><strong>{{ p.tienda }}</strong></a>
+
+                    Estado:<strong *ngIf="p.stock > 0" class="ps-tag--in-stock"> En stock</strong>
+                    <strong *ngIf="p.stock == 0" class="ps-tag--out-stock">Sin stock</strong>
+                </p>
+
+                <div class="ps-list--dot" [innerHTML]="p.resumen"> </div>
+                <iframe class="mb-3" [attr.src]="video|urlsecure" height="360" frameborder="0"
+                allowfullscreen></iframe>
+                
+
+            </div>
+         
+
+            <!-- <div class="ps-product__variations">
+
+                <div [innerHTML]="p.especificaciones"></div>
+
+            </div> -->
+
+            <div *ngIf="p.oferta != ''" class="ps-product__countdown">
+
+                <figure>
+
+                    <figcaption> ¡No te lo pierdas! Esta promoción caducará en</figcaption>
+
+                    <ul class="ps-countdown" [attr.data-time]="countd[i]">
+
+                        <li><span class="days"></span>
+                            <p>Días</p>
+                        </li>
+
+                        <li><span class="hours"></span>
+                            <p>Horas</p>
+                        </li>
+
+                        <li><span class="minutes"></span>
+                            <p>Minutos</p>
+                        </li>
+
+                        <li><span class="seconds"></span>
+                            <p>Segundos</p>
+                        </li>
+
+                    </ul>
+
+                </figure>
+
+                <figure>
+
+                    <figcaption>Unidades vendidas</figcaption>
+
+                    <div class="ps-product__progress-bar ps-progress" [attr.data-value]="28">
+
+                        <div class="ps-progress__value"><span></span></div>
+
+                        <p><b>{{100-p.stock}}/100</b> Vendidas</p>
+
+                    </div>
+
+                </figure>
+
+            </div>
+
+            <div class="ps-product__shopping">
+
+                <figure>
+
+                    <figcaption>Cantidad</figcaption>
+
+                    <div class="form-group--number quantity">
+
+                        <button class="up">
+                            <i class="fa fa-plus"></i>
+                        </button>
+
+                        <button class="down">
+                            <i class="fa fa-minus"></i>
+                        </button>
+
+                        <input class="form-control" type="number" value="1"  min="1" max="100" step="1" >
+
+                    </div>
+
+                </figure>
+
+                <a class="ps-btn ps-btn--black" href="#">Añadir al carrito</a>
+
+                <a class="ps-btn" href="#">Comprar ahora</a>
+
+                <div class="ps-product__actions">
+
+                    <a href="#">
+                        <i class="icon-heart"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="ps-product__specification">
+
+                <!-- <a class="report" href="#">Report Abuse</a> -->
+
+                <p class="categories">
+
+                    <strong> Categorias:</strong>
+
+                    <a href="productos/{{p.categoria}}">{{p.categoria}}</a>,
+                    <a href="productos/{{p.subcategoria}}">{{p.subcategoria}} </a>,
+                    <a href="search/{{p.grupo}}">{{p.grupo}}</a>
+
+                </p>
+
+                <p class="tags"><strong> Etiquetas</strong>
+
+                    <a *ngFor="let tag of tags" href="search/{{tag}}"> {{tag}},</a>
+
+                </p>
+
+            </div>
+
+            <div class="ps-product__sharing">
+
+                <a class="facebook" href="#">
+                    <i class="fab fa-facebook"></i>
+                </a>
+
+                <a class="twitter" href="#">
+                    <i class="fab fa-twitter"></i>
+                </a>
+
+
+                <a class="linkedin" href="#">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+
+                <a class="instagram" href="#">
+                    <i class="fab fa-instagram"></i>
+                </a>
+
+            </div>
+
+        </div> <!-- End Product Info -->
+
+    </div> <!-- End Product header -->
+
+    <!--=====================================
+    Product Content
+    ======================================-->
+
+    <div *ngFor="let p of product;let lastIndex =last; " class="ps-product__content ps-tab-root">
+
+        <app-bought-together [childItem]="p" ></app-bought-together>
+
+        <ul class="ps-tab-list">
+
+            <li class="active"><a href="#tab-1">Descripción</a></li>
+            <!-- <li><a href="#tab-2">Especificaciones</a></li> -->
+            <li><a href="#tab-3">Vendedor</a></li>
+            <li><a href="#tab-4">Reviews ({{totalReviews}})</a></li>
+            <li><a href="#tab-5">Preguntas y respuestas</a></li>
+
+        </ul>
+
+        <div class="ps-tabs">
+
+            <div class="ps-tab active" id="tab-1">
+
+                <div [innerHTML]="p.descripcion"></div>
+
+            </div>
+
+            <!-- <div class="ps-tab" id="tab-2">
+
+                <div [innerHTML]="p.detalles"></div>
+
+            </div> -->
+
+            <div class="ps-tab" id="tab-3">
+
+                <app-vendor-store [childItem]="p.tienda" ></app-vendor-store>
+
+            </div>
+
+            <div class="ps-tab" id="tab-4">
+
+                <app-reviews [childItem]="p" ></app-reviews>
+
+            </div>
+
+            <div class="ps-tab" id="tab-5">
+
+                <div class="ps-block--questions-answers">
+
+                    <h3>Preguntas y respuestas</h3>
+
+                    <div class="form-group">
+
+                        <input class="form-control" type="text" placeholder="Tienes una pregunta? Buscas una respuesta?">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            
+
+        </div>
+
+        {{lastIndex?callback():''}}
+
+    </div><!--  End product content -->
+
+</div>

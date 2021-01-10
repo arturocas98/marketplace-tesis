@@ -31,16 +31,16 @@
 
             <div class="header__right">
                 <ul class="header__top-links"> 
-                    <li><a href="#">Sell on MarketPlace</a></li>
-                    <li><a href="#">Store List</a></li>
-                    <li><i class="icon-telephone"></i> Hotline:<strong> 1-800-234-5678</strong></li>                     
-                    <li>
+                    <li><a href="#">Vender en  OrganicGye</a></li>
+                    <li><a href="#">Lista de tiendas</a></li>
+                    <li><i class="icon-telephone"></i> Línea directa:<strong> 1-800-123-5678</strong></li>                     
+                    <!-- <li>
                         <div class="ps-dropdown language"><a href="#"><img src="{{url_image}}img/template/en.png" alt="">English</a>
                             <ul class="ps-dropdown-menu">
                                 <li><a href="#"><img src="{{url_image}}img/template/es.png" alt=""> Spanish</a></li>
                             </ul>
                         </div>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
 
@@ -62,8 +62,8 @@
                 Logo
                 ======================================-->
 
-                <a class="ps-logo" href="index.html">
-                    <img src="{{url_image}}img/template/logo_organic.png" alt="">
+                <a class="ps-logo" routerLink="/">
+                    <img src="{{url_image}}img/template/logo_organic_2.png" alt="">
                 </a>
 
                 <!--=====================================
@@ -81,7 +81,7 @@
                         <ul class="menu--dropdown">
                            
                             <li *ngFor="let categoria of categorias;let i=index;let lastIndex=last" class="menu-item-has-children has-mega-menu">
-                                <a routerLink="productos/{{categoria.url}}" ><i class="{{categoria.icon}}"></i> {{categoria.nombre}} </a>
+                                <a routerLink="productos/{{categoria.url}}" target="_top" ><i class="{{categoria.icon}}"></i> {{categoria.nombre}} </a>
                                 <div  class="mega-menu">
                                     <div   *ngFor="let title of title_list[i] " class="mega-menu__column">
                                         <h4>{{title }}<span class="sub-toggle"></span></h4>
@@ -111,15 +111,15 @@
                 <form class="ps-form--quick-search" action="index.html" method="get">
                     <div class="form-group--icon">
                         <i class="icon-chevron-down"></i>
-                        <select class="form-control">
+                        <!-- <select class="form-control">
                             <option value="1">Todo </option>
                             <option value="1">Smartphone</option>
                             <option value="1">Sounds</option>
                             <option value="1">Technology toys</option>
-                        </select>
+                        </select> -->
                     </div>
-                    <input class="form-control" type="text" placeholder="Estoy buscando...">
-                    <button>Buscar</button>
+                    <input (keyup.enter)="goSearch(search.value)" #search  class="form-control" type="text" placeholder="Estoy buscando...">
+                    <button type="button" (click)="goSearch(search.value)" #search  >Buscar</button>
                 </form>
             </div>
 

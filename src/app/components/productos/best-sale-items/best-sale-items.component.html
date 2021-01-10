@@ -1,0 +1,127 @@
+<!--=====================================
+Recommended Items
+======================================--> 
+
+<div 
+*ngIf="!cargando"
+class="ps-block--shop-features">
+
+    <div class="ps-block__header">
+
+        <h3>Productos más vendidos</h3>
+
+        <div class="ps-block__navigation">
+
+        	<a class="ps-carousel__prev" href="#recommended">
+        		<i class="icon-chevron-left"></i>
+        	</a>
+
+        	<a class="ps-carousel__next" href="#recommended">
+        		<i class="icon-chevron-right"></i>
+        	</a>
+
+        </div>
+
+    </div>
+
+    <div class="ps-block__content">
+
+        <div class="owl-slider" id="recommended" data-owl-auto="true" data-owl-loop="true" data-owl-speed="10000" data-owl-gap="30" data-owl-nav="false" data-owl-dots="false" data-owl-item="6" data-owl-item-xs="2" data-owl-item-sm="2" data-owl-item-md="3" data-owl-item-lg="4" data-owl-item-xl="6" data-owl-duration="1000" data-owl-mousedrag="on">
+
+         	<!--=====================================
+			Product
+			======================================--> 
+
+            <div 
+			*ngFor="let product of recommendedItems; let i = index; let lastIndex = last"
+            class="ps-product">
+
+                <div class="ps-product__thumbnail">
+
+                	<a href="producto/{{product.url}}">
+                		<img src="{{path}}img/products/{{product.categoria}}/{{product.imagen}}" alt="{{product.nombre}}">
+                	</a>
+
+                	<div [innerHTML]="price[i][1]"></div>
+
+                    <ul class="ps-product__actions">
+
+                        <li>
+                        	<a href="#" data-toggle="tooltip" data-placement="top" title="Añadir al carrito">
+                        		<i class="icon-bag2"></i>
+                        	</a>
+                        </li>
+
+                        <li>
+                        	<a href="producto/{{product.url}}" data-toggle="tooltip" data-placement="top" title="Vista rápida">
+                        		<i class="icon-eye"></i>
+                        	</a>
+                        </li>
+
+                        <li>
+                        	<a href="#" data-toggle="tooltip" data-placement="top" title="Añadir a la lista de deseos">
+                        		<i class="icon-heart"></i>
+                        	</a>
+                        </li>                                           
+
+                    </ul>
+
+                </div>
+
+                <div class="ps-product__container">
+
+                	<a class="ps-product__vendor" href="#">{{product.tienda}}</a>
+
+                    <div class="ps-product__content">
+
+                    	<a class="ps-product__title" href="producto/{{product.url}}">
+                    	{{product.nombre}}</a>
+
+                        <div class="ps-product__rating">
+
+                            <select class="ps-rating" data-read-only="true">
+
+                                <option 
+								*ngFor="let review of reviews[i]; let f = index"
+                                [value]="review">{{f+1}}</option>
+                             
+                            </select>
+
+                            <span>{{rating[i]}}</span>
+
+                        </div>
+
+                        <div [innerHTML]="price[i][0]"></div>
+
+                    </div>
+
+                    <div class="ps-product__content hover">
+
+                    	<a class="ps-product__title" href="producto/{{product.url}}">
+                    	{{product.nombre}}</a>
+
+                        <div [innerHTML]="price[i][0]"></div>
+
+                    </div>
+
+                </div>
+
+            
+			{{ lastIndex ? callback() : ""}}
+            </div><!-- End Product -->
+
+        </div>
+
+    </div>
+
+</div><!-- End Recommended Items -->
+
+<!--=====================================
+Preload
+======================================-->
+
+<div 
+*ngIf="cargando"
+class="d-flex justify-content-center">
+    <div class="spinner-border text-muted my-5"></div>
+</div>

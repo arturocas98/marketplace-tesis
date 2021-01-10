@@ -1,0 +1,104 @@
+<aside class="widget widget_product widget_features">
+
+    <p><i class="icon-network"></i> Entrega a toda la ciudad de Guayaquil</p>
+
+    <!-- <p><i class="icon-3d-rotate"></i> Free 7-day return if eligible, so easy</p> -->
+
+    <p><i class="icon-receipt"></i> El proveedor da factura por este pedido.</p>
+
+    <p><i class="icon-credit-card"></i> Pague en línea 100% seguro</p>
+
+</aside>
+
+<aside class="widget widget_sell-on-site">
+
+    <p><i class="icon-store"></i> Deseas vender en el MarketPlace?<a href="#"> Regitrate ahora !</a></p>
+
+</aside>
+
+<aside class="widget widget_same-brand">
+
+    <h3>Productos de la misma Tienda</h3>
+
+    <div class="widget__content">
+
+        <div 
+        *ngFor="let product of products; let i = index; let lastIndex = last"
+        class="ps-product">
+
+            <div class="ps-product__thumbnail">
+
+            	<a href="producto/{{product.url}}">
+            		<img src="{{path}}img/products/{{product.categoria}}/{{product.imagen}}" alt="{{product.nombre}}">
+            	</a>
+
+                <div [innerHTML]="price[i][1]"></div>
+
+                <ul class="ps-product__actions">
+
+                    <li>
+                    	<a href="#" data-toggle="tooltip" data-placement="top" title="Leer más">
+                        	<i class="icon-bag2"></i>
+                        </a>
+                    </li>
+
+                    <li>
+                    	<a href="producto/{{product.url}}" data-toggle="tooltip" data-placement="top" title="Vista rápida">
+                    		<i class="icon-eye"></i>
+                    	</a>
+                    </li>
+
+                    <li>
+                    	<a href="#" data-toggle="tooltip" data-placement="top" title="Añadir a la lista de deseos">
+                    		<i class="icon-heart"></i>
+                    	</a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="ps-product__container">
+
+            	<a class="ps-product__vendor" href="#">{{product.tienda}}</a>
+
+                <div class="ps-product__content">
+
+                	<a class="ps-product__title" href="producto/{{product.url}}">{{product.nombre}}</a>
+
+                    <div class="ps-product__rating">
+
+                        <select class="ps-rating" data-read-only="true">
+
+                            <option 
+                            *ngFor="let review of reviews[i]; let f = index"
+                            [value]="review">{{f+1}}</option>
+
+                        </select>
+
+                        <span>{{rating[i]}}</span>
+
+                    </div>
+
+                     <div [innerHTML]="price[i][0]"></div>
+
+                </div>
+
+                <div class="ps-product__content hover">
+
+                	<a class="ps-product__title" href="producto/{{product.url}}">{{product.nombre}}</a>
+
+                    <div [innerHTML]="price[i][0]"></div>
+
+                </div>
+
+            </div>
+
+        {{lastIndex ? callback() : ""}}
+
+        </div>
+
+
+    </div>
+
+</aside>

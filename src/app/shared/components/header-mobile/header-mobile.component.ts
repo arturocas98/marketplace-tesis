@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { SearchComponent } from 'src/app/components/search/search/search.component';
 import { CategoriaService } from 'src/app/core/categoria/categoria.service';
 import { SubcategoriaService } from 'src/app/core/categoria/sub_categoria.service';
 import { environment } from 'src/environments/environment';
 import { SiteToggleAction } from '../../../functions';
+import { Search } from '../../../functions';
 
 declare var jQuery:any;
 declare var $:any;
@@ -82,6 +84,14 @@ export class HeaderMobileComponent implements OnInit {
       });
       SiteToggleAction.fnc();
     }
+  }
+
+  goSearch(value:string){
+    if (value.length == 0 || Search.fnc(value) == undefined ) {
+      return;
+    }
+
+    window.open(`search/${Search.fnc(value)}`  ,'_top')
   }
 
 }
