@@ -35,15 +35,16 @@ Related products
 	                    </li>
 
 	                    <li>
-	                    	<a href="producto/{{product.url}}" data-toggle="tooltip" data-placement="top" title="Vista rápida">
+	                    	<a href="producto/{{product.url}}" data-toggle="tooltip" data-placement="top" title="ver">
 	                    		<i class="icon-eye"></i>
 	                    	</a>
 	                    </li>
 
 	                    <li>
-	                    	<a href="#" data-toggle="tooltip" data-placement="top" title="Añadir a la lista de deseos">
-	                    		<i class="icon-heart"></i>
-	                    	</a>
+	                    	<a  data-toggle="tooltip" style="cursor:pointer"  (click)="addWishList(product.url)" data-placement="top" title="Añadir a la lista de deseos">
+                        		<i class="icon-heart"></i>
+                        	</a>
+
 	                    </li>
 
 	                </ul>

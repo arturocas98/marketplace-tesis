@@ -385,7 +385,7 @@ export let Sweetalert = {
 
                 Swal.fire({
                     icon: 'success',
-                    title: 'Se ha registrado correctamente la información',
+                    title: 'Se ha registrado la información',
                     text: text,
                     width: '46rem',
 
@@ -395,7 +395,7 @@ export let Sweetalert = {
 
                 Swal.fire({
                     icon: 'success',
-                    title: 'Se ha registrado correctamente la información',
+                    title: 'Se ha registrado la información',
                     text: text,
                     width: '46rem',
 

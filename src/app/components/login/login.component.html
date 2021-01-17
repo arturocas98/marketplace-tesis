@@ -121,8 +121,19 @@
 
                         <ul class="ps-list--social">
 
-                            <li><a class="facebook" href="#"><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a class="google" href="#"><i class="fab fa-google"></i></a></li>
+                            <li>
+                                <a 
+                                class="facebook" 
+                                style="cursor:pointer"
+                                (click)="facebookLogin()">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li>                            
+                            <li> 
+                                <a class="google" style="cursor:pointer" (click)="googleLogin()">
+                                    <i class="fab fa-google"></i>
+                                </a>
+                            </li>
 
                         </ul>
 
@@ -155,7 +166,7 @@
                     <div class="form-group">
 
                         <input class="form-control" maxlength="40" required type="email" formControlName="email_forgot"
-                            placeholder="Correo electrónico">
+                            placeholder="Correo electrónico" data-toggle="tooltip" title="Ingrese su email con el siguiente formato, ejemplo:hola@hotmail.com" >
                         <div *ngIf="validatorErrorField('email_forgot') ">
                             <p class="text-danger" *ngIf="form.get('email_forgot').hasError('required')">El campo es
                                 requerido </p>
@@ -166,8 +177,7 @@
                     </div>
                     <div class="form-group">
 
-                        <button  (click)="reestablecerPassword()"
-                            class="ps-btn ps-btn--fullwidth">Enviar</button>
+                        <button (click)="reestablecerPassword()" class="ps-btn ps-btn--fullwidth">Enviar</button>
 
                     </div>
                 </form>
@@ -215,8 +225,7 @@
 
                     <div class="form-group submtit">
 
-                        <button   (click)="newPassword()"
-                            class="ps-btn ps-btn--fullwidth">Enviar</button>
+                        <button (click)="newPassword()" class="ps-btn ps-btn--fullwidth">Enviar</button>
 
                     </div>
 
@@ -226,7 +235,7 @@
 
             <!-- Modal footer -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
             </div>
 
         </div>

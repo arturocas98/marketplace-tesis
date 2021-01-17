@@ -42,5 +42,10 @@ export class ProductoService {
 
 		return this.http.patch(`${this.url_api}/producto/${id}.json`,value);
 
-	}
+  }
+  
+  getById(value:string){
+
+    return this.http.get(`${this.url_api}/producto/${value}.json`);
+  }
 }

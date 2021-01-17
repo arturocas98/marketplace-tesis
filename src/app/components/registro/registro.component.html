@@ -127,8 +127,21 @@
 
                         <ul class="ps-list--social">
 
-                            <li><a class="facebook" href="#"><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a class="google" href="#"><i class="fab fa-google"></i></a></li>
+                            <li>
+                                <a 
+                                class="facebook" 
+                                style="cursor:pointer"
+                                (click)="facebookRegister()">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li>
+                            <li><a 
+                                class="google" 
+                                style="cursor:pointer"
+                                (click)="googleRegister()">
+                                    <i class="fab fa-google"></i>
+                                </a>
+                            </li>
 
                         </ul>
 

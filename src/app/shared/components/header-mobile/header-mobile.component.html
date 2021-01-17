@@ -20,11 +20,11 @@
 
             <ul class="navigation__extra">
 
-                <li><a href="#">Sell on MarketPlace</a></li>
-                <li><a href="#">Store List</a></li>
-                <li><i class="icon-telephone"></i> Hotline:<strong> 1-800-234-5678</strong></li>
+                <li><a href="#">Vender en el MarketPlace</a></li>
+                <li><a href="#">Lista de tiendas</a></li>
+                <li><i class="icon-telephone"></i> Linea directa:<strong> 1-800-123-5678</strong></li>
 
-                <li>
+                <!-- <li>
 
                     <div class="ps-dropdown language"><a href="#"><img src="{{url_image}}img/template/en.png"
                                 alt="">English</a>
@@ -37,7 +37,7 @@
 
                     </div>
 
-                </li>
+                </li> -->
 
             </ul>
 
@@ -181,20 +181,25 @@
 					Login and Register
 					======================================-->
 
-                <div class="ps-block--user-header">
-
-                    <!-- <div class="ps-block__left">
-                        <i class="icon-user"></i>
+                    <div *ngIf="!authValidate" class="ps-block--user-header">
+                        <a class="header__extra" routerLink="login">
+                            <i class="icon-user"></i>
+                        </a>
+                        <div class="ps-block__right">
+                            <a routerLink="login">Login</a>
+                            <a routerLink="registro">Registro</a>
+                        </div>
                     </div>
-                    <div class="ps-block__right">
-                        <a routerLink="login">Login</a>
-                        <a routerLink="registro">Register</a>
-                    </div> -->
-                    <a class="header__extra" routerLink="login">
-                        <i class="icon-user"></i>
-                    </a>
-
-                </div>
+                    
+                    <div *ngIf="authValidate" class="ps-block--user-header">
+                        <div class="ps-block__left text-right">
+                            <div [innerHTML]="picture" style="width:40px" ></div>
+                        </div>
+                        <div class="ps-block__right">
+                            <a routerLink="/cuenta-usuario/cuenta">Mi cuenta</a>
+                            
+                        </div>
+                    </div>
 
             </div>
 

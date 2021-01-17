@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductoService } from 'src/app/core/producto/producto.service';
+import { UsuarioService } from 'src/app/core/usuario/usuario.service';
 import { environment } from 'src/environments/environment';
 import {
   OwlCarouselConfig,
@@ -35,10 +36,11 @@ export class ProductoLeftComponent implements OnInit {
   video: string = null;
   tags: string = null;
   totalReviews: String;
-
+  oferta_valida:boolean = false;
   constructor(
     private activateRoute: ActivatedRoute,
-    private productService: ProductoService
+    private productService: ProductoService,
+    private userService: UsuarioService
   ) { }
 
   ngOnInit(): void {
@@ -84,15 +86,26 @@ export class ProductoLeftComponent implements OnInit {
       this.price.push(DinamicPrice.fnc(this.product[index]));
 
       if (this.product[index].oferta != '') {
-        const date = JSON.parse(this.product[index].oferta)[2];
-        this.countd.push(
-          new Date(
-            parseInt(date.split('-')[0]),
-            parseInt(date.split('-')[1]) - 1,
-            parseInt(date.split('-')[2]),
+        let today = new Date();
+        let offerDate = new Date(
+          parseInt(JSON.parse(this.product[index].oferta)[2].split("-")[0]),
+          parseInt(JSON.parse(this.product[index].oferta)[2].split("-")[1]) - 1,
+          parseInt(JSON.parse(this.product[index].oferta)[2].split("-")[2]),
 
-          )
-        )
+        );
+        if (today < offerDate) {
+          const date = JSON.parse(this.product[index].oferta)[2];
+          this.countd.push(
+            new Date(
+              parseInt(date.split('-')[0]),
+              parseInt(date.split('-')[1]) - 1,
+              parseInt(date.split('-')[2]),
+
+            )
+          );
+          this.oferta_valida = true;
+        }
+
       }
 
       // galeria
@@ -143,6 +156,10 @@ export class ProductoLeftComponent implements OnInit {
       SlickConfig.fnc();
       ProductLightbox.fnc();
     }
+  }
+
+  addWishList(producto) {
+    this.userService.wishlist(producto);
   }
 
 }

@@ -89,9 +89,9 @@
                 </p>
 
                 <div class="ps-list--dot" [innerHTML]="p.resumen"> </div>
-                <iframe class="mb-3" [attr.src]="video|urlsecure" height="360" frameborder="0"
+                <!-- <iframe class="mb-3" [attr.src]="video|urlsecure" height="360" frameborder="0"
                 allowfullscreen></iframe>
-                
+                 -->
 
             </div>
          
@@ -102,7 +102,7 @@
 
             </div> -->
 
-            <div *ngIf="p.oferta != ''" class="ps-product__countdown">
+            <div *ngIf="p.oferta != '' && oferta_valida" class="ps-product__countdown">
 
                 <figure>
 
@@ -134,11 +134,11 @@
 
                     <figcaption>Unidades vendidas</figcaption>
 
-                    <div class="ps-product__progress-bar ps-progress" [attr.data-value]="28">
+                    <div class="ps-product__progress-bar ps-progress" [attr.data-value]="100-p.stock">
 
                         <div class="ps-progress__value"><span></span></div>
 
-                        <p><b>{{100-p.stock}}/100</b> Vendidas</p>
+                        <p><b>{{100-p.stock}}/100</b> disponibles</p>
 
                     </div>
 
@@ -174,7 +174,7 @@
 
                 <div class="ps-product__actions">
 
-                    <a href="#">
+                    <a  data-toggle="tooltip" style="cursor:pointer"  (click)="addWishList(p.url)" data-placement="top" title="Añadir a la lista de deseos">
                         <i class="icon-heart"></i>
                     </a>
 

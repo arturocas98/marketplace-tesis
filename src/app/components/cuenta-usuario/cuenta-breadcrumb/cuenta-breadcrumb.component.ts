@@ -15,6 +15,7 @@ export class CuentaBreadcrumbComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.validUserAuth();
   }
   /*=============================================
 		Validar si existe usuario autenticado
@@ -26,7 +27,6 @@ export class CuentaBreadcrumbComponent implements OnInit {
 
 				this.usuarioService.getFilterData("idToken", localStorage.getItem("idToken"))
 				.subscribe(resp=>{
-
 					for(const i in resp){
 
 						this.displayName = resp[i].displayName;

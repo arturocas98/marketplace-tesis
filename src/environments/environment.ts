@@ -24,7 +24,8 @@ export const environment = {
   SendPasswordResetEmail: "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg",
   VerifyPasswordResetCode:'https://identitytoolkit.googleapis.com/v1/accounts:resetPassword?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg',
   ConfirmPasswordReset: 'https://identitytoolkit.googleapis.com/v1/accounts:resetPassword?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg',
-  ChangePassword:'https://identitytoolkit.googleapis.com/v1/accounts:update?key=[YOUR-API-KEY]'
+  ChangePassword:'https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg',
+  server:'http://localhost/marketplace-tesis/src/assets/img/index.php?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg'
 };
 
 /*
