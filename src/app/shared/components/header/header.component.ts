@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoriaService } from 'src/app/core/categoria/categoria.service';
 import { SubcategoriaService } from 'src/app/core/categoria/sub_categoria.service';
+import { UsuarioService } from 'src/app/core/usuario/usuario.service';
 import { environment } from 'src/environments/environment';
 import { Search } from '../../../functions';
 
@@ -17,9 +18,12 @@ export class HeaderComponent implements OnInit {
   public title_list: any[];
   public render: boolean;
   public subcategoria_list: any;
+  public authValidate : boolean = false;
+  public picture:string = "";
   constructor(
     private categoriaService: CategoriaService,
-    private subcategoriaService: SubcategoriaService
+    private subcategoriaService: SubcategoriaService,
+    private usuarioService: UsuarioService
   ) {
     this.url_image = environment.url_image;
     this.categorias = [];
@@ -30,7 +34,25 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAll();
-
+    this.usuarioService.authActivate().then(resp=>{
+      if (resp) {
+        this.authValidate =  true;
+        this.usuarioService.getFilterData("idToken",localStorage.getItem('idToken')).subscribe(res=>{
+          for(const i in res){
+            if (res[i].picture != undefined) {
+              if (res[i].metodo_registro != 'directo') {
+                this.picture = `<img class="img-fluid rounded-circle w-50 ml-auto" src="${res[i].picture}" >`;
+              }else{
+                this.picture = `<img class="img-fluid rounded-circle w-50 ml-auto" src="assets/users/${res[i].username}/${res[i].picture}" >`;
+              }
+            }else{
+              this.picture = `<i class="icon-user"></i>
+              `
+            }
+          }
+        })
+      }
+    })
   }
 
   getAll() {

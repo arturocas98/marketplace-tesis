@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SearchComponent } from 'src/app/components/search/search/search.component';
 import { CategoriaService } from 'src/app/core/categoria/categoria.service';
 import { SubcategoriaService } from 'src/app/core/categoria/sub_categoria.service';
+import { UsuarioService } from 'src/app/core/usuario/usuario.service';
 import { environment } from 'src/environments/environment';
 import { SiteToggleAction } from '../../../functions';
 import { Search } from '../../../functions';
@@ -18,10 +19,12 @@ export class HeaderMobileComponent implements OnInit {
   public categorias:any;
   public render: boolean;
   public categoria_list:Array<any>;
-
+  public authValidate : boolean = false;
+  public picture:string = "";
   constructor(
     private categoriaService: CategoriaService,
     private subcategoriaService: SubcategoriaService,
+    private userService:UsuarioService
   ) { 
     this.categorias = [];
     this.render = true;
@@ -30,6 +33,25 @@ export class HeaderMobileComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAll();
+    this.userService.authActivate().then(resp=>{
+      if (resp) {
+        this.authValidate =  true;
+        this.userService.getFilterData("idToken",localStorage.getItem('idToken')).subscribe(res=>{
+          for(const i in res){
+            if (res[i].picture != undefined) {
+              if (res[i].metodo_registro != 'directo') {
+                this.picture = `<a href="/cuenta-usuario/cuenta" ><img class="img-fluid rounded-circle ml-auto" style="width:40px;"   src="${res[i].picture}" ></a> `;
+              }else{
+                this.picture = `<img class="img-fluid rounded-circle  ml-auto" style="width:40px;" src="assets/users/${res[i].username}/${res[i].picture}" >`;
+              }
+            }else{
+              this.picture = `<a href="/cuenta-usuario/cuenta" ><i class="icon-user"></i></a>
+              `
+            }
+          }
+        })
+      }
+    })
   }
 
   getAll() {

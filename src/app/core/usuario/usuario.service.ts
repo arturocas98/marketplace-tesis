@@ -17,6 +17,7 @@ export class UsuarioService {
   private SendPasswordResetEmail;
   private confirmChangePassword;
   private sendNewPassword;
+  private changePassword;
   constructor(
     private http: HttpClient
   ) {
@@ -29,6 +30,7 @@ export class UsuarioService {
     this.SendPasswordResetEmail = environment.SendPasswordResetEmail;
     this.confirmChangePassword = environment.VerifyPasswordResetCode;
     this.sendNewPassword = environment.ConfirmPasswordReset;
+    this.changePassword = environment.ChangePassword;
   }
 
   getAll() {
@@ -175,6 +177,14 @@ export class UsuarioService {
   confirmPasswordReset(body:object){
 
     return this.http.post(`${this.sendNewPassword}`, body)
+
+  }
+  	/*=============================================
+	Cambiar la contraseña
+	=============================================*/
+  changePasswordFnc(body:object){
+
+    return this.http.post(`${this.changePassword}`, body)
 
   }
 

@@ -1,8 +1,8 @@
 {
-  "name": "marketplace-tesis",
-  "short_name": "marketplace-tesis",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "name": "Organic Gye",
+  "short_name": "organic-gye",
+  "theme_color": "#5fa30f",
+  "background_color": "#5fa30f",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",

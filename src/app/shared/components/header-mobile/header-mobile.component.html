@@ -181,20 +181,25 @@
 					Login and Register
 					======================================-->
 
-                <div class="ps-block--user-header">
-
-                    <!-- <div class="ps-block__left">
-                        <i class="icon-user"></i>
+                    <div *ngIf="!authValidate" class="ps-block--user-header">
+                        <a class="header__extra" routerLink="login">
+                            <i class="icon-user"></i>
+                        </a>
+                        <div class="ps-block__right">
+                            <a routerLink="login">Login</a>
+                            <a routerLink="registro">Registro</a>
+                        </div>
                     </div>
-                    <div class="ps-block__right">
-                        <a routerLink="login">Login</a>
-                        <a routerLink="registro">Register</a>
-                    </div> -->
-                    <a class="header__extra" routerLink="login">
-                        <i class="icon-user"></i>
-                    </a>
-
-                </div>
+                    
+                    <div *ngIf="authValidate" class="ps-block--user-header">
+                        <div class="ps-block__left text-right">
+                            <div [innerHTML]="picture" ></div>
+                        </div>
+                        <div class="ps-block__right">
+                            <a routerLink="/cuenta-usuario/cuenta">Mi cuenta</a>
+                            
+                        </div>
+                    </div>
 
             </div>
 
