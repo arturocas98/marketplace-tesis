@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductoService } from 'src/app/core/producto/producto.service';
+import { UsuarioService } from 'src/app/core/usuario/usuario.service';
+import { Usuario } from 'src/app/models/usuario';
 import { environment } from 'src/environments/environment';
 import { OwlCarouselConfig, 
   carouselNavigation, 
@@ -23,8 +25,13 @@ export class ProductosRecomendadosComponent implements OnInit {
   price: Array<any> = [];
   cargando: Boolean = false;
 
-  constructor(private productsService: ProductoService,
-    private activateRoute: ActivatedRoute) { }
+  constructor(
+    private productsService: ProductoService,
+    private activateRoute: ActivatedRoute,
+    private userService:UsuarioService,
+  ){
+
+  }
 
   ngOnInit(): void {
 
@@ -135,6 +142,10 @@ Función que nos avisa cuando finaliza el renderizado de Angular
 
     }
 
+  }
+
+  addWishList(producto){
+    this.userService.wishlist(producto);
   }
 
 }

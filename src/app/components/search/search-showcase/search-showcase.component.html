@@ -85,20 +85,20 @@ Products found
                                 <ul class="ps-product__actions">
 
                                     <li>
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Add to Cart">
+                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Añadir al carrito">
                                             <i class="icon-bag2"></i>
                                         </a>
                                     </li>
 
                                     <li>
                                         <a href="producto/{{product.url}}" data-toggle="tooltip" data-placement="top"
-                                            title="Quick View">
+                                            title="ver">
                                             <i class="icon-eye"></i>
                                         </a>
                                     </li>
 
                                     <li>
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist">
+                                        <a  data-toggle="tooltip" style="cursor:pointer"  (click)="addWishList(product.url)" data-placement="top" title="Añadir a la lista de deseos">
                                             <i class="icon-heart"></i>
                                         </a>
                                     </li>
@@ -224,8 +224,14 @@ Products found
                             <a class="ps-btn" href="#">Añadir al carrito</a>
 
                             <ul class="ps-product__actions">
-                                <li><a href="producto/{{product.url}}"><i class="icon-eye"></i>View</a></li>
-                                <li><a href="#"><i class="icon-heart"></i> Wishlist</a></li>
+                                <li>
+                                    <a href="producto/{{product.url}}"><i class="icon-eye"></i>Ver</a>
+                                </li>
+                                <li>
+                                    <a  data-toggle="tooltip" style="cursor:pointer"  (click)="addWishList(product.url)" data-placement="top" title="Añadir a la lista de deseos">
+                                        <i class="icon-heart"></i>
+                                    </a>                                
+                                </li>
                             </ul>
 
                         </div>

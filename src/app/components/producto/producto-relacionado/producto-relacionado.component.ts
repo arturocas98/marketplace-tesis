@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductoService } from 'src/app/core/producto/producto.service';
+import { UsuarioService } from 'src/app/core/usuario/usuario.service';
 import { environment } from 'src/environments/environment';
 import { OwlCarouselConfig, 
   carouselNavigation,
@@ -24,7 +25,8 @@ export class ProductoRelacionadoComponent implements OnInit {
   cargando: Boolean = false;
 
   constructor(private activateRoute: ActivatedRoute,
-    private productsService: ProductoService) { }
+    private productsService: ProductoService,
+    private userService:UsuarioService) { }
 
   ngOnInit(): void {
 
@@ -126,6 +128,10 @@ Declaramos función para mostrar los productos recomendados
       }, 1000)
 
     }
+  }
+
+  addWishList(producto){
+    this.userService.wishlist(producto);
   }
 
 }

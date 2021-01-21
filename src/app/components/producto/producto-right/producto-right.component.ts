@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductoService } from 'src/app/core/producto/producto.service';
+import { UsuarioService } from 'src/app/core/usuario/usuario.service';
 import { environment } from 'src/environments/environment';
-import { Rating, 
-  DinamicRating, 
-    DinamicReviews, 
-    DinamicPrice   } from '../../../functions';
+import {
+  Rating,
+  DinamicRating,
+  DinamicReviews,
+  DinamicPrice
+} from '../../../functions';
 @Component({
   selector: 'app-producto-right',
   templateUrl: './producto-right.component.html',
@@ -21,7 +24,8 @@ export class ProductoRightComponent implements OnInit {
   cargando: Boolean = false;
 
   constructor(private activateRoute: ActivatedRoute,
-    private productsService: ProductoService) { }
+    private productsService: ProductoService,
+    private userService: UsuarioService) { }
 
   ngOnInit(): void {
 
@@ -114,6 +118,11 @@ Declaramos función para mostrar los productos recomendados
       Rating.fnc();
 
     }
+  }
+
+
+  addWishList(producto) {
+    this.userService.wishlist(producto);
   }
 
 }

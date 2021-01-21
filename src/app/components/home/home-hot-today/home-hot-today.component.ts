@@ -290,14 +290,14 @@ export class HomeHotTodayComponent implements OnInit {
 						  <div class="ps-product--horizontal" style="z-index:10000">
 
                 <div class="ps-product__thumbnail">
-                  <a href="product/${top20Array[i][f].url}">
+                  <a href="producto/${top20Array[i][f].url}">
                     <img src="assets/img/products/categorias/${top20Array[i][f].categoria}/${top20Array[i][f].imagen}">
                   </a>
                 </div>
 
                 <div class="ps-product__content">
 
-                  <a class="ps-product__title" href="product/${top20Array[i][f].url}">${top20Array[i][f].nombre}</a>
+                  <a class="ps-product__title" href="producto/${top20Array[i][f].url}">${top20Array[i][f].nombre}</a>
 
                     ${precio}
 

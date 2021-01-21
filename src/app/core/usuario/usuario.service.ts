@@ -3,10 +3,15 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario';
 import { environment } from 'src/environments/environment';
+import {Sweetalert } from '../../functions';
 
+declare var jQuery:any;
+declare var $:any;
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class UsuarioService {
   private url_api;
   private register;
@@ -17,6 +22,7 @@ export class UsuarioService {
   private SendPasswordResetEmail;
   private confirmChangePassword;
   private sendNewPassword;
+  private changePassword;
   constructor(
     private http: HttpClient
   ) {
@@ -29,6 +35,7 @@ export class UsuarioService {
     this.SendPasswordResetEmail = environment.SendPasswordResetEmail;
     this.confirmChangePassword = environment.VerifyPasswordResetCode;
     this.sendNewPassword = environment.ConfirmPasswordReset;
+    this.changePassword = environment.ChangePassword;
   }
 
   getAll() {
@@ -176,6 +183,89 @@ export class UsuarioService {
 
     return this.http.post(`${this.sendNewPassword}`, body)
 
+  }
+  	/*=============================================
+	Cambiar la contraseña
+	=============================================*/
+  changePasswordFnc(body:object){
+
+    return this.http.post(`${this.changePassword}`, body)
+
+  }
+
+  getById(value:string){
+
+    return this.http.get(`${this.url_api}/usuario/${value}.json`);
+  }
+
+  wishlist(producto){
+    this.authActivate().then(res=>{
+      if (!res) {
+        Sweetalert.fnc('error',"Inicie sesión para agregar el producto a la lista de deseos ",null);
+        return;
+      }else{
+        this.getFilterData('idToken',localStorage.getItem('idToken')).subscribe(resp=>{
+            let id = Object.keys(resp).toString();
+            for(const i in resp){
+              if (resp[i].wishlist != undefined) {
+                let wishlist = [];
+                wishlist = JSON.parse(resp[i].wishlist);
+                let length = 0;
+                if (wishlist.length != 0) {
+                  wishlist.forEach((list,index)=>{
+                    if (list == producto) {
+                      length --;
+                    }else{
+                      length ++;
+                    }
+                  });
+                  if (length != wishlist.length) {
+                    Sweetalert.fnc('error','Este producto ya existe en tu lista de deseos',null);
+                  }else{
+                    wishlist.push(producto);
+                    let body = {
+                      wishlist: JSON.stringify(wishlist)
+                    }
+                    this.update(id,body).subscribe(resp2=>{
+                      if (resp2['wishlist'] != '' ) {
+                        let totalWishlist = Number($(".totalWishlist").html());
+                            
+                        $(".totalWishlist").html(totalWishlist+1); 
+                        Sweetalert.fnc("success",'El producto se ha añadido a la lista de deseos',null);
+                      }
+                    });
+                  }
+                }else{
+                  wishlist.push(producto);
+                  let body = {
+                    wishlist: JSON.stringify(wishlist)
+                  }
+                  this.update(id,body).subscribe(resp2=>{
+                    if (resp2['wishlist'] != '' ) {
+                      let totalWishlist = Number($(".totalWishlist").html());
+                            
+                      $(".totalWishlist").html(totalWishlist+1); 
+                      Sweetalert.fnc("success",'El producto se ha añadido a la lista de deseos',null);
+                    }
+                  })
+                }
+              }else{
+                let body = {
+                  wishlist: `["${producto}"]`
+                }
+                this.update(id,body).subscribe(resp2=>{
+                  if (resp2['wishlist'] != '' ) {
+                    let totalWishlist = Number($(".totalWishlist").html());
+                            
+                    $(".totalWishlist").html(totalWishlist+1); 
+                    Sweetalert.fnc("success",'El producto se ha añadido a la lista de deseos',null);
+                  }
+                })
+              }
+            }
+        });    
+      }
+    });
   }
 
 }

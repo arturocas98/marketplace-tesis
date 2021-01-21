@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductoService } from 'src/app/core/producto/producto.service';
+import { UsuarioService } from 'src/app/core/usuario/usuario.service';
 import { environment } from 'src/environments/environment';
-import { OwlCarouselConfig, carouselNavigation, Rating, DinamicRating, DinamicReviews, DinamicPrice } from '../../../functions';
+import { OwlCarouselConfig, carouselNavigation, Rating, DinamicRating, DinamicReviews, DinamicPrice,Sweetalert } from '../../../functions';
 declare var jQuery: any;
 declare var $: any;
 @Component({
@@ -19,8 +20,14 @@ export class BestSaleItemsComponent implements OnInit {
   price: Array<any> = [];
   cargando: Boolean = false;
 
-  constructor(private productsService: ProductoService,
-    private activateRoute: ActivatedRoute) { }
+  constructor(
+    private productsService: ProductoService,
+    private activateRoute: ActivatedRoute,
+    private userService : UsuarioService
+
+  ){
+
+  }
 
   ngOnInit(): void {
 
@@ -131,6 +138,10 @@ Función que nos avisa cuando finaliza el renderizado de Angular
 
     }
 
+  }
+
+  addWishList(producto){
+    this.userService.wishlist(producto);
   }
 
 }

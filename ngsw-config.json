@@ -26,5 +26,17 @@
         ]
       }
     }
+  ],
+  "dataGroups": [
+    {
+      "name": "api",
+      "urls": ["https://marketplace-tesis.firebaseio.com/**"],
+      "cacheConfig": {
+        "maxSize": 4,
+        "maxAge": "1d",
+        "strategy": "performance",
+        "timeout": "2s"
+      }
+    }
   ]
 }

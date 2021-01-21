@@ -59,7 +59,7 @@
 
                                                 <div [attr.oferta]="products[i].oferta" [attr.precio]="products[i].precio"
                                                     class="ps-product__badge oferta_1">
-                                                    <span>Save <br> $280.000</span>
+                                                    <span>Ahorra <br> $280.000</span>
                                                 </div>
 
                                             </div>
@@ -79,7 +79,9 @@
 
                                         <h5>{{ products[index].categoria }}</h5>
 
-                                        <h3 class="ps-product__name">{{ products[index].nombre }}</h3>
+                                        <h3   class="ps-product__name">
+                                            <a href="producto/{{products[index].url}}" > {{ products[index].nombre }} </a>
+                                        </h3>
 
                                         <div class="ps-product__meta">
 
@@ -144,11 +146,11 @@
 
                                         <div class="ps-product__processs-bar">
 
-                                            <div class="ps-progress" [attr.data-value]="products[i].stock">
+                                            <div class="ps-progress" [attr.data-value]="100 - products[i].stock">
                                                 <span class="ps-progress__value"></span>
                                             </div>
 
-                                            <p><strong>{{ 100 - products[i].stock }}/100</strong> Vendidos</p>
+                                            <p><strong>{{ 100 - products[i].stock }}/100</strong> disponibles</p>
 
                                         </div>
 

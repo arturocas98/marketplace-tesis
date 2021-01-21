@@ -85,6 +85,7 @@ export class RegistroComponent implements OnInit {
           return;
         } else {
           this.setValues();
+          this.usuario.username = this.usuario.username.toLowerCase();
           this.usuario.return_secure_token = true;
           this.usuarioService.registerAuth(this.usuario).subscribe(res => {
             if (res["email"] == this.usuario.email) {
@@ -96,7 +97,7 @@ export class RegistroComponent implements OnInit {
                 console.log("email-verification:",res);
                 if (res["email"] == this.usuario.email) {
                   this.usuario.displayName = `${this.usuario.nombres} ${this.usuario.apellidos} `;
-                  this.usuario.metodo_registro = 'direct';
+                  this.usuario.metodo_registro = 'directo';
                   this.usuario.idToken = res['idToken'];
                   this.usuario.confirmar_correo = false;
                   this.usuarioService.registerDatabase(this.usuario).subscribe(res => {
@@ -131,26 +132,134 @@ export class RegistroComponent implements OnInit {
   }
 
   googleRegister(){
+    let localUsersService = this.usuarioService;
+    let localUser = this.usuario;
+  
+    // Initialize Firebase
+    // firebase.initializeApp(environment.firebase);
+  
+    this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider).then(function(result){
+      registerFirebaseDatabase(result, localUser, localUsersService)
 
-    // https://firebase.google.com/docs/web/setup
-    // Crea una nueva APP en Settings
-    // npm install --save firebase
-    // Agregar import * as firebase from "firebase/app";
-    // import "firebase/auth";
+    }).catch(function(error){
+      var errorMessage = error.message;
+      
+      Sweetalert.fnc("error", errorMessage, "registro");
+    });
 
-    /*=============================================
-    Inicializa Firebase en tu proyecto web
+    function registerFirebaseDatabase(result, localUser, localUsersService:UsuarioService){
+
+      var user = result.user; 
+     
+      if(user.P){
+     
+        localUser.displayName = user.displayName;
+        localUser.email = user.email;
+        localUser.idToken = user.b.b.i;
+        localUser.metodo_registro = "google";
+        localUser.username = user.email.split('@')[0];
+        localUser.imagen = user.photoURL;
+  
+        /*=============================================
+        Evitar que se dupliquen los registros en Firebase Database
+        =============================================*/
+  
+        localUsersService.getFilterData("email", user.email)
+        .subscribe(resp=>{
+  
+          if(Object.keys(resp).length > 0){
+  
+            Sweetalert.fnc("error", `Ya ha iniciado sesión con este correo, inicie sesión con un correo diferente`, "login")
+  
+          }else{
+  
+            localUsersService.registerDatabase(localUser)
+            .subscribe(resp=>{
+  
+              if(resp["name"] != ""){
+  
+                Sweetalert.fnc("success", "Por favor inicie sesión con google", "login");
+  
+              } 
+  
+            })
+  
+          }
+  
+        })
+  
+      }
+  
+    }
+  }
+
+  facebookRegister(){
+
+    let localUsersService = this.usuarioService;
+    let localUser = this.usuario;
+
+
+    this.afAuth.signInWithPopup(new firebase.auth.FacebookAuthProvider).then(function (result) {
+      
+      registerFirebaseDatabase(result, localUser, localUsersService)
+     
+    }).catch(function(error) {
+     
+      var errorMessage = error.message;
+      
+      Sweetalert.fnc("error", errorMessage, "registro");
+   
+    });
+
+      /*=============================================
+    Registramos al usuario en Firebase Database
     =============================================*/
 
-    
+    function registerFirebaseDatabase(result, localUser, localUsersService){
 
-    // Initialize Firebase
-    firebase.initializeApp(environment.firebase);
+      var user = result.user; 
+     
+      if(user.P){
+     
+        localUser.displayName = user.displayName;
+        localUser.email = user.email;
+        localUser.idToken = user.b.b.g;
+        localUser.metodo_registro = "facebook";
+        localUser.username = user.email.split('@')[0];
+        localUser.imagen = user.photoURL;
   
-    this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider);
+        /*=============================================
+        Evitar que se dupliquen los registros en Firebase Database
+        =============================================*/
 
-    
+        localUsersService.getFilterData("email", user.email)
+        .subscribe(resp=>{
 
+          if(Object.keys(resp).length > 0){
+
+            Sweetalert.fnc("error", `You're already signed in, please login with ${resp[Object.keys(resp)[0]].method} method`, "login")
+
+          }else{
+
+            localUsersService.registerDatabase(localUser)
+            .subscribe(resp=>{
+              console.log("resp_fb:",resp);
+              if(resp["name"] != ""){
+
+                Sweetalert.fnc("success", "Please Login with facebook", "login");
+
+              } 
+
+            })
+
+          }
+
+        })
+
+      }
+    }
   }
+
+  
 
 }

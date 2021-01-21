@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductoService } from 'src/app/core/producto/producto.service';
+import { UsuarioService } from 'src/app/core/usuario/usuario.service';
 import { environment } from 'src/environments/environment';
 import { Pagination, Rating, DinamicRating, DinamicReviews, DinamicPrice, Tabs, Select2Cofig } from '../../../functions';
 declare var jQuery: any;
@@ -31,7 +32,8 @@ export class SearchShowcaseComponent implements OnInit {
   listProducts: Array<any> = [];
   constructor(
     private productsService: ProductoService,
-    private activateRoute: ActivatedRoute
+    private activateRoute: ActivatedRoute,
+    private userService :UsuarioService
   ) { }
 
   ngOnInit(): void {
@@ -349,6 +351,10 @@ Función que nos avisa cuando finaliza el renderizado de Angular
 
       })
     }
+  }
+
+  addWishList(producto){
+    this.userService.wishlist(producto);
   }
 
 }

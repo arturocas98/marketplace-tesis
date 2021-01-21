@@ -1,1 +1,124 @@
-<p>cuenta-wishlist works!</p>
+<!--=====================================
+Nav Account
+======================================-->
+
+<div class="ps-section__content">
+
+    <ul class="ps-section__links">
+        <li class="active"><a href=my-account_wishlist.html>Mi lista de deseos</a></li>
+        <li><a href="my-account_my-shopping.html">Mis compras</a></li>
+        <!-- <li><a href="my-account_new-store.html">Mi Tienda</a></li>
+        <li><a href="my-account_my-sales.html">Mis ventas</a></li> -->
+    </ul>
+
+    <!--=====================================
+    Wishlist
+    ======================================-->
+
+    <div class="table-responsive">
+
+        <table class="table ps-table--whishlist dt-responsive" >
+
+            <thead>
+
+                <tr>
+                    <th colspan="2" >Producto</th>
+                    
+
+                    <th>Precio unitario</th>
+
+                    <th>Stock</th>
+
+                    <th></th>
+
+                    <th></th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr *ngIf="products.length == 0">
+
+                    <td colspan="3" class="text-center">No tiene ningún producto en su lista de deseos</td>
+                </tr>
+
+                <!-- Product -->
+
+                <tr *ngFor="let product of products; let i = index; let lastIndex = last">
+
+                    <td>
+                        <div class="ps-product--cart">
+                            <div class="ps-product__thumbnail">
+
+                                <a href="product/{{product.url}}">
+
+                                    <img src="{{path}}img/products/{{product.categoria}}/{{product.imagen}}"
+                                        alt="{{product.nombre}}">
+
+                                </a>
+
+                            </div>
+                        </div>
+                    </td>
+
+                    <td >
+                        <div class="ps-product--cart">
+
+                            
+
+                            <div class="ps-product__content">
+
+                                <a href="producto/{{product.url}}">
+
+                                    {{product.nombre}}
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </td>
+
+                    <td class="ps-product">
+
+                        <div [innerHTML]="precio[i][0]"></div>
+
+                    </td>
+
+                    <td>
+
+                        <span *ngIf="product.stock == 0" class="ps-tag ps-tag--out-stock">Sin stock</span>
+
+                        <span *ngIf="product.stock > 0" class="ps-tag ps-tag--in-stock">Con stock</span>
+
+                    </td>
+
+                    <td>
+                        <a *ngIf="product.stock > 0" class="ps-btn" href="#">
+                            Añadir al carrito
+                        </a>
+                    </td>
+
+                    <td>
+                        <a mwlConfirmationPopover [popoverMessage]="popoverMessage" cancelText="Cancelar" [confirmText]="confirmText" placement="left"
+                            class="removeProduct" style="cursor:pointer" (confirm)="removeProduct(product.url)"
+                            [attr.remove]="product.url">
+                            <i class="icon-cross"></i>
+                        </a>
+                    </td>
+
+                    {{ lastIndex ? callback() : ""}}
+
+                </tr>
+
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>

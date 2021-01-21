@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ProductoService } from 'src/app/core/producto/producto.service';
+import { UsuarioService } from 'src/app/core/usuario/usuario.service';
 import { environment } from 'src/environments/environment';
 import {
   DinamicPrice,
@@ -18,7 +19,7 @@ export class BoughtTogetherComponent implements OnInit {
   products: Array<any> = [];
   price: Array<any> = [];
   render:boolean  = true;
-  constructor(private productsService: ProductoService) { }
+  constructor(private productsService: ProductoService,private userService:UsuarioService) { }
 
   ngOnInit(): void {
 
@@ -39,12 +40,20 @@ export class BoughtTogetherComponent implements OnInit {
     getProduct.sort(function (a, b) {
       return (b.vistas - a.vistas);
     })
-
+    let random = Math.floor(Math.random()*getProduct.length);
     getProduct.forEach((product, index) => {
-      if (index < 1) {
-        this.products.push(product);
+      let noIndex = 0;
+      if (this.childItem['nombre'] == product['nombre']) {
+        noIndex = index;
       }
+      if (random == noIndex) {
+        random = Math.floor(Math.random()*getProduct.length);
+      }
+      if (index != noIndex && index == random) {
+        this.products.push(product);
 
+      }
+      
     })
 
     for(const i in this.products){
@@ -73,4 +82,11 @@ export class BoughtTogetherComponent implements OnInit {
     }
   }
 
+  addWishList(producto_1,producto_2 ){
+    this.userService.wishlist(producto_1);
+    let localUserService = this.userService;
+    setTimeout(function(){
+      localUserService.wishlist(producto_2);
+    },1000);
+  }
 }
