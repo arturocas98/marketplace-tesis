@@ -49,7 +49,6 @@ export class LoginComponent implements OnInit {
     Tooltip.fnc();
     this.confirmarCorreo();
     this.changePassword();
-
   }
 
   setValueForm() {
@@ -502,5 +501,8 @@ export class LoginComponent implements OnInit {
     }
 
   }
+
+  
+
 
 }
