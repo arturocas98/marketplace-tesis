@@ -17,6 +17,8 @@ import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DataTablesModule } from 'angular-datatables';
+import { CarritoCompraComponent } from './components/carrito-compra/carrito-compra.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { DataTablesModule } from 'angular-datatables';
     PageNotFoundComponent,
     LoginComponent,
     RegistroComponent,
+    CarritoCompraComponent,
+    CheckoutComponent,
    
   ],
   imports: [

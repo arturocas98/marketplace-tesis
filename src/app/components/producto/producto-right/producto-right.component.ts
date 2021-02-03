@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductoService } from 'src/app/core/producto/producto.service';
 import { UsuarioService } from 'src/app/core/usuario/usuario.service';
 import { environment } from 'src/environments/environment';
@@ -25,7 +25,9 @@ export class ProductoRightComponent implements OnInit {
 
   constructor(private activateRoute: ActivatedRoute,
     private productsService: ProductoService,
-    private userService: UsuarioService) { }
+    private userService: UsuarioService,
+    private router:Router  
+  ) { }
 
   ngOnInit(): void {
 
@@ -123,6 +125,19 @@ Declaramos función para mostrar los productos recomendados
 
   addWishList(producto) {
     this.userService.wishlist(producto);
+  }
+
+  addShoppingCart(producto,unidad,detalles){
+    let url = this.router.url;
+     
+
+    let item = {
+      producto:producto,
+      unidad:unidad,
+      detalles:detalles,
+      url:url
+    }
+    this.userService.addShoppingCart(item)
   }
 
 }

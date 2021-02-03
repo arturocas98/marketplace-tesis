@@ -22,7 +22,6 @@ export class ProductosBreadcrumbComponent implements OnInit {
     this.activateRoute.params.subscribe(res => {
       let param = res.param;
       this.categoriaService.getByFilter('url', param).subscribe(resp1 => {
-        console.log("categoria:",resp1);
         if (Object.keys(resp1).length > 0) {
           for (const i in resp1) {
             this.breadcrumb = resp1[i].nombre;
@@ -31,8 +30,6 @@ export class ProductosBreadcrumbComponent implements OnInit {
             let value = {
               "vistas": Number(resp1[i].vistas + 1)
             }
-            console.log("value:",value.vistas);
-            console.log("id",id);
             this.categoriaService.patchData(id, value).subscribe(resp => { })
           }
         } else {
@@ -46,7 +43,6 @@ export class ProductosBreadcrumbComponent implements OnInit {
               let value = {
                 "vistas": Number(resp2[i].vistas + 1)
               }
-              console.log("vistas 2:",value.vistas);
               this.subcategoriaService.patchData(id, value).subscribe(resp => { })
             }
           });

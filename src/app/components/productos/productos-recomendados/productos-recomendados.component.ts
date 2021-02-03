@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductoService } from 'src/app/core/producto/producto.service';
 import { UsuarioService } from 'src/app/core/usuario/usuario.service';
 import { Usuario } from 'src/app/models/usuario';
@@ -29,6 +29,8 @@ export class ProductosRecomendadosComponent implements OnInit {
     private productsService: ProductoService,
     private activateRoute: ActivatedRoute,
     private userService:UsuarioService,
+    private router:Router
+
   ){
 
   }
@@ -146,6 +148,18 @@ Función que nos avisa cuando finaliza el renderizado de Angular
 
   addWishList(producto){
     this.userService.wishlist(producto);
+  }
+
+  addShoppingCart(producto,unidad,detalles){
+    let url = this.router.url; 
+
+    let item = {
+      producto:producto,
+      unidad:unidad,
+      detalles:detalles,
+      url:url
+    }
+    this.userService.addShoppingCart(item)
   }
 
 }

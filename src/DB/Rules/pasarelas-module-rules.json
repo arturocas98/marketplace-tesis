@@ -1,0 +1,37 @@
+{
+    "producto": {
+        ".read": true,
+        "$custom": {
+            "vistas": {
+                ".write": true
+            },
+            "ventas": {
+                ".write": "auth != null"
+            }
+        },
+        ".indexOn": [
+            "nombre",
+            "categoria",
+            "subcategoria",
+            "etiquetas",
+            "grupo",
+            "url",
+            "tienda"
+        ]
+    },
+    "tienda": {
+        ".read": true,
+        ".write": "auth != null",
+        ".indexOn": [
+            "nombre",
+            "url"
+        ]
+    },
+    "orden": {
+        ".read": true,
+        ".write": "auth != null",
+        ".indexOn": [
+            "usuario"
+        ]
+    }
+}

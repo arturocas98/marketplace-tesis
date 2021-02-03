@@ -1,0 +1,13 @@
+
+
+  .change-cantidad {
+    border: 1px solid #ccc;
+    height: 40px;
+    padding: 0 25px;
+    text-align: center;
+    font-size: 14px;
+    color: #000;
+    background-color: transparent;
+    border-radius: 0;
+    max-width: 100px;
+  }

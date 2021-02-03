@@ -12,7 +12,7 @@ export class MyValidators {
     }
 
     public soloLetras(e) {
-        console.log(e);
+        // console.log(e);
         let key = e.keyCode || e.which;
         let tecla = String.fromCharCode(key).toLowerCase();
         let letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
@@ -32,24 +32,31 @@ export class MyValidators {
         }
     }
 
+    public soloNumeros(e) {
+        var key = window.event ? e.which : e.keyCode;
+        if (key < 48 || key > 57) {
+            e.preventDefault();
+        }
+    }
+
     public needValidation() {
         (function () {
             'use strict';
             window.addEventListener('load', function () {
-              // Get the forms we want to add validation styles to
-              var forms = document.getElementsByClassName('needs-validation');
-              // Loop over them and prevent submission
-              var validation = Array.prototype.filter.call(forms, function (form) {
-                form.addEventListener('submit', function (event) {
-                  if (form.checkValidity() === false) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                  }
-                  form.classList.add('was-validated');
-                }, false);
-              });
+                // Get the forms we want to add validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
             }, false);
-          })();
+        })();
     };
 
     public tooltip() {

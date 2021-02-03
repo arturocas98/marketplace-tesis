@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
 import { UsuarioService } from 'src/app/core/usuario/usuario.service';
 import { ProductoBreadcrumbComponent } from '../../producto/producto-breadcrumb/producto-breadcrumb.component';
 import { ProductoService } from 'src/app/core/producto/producto.service';
+import { Router } from '@angular/router';
 
 declare var jQuery:any;
 declare var $:any;
@@ -36,8 +37,11 @@ export class CuentaWishlistComponent implements OnInit, OnDestroy {
 
   popoverMessage:string = 'Esta seguro que desea eliminar el producto de su lista de deseos?';
   confirmText:string = 'Confirmar';
-	constructor(private usersService: UsuarioService,
-		        private productsService: ProductoService) { }
+	constructor(
+    private usersService: UsuarioService,
+    private productsService: ProductoService,
+    private router:Router
+  ) { }
 
 	ngOnInit(): void {
 
@@ -241,6 +245,19 @@ export class CuentaWishlistComponent implements OnInit, OnDestroy {
     
     }
 
+  }
+
+  addShoppingCart(producto,unidad,detalles){
+    let url = this.router.url;
+     
+
+    let item = {
+      producto:producto,
+      unidad:unidad,
+      detalles:detalles,
+      url:url
+    }
+    this.usersService.addShoppingCart(item)
   }
 
 	/*=============================================

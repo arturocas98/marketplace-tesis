@@ -1,0 +1,347 @@
+<!--=====================================
+    Breadcrumb
+    ======================================-->
+
+<div class="ps-breadcrumb">
+
+    <div class="container">
+
+        <ul class="breadcrumb">
+
+            <li><a routerLink="/">Home</a></li>
+
+            <li><a href="/carrito-compra">Carrito de compras</a></li>
+
+            <li>Pago</li>
+
+        </ul>
+
+    </div>
+
+</div>
+
+<!--=====================================
+    Checkout
+    ======================================-->
+<div class="ps-checkout ps-section--shopping">
+
+    <div class="container">
+
+        <div class="ps-section__header">
+
+            <h1>Pago</h1>
+
+        </div>
+
+        <div class="ps-section__content">
+
+            <form class="ps-form--checkout" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+                <div class="row">
+
+                    <div class="col-xl-7 col-lg-8 col-sm-12">
+
+                        <div class="ps-form__billing-info">
+
+                            <h3 class="ps-form__heading">Datos de facturación</h3>
+
+                            <div class="form-group">
+
+                                <label>Nombres<sup>*</sup></label>
+
+                                <div class="form-group__content">
+
+                                    <input class="form-control" required type="text" maxlength="30"
+                                        (keypress)="validators.soloLetras($event)" (paste)="false"
+                                        formControlName="nombres" (change)="capitalize(nombres)" #nombres
+                                        placeholder="Nombres" readonly>
+
+                                    <div *ngIf="validatorErrorField('nombres') ">
+                                        <!-- <p class="text-danger" *ngIf="form.get('nombres').hasError('pattern')" >Ingrese solo letras</p> -->
+                                        <p class="text-danger" *ngIf="form.get('nombres').hasError('required')">El campo
+                                            es requerido </p>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <!-- 
+                            <div class="form-group">
+
+                                <label>Apellidos<sup>*</sup></label>
+
+                                <div class="form-group__content">
+
+                                    <input class="form-control" type="text" required maxlength="30"
+                                        (keypress)="validators.soloLetras($event)" formControlName="apellidos"
+                                        (paste)="false" (change)="capitalize(apellidos)" #apellidos
+                                        placeholder="Apellidos">
+
+                                    <div *ngIf="validatorErrorField('apellidos') ">
+                                        <p class="text-danger" *ngIf="form.get('apellidos').hasError('required')">El
+                                            campo es requerido </p>
+
+                                    </div>
+
+                                </div>
+
+                            </div> -->
+
+                            <div class="form-group">
+
+                                <label>Correo<sup>*</sup></label>
+
+                                <div class="form-group__content">
+
+                                    <input class="form-control" maxlength="40" required type="email"
+                                        formControlName="email" readonly [(ngModel)]="usuario.email"
+                                        data-toggle="tooltip"
+                                        title="Ingrese su email con el siguiente formato, ejemplo:hola@hotmail.com"
+                                        placeholder="Correo">
+
+                                    <div *ngIf="validatorErrorField('email') ">
+                                        <p class="text-danger" *ngIf="form.get('email').hasError('required')">El campo
+                                            es requerido </p>
+                                        <p class="text-danger" *ngIf="form.get('email').hasError('pattern')">Email
+                                            incorrecto </p>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <!-- <div class="form-group">
+
+                                <label>Ciudad<sup>*</sup></label>
+
+                                <div class="form-group__content">
+
+                                    <input class="form-control" type="text">
+
+                                </div>
+
+                            </div> -->
+
+                            <div class="form-group">
+
+                                <label>Telefono<sup>*</sup></label>
+
+                                <div class="form-group__content">
+
+                                    <input class="form-control" required type="text" maxlength="30" (paste)="false"
+                                        formControlName="telefono" maxlength="10"
+                                        (keypress)="validators.soloNumeros($event)">
+
+                                    <div *ngIf="validatorErrorField('telefono') ">
+                                        <p class="text-danger" *ngIf="form.get('telefono').hasError('required')">El
+                                            campo
+                                            es requerido </p>
+                                        <p class="text-danger" *ngIf="form.get('telefono').hasError('maxlength')">El
+                                            campo tiene un máximo de 10 digitos </p>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label>Dirección<sup>*</sup></label>
+
+                                <div class="form-group__content">
+
+                                    <input class="form-control" required type="text" maxlength="100" (paste)="false"
+                                        formControlName="direccion">
+
+                                    <div *ngIf="validatorErrorField('direccion') ">
+                                        <!-- <p class="text-danger" *ngIf="form.get('direccion').hasError('pattern')" >Ingrese solo letras</p> -->
+                                        <p class="text-danger" *ngIf="form.get('direccion').hasError('required')">El
+                                            campo
+                                            es requerido </p>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <div class="ps-checkbox">
+
+                                    <input class="form-control" formControlName="guardar_direccion"
+                                        (change)="guardarDireccion()" type="checkbox" id="create-account">
+
+                                    <label for="create-account">Guardar dirección?</label>
+
+                                </div>
+
+                            </div>
+
+                            <h3 class="mt-40"> Información adicional</h3>
+
+                            <div class="form-group">
+
+
+                                <div class="form-group__content">
+
+                                    <textarea  formControlName="informacion_adicional" class="form-control" rows="7"
+                                        placeholder="Notas o indicaciones especiales para hacer tu envio"></textarea>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-xl-5 col-lg-4 col-sm-12">
+
+                        <div class="ps-form__total">
+
+                            <h3 class="ps-form__heading">Tu pedido</h3>
+
+                            <div class="content">
+
+                                <div class="ps-block--checkout-total">
+
+                                    <div class="ps-block__header d-flex justify-content-between">
+
+                                        <p>Producto</p>
+
+                                        <p>Total</p>
+
+                                    </div>
+
+                                    <div class="ps-block__content">
+
+                                        <table class="table ps-block__products">
+
+                                            <tbody>
+
+                                                <tr *ngFor="let product of shoppingCart;let lastIndex = last;">
+
+                                                    <td>
+                                                        <a href="producto/{{product.url}}"> {{product.nombre}}</a>
+                                                        <div class="small text-secondary ">
+                                                            Cantidad: <span class="qCheckout"> {{product.cantidad}}
+                                                            </span>
+
+                                                        </div>
+                                                        <div class="d-none sCheckout">
+                                                            {{product.shipping}}
+                                                        </div>
+                                                    </td>
+
+                                                    <td class="text-right ps-product">
+                                                        <div class="d-none pCheckout" [innerHTML]="product.precio">
+                                                        </div>
+                                                        <div class="subTotalPriceCheckout">
+                                                            <div class="spinner-border"></div>
+                                                        </div>
+                                                    </td>
+
+                                                    {{lastIndex?callback():''}}
+
+                                                </tr>
+
+                                                <!-- <tr>
+                                                    <td>
+                                                        
+                                                    </td>
+                                                </tr> -->
+
+                                            </tbody>
+
+                                        </table>
+                                        <!-- <div  style="margin-left: 200px;" >
+                                            
+                                           
+                                        </div> -->
+
+                                        <div [innerHTML]="subTotalSinEnvio" ></div>
+                                        <div [innerHTML]="envio" ></div>
+                                        <div [innerHTML]="totalP"></div>
+                                            
+                                        
+                                    </div>
+
+                                </div>
+
+                                <hr class="py-3">
+
+                                <div class="form-group">
+                                    <h3 class="ps-form__heading">Selecciona tu método de pago *</h3>
+                                    <div *ngIf="form.get('metodo_pago').invalid">
+                                        <p class="text-danger" *ngIf="form.get('metodo_pago').hasError('required')">
+                                            El campo
+                                            es requerido </p>
+                                    </div>
+
+
+                                    <div class="ps-radio">
+
+                                        <input class="form-control" formControlName="metodo_pago" type="radio"
+                                            id="pay-paypal" value="paypal" checked>
+                                        
+
+                                        <label for="pay-paypal">Pagar con paypal? <span><img
+                                                    src="{{path}}img/payment-method/paypal.jpg"
+                                                    class="w-50"></span></label>
+
+                                    </div>
+
+                                </div>
+
+                                <!-- <div class="form-group">
+
+                                    <div class="ps-radio">
+
+                                        <input class="form-control" type="radio" id="pay-payu" name="payment-method"
+                                            value="payu">
+
+                                        <label for="pay-payu">Pay with payu? <span><img
+                                                    src="{{path}}img/payment-method/payu.jpg"
+                                                    class="w-50"></span></label>
+
+                                    </div>
+
+                                </div> -->
+
+                                <div class="form-group">
+
+                                    <div class="ps-radio">
+
+                                        <input class="form-control" formControlName="metodo_pago" type="radio"
+                                            id="pay-mercadopago" value="mercado-pago">
+
+
+                                        <label for="pay-mercadopago">Pagar con Mercado Pago?
+                                            <span>
+                                                <img src="{{path}}img/payment-method/mercado_pago.jpg" class="w-50">
+                                            </span>
+                                        </label>
+
+                                    </div>
+
+
+                                </div>
+
+                                <button type="submit" class="ps-btn ps-btn--fullwidth">Proceder a pagar</button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

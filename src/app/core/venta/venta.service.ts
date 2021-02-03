@@ -19,6 +19,9 @@ export class VentaService {
     return this.http.get(url);
   }
 
+  registerDatabase(body:Object,idToken:string) {
+    return this.http.post(`${this.url_api}/venta.json?auth=${idToken}`, body);
+  }
   
 
 }

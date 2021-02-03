@@ -48,4 +48,10 @@ export class ProductoService {
 
     return this.http.get(`${this.url_api}/producto/${value}.json`);
   }
+
+  patchDataAuth(id:String, value:Object,idToken:string){
+
+		return this.http.patch(`${this.url_api}/producto/${id}.json?auth=${idToken}`,value);
+
+  }
 }

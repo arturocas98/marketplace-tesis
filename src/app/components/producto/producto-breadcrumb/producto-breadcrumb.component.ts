@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductoService } from 'src/app/core/producto/producto.service';
+import { TiendaService } from 'src/app/core/tienda/tienda.service';
+import * as Cookies from 'js-cookie';
 
 @Component({
   selector: 'app-producto-breadcrumb',
@@ -12,7 +14,9 @@ export class ProductoBreadcrumbComponent implements OnInit {
   breadcrumb: string = null;
 
   constructor(private activateRoute: ActivatedRoute,
-    private productsService: ProductoService) { }
+    private productsService: ProductoService,
+    private tiendaService: TiendaService  
+  ) { }
 
   ngOnInit(): void {
 
@@ -35,13 +39,31 @@ export class ProductoBreadcrumbComponent implements OnInit {
         let value = {
           "vistas": Number(resp[i].vistas + 1)
         }
-        console.log("vistas productos:",value.vistas);
         this.productsService.patchData(id, value)
           .subscribe(resp => { })
 
       }
 
     })
+
+    /*=============================================
+       Capturamos el parámetro URL del cupón de la tienda
+       =============================================*/
+
+    if (this.activateRoute.snapshot.queryParams["coupon"] != undefined) {
+
+      this.tiendaService.getFilterData("url", this.activateRoute.snapshot.queryParams["coupon"])
+        .subscribe(resp => {
+
+          for (const i in resp) {
+
+            Cookies.set('cupon', resp[i].url, { expires: 7 })
+
+          }
+
+        })
+
+    }
 
 
   }

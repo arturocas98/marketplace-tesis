@@ -9,12 +9,13 @@ import { CuentaWishlistComponent } from './cuenta-wishlist/cuenta-wishlist.compo
 import { ReactiveFormsModule } from '@angular/forms';
 import { DataTablesModule } from 'angular-datatables';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import { CuentaMisComprasComponent } from './cuenta-mis-compras/cuenta-mis-compras.component';
 
 
 
 @NgModule({
   declarations: [ 
-    CuentaComponent, CuentaPerfilComponent, CuentaBreadcrumbComponent, CuentaWishlistComponent,
+    CuentaComponent, CuentaPerfilComponent, CuentaBreadcrumbComponent, CuentaWishlistComponent, CuentaMisComprasComponent,
     
   ],
   imports: [

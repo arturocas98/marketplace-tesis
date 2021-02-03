@@ -10,4 +10,6 @@ export class Usuario{
     imagen:string;
     idToken:string;
     confirmar_correo:boolean;
+    direccion:string;
+    telefono:string; 
 }

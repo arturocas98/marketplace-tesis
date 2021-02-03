@@ -5,10 +5,10 @@ Nav Account
 <div class="ps-section__content">
 
     <ul class="ps-section__links">
-        <li class="active"><a href=my-account_wishlist.html>Mi lista de deseos</a></li>
-        <li><a href="my-account_my-shopping.html">Mis compras</a></li>
+        <li class="active"><a href="cuenta-usuario/cuenta">Mi lista de deseos</a></li>
+        <li><a routerLink="/cuenta-usuario/cuenta/mis-compras">Mis compras</a></li>
         <!-- <li><a href="my-account_new-store.html">Mi Tienda</a></li>
-        <li><a href="my-account_my-sales.html">Mis ventas</a></li> -->
+        <li><a href="my-account_my-sales.html">Mis ventas</a></li   > -->
     </ul>
 
     <!--=====================================
@@ -97,7 +97,7 @@ Nav Account
                     </td>
 
                     <td>
-                        <a *ngIf="product.stock > 0" class="ps-btn" href="#">
+                        <a *ngIf="product.stock > 0" class="ps-btn" style="cursor:pointer;color: white;"  (click)="addShoppingCart(product.url,1,[])">
                             Añadir al carrito
                         </a>
                     </td>

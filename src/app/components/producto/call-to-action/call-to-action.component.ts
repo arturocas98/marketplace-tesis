@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductoService } from 'src/app/core/producto/producto.service';
+import { UsuarioService } from 'src/app/core/usuario/usuario.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -14,7 +15,9 @@ export class CallToActionComponent implements OnInit {
   price: Array<any> = [];
   constructor(
     private activateRoute: ActivatedRoute,
-    private productsService: ProductoService
+    private productsService: ProductoService,
+    private userService: UsuarioService,
+    private router:Router
   ) { }
 
   ngOnInit(): void {
@@ -64,8 +67,20 @@ export class CallToActionComponent implements OnInit {
 
         })
       }
-      console.log(this.call_to_action);
     });
   }
+
+  addShoppingCart(producto,unidad,detalles){
+    let url = this.router.url; 
+
+    let item = {
+      producto:producto,
+      unidad:unidad,
+      detalles:detalles,
+      url:url
+    }
+    this.userService.addShoppingCart(item)
+  }
+
 
 }

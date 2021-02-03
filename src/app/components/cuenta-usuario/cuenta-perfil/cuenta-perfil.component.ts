@@ -29,11 +29,12 @@ export class CuentaPerfilComponent implements OnInit {
   public needValidation: any;
   image: File = null;
   public server : string = environment.server;
+  cuenta_url:string = null;
   constructor(
     private usersService: UsuarioService,
     public formBuilder: FormBuilder,
     public activatedRouter: ActivatedRoute,
-    private http:HttpClient
+    private http:HttpClient,
 
   ) {
     this.validators = new MyValidators();
@@ -43,6 +44,7 @@ export class CuentaPerfilComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     this.preload = true;
+    this.cuenta_url  = this.activatedRouter.snapshot.params["param"]; 
     this.needValidation = this.validators.needValidation();
 
     this.usersService.authActivate().then(resp => {

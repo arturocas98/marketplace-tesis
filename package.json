@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "compodoc": "npx compodoc -p tsconfig.app.json src --language es-ES -s -o"
   },
   "private": true,
   "dependencies": {
@@ -22,9 +23,11 @@
     "@angular/pwa": "^0.1100.4",
     "@angular/router": "~11.0.1",
     "@angular/service-worker": "~11.0.1",
+    "@types/js-cookie": "^2.2.6",
     "angular-confirmation-popover": "^6.0.0",
     "angular-datatables": "^10.1.0",
     "firebase": "^8.2.1",
+    "js-cookie": "^2.2.1",
     "notie": "^4.3.1",
     "rxjs": "~6.6.0",
     "sweetalert2": "^10.12.5",
