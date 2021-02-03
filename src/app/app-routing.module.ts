@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { CarritoCompraComponent } from './components/carrito-compra/carrito-compra.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 import { LoginComponent } from './components/login/login.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { RegistroComponent } from './components/registro/registro.component';
@@ -53,11 +55,26 @@ const routes: Routes = [
         
         //para que cargar un modulo hijo 
       },
+      // {
+      //   path:'cuenta-usuario/:param',
+        
+      //   loadChildren:()=> import ('./components/cuenta-usuario/cuenta-usuario.module').then(m=> m.CuentaUsuarioModule),
+      //   canActivate:[AuthGuard]
+        
+      //   //para que cargar un modulo hijo 
+      // },
       {
         path:'login',component:LoginComponent
       },
       {
         path:'registro',component:RegistroComponent
+      },
+      {
+        path:'carrito-compra',component:CarritoCompraComponent
+      },
+      {
+        path:'checkout',component:CheckoutComponent,
+        canActivate:[AuthGuard]
       }
 
       // {

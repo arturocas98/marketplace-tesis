@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario';
 import { environment } from 'src/environments/environment';
 import {Sweetalert } from '../../functions';
+import { ProductoService } from '../producto/producto.service';
 
 declare var jQuery:any;
 declare var $:any;
@@ -24,7 +25,8 @@ export class UsuarioService {
   private sendNewPassword;
   private changePassword;
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private productoService:ProductoService
   ) {
     this.url_api = environment.url_api;
     this.register = environment.register;
@@ -266,6 +268,48 @@ export class UsuarioService {
         });    
       }
     });
+  }
+
+  addShoppingCart(item:any){
+    // console.log(item);
+    this.productoService.getByFilter('url',item.producto).subscribe(resp=>{
+      for(const i in resp){
+        if (resp[i]['stock'] == 0 ) {
+          Sweetalert.fnc('error','Sin stock',null);
+        }
+      }
+      
+    });
+    if (localStorage.getItem('list-shopping-cart')) {
+      let arrayList = JSON.parse(localStorage.getItem('list-shopping-cart'));
+      let count = 0 ;
+      let index; 
+      for(const i in arrayList){
+        if (arrayList[i].producto == item.producto ) {
+          count --;
+          index = i;
+        }else{
+          count ++;
+        }
+      }
+
+      if (count == arrayList.length) {
+        arrayList.push(item);
+      }else{
+        arrayList[index].unidad += item.unidad;
+
+      }
+
+      localStorage.setItem('list-shopping-cart',JSON.stringify(arrayList));
+      Sweetalert.fnc('success','Se agrego el producto al carrito',item.url);
+    }else{
+      let arrayList =[];
+      arrayList.push(item);
+      localStorage.setItem('list-shopping-cart',JSON.stringify(arrayList));
+      Sweetalert.fnc('success','Se agrego el producto al carrito',item.url);
+    }
+    
+    
   }
 
 }

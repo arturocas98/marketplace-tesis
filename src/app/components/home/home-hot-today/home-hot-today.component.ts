@@ -47,10 +47,8 @@ export class HomeHotTodayComponent implements OnInit {
   }
   getProductos() {
     this.productoService.getAll().subscribe(res => {
-      // console.log(res);
       let i;
       for (const i in res) {
-
         this.getProducts.push(
           {
             "oferta": JSON.parse(res[i].oferta),
@@ -59,23 +57,18 @@ export class HomeHotTodayComponent implements OnInit {
 
         )
         this.products.push(res[i]);
-
       }
-      console.log("get products:", this.products);
       for (const i in this.getProducts) {
         this.fecha_oferta = new Date(
           parseInt(this.getProducts[i]['oferta'][2].split("-")[0]),
           parseInt(this.getProducts[i]['oferta'][2].split("-")[1]) - 1,
           parseInt(this.getProducts[i]['oferta'][2].split("-")[2]),
-
         )
         if (this.now < this.fecha_oferta && this.getProducts[i]["stock"] > 0) {
           this.indexes.push(i);
           this.preload = false;
         }
-
       }
-
     })
   }
 
@@ -83,104 +76,50 @@ export class HomeHotTodayComponent implements OnInit {
 
 
   getVentas() {
-    /*=============================================
-    Tomamos la data de las ventas
-    =============================================*/
-
     let getSales = [];
+    this.ventaService.getAll().subscribe(resp => {
+      for (const i in resp) {
+        getSales.push({
+          "producto": resp[i].producto,
+          "cantidad": resp[i].cantidad
+        })
+      }
+      getSales.sort(function (a, b) {
+        return (b.cantidad - a.cantidad)
+      })
+      let filterSales = [];
+      getSales.forEach(sale => {
+        if (!filterSales.find(resp => resp.producto == sale.producto)) {
+          const { producto, cantidad } = sale;
+          filterSales.push({ producto, cantidad })
+        }
+      })
+      let block = 0;
+      filterSales.forEach((sale, index) => {
+        if (index < 20) {
+          block++;
+          this.productoService.getByFilter("nombre", sale.producto).subscribe(resp => {
+            for (const i in resp) {
 
-    this.ventaService.getAll()
-      .subscribe(resp => {
+              this.topSales.push(resp[i])
 
-        /*=============================================
-        Recorremos cada venta para separar los productos y las cantidades
-        =============================================*/
-
-        let i;
-
-        for (i in resp) {
-
-          getSales.push({
-
-            "producto": resp[i].producto,
-            "cantidad": resp[i].cantidad
+            }
 
           })
-
         }
+      });
+      /*=============================================
+      Enviamos el máximo de bloques para mostrar 4 productos por bloque
+      =============================================*/
+      // cambiar
+      // Math.ceil(block/4)
+      for (let i = 0; i < Math.ceil(10 / 4); i++) {
 
-        /*=============================================
-        Ordenamos de mayor a menor el arreglo de objetos
-        =============================================*/
+        this.topSalesBlock.push(i);
 
-        getSales.sort(function (a, b) {
+      }
 
-          return (b.cantidad - a.cantidad)
-
-        })
-
-        /*=============================================
-        Sacamos del arreglo los productos repetidos dejando los de mayor venta
-        =============================================*/
-
-        let filterSales = [];
-
-        getSales.forEach(sale => {
-
-          if (!filterSales.find(resp => resp.producto == sale.producto)) {
-
-            const { producto, cantidad } = sale;
-
-            filterSales.push({ producto, cantidad })
-
-          }
-
-        })
-
-        /*=============================================
-        Filtramos la data de productos buscando coincidencias con las ventas
-        =============================================*/
-
-        let block = 0;
-
-        filterSales.forEach((sale, index) => {
-
-          /*=============================================
-          Filtramos hasta 20 ventas
-          =============================================*/
-
-          if (index < 20) {
-
-            block++;
-
-            this.productoService.getByFilter("nombre", sale.producto)
-              .subscribe(resp => {
-
-                let i;
-
-                for (i in resp) {
-
-                  this.topSales.push(resp[i])
-
-                }
-
-              })
-
-          }
-
-        })
-        /*=============================================
-        Enviamos el máximo de bloques para mostrar 4 productos por bloque
-        =============================================*/
-        // cambiar
-        // Math.ceil(block/4)
-        for (let i = 0; i < Math.ceil(10 / 4); i++) {
-
-          this.topSalesBlock.push(i);
-
-        }
-
-      })
+    })
 
   }
 
@@ -256,24 +195,24 @@ export class HomeHotTodayComponent implements OnInit {
               if (today < offerDate) {
                 type = JSON.parse(top20Array[i][f].oferta)[0];
                 value = JSON.parse(top20Array[i][f].oferta)[1];
-  
+
                 if (type == "Descuento") {
-  
+
                   oferta = (top20Array[i][f].precio - (top20Array[i][f].precio * value / 100)).toFixed(2)
-  
+
                 }
-  
+
                 if (type == "Fijo") {
-  
+
                   oferta = value
-  
+
                 }
-  
+
                 precio = `<p class="ps-product__price sale">$${oferta} <del>$${top20Array[i][f].precio} </del></p>`;
-              }else{
+              } else {
                 precio = `<p class="ps-product__price">$${top20Array[i][f].precio} </p>`;
               }
-             
+
 
             } else {
 

@@ -55,8 +55,8 @@
 
             <div class="menu--product-categories">
 
-                <div class="ps-shop__filter-mb mr-4 mt-4"  id="filter-sidebar">
-                    <i  class="icon-menu "></i>
+                <div class="ps-shop__filter-mb mr-4 mt-4" id="filter-sidebar">
+                    <i class="icon-menu "></i>
                 </div>
 
                 <div class="ps-filter--sidebar">
@@ -70,16 +70,16 @@
                         <aside class="widget widget_shop">
 
                             <ul class="ps-list--categories">
-                                <li *ngFor="let categoria of categorias;let lastIndex=last"  class="current-menu-item menu-item-has-children">
-                                    <a
-                                        routerLink="productos/{{categoria.url}}" >
-                                         <strong>{{categoria.nombre}}</strong>  
+                                <li *ngFor="let categoria of categorias;let lastIndex=last"
+                                    class="current-menu-item menu-item-has-children">
+                                    <a routerLink="productos/{{categoria.url}}">
+                                        <strong>{{categoria.nombre}}</strong>
                                     </a>
                                     <span class="sub-toggle">
                                         <i class="fa fa-angle-down"></i>
                                     </span>
-                                     <ul class="sub-menu" style="display: none;" [attr.categorias]="categoria.nombre" >
-                                        
+                                    <ul class="sub-menu" style="display: none;" [attr.categorias]="categoria.nombre">
+
                                     </ul>
                                     {{lastIndex?getSubcategorias():"" }}
                                 </li>
@@ -94,7 +94,7 @@
 
             </div><!-- End menu-->
 
-            <a class="ps-logo pl-3 pl-sm-5" href="index.html">
+            <a class="ps-logo pl-3 pl-sm-5" routerLink="/">
                 <img src="{{url_image}}img/template/logo_organic_2.png" class="pt-3" alt="">
             </a>
 
@@ -110,70 +110,56 @@
 
                 <div class="ps-cart--mini">
 
-                    <a class="header__extra" href="#">
-                        <i class="icon-bag2"></i><span><i>0</i></span>
+                    <a class="header__extra" routerLink="/carrito-compra">
+                        <i class="icon-bag2"></i><span><i>{{totalShoppingCart}}</i></span>
                     </a>
 
-                    <div class="ps-cart__content">
+                    <!-- <div *ngIf="shoppingCart.length > 0" class="ps-cart__content">
 
                         <div class="ps-cart__items">
 
-                            <div class="ps-product--cart-mobile">
+                            <div *ngFor="let product of shoppingCart;let lastIndex= last "
+                                class="ps-product--cart-mobile">
 
                                 <div class="ps-product__thumbnail">
-                                    <a href="#">
-                                        <img src="{{url_image}}img/products/clothing/7.jpg" alt="">
+                                    <a href="producto/{{product.url}}">
+                                        <img src="{{url_image}}img/products/{{product.categoria}}/{{product.imagen}}">
                                     </a>
                                 </div>
 
                                 <div class="ps-product__content">
-
-                                    <a class="ps-product__remove" href="#">
+                                    <a class="ps-product__remove" style="cursor:pointer"
+                                        (click)="removeProduct(product.url)">
                                         <i class="icon-cross"></i>
                                     </a>
-
-                                    <a href="product-default.html">MVMTH Classical Leather Watch In Black</a>
-                                    <p><strong>Sold by:</strong> YOUNG SHOP</p>
-                                    <small>1 x $59.99</small>
-
+                                    <a href="product-default.html">{{product.nombre}}</a>
+                                    <small class="ps-product text-left p-0 m-0">
+                                        Cantidad:
+                                        <span class="qShoppingHeaderM"> {{product.cantidad}} </span>
+                                        x Costo de envio: $
+                                        <span class="sShoppingHeaderM"> {{product.shipping}} </span>
+                                        +
+                                        <span class="pShoppingHeaderM" [innerHTML]="product.precio"></span>
+                                    </small>
                                 </div>
-
+                                {{lastIndex?callbackShooping():''}}
                             </div>
 
-                            <div class="ps-product--cart-mobile">
 
-                                <div class="ps-product__thumbnail">
-
-                                    <a href="#"><img src="{{url_image}}img/products/clothing/5.jpg" alt=""></a>
-
-                                </div>
-
-                                <div class="ps-product__content">
-                                    <a class="ps-product__remove" href="#">
-                                        <i class="icon-cross"></i>
-                                    </a>
-                                    <a href="product-default.html">Sleeve Linen Blend Caro Pane Shirt</a>
-                                    <p><strong>Sold by:</strong> YOUNG SHOP</p>
-                                    <small>1 x $59.99</small>
-
-                                </div>
-
-                            </div>
 
                         </div>
 
                         <div class="ps-cart__footer">
 
-                            <h3>Sub Total:<strong>$59.99</strong></h3>
-
+                            <div [innerHTML]="subTotal"></div>
                             <figure>
-                                <a class="ps-btn" href="shopping-cart.html">View Cart</a>
-                                <a class="ps-btn" href="checkout.html">Checkout</a>
+                                <a class="ps-btn" href="/carrito-compra">Ir al carrito</a>
+                                <a class="ps-btn" href="/checkout">Comprar</a>
                             </figure>
 
                         </div>
 
-                    </div>
+                    </div> -->
 
                 </div>
 
@@ -181,25 +167,25 @@
 					Login and Register
 					======================================-->
 
-                    <div *ngIf="!authValidate" class="ps-block--user-header">
-                        <a class="header__extra" routerLink="login">
-                            <i class="icon-user"></i>
-                        </a>
-                        <div class="ps-block__right">
-                            <a routerLink="login">Login</a>
-                            <a routerLink="registro">Registro</a>
-                        </div>
+                <div *ngIf="!authValidate" class="ps-block--user-header">
+                    <a class="header__extra" routerLink="login">
+                        <i class="icon-user"></i>
+                    </a>
+                    <div class="ps-block__right">
+                        <a routerLink="login">Login</a>
+                        <a routerLink="registro">Registro</a>
                     </div>
-                    
-                    <div *ngIf="authValidate" class="ps-block--user-header">
-                        <div class="ps-block__left text-right">
-                            <div [innerHTML]="picture" style="width:40px" ></div>
-                        </div>
-                        <div class="ps-block__right">
-                            <a routerLink="/cuenta-usuario/cuenta">Mi cuenta</a>
-                            
-                        </div>
+                </div>
+
+                <div *ngIf="authValidate" class="ps-block--user-header">
+                    <div class="ps-block__left text-right">
+                        <div [innerHTML]="picture" style="width:40px"></div>
                     </div>
+                    <div class="ps-block__right">
+                        <a routerLink="/cuenta-usuario/cuenta">Mi cuenta</a>
+
+                    </div>
+                </div>
 
             </div>
 
@@ -215,8 +201,9 @@
 
         <form class="ps-form--search-mobile">
             <div class="form-group--nest">
-                <input  (keyup.enter)="goSearch(search.value)" #search class="form-control" type="text" placeholder="Estoy buscando...">
-                <button type="button" (click)="goSearch(search.value)" #search ><i class="icon-magnifier"></i></button>
+                <input (keyup.enter)="goSearch(search.value)" #search class="form-control" type="text"
+                    placeholder="Estoy buscando...">
+                <button type="button" (click)="goSearch(search.value)" #search><i class="icon-magnifier"></i></button>
             </div>
         </form>
 

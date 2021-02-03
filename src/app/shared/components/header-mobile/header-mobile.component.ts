@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { SearchComponent } from 'src/app/components/search/search/search.component';
 import { CategoriaService } from 'src/app/core/categoria/categoria.service';
 import { SubcategoriaService } from 'src/app/core/categoria/sub_categoria.service';
+import { ProductoService } from 'src/app/core/producto/producto.service';
 import { UsuarioService } from 'src/app/core/usuario/usuario.service';
 import { environment } from 'src/environments/environment';
 import { SiteToggleAction } from '../../../functions';
-import { Search } from '../../../functions';
+import { Search,DinamicPrice, Sweetalert } from '../../../functions';
 
 declare var jQuery:any;
 declare var $:any;
@@ -21,10 +23,16 @@ export class HeaderMobileComponent implements OnInit {
   public categoria_list:Array<any>;
   public authValidate : boolean = false;
   public picture:string = "";
+  public shoppingCart: any[] = [];
+  public totalShoppingCart: number = 0;
+  public renderShopping: boolean = true;
+  subTotal: string = `<h3>Sub Total:<strong class="subTotalHeader"><div class="spinner-border"></div></strong></h3>`;
   constructor(
     private categoriaService: CategoriaService,
     private subcategoriaService: SubcategoriaService,
-    private userService:UsuarioService
+    private userService:UsuarioService,
+    private productService:ProductoService,
+    private router:Router
   ) { 
     this.categorias = [];
     this.render = true;
@@ -52,6 +60,29 @@ export class HeaderMobileComponent implements OnInit {
         })
       }
     })
+    if (localStorage.getItem('list-shopping-cart')) {
+      let list = JSON.parse(localStorage.getItem('list-shopping-cart'));
+      this.totalShoppingCart = list.length;
+
+      for (const i in list) {
+        this.productService.getByFilter('url', list[i].producto).subscribe(
+          res => {
+            for (const j in res) {
+              this.shoppingCart.push({
+                url: res[j].url,
+                nombre: res[j].nombre,
+                imagen: res[j].imagen,
+                tiempo_entrega: res[j].tiempo_entrega,
+                cantidad: list[i].unidad,
+                precio: DinamicPrice.fnc(res[j])[0],
+                shipping: res[j].shipping,
+                categoria: res[j].categoria,
+              });
+            }
+          }
+        )
+      }
+    }
   }
 
   getAll() {
@@ -114,6 +145,80 @@ export class HeaderMobileComponent implements OnInit {
     }
 
     window.open(`search/${Search.fnc(value)}`  ,'_top')
+  }
+
+  callbackShooping() {
+
+    if (this.renderShopping) {
+
+      this.renderShopping = false;
+
+      /*=============================================
+      Sumar valores para el precio total
+      =============================================*/
+
+      let totalProduct = $(".ps-product--cart-mobile");
+
+      setTimeout(function () {
+
+        let price = $(".pShoppingHeaderM .end-price")
+        let quantity = $(".qShoppingHeaderM");
+        let shipping = $(".sShoppingHeaderM");
+
+        let totalPrice = 0;
+
+        for (let i = 0; i < price.length; i++) {
+
+          /*=============================================
+          Sumar precio con envío
+          =============================================*/
+
+          // let shipping_price = Number($(price[i]).html()) + Number($(shipping[i]).html());
+
+          // totalPrice += Number($(quantity[i]).html() * shipping_price)
+
+          totalPrice += Number($(quantity[i]).html()) * Number($(price[i]).html());
+
+
+        }
+
+        $(".subTotalHeader").html(`$${totalPrice.toFixed(2)}`)
+
+      }, totalProduct.length * 500)
+
+    }
+
+  }
+
+
+  removeProduct(product) {
+
+    console.log("product", product);
+
+    if (localStorage.getItem("list-shopping-cart")) {
+
+      let shoppingCart = JSON.parse(localStorage.getItem("list-shopping-cart"));
+      shoppingCart.forEach((list, index) => {
+
+        if (list.producto == product) {
+
+          shoppingCart.splice(index, 1);
+
+        }
+
+      })
+      console.log("shoppingCart:",shoppingCart);
+
+      /*=============================================
+       Actualizamos en LocalStorage la lista del carrito de compras
+       =============================================*/
+
+      localStorage.setItem("list-shopping-cart", JSON.stringify(shoppingCart));
+
+      Sweetalert.fnc("success", "Producto removido ", this.router.url)
+
+    }
+
   }
 
 }

@@ -97,7 +97,10 @@
 
 </div>
 
-<app-cuenta-wishlist *ngIf="!preload" [usuario_id]="id" ></app-cuenta-wishlist>
+<app-cuenta-wishlist *ngIf="!preload && cuenta_url == undefined" [usuario_id]="id" ></app-cuenta-wishlist>
+
+<app-cuenta-mis-compras *ngIf="!preload && cuenta_url == 'mis-compras' " [usuario]="username" ></app-cuenta-mis-compras>
+
 
 <div class="modal" id="newPassword">
     <div class="modal-dialog">

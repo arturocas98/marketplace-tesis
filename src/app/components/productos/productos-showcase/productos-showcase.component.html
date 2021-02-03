@@ -92,7 +92,7 @@ Products found
                                 <ul class="ps-product__actions">
 
                                     <li>
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Añadir al carrito">
+                                        <a style="cursor:pointer"  (click)="addShoppingCart(product.url,1,[])" data-toggle="tooltip" data-placement="top" title="Añadir al carrito">
                                             <i class="icon-bag2"></i>
                                         </a>
                                     </li>
@@ -231,7 +231,7 @@ Products found
 
                             <div [innerHTML]="price[i][0]"></div>
 
-                            <a class="ps-btn" href="#">Añadir al carrito</a>
+                            <a class="ps-btn" style="cursor:pointer"  (click)="addShoppingCart(product.url,1,[])">Añadir al carrito</a>
 
                             <ul class="ps-product__actions">
                                 <li><a href="producto/{{product.url}}"><i class="icon-eye"></i>ver</a></li>

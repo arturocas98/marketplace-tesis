@@ -1,0 +1,163 @@
+<!--=====================================
+    Breadcrumb
+    ======================================-->
+
+<div class="ps-breadcrumb">
+
+    <div class="container">
+
+        <ul class="breadcrumb">
+
+            <li><a href="index.html">Home</a></li>
+
+            <li>Carrito de compras</li>
+
+        </ul>
+
+    </div>
+
+</div>
+
+<!--=====================================
+    Shopping Car
+    ======================================-->
+
+<div class="ps-section--shopping ps-shopping-cart"  > 
+
+    <div class="container">
+
+        <div class="ps-section__header">
+
+            <h1>Carrito de compras</h1>
+
+        </div>
+
+        <div class="ps-section__content">
+
+            <div class="table-responsive">
+
+                <table class="table">
+
+                    <thead class="thead-light" >
+
+                        <tr style="text-transform: uppercase;font-size: 16px;" >
+
+                            <th >Producto</th>
+                            <th>Tienda</th>
+                            <th  >Precio</th>
+                            <th  >Cantidad</th>
+                            <th  >Total</th>
+                            <th  ></th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+                        <tr *ngIf="shoppingCart.length == 0" >
+                            <td colspan="6"  class="text-center" > No se han encontrado productos </td>
+                        </tr>
+                        <tr *ngFor="let carrito of shoppingCart;let index = i; let lastIndex=last;" >
+                            <td>
+
+                                <div class="ps-product--cart">
+
+                                    <div class="ps-product__thumbnail">
+
+                                        <a href="producto/{{carrito.url}}"><img src="{{path}}img/products/{{carrito.categoria}}/{{carrito.imagen}}"
+                                                alt=""></a>
+
+                                    </div>
+
+                                    <div class="ps-product__content">
+
+                                        <a href="product/{{ carrito.url }}">{{carrito.nombre}}</a>
+
+                                        <!-- <p>Sold By:<strong> YOUNG SHOP</strong></p> -->
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td class="ps-product pShoppingCart" > {{carrito.tienda}} </td>
+
+                            <td class="ps-product pShoppingCart" [innerHTML]="carrito.precio" ></td>
+
+                            <!-- <td class="text-center">$ <span class="sShoppingCart" > {{ carrito.shipping }} </span> </td> -->
+
+
+                            <td>
+
+                                <div class="form-group--number quantity" style="max-width: 100px;" >
+
+                                    <button class="up" (click)="changeCantidad(quantity.value, 1, 'up',carrito.url)">
+                                        +</button>
+    
+                                        <button class="down" (click)="changeCantidad(quantity.value, 1, 'down',carrito.url)">
+                                        -</button>
+    
+                                        <input class="form-control qShoppingCart" type="number" value="{{carrito.cantidad}}" min="1" max="100" step="1" #quantity (change)="changeCantidad(quantity.value, 0, null,carrito.url)">
+
+                                </div>
+
+                            </td>
+
+                            <td  class="subTotalPrice">
+                                <div class="spinner-border subTotalPriceM">
+
+                                </div>
+                            </td>                             
+
+                            <td>
+
+                                <a style="cursor:pointer"(click)="removeProduct(carrito.url)">
+                                    <i class="icon-cross"></i>
+                                </a>
+
+                            </td>
+                            {{lastIndex?callback():''}}
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <hr>
+
+            <div *ngIf="shoppingCart.length > 0" class="justify-content-end flex-column flex-column-reverse" 
+                 >
+                    <div [innerHTML]="subTotalSinEnvio" ></div>
+                    <div [innerHTML]="envio" ></div>
+
+                    
+                    <div [innerHTML]="totalP" ></div>
+
+                
+            </div>
+            <!-- <div class="ps-section">
+
+            </div> -->
+            <!-- <p>Te falta $10 para el envio gratis!</p> -->
+
+            <div class="ps-section__cart-actions">
+
+
+                <a class="ps-btn" routerLink="/">
+                    <i class="icon-arrow-left"></i> Seguir comprando
+                </a>
+
+                <a  *ngIf="shoppingCart.length > 0" class="ps-btn" href="checkout">
+                    Proceder a pagar <i class="icon-arrow-right"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

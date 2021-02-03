@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductoService } from 'src/app/core/producto/producto.service';
 import { UsuarioService } from 'src/app/core/usuario/usuario.service';
 import { environment } from 'src/environments/environment';
@@ -17,6 +17,8 @@ import {
   ProductLightbox,
   Quantity
 } from '../../../functions';
+declare var jQuery: any;
+declare var $: any;
 @Component({
   selector: 'app-producto-left',
   templateUrl: './producto-left.component.html',
@@ -36,11 +38,13 @@ export class ProductoLeftComponent implements OnInit {
   video: string = null;
   tags: string = null;
   totalReviews: String;
-  oferta_valida:boolean = false;
+  oferta_valida: boolean = false;
+  cantidad: number = 1;
   constructor(
     private activateRoute: ActivatedRoute,
     private productService: ProductoService,
-    private userService: UsuarioService
+    private userService: UsuarioService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -161,5 +165,65 @@ export class ProductoLeftComponent implements OnInit {
   addWishList(producto) {
     this.userService.wishlist(producto);
   }
+
+  changeCantidad(cantidad, unidad, movimiento) {
+    let number = 1;
+    if (Number(cantidad) > 100) {
+      cantidad = 100;
+    }
+    if (Number(cantidad) < 1) {
+      cantidad = 1;
+    }
+
+    if (movimiento == 'up' && Number(cantidad) < 100) {
+      number = Number(cantidad) + unidad;
+    }
+
+    else if (movimiento == 'down' && Number(cantidad) < 100) {
+      number = Number(cantidad) - unidad;
+    }
+    else {
+      number = Number(cantidad);
+    }
+
+    $('.quantity input ').val(cantidad);
+    this.cantidad = number;
+  }
+
+
+  addShoppingCart(producto, unidad, detalles) {
+    let url = this.router.url;
+
+    let item = {
+      producto: producto,
+      unidad: this.cantidad,
+      detalles: detalles,
+      url: url
+    }
+    this.userService.addShoppingCart(item)
+  }
+
+
+  buyNow(product, unit, details) {
+
+   
+
+    /*=============================================
+    Agregar producto al carrito de compras
+    =============================================*/
+
+    let item = {
+
+      product: product,
+      unit: this.cantidad,
+      url: 'checkout'
+    }
+
+
+    this.userService.addShoppingCart(item);
+
+  }
+
+
 
 }

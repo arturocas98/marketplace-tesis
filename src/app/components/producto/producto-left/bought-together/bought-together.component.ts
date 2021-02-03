@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ProductoService } from 'src/app/core/producto/producto.service';
 import { UsuarioService } from 'src/app/core/usuario/usuario.service';
 import { environment } from 'src/environments/environment';
@@ -19,7 +20,11 @@ export class BoughtTogetherComponent implements OnInit {
   products: Array<any> = [];
   price: Array<any> = [];
   render:boolean  = true;
-  constructor(private productsService: ProductoService,private userService:UsuarioService) { }
+  constructor(
+    private productsService: ProductoService,
+    private userService:UsuarioService,
+    private router:Router
+  ) { }
 
   ngOnInit(): void {
 
@@ -89,4 +94,37 @@ export class BoughtTogetherComponent implements OnInit {
       localUserService.wishlist(producto_2);
     },1000);
   }
+
+  addShoppingCart(product1, unit1, details1, product2, unit2, details2){
+
+		let url = this.router.url;
+
+		let item1 = {
+		
+			producto: product1,
+			unidad: unit1,
+			detalles: details1,
+			url:url
+		}
+
+		this.userService.addShoppingCart(item1);
+
+		let localUsersService = this.userService;
+
+		setTimeout(function(){
+
+
+			let item2 = {
+			
+				producto: product2,
+				unidad: unit2,
+				detalles: details2,
+				url:url
+			}
+
+  			localUsersService.addShoppingCart(item2);
+
+  		},1000)
+
+	}
 }
