@@ -431,8 +431,6 @@ export let Sweetalert = {
 
         break;
 
-     
-
       case "html":
         Swal.fire({
           allowOutsideClick: false,
@@ -442,9 +440,8 @@ export let Sweetalert = {
           showConfirmButton: false,
           showCancelButton: true,
           cancelButtonColor: "#d33",
-          cancelButtonText:'Cancelar',
+          cancelButtonText: "Cancelar",
           width: "46rem",
-
         });
 
         break;
@@ -480,14 +477,16 @@ export let DinamicRating = {
 
     let totalReview = 0;
     let rating = 0;
+    if (JSON.parse(response.reviews).length > 0) {
+      for (let i = 0; i < JSON.parse(response.reviews).length; i++) {
+        totalReview += Number(JSON.parse(response.reviews)[i]["review"]);
+      }
+      rating = Math.round(totalReview / JSON.parse(response.reviews).length);
 
-    for (let i = 0; i < JSON.parse(response.reviews).length; i++) {
-      totalReview += Number(JSON.parse(response.reviews)[i]["review"]);
+      return rating;
+    } else {
+      return 0;
     }
-
-    rating = Math.round(totalReview / JSON.parse(response.reviews).length);
-
-    return rating;
   },
 };
 
@@ -498,16 +497,20 @@ DinamicReview
 export let DinamicReviews = {
   fnc: function (response) {
     /*=============================================
-        Clasificamos la cantidad de estrellas según la calificación
-        =============================================*/
+    Clasificamos la cantidad de estrellas según la calificación
+    =============================================*/
 
     let reviews = [];
 
     for (let r = 0; r < 5; r++) {
-      if (response < r + 1) {
-        reviews[r] = 2;
+      if (response > 0) {
+        if (response < r + 1) {
+          reviews[r] = 2;
+        } else {
+          reviews[r] = 1;
+        }
       } else {
-        reviews[r] = 1;
+        reviews = [0, 1, 1, 1, 1, 1];
       }
     }
 
@@ -704,63 +707,58 @@ export let Quantity = {
 };
 
 export let Paypal = {
-
-    fnc: function(price){
-
-        return new Promise(resolve=>{   
-
-            paypal.Buttons({
-
-                createOrder: function(data, actions) {
-
-                    // This function sets up the details of the transaction, including the amount and line item details.
-                    return actions.order.create({
-
-                        purchase_units: [{
-
-                            amount: {
-
-                                value: price
-
-                            }
-
-                        }]
-
-                    });
+  fnc: function (price) {
+    return new Promise((resolve) => {
+      paypal
+        .Buttons({
+          createOrder: function (data, actions) {
+            // This function sets up the details of the transaction, including the amount and line item details.
+            return actions.order.create({
+              purchase_units: [
+                {
+                  amount: {
+                    value: price,
+                  },
                 },
+              ],
+            });
+          },
 
-                onApprove: function(data, actions) {
+          onApprove: function (data, actions) {
+            // This function captures the funds from the transaction.
+            return actions.order.capture().then(function (details) {
+              if (details.status == "COMPLETED") {
+                localStorage.setItem("id_payment", details.id);
 
-                    // This function captures the funds from the transaction.
-                    return actions.order.capture().then(function(details) {
+                resolve(true);
+              }
+            });
+          },
 
-                        if(details.status == "COMPLETED"){
+          onCancel: function (data) {
+            resolve(false);
+          },
 
-                            localStorage.setItem("id_payment", details.id)
+          onError: function (err) {
+            resolve(false);
+          },
+        })
+        .render("#paypal-button-container");
+    });
+  },
+};
 
-                           resolve(true);
+export let CreateUrl = {
+  fnc: function (value) {
+    value = value.toLowerCase();
+    value = value.replace(/[ ]/g, "-");
+    value = value.replace(/[á]/g, "a");
+    value = value.replace(/[é]/g, "e");
+    value = value.replace(/[í]/g, "i");
+    value = value.replace(/[ó]/g, "o");
+    value = value.replace(/[ú]/g, "u");
+    value = value.replace(/[ñ]/g, "n");
 
-                        }
-                    
-                    });
-
-                },
-
-                onCancel: function (data) {
-
-                    resolve(false);
-
-                },
-
-                onError: function (err) {
-
-                    resolve(false);
-
-                }
-
-            }).render('#paypal-button-container');
-
-         })
-
-    }
-}
+    return value;
+  },
+};

@@ -1,0 +1,380 @@
+<!--=====================================
+                Nav Account
+                ======================================-->
+
+<div *ngIf="preload" class="ps-section__content">
+
+    <ul class="ps-section__links">
+        <li ><a href="cuenta-usuario/cuenta">Mi lista de deseos</a></li>
+        <li><a href="cuenta-usuario/cuenta/mis-compras">Mis compras</a></li>
+        <li class="active"   ><a href="cuenta-usuario/cuenta/nueva-tienda">Mi Tienda</a></li>
+        <!-- <li class="active"  *ngIf="es_vendedor" ><a href="cuenta-usuario/cuenta/mi-tienda">Mi Tienda</a></li> -->
+        <li ><a href="my-account_my-sales.html">Mis ventas</a></li   >
+    </ul>
+
+    <!--=====================================
+                    My Store
+                    ======================================-->
+    <div class="ps-vendor-store">
+
+        <div class="container">
+
+            <div class="ps-section__container">
+
+                <!--=====================================
+                                Vendor Profile
+                                ======================================-->
+
+                <div class="ps-section__left">
+
+                    <div class="ps-block--vendor">
+
+                        <div class="ps-block__thumbnail">
+
+                            <img src="{{path}}img/stores/{{store[0].url}}/{{store[0].logo}}" alt="{{store[0].tienda}}">
+
+                        </div>
+
+                        <div class="ps-block__container">
+
+                            <div class="ps-block__header">
+
+                                <h4>{{store[0].tienda}}</h4>
+
+                                <div class="br-wrapper br-theme-fontawesome-stars">
+
+                                    
+
+                                </div>
+
+                                <p><strong><span class="porcentaje">0</span>% Positivo</strong> (<span class="globalRating">0</span> calificaciones)</p>
+
+                            </div><span class="ps-block__divider"></span>
+
+                            <div class="ps-block__content">
+
+                                <p>{{store[0].acerca_de}}</p>
+
+                                <span class="ps-block__divider"></span>
+
+                                <p><strong>Dirección</strong> {{store[0].direccion}}</p>
+
+                                <figure>
+
+                                    <figcaption>Redes sociales</figcaption>
+
+                                    <ul class="ps-list--social-color">
+
+                                        <li *ngFor="let social of store[0].newSocial" >
+                                            <a class="{{social}}" target="_blank" href="{{store[0].social[social]}}">
+                                                <i class="fab fa-{{social}}"></i></a>
+                                        </li>
+
+                                        
+
+
+                                    </ul>
+
+                                </figure>
+
+                            </div>
+
+                            <div class="ps-block__footer">
+
+                                <p>Teléfono<strong><small>{{store[0].telefono}}</small></strong></p>
+
+                                <p>Correo
+                                    <strong><small>{{store[0].email}}</small></strong></p>
+
+                                <a class="ps-btn ps-btn--fullwidth" href="">Editar</a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div><!-- End Vendor Profile -->
+
+                <!--=====================================
+                                Products
+                                ======================================-->
+
+                <div class="ps-section__right">
+
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+                            <button class="btn btn-lg btn-warning my-3">Nuevo producto</button>
+                        </div>
+
+                        <div>
+                            <ul class="nav nav-tabs">
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">About</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Orders</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Disputes</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Messages</a>
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                    <table class="table dt-responsive" datatable [dtOptions]="dtOptions"  [dtTrigger]="dtTrigger"  width="100%"  style="opacity: 0;" >
+
+                        <thead>
+
+                            <tr>
+
+                                <th>#</th>
+
+                                <th>Feedback</th>
+
+                                <th>Imagen de portada</th>
+
+                                <th>Producto</th>
+
+                                <th>Categoría</th>
+
+                                <th>Subcategoría</th>
+
+                                <th>Precio</th>
+
+                                <th>Stock</th>
+
+                                <th>Tiempo de entrega</th>
+
+                                <th>Oferta</th>
+
+                                <th>Fin de la oferta</th>
+
+                                <th>Resumen</th>
+
+                                <th>Descripción</th>
+
+                                <th>Galería</th>
+
+                                <th>Banner por defecto</th>
+
+                                <th>Slider horizontal</th>
+
+                                <th>Reviews</th>
+
+                                <!-- <th>Actions</th> -->
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <tr *ngFor="let product of products;let i=index;let lastIndex=last;" >
+
+                                <td>{{i+1}}</td>
+
+                                <td>
+                                    <h4> 
+                                        <span 
+                                        *ngIf="product.feedback.type == 'approved'"
+                                        data-toggle="tooltip" title="{{product.feedback.comment}}"
+                                        class="badge badge-success">
+                                            <a routerLink="/producto/{{product.url}}">Aprobado</a>
+                                        </span>
+
+                                        <span 
+                                        *ngIf="product.feedback.type == 'review'"
+                                        data-toggle="tooltip" title="{{product.feedback.comment}}"
+                                        class="badge badge-warning">En revisión</span>
+                                    </h4>
+
+                                    <!--=====================================
+                                    Acciones
+                                    ======================================-->
+                                    <div class="btn-group">
+                                        <!-- (click)="editProduct(idProducts[i])" -->
+                                        <button
+                                           type="button" 
+                                           class="btn btn-warning rounded-circle mr-2"
+                                          >
+
+                                            <i class="fas fa-pencil-alt"></i>
+
+                                        </button>
+                                        <!-- [popoverMessage]="popoverMessage"
+                                        (confirm)="deleteProduct(idProducts[i], products, i)" -->
+
+                                        <button
+                                        type="button" 
+                                        class="btn btn-danger rounded-circle"
+                                        mwlConfirmationPopover
+                                        
+                                        placement="left"
+                                        >
+
+                                            <i class="fas fa-trash"></i>
+
+                                        </button>
+
+                                    </div>
+
+
+                                </td>
+
+                                <td>
+                                    <img src="{{path}}img/products/categorias/{{product.categoria}}/{{product.imagen}}" alt="">
+                                </td>
+
+                                <td>{{product.nombre}}</td>
+
+                                <td>{{product.categoria}}</td>
+
+                                <td>{{product.subcategoria}}</td>
+
+                                <td>{{product.precio}}</td>
+
+                                <td>
+                                    <span 
+                                    *ngIf="product.stock >= 50"
+                                    class="badge badge-success p-2">{{product.stock}}</span>
+                                    <span 
+                                    *ngIf="product.stock < 50"
+                                    class="badge badge-danger p-2">{{product.stock}}</span>
+                                </td>
+
+                                <td>{{product.tiempo_entrega}} días</td>
+
+                                <td>
+                                    <div 
+                                    *ngIf="product.oferta.length > 0"
+                                    >
+                                        {{product.oferta[0]}}: 
+                                        <span *ngIf="product.oferta[0] == 'Disccount'">{{product.oferta[1]}}%</span>
+                                        <span *ngIf="product.oferta[0] == 'Fixed'">${{product.oferta[1]}}</span>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div 
+                                    *ngIf="product.oferta.length > 0"
+                                    >
+                                        {{product.oferta[2] | date}}
+                                    </div>
+                                </td>
+
+                                <td>
+                                    
+                                    <div>
+
+                                        <ul class="list-group p-3">
+                                            
+                                            <li *ngFor="let sum of product.resumen">
+                                                {{sum}}
+                                            </li>
+
+                                        </ul>
+
+                                    </div>
+
+                                </td>
+
+
+                                <td [innerHTML]="product.descripcion" ></td>
+
+                                <td>
+                                    <div class="row">
+
+                                        <figure 
+                                        *ngFor="let pic of product.galeria"
+                                        class="col-3">
+                                            <img src="{{path}}img/products/categorias/{{product.categoria}}/gallery/{{pic}}">
+                                        </figure>
+                                      
+                                    </div>
+                                </td>
+
+                            
+                                <td>
+                                    <img src="{{path}}img/products/categorias/{{product.categoria}}/default/{{product.default_banner}}" alt="" class="img-fluid">
+                                </td>
+
+                                <td>
+                                    <div class="py-3">
+
+                                        <p><strong>H4 tag:</strong> {{product.horizontal_slider["H4 tag"]}}</p>
+                                        <p><strong>H3-1 tag:</strong> {{product.horizontal_slider["H3-1 tag"]}}</p>
+                                        <p><strong>H3-2 tag:</strong> {{product.horizontal_slider["H3-2 tag"]}}</p>
+                                        <p><strong>H3-3 tag:</strong> {{product.horizontal_slider["H3-3 tag"]}}</p>
+                                        <p><strong>H3-4s tag:</strong> {{product.horizontal_slider["H3-4s tag"]}}</p>
+                                       
+                                        <p><strong>Button tag:</strong> {{product.horizontal_slider["Button tag"]}}</p>
+                                        <p><strong>IMG tag:</strong></p>
+
+                                        <img src="{{path}}img/products/categorias/{{product.categoria}}/horizontal/{{product.horizontal_slider['IMG tag']}}"  class="img-fluid">
+
+                                    </div>
+                                </td>
+
+                                <!--=====================================
+                                Reseñas
+                                ======================================-->
+
+                                <td>
+                              
+                                    <div class="br-wrapper br-theme-fontawesome-stars">
+
+                                        <select class="ps-rating" data-read-only="true">
+
+                                            <option 
+                                            *ngFor="let review of product.reviews; let i = index; let lastIndex = last"
+                                            [value]="review">
+
+                                            {{i+1}}
+
+                                            {{lastIndex ? callbackReview() : ""}}
+
+                                            </option>
+
+                                        </select>
+                    
+
+                                    </div>
+
+                                </td>
+ 
+
+
+                                {{lastIndex?callback(i,totalReviews):''}}
+                            </tr>
+
+
+                        </tbody>
+
+                    </table>
+
+                    <div class="d-flex justify-content-center preloadTable">
+                        
+                        <div class="spinner-border text-muted my-3"></div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

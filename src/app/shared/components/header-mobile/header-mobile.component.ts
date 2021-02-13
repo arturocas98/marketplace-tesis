@@ -18,7 +18,7 @@ declare var $:any;
 })
 export class HeaderMobileComponent implements OnInit {
   public url_image:string = environment.url_image;
-  public categorias:any;
+  public categorias:any[] = [];
   public render: boolean;
   public categoria_list:Array<any>;
   public authValidate : boolean = false;
@@ -34,7 +34,7 @@ export class HeaderMobileComponent implements OnInit {
     private productService:ProductoService,
     private router:Router
   ) { 
-    this.categorias = [];
+    // this.categorias = [];
     this.render = true;
     this.categoria_list = [];
   }
@@ -88,8 +88,9 @@ export class HeaderMobileComponent implements OnInit {
   getAll() {
     this.categoriaService.getAll().subscribe(
       res => {
-        this.categorias = res;
         for (const i in res) {
+          this.categorias.push(res[i]);
+
           this.categoria_list.push(res[i].nombre);
         }
       }, err => {

@@ -110,13 +110,15 @@ Declaramos función para mostrar los productos recomendados
         this.recommendedItems.push(product);
 
         this.rating.push(DinamicRating.fnc(this.recommendedItems[index]));
+       
 
         this.reviews.push(DinamicReviews.fnc(this.rating[index]));
-
         this.price.push(DinamicPrice.fnc(this.recommendedItems[index]));
 
         this.cargando = false;
-
+        setTimeout(function(){
+          Rating.fnc();
+        },index*100);
       }
 
     })
@@ -135,7 +137,6 @@ Función que nos avisa cuando finaliza el renderizado de Angular
 
       OwlCarouselConfig.fnc();
       carouselNavigation.fnc();
-      Rating.fnc();
 
     }
 

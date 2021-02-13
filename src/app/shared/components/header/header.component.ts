@@ -16,7 +16,7 @@ declare var $: any;
 })
 export class HeaderComponent implements OnInit {
   url_image: string;
-  public categorias: any;
+  public categorias: any[]=[];
   public title_list: any[];
   public render: boolean;
   public subcategoria_list: any;
@@ -36,7 +36,7 @@ export class HeaderComponent implements OnInit {
     private router: Router
   ) {
     this.url_image = environment.url_image;
-    this.categorias = [];
+    // this.categorias = [];
     this.title_list = [];
     this.render = true;
     this.subcategoria_list = [];
@@ -98,9 +98,10 @@ export class HeaderComponent implements OnInit {
   getAll() {
     this.categoriaService.getAll().subscribe(
       res => {
-        this.categorias = res;
-        for (const i in this.categorias) {
-          this.title_list.push(JSON.parse(this.categorias[i].grupo));
+        for (const i in res) {
+          this.categorias.push(res[i]);
+
+          this.title_list.push(JSON.parse(res[i].grupo));
           // console.log("title_list:",this.title_list);
         }
 

@@ -8,6 +8,7 @@ import { RegistroComponent } from './components/registro/registro.component';
 import { AuthGuard } from './guards/auth.guard';
 
 import { LayoutComponent } from './layout/layout.component';
+import { EmpiezaVenderComponent } from './shared/components/empieza-vender/empieza-vender.component';
 // import { DemoComponent } from './demo/demo.component';
 // import { ContactComponent } from './contact/contact.component';
 // import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -75,6 +76,13 @@ const routes: Routes = [
       {
         path:'checkout',component:CheckoutComponent,
         canActivate:[AuthGuard]
+      },
+      {
+        path:'empieza-vender',component:EmpiezaVenderComponent
+      },
+      {
+        path:'**',
+        component: PageNotFoundComponent
       }
 
       // {
@@ -87,10 +95,7 @@ const routes: Routes = [
 
     ]
   },
-  {
-    path:'**',
-    component: PageNotFoundComponent
-  }
+  
 //   {
 //     path:'demo',
 //     component: DemoComponent

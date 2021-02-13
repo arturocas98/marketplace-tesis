@@ -28,8 +28,12 @@
     "angular-datatables": "^10.1.0",
     "firebase": "^8.2.1",
     "js-cookie": "^2.2.1",
+    "ngx-chips": "^2.2.2",
+    "ngx-dropzone": "^3.0.0",
+    "ngx-summernote": "^0.8.0",
     "notie": "^4.3.1",
     "rxjs": "~6.6.0",
+    "summernote": "^0.8.18",
     "sweetalert2": "^10.12.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

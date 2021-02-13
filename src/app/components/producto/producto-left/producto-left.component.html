@@ -25,8 +25,8 @@
                     <div class="ps-product__gallery" data-arrow="true">
 
                         <div *ngFor="let image of gallery[0];let i = index;" class="item">
-                            <a href="{{path}}img/products/{{product[0].categoria}}/{{image}}">
-                                <img src="{{path}}img/products/{{product[0].categoria}}/{{image }}"
+                            <a href="{{path}}img/products/categorias/{{product[0].categoria}}/gallery/{{image}}">
+                                <img src="{{path}}img/products/categorias/{{product[0].categoria}}/gallery/{{image }}"
                                     alt="{{product[0].nombre}}">
                             </a>
                         </div>
@@ -38,10 +38,10 @@
 
             <div class="ps-product__variants" data-item="4" data-md="4" data-sm="4" data-arrow="false">
 
-                <div *ngFor="let image of gallery[0];let lastIndex = last;" class="item">
-                    <img src="{{path}}img/products/{{product[0].categoria}}/{{image}}" alt="{{product[0].nombre}}">
+                <div *ngFor="let image of gallery[0];let lastIndex = last;let i = index;" class="item">
+                    <img src="{{path}}img/products/categorias/{{product[0].categoria}}/gallery/{{image}}" alt="{{product[0].nombre}}">
 
-                    {{lastIndex?callbackGallery():''}}
+                    {{lastIndex?callbackGallery(i):''}}
                 </div>
 
 
@@ -88,7 +88,20 @@
                     <strong *ngIf="p.stock == 0" class="ps-tag--out-stock">Sin stock</strong>
                 </p>
 
-                <div class="ps-list--dot" [innerHTML]="p.resumen"> </div>
+
+                <div class="ps-list--dot">
+                    
+                    <ul class="ps-product__desc">
+                        
+                        <li *ngFor="let sum of summary[i]">
+                            {{sum}}
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <!-- <div class="ps-list--dot" [innerHTML]="p.resumen"> </div> -->
                 <!-- <iframe class="mb-3" [attr.src]="video|urlsecure" height="360" frameborder="0"
                 allowfullscreen></iframe>
                  -->
@@ -198,7 +211,9 @@
 
                 <p class="tags"><strong> Etiquetas</strong>
 
-                    <a *ngFor="let tag of tags" href="search/{{tag}}"> {{tag}},</a>
+                	<a 
+                    *ngFor="let tag of tags"
+                    href="search/{{tag}}"> {{tag}} , </a>
 
                 </p>
 

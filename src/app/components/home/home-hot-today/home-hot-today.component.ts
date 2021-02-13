@@ -113,7 +113,7 @@ export class HomeHotTodayComponent implements OnInit {
       =============================================*/
       // cambiar
       // Math.ceil(block/4)
-      for (let i = 0; i < Math.ceil(10 / 4); i++) {
+      for (let i = 0; i < Math.ceil(block / 4); i++) {
 
         this.topSalesBlock.push(i);
 
@@ -278,9 +278,12 @@ export class HomeHotTodayComponent implements OnInit {
       let oferta_1 = $(".oferta_1");
       let oferta_2 = $(".oferta_2");
       let oferta_3 = $(".oferta_3");
+      let count = 0;
+      $(".ps-carousel--deal-hot").hide();
 
       //recorremos todos los productos cumpla la condicion de hot today
       for (let i = 0; i < galleryMix_1.length; i++) {
+        count ++;
         // recorremos las fotografias de la galeria de cada producto
         for (let j = 0; j < JSON.parse($(galleryMix_1[i]).attr("galeria")).length; j++) {
           $(galleryMix_2[i]).append(
@@ -374,14 +377,20 @@ export class HomeHotTodayComponent implements OnInit {
 
         // console.log(total_review);
       }
-      // OwlCarouselConfig.fnc();
-      // this.carousel();
-      carouselNavigation.fnc();
-      SlickConfig.fnc();
-      ProductLightbox.fnc();
+
+      setTimeout(function(){
+        $(".ps-carousel--deal-hot").show();
+
+        OwlCarouselConfig.fnc();
+        carouselNavigation.fnc();
+        SlickConfig.fnc();
+        ProductLightbox.fnc();
+        
+      },count *100 );
       CountDown.fnc();
       Rating.fnc();
       ProgressBar.fnc();
+     
     }
   }
 

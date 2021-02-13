@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Tienda } from 'src/app/models/tienda';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -20,6 +21,16 @@ export class TiendaService {
   getFilterData(orderBy:String, equalTo:String){
 
 		return this.http.get(`${this.api}/tienda.json?orderBy="${orderBy}"&equalTo="${equalTo}"&print=pretty`);
+
+	}
+
+  /*=============================================
+	Registro en Firebase Database
+	=============================================*/
+
+	registerDatabase(body: Tienda, idToken:string){
+
+		return this.http.post(`${this.api}/tienda.json?auth=${idToken}`, body);
 
 	}
 }

@@ -5,10 +5,11 @@
 <div class="ps-section__content">
 
     <ul class="ps-section__links">
-        <li><a routerLink="/cuenta-usuario/cuenta">Mi lista de deseos</a></li>
-        <li class="active"><a routerLink="/cuenta-usuario/cuenta/mis-compras">Mis compras</a></li>
-        <!-- <li><a href="my-account_new-store.html">Mi Tienda</a></li>
-        <li><a href="my-account_my-sales.html">Mis ventas</a></li   > -->
+        <li ><a href="cuenta-usuario/cuenta">Mi lista de deseos</a></li>
+        <li class="active" ><a href="cuenta-usuario/cuenta/mis-compras">Mis compras</a></li>
+        <li   *ngIf="!es_vendedor" ><a href="cuenta-usuario/cuenta/nueva-tienda">Mi Tienda</a></li>
+        <li   *ngIf="es_vendedor" ><a href="cuenta-usuario/cuenta/mi-tienda">Mi Tienda</a></li>
+        <li ><a href="my-account_my-sales.html">Mis ventas</a></li   >
     </ul>
 
     <!--=====================================

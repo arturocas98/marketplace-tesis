@@ -13,6 +13,7 @@ import { UsuarioService } from 'src/app/core/usuario/usuario.service';
 import { ProductoBreadcrumbComponent } from '../../producto/producto-breadcrumb/producto-breadcrumb.component';
 import { ProductoService } from 'src/app/core/producto/producto.service';
 import { Router } from '@angular/router';
+import { TiendaService } from 'src/app/core/tienda/tienda.service';
 
 declare var jQuery:any;
 declare var $:any;
@@ -37,10 +38,12 @@ export class CuentaWishlistComponent implements OnInit, OnDestroy {
 
   popoverMessage:string = 'Esta seguro que desea eliminar el producto de su lista de deseos?';
   confirmText:string = 'Confirmar';
+  es_vendedor:boolean = false;
 	constructor(
     private usersService: UsuarioService,
     private productsService: ProductoService,
-    private router:Router
+    private router:Router,
+    private tiendaService: TiendaService
   ) { }
 
 	ngOnInit(): void {
@@ -60,7 +63,13 @@ export class CuentaWishlistComponent implements OnInit, OnDestroy {
 
 		this.usersService.getById(this.usuario_id)
 		.subscribe(resp=>{
-			
+      
+      this.tiendaService.getFilterData("username",resp["username"]).subscribe(respTienda=>{
+        if (Object.keys(respTienda).length > 0) {
+          this.es_vendedor = true;
+        }
+      });
+
 			if(resp["wishlist"] != undefined){
 
 				/*=============================================
