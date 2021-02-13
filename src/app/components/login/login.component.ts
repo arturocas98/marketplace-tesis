@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import firebase from "firebase/app";
 import { AngularFireAuth } from '@angular/fire/auth';
+import { TiendaService } from 'src/app/core/tienda/tienda.service';
 
 declare var jQuery: any;
 declare var $: any;
@@ -27,7 +28,8 @@ export class LoginComponent implements OnInit {
     public formBuilder: FormBuilder,
     public activatedRouter: ActivatedRoute,
     public router: Router,
-    private afAuth: AngularFireAuth
+    private afAuth: AngularFireAuth,
+    private storeService:TiendaService
 
 
   ) {
@@ -182,7 +184,7 @@ export class LoginComponent implements OnInit {
 
       this.usuarioService.getFilterData("email", this.usuario.email).subscribe(res1 => {
         console.log(res1);
-
+        
         for (const i in res1) {
           if (res1[i].confirmar_correo) {
 
@@ -213,9 +215,14 @@ export class LoginComponent implements OnInit {
                   } else {
                     localStorage.setItem("rememberMe", "yes");
                   }
-
-                  this.router.navigate(['/cuenta-usuario/cuenta']);
-
+                  this.storeService.getFilterData('username',res1[i].username).subscribe(respTienda=>{
+                    if (Object.keys(respTienda).length > 0) {
+                      // window.open('cuenta-usuario/cuenta/mi-tienda', '_top');
+                      this.router.navigate(['/cuenta-usuario/cuenta/mi-tienda']);
+                    } else {
+                      this.router.navigate(['/cuenta-usuario/cuenta']);
+                    }
+                  });
                 }
               })
 
@@ -300,6 +307,7 @@ export class LoginComponent implements OnInit {
 
     let localUsersService = this.usuarioService;
     let localUser = this.usuario;
+    let localStoreService = this.storeService;
 
     // var provider = new firebase.auth.GoogleAuthProvider();
 
@@ -309,7 +317,7 @@ export class LoginComponent implements OnInit {
 
     this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider).then(function (result) {
 
-      loginFirebaseDatabase(result, localUser, localUsersService)
+      loginFirebaseDatabase(result, localUser, localUsersService, localStoreService)
 
     }).catch(function (error) {
 
@@ -323,7 +331,7 @@ export class LoginComponent implements OnInit {
     Registramos al usuario en Firebase Database
     =============================================*/
 
-    function loginFirebaseDatabase(result, localUser, localUsersService: UsuarioService) {
+    function loginFirebaseDatabase(result, localUser, localUsersService: UsuarioService, localStoreService: TiendaService) {
 
       var user = result.user;
       console.log("usuario:", user);
@@ -375,8 +383,20 @@ export class LoginComponent implements OnInit {
                     /*=============================================
                     Redireccionar al usuario a la página de su cuenta
                     =============================================*/
+                    let username = user.email.split('@')[0];
+                    console.log("username",username);
+                    localStoreService.getFilterData('username',username).subscribe(respTienda=>{
+                      console.log("respTienda:",respTienda);
+                      if (Object.keys(respTienda).length > 0) {
+                        // window.open('cuenta-usuario/cuenta/mi-tienda', '_top');
+                        // this.router.navigate(['/cuenta-usuario/cuenta/mi-tienda']);
+                        window.open("/cuenta-usuario/cuenta/mi-tienda", "_top");
 
-                    window.open("/cuenta-usuario/cuenta", "_top");
+                      } else {
+                        window.open("/cuenta-usuario/cuenta", "_top");
+                      }
+                    });
+
                     // this.router:Router;
                     // this.router.navigate(['/cuenta-usuario/cuenta']);
 

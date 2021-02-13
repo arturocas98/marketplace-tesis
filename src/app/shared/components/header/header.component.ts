@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CategoriaService } from 'src/app/core/categoria/categoria.service';
 import { SubcategoriaService } from 'src/app/core/categoria/sub_categoria.service';
@@ -16,7 +16,7 @@ declare var $: any;
 })
 export class HeaderComponent implements OnInit {
   url_image: string;
-  public categorias: any;
+  public categorias: any[]=[];
   public title_list: any[];
   public render: boolean;
   public subcategoria_list: any;
@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit {
   public totalShoppingCart: number = 0;
   public renderShopping: boolean = true;
   subTotal: string = `<h3>Sub Total:<strong class="subTotalHeader"><div class="spinner-border"></div></strong></h3>`;
-
+  installEvent = null;
   constructor(
     private categoriaService: CategoriaService,
     private subcategoriaService: SubcategoriaService,
@@ -36,7 +36,7 @@ export class HeaderComponent implements OnInit {
     private router: Router
   ) {
     this.url_image = environment.url_image;
-    this.categorias = [];
+    // this.categorias = [];
     this.title_list = [];
     this.render = true;
     this.subcategoria_list = [];
@@ -95,12 +95,30 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  @HostListener('window:beforeinstallprompt', ['$event'])
+  onBeforeInstallPrompt(event: Event) {
+    console.log(event);
+    event.preventDefault();
+    this.installEvent = event;
+  }
+
+  installByUser() {
+    if (this.installEvent) {
+      this.installEvent.prompt();
+      this.installEvent.userChoice
+      .then(rta => {
+        console.log(rta);
+      });
+    }
+  }
+
   getAll() {
     this.categoriaService.getAll().subscribe(
       res => {
-        this.categorias = res;
-        for (const i in this.categorias) {
-          this.title_list.push(JSON.parse(this.categorias[i].grupo));
+        for (const i in res) {
+          this.categorias.push(res[i]);
+
+          this.title_list.push(JSON.parse(res[i].grupo));
           // console.log("title_list:",this.title_list);
         }
 

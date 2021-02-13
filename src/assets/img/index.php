@@ -29,11 +29,15 @@ if(isset($_GET["key"]) && $_GET["key"] == "AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdV
 		Eliminar todos los archivos que existan en ese directorio
 		=============================================*/
 
-		$files = glob($directory."/*");
+		if($_POST["path"] != "products/categorias" && $_POST["path"] != "stores"){
 
-		foreach ($files as $file) {
-			
-			unlink($file);
+			$files = glob($directory."/*");
+
+			foreach ($files as $file) {
+				
+				unlink($file);
+			}
+
 		}
 
 		/*=============================================
@@ -52,7 +56,11 @@ if(isset($_GET["key"]) && $_GET["key"] == "AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdV
 		if($_FILES["file"]["type"] == "image/jpeg"){
 
 			//definimos nombre del archivo
-			$name = mt_rand(100, 9999).'.jpg';
+			if(!isset($_POST["name"])){
+				$name = mt_rand(100, 9999).'.jpg';
+			}else{
+				$name = $_POST["name"];
+			}
 
 			//definimos el destino donde queremos guardar el archivo
 			$folderPath = $directory.'/'.$name;
@@ -73,7 +81,11 @@ if(isset($_GET["key"]) && $_GET["key"] == "AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdV
 		if($_FILES["file"]["type"] == "image/png"){
 
 			//definimos nombre del archivo
-			$name = mt_rand(100, 9999).'.png';
+			if(!isset($_POST["name"])){
+				$name = mt_rand(100, 9999).'.png';
+			}else{
+				$name = $_POST["name"];
+			}
 
 			//definimos el destino donde queremos guardar el archivo
 			$folderPath = $directory.'/'.$name;
@@ -98,7 +110,19 @@ if(isset($_GET["key"]) && $_GET["key"] == "AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdV
 		$json = array(
 
 		 	'status' => 200,
-		 	'data' =>$name
+		 	'result' =>$name
+		
+		);
+
+		echo json_encode($json, true);
+
+		return;
+
+	}else{
+
+		$json = array(
+
+		 	'status' => null
 		
 		);
 

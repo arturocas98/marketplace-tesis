@@ -12,7 +12,7 @@
 
 <aside class="widget widget_sell-on-site">
 
-    <p><i class="icon-store"></i> Deseas vender en el MarketPlace?<a href="#"> Regitrate ahora !</a></p>
+    <p><i class="icon-store"></i> Deseas vender en el MarketPlace?<a routerLink="/empieza-vender"> Regitrate ahora !</a></p>
 
 </aside>
 
@@ -29,7 +29,7 @@
             <div class="ps-product__thumbnail">
 
             	<a href="producto/{{product.url}}">
-            		<img src="{{path}}img/products/{{product.categoria}}/{{product.imagen}}" alt="{{product.nombre}}">
+            		<img src="{{path}}img/products/categorias/{{product.categoria}}/{{product.imagen}}" alt="{{product.nombre}}">
             	</a>
 
                 <div [innerHTML]="price[i][1]"></div>

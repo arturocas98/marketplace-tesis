@@ -8,7 +8,7 @@
     Header TOP
     ======================================-->
 
-    <div class="header__top">
+    <div class="header__top" style="height:60px;" >
 
         <div class="container">
 
@@ -28,12 +28,18 @@
             <!--=====================================
             Contact & lenguage 
             ======================================-->
+        
 
             <div class="header__right">
+                <!-- <ul class="header__top-links" >
+                </ul> -->
+
+
                 <ul class="header__top-links">
-                    <li><a href="#">Vender en OrganicGye</a></li>
+                    <li><i class="icon-smartphone"></i> <a  class="btn btn-fill" style="font-size:16px;font-weight:600;color:white;" *ngIf="installEvent"  (click)="installByUser()" >Instalar App</a></li>
+                    <li><a routerLink="/empieza-vender">Vender en OrganicGye</a></li>
                     <li><a href="#">Lista de tiendas</a></li>
-                    <li><i class="icon-telephone"></i> Línea directa:<strong> 1-800-123-5678</strong></li>
+                    <!-- <li><i class="icon-telephone"></i> Línea directa:<strong> 1-800-123-5678</strong></li> -->
                     <!-- <li>
                         <div class="ps-dropdown language"><a href="#"><img src="{{url_image}}img/template/en.png" alt="">English</a>
                             <ul class="ps-dropdown-menu">
@@ -108,22 +114,23 @@
             <!--=====================================
             Search
             ======================================-->
-
             <div class="header__content-center">
-                <form class="ps-form--quick-search" action="index.html" method="get">
-                    <div class="form-group--icon">
-                        <i class="icon-chevron-down"></i>
-                        <!-- <select class="form-control">
-                            <option value="1">Todo </option>
-                            <option value="1">Smartphone</option>
-                            <option value="1">Sounds</option>
-                            <option value="1">Technology toys</option>
-                        </select> -->
-                    </div>
-                    <input (keyup.enter)="goSearch(search.value)" #search class="form-control" type="text"
-                        placeholder="Estoy buscando...">
-                    <button type="button" (click)="goSearch(search.value)" #search>Buscar</button>
+                    
+                <form class="ps-form--quick-search"> 
+                    
+                    <input 
+                    (keyup.enter)="goSearch(search.value)"
+                    #search
+                    class="form-control" 
+                    type="text" 
+                    placeholder="Estoy buscando...">
+
+                    <button type="button"
+                    (click)="goSearch(search.value)"
+                    >Buscar</button>
+
                 </form>
+
             </div>
 
             <div class="header__content-right">

@@ -257,7 +257,8 @@ export class CheckoutComponent implements OnInit {
 
                     let value = {
 
-                      ventas: Number(resp[i].ventas) + Number(product.cantidad)
+                      ventas: Number(resp[i].ventas) + Number(product.cantidad),
+                      stock: Number(resp[i].stock) - Number(product.cantidad),
 
                     }
 

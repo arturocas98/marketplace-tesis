@@ -25,11 +25,15 @@
               "src/manifest.webmanifest"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/summernote/dist/summernote-lite.min.css"
             ],
             "scripts": [
-              "./node_modules/js-cookie/src/js.cookie.js"
+              "./node_modules/js-cookie/src/js.cookie.js",
+              "node_modules/summernote/dist/summernote-lite.min.js",
+              "node_modules/summernote/dist/lang/summernote-es-ES.js"
             ]
+            
           },
           "configurations": {
             "production": {

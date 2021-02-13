@@ -36,10 +36,12 @@ export class ProductoLeftComponent implements OnInit {
   gallery: Array<any> = [];
   render_gallery: boolean = true;
   video: string = null;
-  tags: string = null;
+  tags: any[] = [];
   totalReviews: String;
   oferta_valida: boolean = false;
   cantidad: number = 1;
+  summary:any[]=[];
+
   constructor(
     private activateRoute: ActivatedRoute,
     private productService: ProductoService,
@@ -88,6 +90,9 @@ export class ProductoLeftComponent implements OnInit {
       this.reviews.push(DinamicReviews.fnc(this.rating[index]));
 
       this.price.push(DinamicPrice.fnc(this.product[index]));
+     
+      this.summary.push(JSON.parse(this.product[index].resumen));
+
 
       if (this.product[index].oferta != '') {
         let today = new Date();
@@ -121,18 +126,19 @@ export class ProductoLeftComponent implements OnInit {
       Video
       =============================================*/
 
-      if (JSON.parse(this.product[index].video)[0] == "youtube") {
+      // if (JSON.parse(this.product[index].video)[0] == "youtube") {
 
-        this.video = `https://www.youtube.com/embed/${JSON.parse(this.product[index].video)[1]}?rel=0&autoplay=0 `
+      //   this.video = `https://www.youtube.com/embed/${JSON.parse(this.product[index].video)[1]}?rel=0&autoplay=0 `
 
-      }
+      // }
 
-      if (JSON.parse(this.product[index].video)[0] == "vimeo") {
+      // if (JSON.parse(this.product[index].video)[0] == "vimeo") {
 
-        this.video = `https://player.vimeo.com/video/${JSON.parse(this.product[index].video)[1]}`
+      //   this.video = `https://player.vimeo.com/video/${JSON.parse(this.product[index].video)[1]}`
 
-      }
-      this.tags = this.product[index].etiquetas.split(',');
+      // }
+      // this.tags = this.product[index].etiquetas.split(',');
+      this.tags = JSON.parse(this.product[index].etiquetas);
       this.totalReviews = JSON.parse(this.product[index]["reviews"]).length;
       this.cargando = false;
 
@@ -154,11 +160,16 @@ export class ProductoLeftComponent implements OnInit {
     }
   }
 
-  callbackGallery() {
+  callbackGallery(i) {
     if (this.render_gallery) {
       this.render_gallery = false;
-      SlickConfig.fnc();
-      ProductLightbox.fnc();
+      $('ps-product__thumbnail').hide();
+      setTimeout(function(){
+        SlickConfig.fnc();
+        ProductLightbox.fnc();
+        $('ps-product__thumbnail').show();
+      },i*100)
+     
     }
   }
 
@@ -213,13 +224,12 @@ export class ProductoLeftComponent implements OnInit {
     =============================================*/
 
     let item = {
-
-      product: product,
-      unit: this.cantidad,
+      producto:product,
+      unidad:unit,
+      detalles:details,
       url: 'checkout'
     }
-
-
+   
     this.userService.addShoppingCart(item);
 
   }

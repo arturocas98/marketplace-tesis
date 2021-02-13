@@ -38,8 +38,8 @@ class="ps-block--shop-features">
 
                 <div class="ps-product__thumbnail">
 
-                	<a href="producto/{{product.url}}">
-                		<img src="{{path}}img/products/{{product.categoria}}/{{product.imagen}}" alt="{{product.nombre}}">
+                	<a routerLink="/producto/{{product.url}}">
+                		<img src="{{path}}img/products/categorias/{{product.categoria}}/{{product.imagen}}" alt="{{product.nombre}}">
                 	</a>
 
                 	<div [innerHTML]="price[i][1]"></div>
@@ -53,7 +53,7 @@ class="ps-block--shop-features">
                         </li>
 
                         <li>
-                        	<a href="producto/{{product.url}}" data-toggle="tooltip" data-placement="top" title="ver">
+                        	<a routerLink="/producto/{{product.url}}" data-toggle="tooltip" data-placement="top" title="ver">
                         		<i class="icon-eye"></i>
                         	</a>
                         </li>
@@ -70,11 +70,11 @@ class="ps-block--shop-features">
 
                 <div class="ps-product__container">
 
-                	<a class="ps-product__vendor" href="#">{{product.tienda}}</a>
+                	<a class="ps-product__vendor" routerLink="/#">{{product.tienda}}</a>
 
                     <div class="ps-product__content">
 
-                    	<a class="ps-product__title" href="producto/{{product.url}}">
+                    	<a class="ps-product__title" routerLink="/producto/{{product.url}}">
                     	{{product.nombre}}</a>
 
                         <div class="ps-product__rating">
@@ -97,7 +97,7 @@ class="ps-block--shop-features">
 
                     <div class="ps-product__content hover">
 
-                    	<a class="ps-product__title" href="producto/{{product.url}}">
+                    	<a class="ps-product__title" routerLink="/producto/{{product.url}}">
                     	{{product.nombre}}</a>
 
                         <div [innerHTML]="price[i][0]"></div>

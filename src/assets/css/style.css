@@ -1663,6 +1663,24 @@ body {
   background-color: #417cb7;
 }
 
+.ps-list--social-color li a.instagram {
+  background-color: #e4405f;
+}
+
+.ps-list--social-color li a.instagram:hover {
+  background-color: #e4405f;
+}
+
+.ps-list--social-color li a.youtube {
+  background-color: #FF0000;
+}
+
+.ps-list--social-color li a.youtube:hover {
+  background-color: #FF0000;
+}
+
+
+
 .ps-list--social-color li a.feed {
   background-color: #f86a02;
 }
@@ -10286,7 +10304,7 @@ input[type=number]
 }
 
 .ps-product--header-sticky .ps-product__shopping .ps-product__price {
-  padding-right: 30px;
+  padding-right: 0px;
 }
 
 .ps-product--header-sticky .ps-product__shopping .ps-btn {
@@ -15776,7 +15794,7 @@ input[type=number]
 
 .header--standard .ps-form--quick-search input {
   border: 1px solid #e1e1e1;
-  border-left: none;
+  /* border-left: none; */
 }
 
 .header--standard .header__content {

@@ -12,7 +12,7 @@
 
             <div class="br-wrapper">
 
-                <button data-target="#nuevaFoto" data-toggle="modal" class="btn btn-primary btn-lg rounded-circle">
+                <button *ngIf="!method" data-target="#nuevaFoto" data-toggle="modal" class="btn btn-primary btn-lg rounded-circle">
                     <i class="fas fa-pencil-alt"></i>
                 </button>
 
@@ -101,7 +101,9 @@
 
 <app-cuenta-mis-compras *ngIf="!preload && cuenta_url == 'mis-compras' " [usuario]="username" ></app-cuenta-mis-compras>
 
+<app-cuenta-nueva-tienda  *ngIf="!preload && cuenta_url == 'nueva-tienda' " [usuario]="username" >  </app-cuenta-nueva-tienda>
 
+<app-cuenta-mi-tienda  *ngIf="!preload && cuenta_url == 'mi-tienda' " [usuario]="username" ></app-cuenta-mi-tienda>
 <div class="modal" id="newPassword">
     <div class="modal-dialog">
         <div class="modal-content">

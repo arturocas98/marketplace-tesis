@@ -28,7 +28,7 @@ export class SearchShowcaseComponent implements OnInit {
   sort;
   sortItems: Array<any> = [];
   sortValues: Array<any> = [];
-  properties: Array<any> = ["nombre", "categoria", "subcategoria", "etiquetas", "grupo", "url", "tienda"];
+  properties: Array<any> = ["nombre", "categoria", "subcategoria", "etiquetas", "grupo", "tienda","url"];
   listProducts: Array<any> = [];
   constructor(
     private productsService: ProductoService,
@@ -79,7 +79,7 @@ export class SearchShowcaseComponent implements OnInit {
     =============================================*/
     this.properties.forEach(p => {
       this.productsService.getSearchData(p, this.params).subscribe(resp => {
-
+        console.log("resp:",resp);
         for (const i in resp) {
           this.listProducts.push(resp[i]);
         }
@@ -87,6 +87,7 @@ export class SearchShowcaseComponent implements OnInit {
         this.productsFnc(this.listProducts);
       })
     })
+    // console.log("list_products:",this.listProducts);
 
 
   }
@@ -278,7 +279,7 @@ Declaramos función para mostrar el catálogo de productos
       /*=============================================
       Filtramos solo hasta 10 productos
       =============================================*/
-
+      // console.log("get_products:",getProducts);
       getProducts.forEach((product, index) => {
 
         /*=============================================

@@ -7,11 +7,12 @@ import { NewletterComponent } from './components/newletter/newletter.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { UrlsecurePipe } from './pipes/urlsecure.pipe';
+import { EmpiezaVenderComponent } from './components/empieza-vender/empieza-vender.component';
 
 
 
 @NgModule({
-  declarations: [HeaderComponent, HeaderPromotionComponent, HeaderMobileComponent, NewletterComponent, FooterComponent, UrlsecurePipe],
+  declarations: [HeaderComponent, HeaderPromotionComponent, HeaderMobileComponent, NewletterComponent, FooterComponent, UrlsecurePipe, EmpiezaVenderComponent],
   imports: [
     CommonModule,
     RouterModule

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Tienda } from 'src/app/models/tienda';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -22,4 +23,25 @@ export class TiendaService {
 		return this.http.get(`${this.api}/tienda.json?orderBy="${orderBy}"&equalTo="${equalTo}"&print=pretty`);
 
 	}
+
+  /*=============================================
+	Registro en Firebase Database
+	=============================================*/
+
+	registerDatabase(body: Tienda, idToken:string){
+
+		return this.http.post(`${this.api}/tienda.json?auth=${idToken}`, body);
+
+	}
+
+	/*=============================================
+	Actualizar en Firebase Database
+	=============================================*/
+
+	patchDataAuth(id:string, value:Tienda, idToken:string){
+
+		return this.http.patch(`${this.api}/tienda/${id}.json?auth=${idToken}`,value);
+
+	}
+
 }

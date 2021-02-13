@@ -121,7 +121,7 @@ export class RegistroComponent implements OnInit {
       });
 
     } else {
-      Sweetalert.fnc("error", "Llene todos los campos requeridos", null);
+      Sweetalert.fnc("error", "Llene todos los campos requeridos correctamente", null);
     }
 
   }
