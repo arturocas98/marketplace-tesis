@@ -85,7 +85,7 @@ Products found
                                 <ul class="ps-product__actions">
 
                                     <li>
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Añadir al carrito">
+                                        <a style="cursor:pointer" *ngIf="!es_vendedor"  (click)="addShoppingCart(product.url,1,[])" data-toggle="tooltip" data-placement="top" title="Añadir al carrito">
                                             <i class="icon-bag2"></i>
                                         </a>
                                     </li>
@@ -98,7 +98,7 @@ Products found
                                     </li>
 
                                     <li>
-                                        <a  data-toggle="tooltip" style="cursor:pointer"  (click)="addWishList(product.url)" data-placement="top" title="Añadir a la lista de deseos">
+                                        <a  data-toggle="tooltip" style="cursor:pointer" *ngIf="!es_vendedor"  (click)="addWishList(product.url)" data-placement="top" title="Añadir a la lista de deseos">
                                             <i class="icon-heart"></i>
                                         </a>
                                     </li>
@@ -183,7 +183,7 @@ Products found
                     <div class="ps-product__thumbnail">
 
                         <a href="producto/{{product.url}}">
-                            <img src="{{path}}img/products/{{product.categoria}}/{{product.imagen}}"
+                            <img src="{{path}}img/products/categorias/{{product.categoria}}/{{product.imagen}}"
                                 alt="{{product.nombre}}">
                         </a>
 
@@ -213,22 +213,32 @@ Products found
                                 <a href="#">{{product.tienda}}</a>
                             </p>
 
-                            <div [innerHTML]="product.resumen"></div>
-
+                            <!-- <div [innerHTML]="product.resumen"></div> -->
+                            <div class="ps-list--dot">
+                    
+                                <ul class="ps-product__desc">
+                                    
+                                    <li *ngFor="let sum of summary[i]">
+                                        {{sum}}
+                                    </li>
+            
+                                </ul>
+            
+                            </div>
                         </div>
 
                         <div class="ps-product__shopping">
 
                             <div [innerHTML]="price[i][0]"></div>
 
-                            <a class="ps-btn" href="#">Añadir al carrito</a>
+                            <a class="ps-btn" *ngIf="!es_vendedor" (click)="addShoppingCart(product.url,1,[])">Añadir al carrito</a>
 
                             <ul class="ps-product__actions">
                                 <li>
                                     <a href="producto/{{product.url}}"><i class="icon-eye"></i>Ver</a>
                                 </li>
                                 <li>
-                                    <a  data-toggle="tooltip" style="cursor:pointer"  (click)="addWishList(product.url)" data-placement="top" title="Añadir a la lista de deseos">
+                                    <a  data-toggle="tooltip" style="cursor:pointer" *ngIf="!es_vendedor" (click)="addWishList(product.url)" data-placement="top" title="Añadir a la lista de deseos">
                                         <i class="icon-heart"></i>
                                     </a>                                
                                 </li>

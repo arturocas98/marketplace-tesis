@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductoService } from 'src/app/core/producto/producto.service';
+import { TiendaService } from 'src/app/core/tienda/tienda.service';
 import { UsuarioService } from 'src/app/core/usuario/usuario.service';
 import { environment } from 'src/environments/environment';
 import {
@@ -41,16 +42,28 @@ export class ProductoLeftComponent implements OnInit {
   oferta_valida: boolean = false;
   cantidad: number = 1;
   summary:any[]=[];
-
+  es_vendedor:boolean = false;
   constructor(
     private activateRoute: ActivatedRoute,
     private productService: ProductoService,
     private userService: UsuarioService,
-    private router: Router
+    private router: Router,
+    private tiendaService:TiendaService
   ) { }
 
   ngOnInit(): void {
     this.cargando = true;
+    this.userService.getFilterData("idToken",localStorage.getItem('idToken')).subscribe(resp=>{
+      for(const i in resp){
+        this.tiendaService.getFilterData('username',resp[i].username).subscribe(respTienda=>{
+          if (Object.keys(respTienda).length > 0) {
+            this.es_vendedor = true;
+          }else{
+            this.es_vendedor = false;
+          }
+        });
+      }
+    });
     this.productService.getByFilter("url", this.activateRoute.snapshot.params["param"]).subscribe(resp => {
       console.log("resp:", resp);
       this.productsFnc(resp);

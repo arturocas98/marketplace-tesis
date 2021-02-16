@@ -4,6 +4,7 @@ import { SearchComponent } from 'src/app/components/search/search/search.compone
 import { CategoriaService } from 'src/app/core/categoria/categoria.service';
 import { SubcategoriaService } from 'src/app/core/categoria/sub_categoria.service';
 import { ProductoService } from 'src/app/core/producto/producto.service';
+import { TiendaService } from 'src/app/core/tienda/tienda.service';
 import { UsuarioService } from 'src/app/core/usuario/usuario.service';
 import { environment } from 'src/environments/environment';
 import { SiteToggleAction } from '../../../functions';
@@ -27,12 +28,14 @@ export class HeaderMobileComponent implements OnInit {
   public totalShoppingCart: number = 0;
   public renderShopping: boolean = true;
   subTotal: string = `<h3>Sub Total:<strong class="subTotalHeader"><div class="spinner-border"></div></strong></h3>`;
+  public es_vendedor:boolean = false;
   constructor(
     private categoriaService: CategoriaService,
     private subcategoriaService: SubcategoriaService,
     private userService:UsuarioService,
     private productService:ProductoService,
-    private router:Router
+    private router:Router,
+    private tiendaService:TiendaService
   ) { 
     // this.categorias = [];
     this.render = true;
@@ -46,16 +49,38 @@ export class HeaderMobileComponent implements OnInit {
         this.authValidate =  true;
         this.userService.getFilterData("idToken",localStorage.getItem('idToken')).subscribe(res=>{
           for(const i in res){
-            if (res[i].imagen != undefined) {
-              if (res[i].metodo_registro != 'directo') {
-                this.picture = `<a href="/cuenta-usuario/cuenta" ><img class="img-fluid rounded-circle ml-auto" style="width:40px;"   src="${res[i].imagen}" ></a> `;
-              }else{
-                this.picture = `<img class="img-fluid rounded-circle  ml-auto" style="width:40px;" src="assets/img/users/${res[i].username.toLowerCase()}/${res[i].imagen}" >`;
+            
+            this.tiendaService.getFilterData('username',res[i].username).subscribe(respTienda=>{
+              
+              if (Object.keys(respTienda).length > 0) {
+                this.es_vendedor = true;
+              } else {
+                this.es_vendedor = false;
               }
-            }else{
-              this.picture = `<a href="/cuenta-usuario/cuenta" ><i class="icon-user"></i></a>
-              `
-            }
+              if (res[i].imagen != undefined) {
+                if (res[i].metodo_registro != 'directo') {
+  
+                  if (this.es_vendedor) {
+                    
+                    this.picture = `<a href="/cuenta-usuario/cuenta/mi-tienda" ><img class="img-fluid rounded-circle ml-auto" style="width:40px;"   src="${res[i].imagen}" ></a> `;
+                  }else{
+                  
+                    this.picture = `<a href="/cuenta-usuario/cuenta" ><img class="img-fluid rounded-circle ml-auto" style="width:40px;"   src="${res[i].imagen}" ></a> `;
+                  }
+  
+                }else{
+                  this.picture = `<img class="img-fluid rounded-circle  ml-auto" style="width:40px;" src="assets/img/users/${res[i].username.toLowerCase()}/${res[i].imagen}" >`;
+                }
+              }else{
+                if (this.es_vendedor) {
+                  this.picture = `<a href="/cuenta-usuario/cuenta/mi-tienda" ><i class="icon-user"></i></a>`
+                }else{
+                  this.picture = `<a href="/cuenta-usuario/cuenta" ><i class="icon-user"></i></a>`
+                }
+              }
+            });
+            
+            
           }
         })
       }
@@ -194,7 +219,6 @@ export class HeaderMobileComponent implements OnInit {
 
   removeProduct(product) {
 
-    console.log("product", product);
 
     if (localStorage.getItem("list-shopping-cart")) {
 
@@ -208,7 +232,6 @@ export class HeaderMobileComponent implements OnInit {
         }
 
       })
-      console.log("shoppingCart:",shoppingCart);
 
       /*=============================================
        Actualizamos en LocalStorage la lista del carrito de compras

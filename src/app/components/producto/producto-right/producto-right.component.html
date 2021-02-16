@@ -37,7 +37,7 @@
                 <ul class="ps-product__actions">
 
                     <li>
-                    	<a style="cursor:pointer"  (click)="addShoppingCart(product.url,1,[])" data-toggle="tooltip" data-placement="top" title="Añadir al carrito">
+                    	<a style="cursor:pointer" *ngIf="!es_vendedor" (click)="addShoppingCart(product.url,1,[])" data-toggle="tooltip" data-placement="top" title="Añadir al carrito">
                         	<i class="icon-bag2"></i>
                         </a>
                     </li>
@@ -49,7 +49,7 @@
                     </li>
 
                     <li>
-                    	<a  data-toggle="tooltip" style="cursor:pointer"  (click)="addWishList(product.url)" data-placement="top" title="Añadir a la lista de deseos">
+                    	<a  data-toggle="tooltip" style="cursor:pointer" *ngIf="!es_vendedor" (click)="addWishList(product.url)" data-placement="top" title="Añadir a la lista de deseos">
                             <i class="icon-heart"></i>
                         </a>
                     </li>

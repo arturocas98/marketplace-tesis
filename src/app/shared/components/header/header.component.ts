@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CategoriaService } from 'src/app/core/categoria/categoria.service';
 import { SubcategoriaService } from 'src/app/core/categoria/sub_categoria.service';
 import { ProductoService } from 'src/app/core/producto/producto.service';
+import { TiendaService } from 'src/app/core/tienda/tienda.service';
 import { UsuarioService } from 'src/app/core/usuario/usuario.service';
 import { environment } from 'src/environments/environment';
 import { Search, DinamicPrice, Sweetalert } from '../../../functions';
@@ -28,12 +29,14 @@ export class HeaderComponent implements OnInit {
   public renderShopping: boolean = true;
   subTotal: string = `<h3>Sub Total:<strong class="subTotalHeader"><div class="spinner-border"></div></strong></h3>`;
   installEvent = null;
+  es_vendedor:boolean = false;
   constructor(
     private categoriaService: CategoriaService,
     private subcategoriaService: SubcategoriaService,
     private usuarioService: UsuarioService,
     private productoService: ProductoService,
-    private router: Router
+    private router: Router,
+    private tiendaService:TiendaService
   ) {
     this.url_image = environment.url_image;
     // this.categorias = [];
@@ -43,12 +46,19 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAll();
     this.usuarioService.authActivate().then(resp => {
       if (resp) {
         this.authValidate = true;
         this.usuarioService.getFilterData("idToken", localStorage.getItem('idToken')).subscribe(res => {
           for (const i in res) {
+            this.tiendaService.getFilterData('username',res[i].username).subscribe(respTienda=>{
+              if (Object.keys(respTienda).length > 0) {
+                this.es_vendedor = true;
+
+              } else {
+                this.es_vendedor = false;
+              }
+            });
 
             if (res[i].wishlist != undefined) {
 
@@ -65,6 +75,9 @@ export class HeaderComponent implements OnInit {
               this.picture = `<i class="icon-user"></i>
               `
             }
+
+            
+
           }
         })
       }
@@ -93,6 +106,8 @@ export class HeaderComponent implements OnInit {
         )
       }
     }
+    this.getAll();
+
   }
 
   @HostListener('window:beforeinstallprompt', ['$event'])

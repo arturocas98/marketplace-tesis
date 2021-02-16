@@ -110,7 +110,7 @@
 
                 <div class="ps-cart--mini">
 
-                    <a class="header__extra" routerLink="/carrito-compra">
+                    <a  *ngIf="!es_vendedor" class="header__extra" routerLink="/carrito-compra">
                         <i class="icon-bag2"></i><span><i>{{totalShoppingCart}}</i></span>
                     </a>
 

@@ -249,8 +249,8 @@
     ======================================-->
 
     <div *ngFor="let p of product;let lastIndex =last; " class="ps-product__content ps-tab-root">
-
-        <app-bought-together [childItem]="p" ></app-bought-together>
+        
+        <app-bought-together *ngIf="!es_vendedor" [childItem]="p" ></app-bought-together>
 
         <ul class="ps-tab-list">
 

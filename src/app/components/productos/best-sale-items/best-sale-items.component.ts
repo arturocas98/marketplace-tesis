@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import { ProductoService } from 'src/app/core/producto/producto.service';
+import { TiendaService } from 'src/app/core/tienda/tienda.service';
 import { UsuarioService } from 'src/app/core/usuario/usuario.service';
 import { environment } from 'src/environments/environment';
 import { OwlCarouselConfig, carouselNavigation, Rating, DinamicRating, DinamicReviews, DinamicPrice,Sweetalert } from '../../../functions';
@@ -19,12 +20,13 @@ export class BestSaleItemsComponent implements OnInit {
   reviews: Array<any> = [];
   price: Array<any> = [];
   cargando: Boolean = false;
-
+  es_vendedor:boolean = false;
   constructor(
     private productsService: ProductoService,
     private activateRoute: ActivatedRoute,
     private userService : UsuarioService,
-    private router:Router
+    private router:Router,
+    private tiendaService:TiendaService
 
   ){
 
@@ -33,6 +35,18 @@ export class BestSaleItemsComponent implements OnInit {
   ngOnInit(): void {
 
     this.cargando = true;
+
+    this.userService.getFilterData("idToken",localStorage.getItem('idToken')).subscribe(resp=>{
+      for(const i in resp){
+        this.tiendaService.getFilterData('username',resp[i].username).subscribe(respTienda=>{
+          if (Object.keys(respTienda).length > 0) {
+            this.es_vendedor = true;
+          }else{
+            this.es_vendedor = false;
+          }
+        });
+      }
+    });
 
     /*=============================================
     Capturamos el parámetro URL

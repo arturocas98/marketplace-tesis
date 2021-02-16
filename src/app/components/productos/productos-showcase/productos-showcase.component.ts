@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductoService } from 'src/app/core/producto/producto.service';
+import { TiendaService } from 'src/app/core/tienda/tienda.service';
 import { UsuarioService } from 'src/app/core/usuario/usuario.service';
 import { environment } from 'src/environments/environment';
 import { Pagination, Rating, DinamicRating, DinamicReviews, DinamicPrice, Tabs, Select2Cofig } from '../../../functions';
@@ -27,17 +28,30 @@ export class ProductosShowcaseComponent implements OnInit {
   sort;
   sortItems: Array<any> = [];
   sortValues: Array<any> = [];
+  es_vendedor:boolean = false;
+  summary:any[]=[];
   constructor(
     private productsService: ProductoService,
     private activateRoute: ActivatedRoute,
     private userService: UsuarioService,
-    private router:Router
+    private router:Router,
+    private tiendaService:TiendaService
   ) { }
 
   ngOnInit(): void {
 
     this.cargando = true;
-
+    this.userService.getFilterData("idToken",localStorage.getItem('idToken')).subscribe(resp=>{
+      for(const i in resp){
+        this.tiendaService.getFilterData('username',resp[i].username).subscribe(respTienda=>{
+          if (Object.keys(respTienda).length > 0) {
+            this.es_vendedor = true;
+          }else{
+            this.es_vendedor = false;
+          }
+        });
+      }
+    });
     /*=============================================
    Capturamos el parámetro URL
    =============================================*/
@@ -323,6 +337,7 @@ Declaramos función para mostrar el catálogo de productos
           this.reviews.push(DinamicReviews.fnc(this.rating[index]));
 
           this.price.push(DinamicPrice.fnc(getProducts[first]));
+          this.summary.push(JSON.parse(this.products[index].resumen));
 
           this.cargando = false;
 
