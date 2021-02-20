@@ -762,3 +762,64 @@ export let CreateUrl = {
     return value;
   },
 };
+
+/*=============================================
+Datepicker
+=============================================*/
+
+export let Datepicker = {
+  fnc: function () {
+    $(".ps-datepicker.dateFrom").datepicker({
+      endDate: new Date(),
+      todayHighlight: true,
+      format: "yyyy-mm-dd",
+    });
+
+    $(".ps-datepicker.dateFrom").change(function () {
+      $(".ps-datepicker.dateTo").attr("readonly", false);
+
+      let dateFrom = $(this).val();
+
+      $(".ps-datepicker.dateTo").val(dateFrom);
+
+      $(".ps-datepicker.dateTo").datepicker({
+        startDate: dateFrom,
+        datesDisabled: dateFrom,
+        format: "yyyy-mm-dd",
+        endDate: new Date(),
+        todayHighlight: true,
+      });
+
+      if ($(".ps-datepicker.dateTo").val() != "") {
+        $(".btnUpdate").attr(
+          "href",
+          "account/my-sales&" +
+            dateFrom +
+            "&" +
+            $(".ps-datepicker.dateTo").val()
+        );
+      }
+    });
+
+    $(".ps-datepicker.dateTo").change(function () {
+      $(".btnUpdate").attr(
+        "href",
+        "account/my-sales&" +
+          $(".ps-datepicker.dateFrom").val() +
+          "&" +
+          $(this).val()
+      );
+    });
+  },
+};
+
+/*=============================================
+ChartJs
+=============================================*/
+
+export let ChartJs = {
+  fnc: function (config) {
+    let ctx = document.getElementById("line-chart").getContext("2d");
+    window.myLine = new Chart(ctx, config);
+  },
+};

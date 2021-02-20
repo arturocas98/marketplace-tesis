@@ -12,13 +12,14 @@
 
             <div class="br-wrapper">
 
-                <button *ngIf="!method" data-target="#nuevaFoto" data-toggle="modal" class="btn btn-primary btn-lg rounded-circle">
+                <button *ngIf="!method" data-target="#nuevaFoto" data-toggle="modal"
+                    class="btn btn-primary btn-lg rounded-circle">
                     <i class="fas fa-pencil-alt"></i>
                 </button>
 
             </div>
 
-            <div *ngIf="vendedor" class="br-wrapper br-theme-fontawesome-stars mt-3">
+            <!-- <div *ngIf="vendedor" class="br-wrapper br-theme-fontawesome-stars mt-3">
 
                 <select class="ps-rating" data-read-only="true" style="display: none;">
                     <option value="1">1</option>
@@ -28,7 +29,7 @@
                     <option value="2">5</option>
                 </select>
 
-            </div>
+            </div> -->
 
         </div>
 
@@ -49,18 +50,20 @@
 
             <div class="col-lg-3 col-6">
                 <div class="text-center">
-                    <a href="#">
+                    <a href="cuenta-usuario/cuenta/mis-ordenes">
                         <h1><i class="fas fa-shopping-cart text-white"></i></h1>
-                        <h4 class="text-white">Ordenes <span class="badge badge-secondary rounded-circle">51</span></h4>
+                        <h4 class="text-white">Ordenes <span
+                                class="badge badge-secondary rounded-circle">{{ordersPending}}</span></h4>
                     </a>
                 </div>
             </div><!-- box /-->
 
             <div class="col-lg-3 col-6">
                 <div class="text-center">
-                    <a href="#">
+                    <a href="cuenta-usuario/cuenta/mi-tienda">
                         <h1><i class="fas fa-shopping-bag text-white"></i></h1>
-                        <h4 class="text-white">Productos <span class="badge badge-secondary rounded-circle">51</span>
+                        <h4 class="text-white">Productos <span
+                                class="badge badge-secondary rounded-circle">{{store[0].productos}}</span>
                         </h4>
                     </a>
                 </div>
@@ -68,9 +71,10 @@
 
             <div class="col-lg-3 col-6">
                 <div class="text-center">
-                    <a href="#">
+                    <a href="cuenta-usuario/cuenta/disputas">
                         <h1><i class="fas fa-bell text-white"></i></h1>
-                        <h4 class="text-white">Disputas <span class="badge badge-secondary rounded-circle">51</span>
+                        <h4 class="text-white">Disputas <span
+                                class="badge badge-secondary rounded-circle">{{disputes.length}}</span>
                         </h4>
                     </a>
                 </div>
@@ -78,9 +82,10 @@
 
             <div class="col-lg-3 col-6">
                 <div class="text-center">
-                    <a href="#">
+                    <a href="cuenta-usuario/cuenta/mensajes">
                         <h1><i class="fas fa-comments text-white"></i></h1>
-                        <h4 class="text-white">Mensaje <span class="badge badge-secondary rounded-circle">51</span>
+                        <h4 class="text-white">Mensaje <span
+                                class="badge badge-secondary rounded-circle">{{messages.length}}</span>
                         </h4>
                     </a>
                 </div>
@@ -97,13 +102,30 @@
 
 </div>
 
-<app-cuenta-wishlist *ngIf="!preload && cuenta_url == undefined" [usuario_id]="id" ></app-cuenta-wishlist>
+<app-cuenta-wishlist *ngIf="!preload && cuenta_url == undefined" [usuario_id]="id"></app-cuenta-wishlist>
 
-<app-cuenta-mis-compras *ngIf="!preload && cuenta_url == 'mis-compras' " [usuario]="username" ></app-cuenta-mis-compras>
+<app-cuenta-mis-compras *ngIf="!preload && cuenta_url == 'mis-compras' " [usuario]="username"></app-cuenta-mis-compras>
 
-<app-cuenta-nueva-tienda  *ngIf="!preload && cuenta_url == 'nueva-tienda' " [usuario]="username" >  </app-cuenta-nueva-tienda>
+<app-cuenta-nueva-tienda *ngIf="!preload && cuenta_url == 'nueva-tienda' " [usuario]="username">
+</app-cuenta-nueva-tienda>
 
-<app-cuenta-mi-tienda  *ngIf="!preload && cuenta_url == 'mi-tienda' " [usuario]="username" ></app-cuenta-mi-tienda>
+<app-cuenta-mi-tienda *ngIf="!preload && cuenta_url == 'mi-tienda' " [usuario]="username"></app-cuenta-mi-tienda>
+
+<app-cuenta-mis-ventas *ngIf="!preload && cuenta_url == 'mis-ventas' " [childItem]="store[0].tienda">
+</app-cuenta-mis-ventas>
+<div *ngIf="store.length > 0">
+    <app-cuenta-mis-ordenes *ngIf="!preload && cuenta_url == 'mis-ordenes'" [childItem]="store[0].tienda" ></app-cuenta-mis-ordenes>
+</div>
+
+
+<div *ngIf="store.length > 0" >
+    <app-cuenta-disputas *ngIf="!preload && cuenta_url == 'disputas'" [childItem]="store[0].tienda"  ></app-cuenta-disputas>
+</div>
+
+<div *ngIf="store.length > 0" >
+    <app-cuenta-mensajes *ngIf="!preload && cuenta_url == 'mensajes'" [childItem]="store[0].tienda"  ></app-cuenta-mensajes>
+</div>
+
 <div class="modal" id="newPassword">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -189,10 +211,7 @@
 
                     <div class="form-group submtit">
 
-                        <button 
-                        type="button"
-                        (click)="uploadImage()"
-                        class="ps-btn ps-btn--fullwidth">Guardar</button>
+                        <button type="button" (click)="uploadImage()" class="ps-btn ps-btn--fullwidth">Guardar</button>
 
                     </div>
 

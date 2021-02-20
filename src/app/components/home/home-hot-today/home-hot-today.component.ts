@@ -309,7 +309,7 @@ export class HomeHotTodayComponent implements OnInit {
         if (oferta[0] == 'Descuento') {
           $(oferta_1[i]).html(
 
-            `<span>Save <br> $${(precio * oferta[1] / 100).toFixed(2)}</span>`
+            `<span>Ahorra <br> $${(precio * oferta[1] / 100).toFixed(2)}</span>`
 
           )
 
@@ -320,7 +320,7 @@ export class HomeHotTodayComponent implements OnInit {
 
           $(oferta_1[i]).html(
 
-            `<span>Save <br> $${(precio - oferta[1]).toFixed(2)}</span>`
+            `<span>Ahorra <br> $${(precio - oferta[1]).toFixed(2)}</span>`
 
           )
 

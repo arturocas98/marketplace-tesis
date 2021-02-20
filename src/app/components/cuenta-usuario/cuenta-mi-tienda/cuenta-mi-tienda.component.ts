@@ -927,7 +927,7 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
   =============================================*/
 
   editProduct(idProduct) {
-
+    
     this.idProduct = idProduct;
 
     /*=============================================
@@ -1024,14 +1024,11 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
 
         }
 
-        console.log("oferta:", this.offer[3]);
-
-
+        // console.log("oferta:", this.offer[3]);
         /*=============================================
         Abrir la ventana modal
         =============================================*/
-
-        $("#formProduct").modal()
+        $("#editProduct").modal()
 
         /*=============================================
         Cerrar la Alerta suave

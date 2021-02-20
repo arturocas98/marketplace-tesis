@@ -1,0 +1,176 @@
+<!--=====================================
+Nav Account
+======================================-->
+
+<div class="ps-section__content">
+
+    <ul class="ps-section__links">
+        <li><a href="cuenta-usuario/cuenta/mi-tienda">Mi tienda</a></li>
+        <li class="active"><a href="cuenta-usuario/cuenta/mis-ventas">Mis ventas</a></li>
+    </ul>
+
+    <!--=====================================
+   Selección de fecha
+   ======================================-->
+
+    <form class="ps-form--vendor-datetimepicker mt-5">
+
+        <div class="row">
+
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12 ">
+
+                <div class="input-group">
+
+                    <div class="input-group-prepend">
+
+                        <span class="input-group-text" id="time-from">From</span>
+
+                    </div>
+
+                    <input type="text" class="form-control ps-datepicker dateFrom" aria-label="Username"
+                        aria-describedby="time-from" autocomplete="off" value="{{dateFrom}}" required>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12 ">
+
+                <div class="input-group">
+
+                    <div class="input-group-prepend">
+
+                        <span class="input-group-text" id="time-form">To</span>
+
+                    </div>
+
+                    <input type="text" class="form-control ps-datepicker dateTo" aria-label="Username"
+                        aria-describedby="time-to" autocomplete="off" value="{{dateTo}}" readonly required>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12 ">
+
+                <a href="" class="ps-btn btnUpdate"><i class="icon-sync2"></i> Update</a>
+
+            </div>
+
+        </div>
+
+    </form>
+
+    <!--=====================================
+   Bloque de comisiones
+   ======================================-->
+
+    <div class="row">
+
+        <div class="col-12">
+
+            <figure class="ps-block--vendor-status">
+
+                <figcaption>Total sales</figcaption>
+
+                <table class="table ps-table ps-table--vendor-status">
+
+                    <tbody>
+
+                        <tr>
+                            <td>Store Profits</td>
+                            <td>${{storeProfits.toFixed(2)}}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Commissions</td>
+                            <td>${{commissions.toFixed(2)}}</td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>Total</strong></td>
+                            <td>${{totalSales.toFixed(2)}}</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </figure>
+
+        </div>
+
+        <!--=====================================
+       Gráfico de ventas
+       ======================================-->
+
+        <div class="col-12">
+
+            <figure class="ps-block--vendor-status">
+
+                <figcaption>Sales Graph</figcaption>
+
+                <canvas id="line-chart" class="chartjs-render-monitor"></canvas>
+
+            </figure>
+
+        </div>
+
+        <!--=====================================
+       Tabla de ventas
+       ======================================-->
+
+        <div class="col-12">
+
+            <figure class="ps-block--vendor-status">
+
+                <figcaption>Sales Table</figcaption>
+
+            </figure>
+
+            <div class="table-responsive">
+
+                <table class="table ps-table ps-table--vendor" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                    width="100%">
+
+                    <thead>
+                        <tr>
+                            <th>date</th>
+                            <th>Product</th>
+                            <th>Sold</th>
+                            <th>Price</th>
+                            <th>Commission</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr *ngIf="sales.length == 0">
+
+                            <td colspan="6" class="text-center">You haven't sales!</td>
+
+                        </tr>
+
+                        <tr *ngFor="let sale of sales">
+                            <td>{{sale.sales.date | date }}</td>
+                            <td><a href="product/{{sale.sales.url}}">{{sale.sales.product}}</a></td>
+                            <td>{{sale.sales.quantity}}</td>
+                            <td>${{sale.sales.unit_price}}</td>
+                            <td>${{sale.sales.commission}}</td>
+                            <td>${{sale.sales.total}}</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+</div>

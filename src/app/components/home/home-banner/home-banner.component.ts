@@ -51,24 +51,31 @@ export class HomeBannerComponent implements OnInit {
       }
       this.productoService.getLimit( Object.keys(resp)[index],5).subscribe(
         res=>{
+          let count = 0;
           for (const i in res) {
-            
+            count ++;
             this.banner_home.push(JSON.parse(res[i].horizontal_slider));
             this.categoria.push(res[i].categoria);
             this.url.push(res[i].url);
           }
+
+          setTimeout(function(){
+            OwlCarouselConfig.fnc();
+            backgroundImage.fnc();
+          },count*100);
+
         }
       )
     })
   }
 
 
-  getPlugins(){
-    if (this.render) {
-      this.render = false;
-      OwlCarouselConfig.fnc();
-      backgroundImage.fnc();
-    }
-  }
+  // getPlugins(){
+  //   if (this.render) {
+  //     this.render = false;
+  //     OwlCarouselConfig.fnc();
+  //     backgroundImage.fnc();
+  //   }
+  // }
 
 }

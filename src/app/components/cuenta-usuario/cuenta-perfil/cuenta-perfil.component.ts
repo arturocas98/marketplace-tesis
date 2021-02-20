@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { OrdenesService } from 'src/app/core/ordenes/ordenes.service';
+import { TiendaService } from 'src/app/core/tienda/tienda.service';
 import { UsuarioService } from 'src/app/core/usuario/usuario.service';
 import { environment } from 'src/environments/environment';
 import { Sweetalert } from '../../../functions';
@@ -30,12 +32,17 @@ export class CuentaPerfilComponent implements OnInit {
   image: File = null;
   public server : string = environment.server;
   cuenta_url:string = null;
+  store:any[] = [];
+  ordersPending : number = 0;
+  disputes: any[] = [];
+  messages: any[] = [];
   constructor(
     private usersService: UsuarioService,
     public formBuilder: FormBuilder,
     public activatedRouter: ActivatedRoute,
     private http:HttpClient,
-
+    private tiendaService:TiendaService,
+    private ordersService:OrdenesService
   ) {
     this.validators = new MyValidators();
 
@@ -61,11 +68,32 @@ export class CuentaPerfilComponent implements OnInit {
               /*=============================================
               Preguntamos si es vendedor
               =============================================*/
+              this.tiendaService.getFilterData('username',resp[i].username).subscribe(respTienda=>{
+                if (Object.keys(respTienda).length > 0) {
+                  this.vendedor = true;                  
+                }
+                for(const i in respTienda){
+                  this.store.push(respTienda[i]);
+                  this.ordersService.getFilterData("tienda", respTienda[i].tienda)
+									.subscribe(resp=>{
+										
+										if(Object.keys(resp).length > 0){
 
-              if (resp[i].vendor != undefined) {
+											for(const i in resp){
 
-                this.vendedor = true;
-              }
+												if(resp[i].estado == "pendiente"){
+
+													this.ordersPending++;
+												}
+											
+											}
+
+										}
+
+									})
+                }
+              });
+          
               this.displayName = resp[i].displayName;
               this.username = resp[i].username;
               this.email = resp[i].email;

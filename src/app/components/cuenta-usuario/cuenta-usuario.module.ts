@@ -16,12 +16,26 @@ import { NgxSummernoteModule } from 'ngx-summernote';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { TagInputModule } from 'ngx-chips';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CuentaMisVentasComponent } from './cuenta-mis-ventas/cuenta-mis-ventas.component';
+import { CuentaMisOrdenesComponent } from './cuenta-mis-ordenes/cuenta-mis-ordenes.component';
+import { CuentaDisputasComponent } from './cuenta-disputas/cuenta-disputas.component';
+import { CuentaMensajesComponent } from './cuenta-mensajes/cuenta-mensajes.component';
 
 
 
 @NgModule({
   declarations: [ 
-    CuentaComponent, CuentaPerfilComponent, CuentaBreadcrumbComponent, CuentaWishlistComponent, CuentaMisComprasComponent, CuentaNuevaTiendaComponent, CuentaMiTiendaComponent,
+    CuentaComponent, 
+    CuentaPerfilComponent, 
+    CuentaBreadcrumbComponent, 
+    CuentaWishlistComponent, 
+    CuentaMisComprasComponent, 
+    CuentaNuevaTiendaComponent, 
+    CuentaMiTiendaComponent, 
+    CuentaMisVentasComponent, 
+    CuentaMisOrdenesComponent, 
+    CuentaDisputasComponent, 
+    CuentaMensajesComponent,
     
   ],
   imports: [

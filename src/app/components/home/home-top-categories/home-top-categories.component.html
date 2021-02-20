@@ -27,5 +27,36 @@
 <div 
 *ngIf="cargando"
 class="d-flex justify-content-center">
-    <div class="spinner-border text-muted my-5"></div>
+    <!-- <div class="spinner-border text-muted my-5"></div> -->
+
+     <div class="container">
+    
+        <div class="row">
+
+            <div 
+            *ngFor="let precat of preCategories"
+            class="col-xl-2 col-lg-3 col-sm-4 col-6 ">
+      
+                <div class="ph-item">
+                    
+                    <div class="ph-col-12">
+                        <div class="ph-picture"></div>
+                    </div> 
+
+                    <div class="ph-col-12">
+                        
+                        <div class="ph-row">
+                            <div class="ph-col-12 big"></div>
+                        </div>
+
+                    </div>     
+
+                </div>
+   
+            </div>
+
+        </div>
+
+    </div>
 </div>
+

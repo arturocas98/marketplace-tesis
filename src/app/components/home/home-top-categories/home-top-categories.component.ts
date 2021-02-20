@@ -16,16 +16,16 @@ export class HomeTopCategoriesComponent implements OnInit {
 
 	) {
 		this.url_image = environment.url_image;
-		this.cargando = false;
+		// this.cargando = false;
 		this.categorias = [];
 	}
 
 	ngOnInit(): void {
+		this.cargando = true;
 		this.getCategorias();
 	}
 
 	getCategorias() {
-		this.cargando = true;
 
 		/*=============================================
 			Tomamos la data de las categorias
@@ -34,6 +34,7 @@ export class HomeTopCategoriesComponent implements OnInit {
 		let getCategories = [];
 
 		this.categoriaService.getAll().subscribe(resp => {
+			this.cargando = false;
 
 			let i;
 
@@ -62,13 +63,16 @@ export class HomeTopCategoriesComponent implements OnInit {
 				if (index < 6) {
 
 					this.categorias[index] = getCategories[index];
-					this.cargando = false;
+					
 				}
 
 			})
 
 
+
 		})
+
+
 	}
 
 }

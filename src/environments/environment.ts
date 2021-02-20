@@ -26,7 +26,8 @@ export const environment = {
   ConfirmPasswordReset: 'https://identitytoolkit.googleapis.com/v1/accounts:resetPassword?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg',
   ChangePassword:'https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg',
   server:'http://localhost/marketplace-tesis/src/assets/img/index.php?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg',
-  serverDelete : 'http://localhost/marketplace-stores/src/assets/img/delete.php?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg'
+  serverDelete : 'http://localhost/marketplace-tesis/src/assets/img/delete.php?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg',
+  email:'http://localhost/marketplace-tesis/src/assets/email/index.php?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg'
 };
 
 /*

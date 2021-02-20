@@ -22,6 +22,26 @@ export class VentaService {
   registerDatabase(body:Object,idToken:string) {
     return this.http.post(`${this.url_api}/venta.json?auth=${idToken}`, body);
   }
+
+  /*=============================================
+	Filtrado de datos
+	=============================================*/
+
+	getFilterData(orderBy:string, equalTo:string){
+
+		return this.http.get(`${this.url_api}/venta.json?orderBy="${orderBy}"&equalTo="${equalTo}"&print=pretty`);
+
+	}
+
+	/*=============================================
+	Actualizar en Firebase Database
+	=============================================*/
+
+	patchDataAuth(id:string, value:object, idToken:string){
+
+		return this.http.patch(`${this.url_api}/venta/${id}.json?auth=${idToken}`,value);
+
+	}
   
 
 }

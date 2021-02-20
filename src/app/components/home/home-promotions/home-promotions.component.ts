@@ -25,6 +25,7 @@ export class HomePromotionsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.preload = true;
     this.getData();
   }
   getData(){

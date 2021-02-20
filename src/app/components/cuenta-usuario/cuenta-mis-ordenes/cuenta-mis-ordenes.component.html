@@ -1,0 +1,374 @@
+<!--=====================================
+Nav Account
+======================================-->
+
+<div class="ps-section__content">
+
+    <ul class="ps-section__links">
+        
+        <li><a href="cuenta-usuario/cuenta/mi-tienda">Mi tienda</a></li>
+        <li><a href="cuenta-usuario/cuenta/mis-ventas">Mis ventas</a></li>
+    </ul>
+
+    <div class="table-responsive mt-4">
+
+        <table class="table ps-table--whishlist dt-responsive" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+            width="100%">
+
+            <thead>
+
+                <tr>
+
+                    <th>Id de la orden</th>
+
+                    <th>Estado</th>
+
+                    <th>Cliente</th>
+
+                    <th>Dirección</th>
+
+                    <th>Teléfono</th>
+
+                    <th>Producto</th>
+
+                    <th>Cantidad</th>
+
+
+                    <th>Precio</th>
+
+                    <th>Proceso</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                <tr *ngIf="orders.length == 0">
+
+                    <td colspan="12" class="text-center">No tienes ordenes pendientes!</td>
+                </tr>
+
+                <tr *ngFor="let order of orders; let i = index">
+
+                    <td>
+                        {{idOrders[i]}}
+
+                        <div *ngIf="order.estado == 'pendiente'" class="text-center">
+                            <!--  -->
+                            <button type="button" class="btn btn-warning mt-2" (click)="nextProcess(idOrders[i],i)" >Siguiente proceso</button>
+
+                        </div>
+
+                    </td>
+
+                    <td>
+                        <span *ngIf="order.estado == 'pendiente'" class="badge badge-danger p-3">
+                            {{order.estado}}
+                        </span>
+
+                        <span *ngIf="order.estado == 'entregado'" class="badge badge-success p-3">
+                            {{order.estado}}
+                        </span>
+                    </td>
+
+                    <td>
+                        {{order.email}}
+                    </td>
+
+
+                    <td>
+                        {{order.direccion}}
+                    </td>
+
+                    <td>
+                        {{order.telefono}}
+                    </td>
+
+                    <td>
+                        {{order.producto}}
+                    </td>
+
+                    <td>
+                        {{order.cantidad}}
+                    </td>
+
+                    <td>
+                        ${{order.precio}}
+                    </td>
+
+                    <td>
+		            	
+		            	<ul class="timeline">
+
+                        	<!--=====================================
+                        	1 Momento: Órden de entrega recibida
+                        	======================================-->
+       	
+                            <li 
+							*ngIf="process[i][0].stage == 'revisando' && process[i][0].status== 'ok'"
+                            class="success"> 
+
+                                <h5>{{process[i][0].date | date}}</h5>
+                                <p class="text-success">Revisando <i class="fas fa-check"></i></p>
+                                <p>Comentario: {{process[i][0].comment}}</p>
+                                
+                            </li>
+
+                            <!--=====================================
+                        	2 Momento: Cuando se envía el producto
+                        	======================================-->
+
+                        	<!-- Cuando el status es ok -->
+
+                        	<li 
+							*ngIf="process[i][1].stage == 'enviando' && process[i][1].status == 'ok'"
+                            class="success"> 
+
+                                <h5>{{process[i][1].date | date}}</h5>
+                                <p class="text-success">Enviado <i class="fas fa-check"></i></p>
+                                <p>Comentario: {{process[i][1].comment}}</p>
+                                
+                            </li>
+
+                            <!-- Cuando el status es pendiente -->
+
+                            <li 
+                            *ngIf="process[i][1].stage == 'enviando' && process[i][1].status != 'ok'" 
+                            class="process">
+                                <h5>{{process[i][1].date | date}}</h5>         
+                                <p>Enviado</p>
+                                <button class="btn btn-primary" disabled>
+                                  <span class="spinner-border spinner-border-sm"></span>
+                                  En proceso
+                                </button>
+                            </li>
+
+                            <!--=====================================
+                        	3 Momento: Cuando se entrega el producto
+                        	======================================-->
+
+                        	<!-- Cuando el status es ok -->
+
+                        	<li 
+							*ngIf="process[i][2].stage == 'entregado' && process[i][2].status == 'ok'"
+                            class="success"> 
+
+                                <h5>{{process[i][1].date | date}}</h5>
+                                <p class="text-success">Entregado <i class="fas fa-check"></i></p>
+                                <p>Comentario: {{process[i][2].comment}}</p>
+                                
+                            </li>
+
+                            <!-- Cuando el status es pendiente -->
+
+                            <li 
+                            *ngIf="process[i][2].stage == 'entregado' && process[i][2].status != 'ok'" 
+                            class="process">
+                                <h5>{{process[i][2].date | date}}</h5>         
+                                <p>Entrega</p>
+                                <button class="btn btn-primary" disabled>
+                                  <span class="spinner-border spinner-border-sm"></span>
+                                  En proceso
+                                </button>
+                            </li>
+                           
+                        </ul>  
+
+		            </td>
+                   
+
+                </tr>
+
+            </tbody>
+
+
+
+        </table>
+
+
+    </div>
+
+</div>
+
+<!--=====================================
+Ventana modal para el proceso de entrega
+======================================-->
+
+<div class="modal" id="nextProcess">
+	
+	<div class="modal-dialog modal-lg">
+		
+		<div class="modal-content">
+
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h4 class="modal-title">Siguiente proceso para  <span></span></h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+
+			<!-- Modal body -->
+			<div class="modal-body">
+
+				<input type="hidden" id="indexOrder">
+
+				<div
+				*ngFor="let nextProcess of editNextProcess; let i = index"
+				class="card my-3">
+
+					<div class="card-header text-uppercase">{{i+1}}. {{nextProcess.stage}}</div>
+
+					<div class="card-body">
+						
+						<!--=====================================
+						Bloque Fecha
+						======================================-->
+
+						<div class="form-row">
+							
+							<div class="col-2 text-right">
+				  				<label class="p-3 lead">Fecha:</label>
+				  			</div>
+
+				  			<div class="col-10">
+				  				
+				  				<input type="date" class="form-control" name="date" [value]="nextProcess.date | date:'yyyy-MM-dd'" readonly #date>
+
+				  			</div>
+
+						</div>
+
+						<!--=====================================
+						Bloque Status
+						======================================-->
+
+						<div class="form-row">
+							
+							<div class="col-2 text-right">
+				  				<label class="p-3 lead">Estado:</label>
+				  			</div>
+
+				  			<div
+		  					*ngIf="nextProcess.status == 'ok'"
+		  					class="col-10 mt-3">
+
+		  						<div class="text-uppercase">{{nextProcess.status}}</div>
+
+		  					</div>
+
+		  					<div
+		  					*ngIf="nextProcess.status == 'pendiente'"
+		  					class="col-10 mt-3">
+
+		  						<div class="custom-control custom-radio custom-control-inline">
+		  							
+		  							<input 
+		  							*ngIf="nextProcess.status == 'pendiente'"
+		  							id="status-pending{{i}}" 
+		  							type="radio" 
+		  							class="custom-control-input" 
+		  							value="pendiente" 
+		  							name="status{{i}}" 
+		  							checked 
+		  							#status 
+		  							(change)="changeProcess('status', status, i)">
+
+		  							<input 
+		  							*ngIf="nextProcess.status == 'ok'"
+		  							id="status-pending{{i}}" 
+		  							type="radio" 
+		  							class="custom-control-input" 
+		  							value="pendiente" 
+		  							name="status{{i}}" 
+		  							#status 
+		  							(change)="changeProcess('status', status, i)">
+
+		  							<label class="custom-control-label" for="status-pending{{i}}">Pendiente</label>
+
+		  						</div>
+
+		  						<div class="custom-control custom-radio custom-control-inline">
+		  							
+		  							<input 
+		  							*ngIf="nextProcess.status == 'pendiente'"
+		  							id="status-ok{{i}}" 
+		  							type="radio" 
+		  							class="custom-control-input" 
+		  							value="ok" 
+		  							name="status{{i}}" 
+		  							#status 
+		  							(change)="changeProcess('status', status, i)">
+
+		  							<input 
+		  							*ngIf="nextProcess.status == 'ok'"
+		  							id="status-ok{{i}}" 
+		  							type="radio" 
+		  							class="custom-control-input" 
+		  							value="ok" 
+		  							name="status{{i}}" 
+		  							checked 
+		  							#status 
+		  							(change)="changeProcess('status', status, i)">
+
+		  							<label class="custom-control-label" for="status-ok{{i}}">Ok</label>
+
+		  						</div>
+
+
+		  					</div>
+
+						</div>
+
+						<!--=====================================
+						Bloque Comentarios
+						======================================-->
+
+						<div class="form-row">
+
+							<div class="col-2 text-right">
+								<label class="p-3 lead">Comentario:</label>
+							</div>
+
+							<div class="col-10"
+							*ngIf="nextProcess.status == 'ok'"
+							>	
+								<textarea class="form-control" [value]="nextProcess.comment" readonly></textarea>
+							</div>
+
+							<div class="col-10"
+							*ngIf="nextProcess.status == 'pendiente'"
+							>	
+								<textarea class="form-control" [value]="nextProcess.comment" #comment (change)="changeProcess('comment', comment, i)"></textarea>
+							</div>
+
+						</div>
+
+
+
+					</div>
+
+				</div>
+
+			</div>	
+
+			<!-- Modal footer -->
+			<div class="modal-footer">
+
+				<div class="form-group submtit">
+					
+					<button class="ps-btn ps-btn--fullwidth" (click)="onSubmitProcess()">Guardar</button>
+
+				</div>
+
+			</div>
+
+
+		</div>
+
+	</div>
+
+</div>
+
+
+

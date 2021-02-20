@@ -23,4 +23,14 @@ export class OrdenesService {
 
 	}
 
+  /*=============================================
+	Actualizar en Firebase Database
+	=============================================*/
+
+	patchDataAuth(id:string, value:object, idToken:string){
+
+		return this.http.patch(`${this.url_api}/orden/${id}.json?auth=${idToken}`,value);
+
+	}
+
 }

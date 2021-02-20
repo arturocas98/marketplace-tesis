@@ -1,0 +1,17 @@
+{
+    "venta": {
+        ".read": true,
+        ".write": "auth != null",
+        ".indexOn": [
+            "id_order"
+        ]
+    },
+    "orden": {
+        ".read": true,
+        ".write": "auth != null",
+        ".indexOn": [
+            "usuario",
+            "tienda"
+        ]
+    }
+}
