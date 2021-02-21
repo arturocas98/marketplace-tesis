@@ -5,9 +5,9 @@
 <div class="ps-section__content">
 
     <ul class="ps-section__links">
-        <li ><a href="cuenta-usuario/cuenta">Mi lista de deseos</a></li>
-        <li class="active" ><a href="cuenta-usuario/cuenta/mis-compras">Mis compras</a></li>
-        <li   *ngIf="!es_vendedor" ><a href="cuenta-usuario/cuenta/nueva-tienda">Mi Tienda</a></li>
+        <li><a href="cuenta-usuario/cuenta">Mi lista de deseos</a></li>
+        <li class="active"><a href="cuenta-usuario/cuenta/mis-compras">Mis compras</a></li>
+        <li *ngIf="!es_vendedor"><a href="cuenta-usuario/cuenta/nueva-tienda">Mi Tienda</a></li>
         <!-- <li   *ngIf="es_vendedor" ><a href="cuenta-usuario/cuenta/mi-tienda">Mi Tienda</a></li>
         <li *ngIf="es_vendedor" ><a href="my-account_my-sales.html">Mis ventas</a></li   > -->
     </ul>
@@ -24,6 +24,7 @@
             <thead>
 
                 <tr>
+                    <!-- <th>Id de la orden</th> -->
 
                     <th>Producto</th>
 
@@ -51,6 +52,10 @@
 
                 <tr *ngFor="let product of myShopping; let i = index">
 
+                    <!-- <td>
+                        {{idOrders[i]}}
+                    </td> -->
+
                     <td>
 
                         <div class="ps-product--cart">
@@ -65,7 +70,7 @@
 
                             <div class="ps-product__content">
 
-                                <a href="producto/{{product.url}}">{{product.producto}}</a>
+                                <a href="producto/{{product.url}}">{{product.producto}} - {{product.tienda }} </a>
 
                             </div>
 
@@ -73,7 +78,7 @@
 
                     </td>
 
-                    <td>
+                    <td style="height: 50px;" >
 
                         <ul class="timeline">
 
@@ -96,7 +101,8 @@
 
                             <!-- Cuando el status es ok -->
 
-                            <li *ngIf="process[i][1].stage == 'enviando' && process[i][1].status == 'ok'" class="success">
+                            <li *ngIf="process[i][1].stage == 'enviando' && process[i][1].status == 'ok'"
+                                class="success">
 
                                 <h5>{{process[i][1].date | date}}</h5>
                                 <p class="text-success">Enviado <i class="fas fa-check"></i></p>
@@ -106,7 +112,8 @@
 
                             <!-- Cuando el status es pendiente -->
 
-                            <li *ngIf="process[i][1].stage == 'enviando' && process[i][1].status != 'ok'" class="process">
+                            <li *ngIf="process[i][1].stage == 'enviando' && process[i][1].status != 'ok'"
+                                class="process">
                                 <h5>{{process[i][1].date | date}}</h5>
                                 <p>Enviado</p>
                                 <button class="btn btn-primary" disabled>
@@ -145,15 +152,52 @@
                         </ul>
 
                         <!--=====================================
-                                        Apertura de una disputa si el producto aún no ha sido entregado
-                                        ======================================-->
+                        Apertura de una disputa si el producto aún no ha sido entregado
+                        ======================================-->
 
                         <a *ngIf="process[i][2].stage == 'entregado' && process[i][2].status != 'ok'"
-                            class="btn btn-danger btn-lg" href="#">Abrir disputa</a>
+                            class="btn btn-danger btn-lg"
+                            (click)="newDispute(id_order[i], product.tienda, product.usuario)">Abrir disputa</a>
 
                         <!--=====================================
-                                        Permitimos la recompra si el producto ha sido entregado
-                                        ======================================-->
+                        Visualizar las disputas
+                        ======================================-->
+
+                        <div *ngFor="let dispute of disputes" class="my-3">
+
+                            <div *ngIf="dispute.orden == id_order[i]">
+
+                                <div class="media border p-3">
+                                    <div class="media-body">
+                                        <h4><small><i>Fecha de disputa {{dispute.fecha_disputa | date }}</i></small></h4>
+                                        <p>{{dispute.message }}</p>
+                                    </div>
+
+                                    <img *ngIf="dispute.user.metodo_registro != 'directo'" src="{{dispute.user.imagen}}"
+                                        alt="John Doe" class="ml-3 mt-3 rounded-circle" style="width:60px;">
+
+                                    <img *ngIf="dispute.user.metodo_registro == 'directo'"
+                                        src="{{path}}img/users/{{dispute.user.username}}/{{dispute.user.imagen}}"
+                                        class="ml-3 mt-3 rounded-circle" style="width:60px;">
+                                </div>
+
+                                <div *ngIf="dispute.respuesta != null" class="media border p-3">
+
+                                    <img src="{{path}}img/stores/{{dispute.store.url}}/{{dispute.store.logo}}"
+                                        class="ml-3 mt-3 rounded-circle" style="width:60px;">
+                                    <div class="media-body text-right">
+                                        <h4><small><i>Fecha de respuesta {{dispute.fecha_respuesta | date }}</i></small></h4>
+                                        <p>{{dispute.respuesta }}</p>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!--=====================================
+                        Permitimos la recompra si el producto ha sido entregado
+                        ======================================-->
                         <a *ngIf="process[i][2].stage == 'entregado' && process[i][2].status == 'ok'"
                             class="btn btn-warning btn-lg" href="producto/{{product.url}}">Comprar nuevamente</a>
 
@@ -183,23 +227,23 @@
 
                     <td *ngIf="process[i][2].stage == 'entregado' && process[i][2].status == 'ok'">
 
-                        <div class="text-center  mt-2">
+                        <div *ngFor="let item of reviews[i]; let iReview = index; let lastIndexReview = last"
+                            class="text-center  mt-2">
 
-                            <div class="br-theme-fontawesome-stars">
+                            <div *ngIf="item.name != undefined && item.name == product.usuario"
+                                class="br-theme-fontawesome-stars">
 
-                                <select class="ps-rating" data-read-only="true" style="display: none;">
-                                    <option value="1">1</option>
-                                    <option value="1">2</option>
-                                    <option value="1">3</option>
-                                    <option value="1">4</option>
-                                    <option value="2">5</option>
+                                <select class="ps-rating" data-read-only="true" [attr.reviews]="item.review">
+
                                 </select>
 
                             </div>
 
-                            <a class="btn btn-warning btn-lg" href="#">Añadir comentario</a>
+                            {{ lastIndexReview ? callback(iReview) : ""}}
 
                         </div>
+
+                        <a class="btn btn-warning btn-lg" (click)="newReview(product.usuario,product.url)">Añadir comentario</a>
 
                     </td>
 
@@ -213,4 +257,118 @@
 
     </div><!-- End My Shopping -->
 
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="newDispute">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Nueva disputa</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+
+                    <div class="form-group">
+
+                        <label>Escribe tu mensaje</label>
+
+                        <div class="form-group__content">
+
+                            <textarea class="form-control" type="text" name="message" [(ngModel)]="dispute.mensaje"
+                                required></textarea>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+
+                    <div class="float-right">
+                        <button type="submit" class="btn btn-success btn-lg">Send</button>
+                    </div>
+
+                </div>
+
+            </form>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+<!--=====================================
+Modal adicionar reseña
+======================================-->
+
+<!-- The Modal -->
+<div class="modal" id="newReview">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Nueva reseña</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body text-center">
+
+                <div class="br-theme-fontawesome-stars">
+
+                    <select name="review" #review class="ps-rating" data-read-only="false" style="display: none;">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Escribe tu comentario <span class="field-required"> * </span> </label>
+
+                    <div class="form-group__content">
+
+                        <textarea class="form-control" type="text" name="comment" #comment required></textarea>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+
+                <div class="float-right">
+                    <button type="button" class="btn btn-success btn-lg"
+                        (click)="submitReview(comment, review)">Enviar</button>
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
 </div>

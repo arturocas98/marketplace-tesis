@@ -5,6 +5,9 @@ import { CategoriaService } from './categoria/categoria.service';
 import { SubcategoriaService } from './categoria/sub_categoria.service';
 import { VentaService } from './venta/venta.service';
 import { TiendaService } from './tienda/tienda.service';
+import { DisputaService } from './disputa/disputa.service';
+import { OrdenesService } from './ordenes/ordenes.service';
+import { MensajeService } from './mensaje/mensaje.service';
 
 
 
@@ -18,7 +21,10 @@ import { TiendaService } from './tienda/tienda.service';
     CategoriaService,
     SubcategoriaService,
     VentaService,
-    TiendaService
+    TiendaService,
+    DisputaService,
+    OrdenesService,
+    MensajeService,
   ]
 })
 export class CoreModule { }

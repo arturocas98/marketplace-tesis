@@ -1,1 +1,162 @@
-<p>cuenta-disputas works!</p>
+<!--=====================================
+Nav Account
+======================================--> 
+
+<div class="ps-section__content">
+
+    <ul class="ps-section__links">
+       
+        <li><a href="cuenta-usuario/cuenta/mi-tienda">Mi tienda</a></li>
+        <li ><a href="cuenta-usuario/cuenta/mis-ventas">Mis ventas</a></li>
+   </ul>
+
+   <div class="table-responsive mt-4">
+       
+       <table class="table ps-table--whishlist dt-responsive" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" width="100%">
+           
+           <thead>
+
+               <tr>   
+
+                   <th>Id de la disputa</th> 
+
+                   <th>Id de la orden</th>        
+
+                   <th>Fecha de la disputa</th>
+
+                   <th>Emisor</th>
+
+                   <th>Receptor</th>
+
+                   <th>Mensaje</th>
+
+                   <th>Fecha de la repuesta</th>
+
+                   <th>Respuesta</th>
+
+               </tr>
+
+           </thead>
+
+           <tbody>
+
+               <tr
+               *ngIf="disputes.length == 0">
+               
+                   <td colspan="8" class="text-center">No tienes disputas! </td>    
+               </tr>
+
+               <tr
+               *ngFor="let dispute of disputes; let i = index"
+               >
+
+                   <td>
+                       
+                       {{idDisputes[i]}}
+                        <div 
+                        class="text-center" 
+                        *ngIf="dispute.respuesta == null">
+                            <button type="button" class="btn btn-danger mt-2" (click)="answerDispute(idDisputes[i])">Answer dispute</button>
+                        </div>
+
+
+                   </td>
+
+                   <td>
+                       {{dispute.orden}}
+                   </td>
+
+                   <td>
+                       {{dispute.fecha_disputa | date}}
+                   </td>
+
+                   <td>
+                       {{dispute.emisor}}
+                   </td>
+
+                   <td>
+                       {{dispute.receptor}}
+                   </td>
+
+                   <td>
+                       {{dispute.mensaje}}
+                   </td>
+
+                   <td>
+                       {{dispute.fecha_respuesta | date}}
+                   </td>
+
+                   <td>
+                       {{dispute.respuesta}}
+                   </td>
+
+               </tr>
+
+            </tbody>
+
+       </table>
+
+   </div>
+
+     <!--=====================================
+   Modal para las disputas
+   ======================================--> 
+
+   <!-- The Modal -->
+   <div class="modal" id="answerDispute">
+
+       <div class="modal-dialog">
+
+           <div class="modal-content">
+
+               <form
+               (ngSubmit)="onSubmit(f)"
+               #f="ngForm">
+
+                   <!-- Modal Header -->
+                   <div class="modal-header">
+                       <h4 class="modal-title">Responder disputa</h4>
+                       <button type="button" class="close" data-dismiss="modal">&times;</button>
+                   </div>
+
+                   <!-- Modal body -->
+                   <div class="modal-body">
+
+                       <div class="form-group">
+
+                           <label>Escribe tu mensaje</label>
+
+                           <div class="form-group__content">
+                               
+                               <textarea 
+                               class="form-control" 
+                               type="text"
+                               name="answer"
+                               [(ngModel)]="dispute.respuesta"
+                               required></textarea>
+
+                           </div>
+
+                       </div>
+
+                   </div>
+
+                   <!-- Modal footer -->
+                   <div class="modal-footer">
+
+                       <div class="float-right">
+                           <button type="submit" class="btn btn-warning btn-lg">Enviar</button>
+                       </div>
+                      
+                   </div>
+
+               </form>
+
+
+           </div>
+
+       </div>
+
+   </div>
+
+</div>

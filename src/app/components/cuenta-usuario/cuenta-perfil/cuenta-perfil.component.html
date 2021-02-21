@@ -110,9 +110,10 @@
 </app-cuenta-nueva-tienda>
 
 <app-cuenta-mi-tienda *ngIf="!preload && cuenta_url == 'mi-tienda' " [usuario]="username"></app-cuenta-mi-tienda>
+<div *ngIf="store.length > 0">
+    <app-cuenta-mis-ventas *ngIf="!preload && cuenta_url == 'mis-ventas' " [childItem]="store[0].tienda"></app-cuenta-mis-ventas>
 
-<app-cuenta-mis-ventas *ngIf="!preload && cuenta_url == 'mis-ventas' " [childItem]="store[0].tienda">
-</app-cuenta-mis-ventas>
+</div>
 <div *ngIf="store.length > 0">
     <app-cuenta-mis-ordenes *ngIf="!preload && cuenta_url == 'mis-ordenes'" [childItem]="store[0].tienda" ></app-cuenta-mis-ordenes>
 </div>

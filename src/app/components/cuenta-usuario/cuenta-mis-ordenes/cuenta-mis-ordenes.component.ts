@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Sweetalert } from '../../../functions';
 import { OrdenesService } from 'src/app/core/ordenes/ordenes.service';
 import { VentaService } from 'src/app/core/venta/venta.service';
@@ -14,9 +14,10 @@ declare var $:any;
   templateUrl: './cuenta-mis-ordenes.component.html',
   styleUrls: ['./cuenta-mis-ordenes.component.css']
 })
-export class CuentaMisOrdenesComponent implements OnInit {
+export class CuentaMisOrdenesComponent implements OnInit,OnDestroy {
   @Input() childItem: any;
-
+  dtOptions: DataTables.Settings = {};
+	dtTrigger: Subject<any> = new Subject();
   orders: any[] = [];
   idOrders: any[] = [];
   process: any[] = [];
@@ -28,8 +29,7 @@ export class CuentaMisOrdenesComponent implements OnInit {
   ];
   // email: string = Email.url;
 
-  dtOptions: DataTables.Settings = {};
-  dtTrigger: Subject<any> = new Subject();
+  // comentario
   email:string = environment.email;
   constructor(private ordersService: OrdenesService,
     private salesService: VentaService,
@@ -250,12 +250,12 @@ export class CuentaMisOrdenesComponent implements OnInit {
         =============================================*/
 
         const formData = new FormData();
-
+        // composer
         formData.append('email', 'yes');
         formData.append('comment', 'Ha recibido una actualización sobre el proceso de entrega de su pedido');
         formData.append('url', 'cuenta-usuario/cuenta/mis-compras');
         formData.append('address', this.orders[$("#indexOrder").val()].email);
-        formData.append('name', this.orders[$("#indexOrder").val()].user);
+        formData.append('name', this.orders[$("#indexOrder").val()].usuario);
 
         this.http.post(this.email, formData)
           .subscribe(resp => {

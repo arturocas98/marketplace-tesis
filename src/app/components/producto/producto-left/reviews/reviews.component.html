@@ -1,66 +1,58 @@
 <div class="row">
 
-    <div class="col-lg-5 col-12 ">
+	<div class="col-lg-5 col-12 ">
 
-        <div class="ps-block--average-rating">
+		<div class="ps-block--average-rating">
 
-            <div class="ps-block__header">
+			<div class="ps-block__header">
 
-                <h3>{{rating[0]}}</h3>
+				<h3>{{rating[0]}}</h3>
 
-              	<select class="ps-rating reviewsOption" data-read-only="true">
+				<select class="ps-rating reviewsOption" data-read-only="true">
 
-                </select>
+				</select>
 
-                <span>{{totalReviews}} Reviews</span>
+				<span>{{totalReviews}} Reviews</span>
 
-            </div>
+			</div>
 
-        </div>
+		</div>
 
-    </div>
+	</div>
 
-    <div class="col-lg-7 col-12">
+	<div class="col-lg-7 col-12">
 
-    	<div 
-		*ngFor="let item of itemReviews[0]; let lastIndex = last"
-    	class="media border p-3">
-    		
-    		<img 
-			*ngIf="item.image != undefined"
-    		src="{{path}}img/users/{{item.image}}"  
-				class="mr-5 mt-1 rounded-circle" 
-    			style="width:60px;">
+		<div *ngFor="let item of itemReviews[0]; let lastIndex = last" class="media border p-3">
 
-    		<img 
-			*ngIf="item.image == undefined"
-    		src="{{path}}img/users/default/default.jpg"  
-				class="mr-5 mt-1 rounded-circle" 
-    			style="width:60px;">
+			<img *ngIf="item.imagen != undefined && item.method == 'directo'"
+				src="{{path}}img/users/{{item.nombre}}/{{item.imagen}}" class="mr-5 mt-1 rounded-circle"
+				style="width:60px;">
+
+			<img *ngIf="item.imagen != undefined && item.method != 'directo'" src="{{item.imagen}}"
+				class="mr-5 mt-1 rounded-circle" style="width:60px;">
+
+			<img *ngIf="item.imagen == undefined" src="{{path}}img/users/default/default.jpg"
+				class="mr-5 mt-1 rounded-circle" style="width:60px;">
 
 
-    		<div class="media-body">
+			<div class="media-body">
 
-    			 <select class="ps-rating" data-read-only="true" [attr.reviews]="item.review">
+				<select class="ps-rating" data-read-only="true" [attr.reviews]="item.review">
 
-	            
-	            </select>
 
-    			<h4
-				*ngIf="item.name == undefined"
-    			>Anonimous</h4>
+				</select>
 
-    			<h4
-				*ngIf="item.name != undefined"
-    			>{{item.name}}</h4>
+				<h4 *ngIf="item.nombre == undefined">Anonimous</h4>
 
-    			<p>{{item.comment}}</p>
+				<h4 *ngIf="item.nombre != undefined">{{item.nombre}}</h4>
 
-    		</div>
+				<p>{{item.comentario}}</p>
 
-    	{{ lastIndex ? callback() : ""}}
-    	</div>
+			</div>
 
-    </div>
+			{{ lastIndex ? callback() : ""}}
+		</div>
+
+	</div>
 
 </div>

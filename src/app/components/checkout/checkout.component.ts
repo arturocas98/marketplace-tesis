@@ -313,7 +313,7 @@ export class CheckoutComponent implements OnInit {
                       categoria: product.categoria,
                       // details:product.details,
                       cantidad: product.cantidad,
-                      precio: this.totalPrice[index],
+                      precio: this.subTotalPrice[index],
                       email: this.form.controls['email'].value,
                       telefono: this.form.controls['telefono'].value,
                       direccion: this.form.controls['direccion'].value,
@@ -345,7 +345,9 @@ export class CheckoutComponent implements OnInit {
 
                           }
 
-
+                          console.log("comision:",commision);
+                          console.log("precio_unitario:",unitPrice);
+                          
                           /*=============================================
                           Enviar información de la venta a la base de datos
                           =============================================*/

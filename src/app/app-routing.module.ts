@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { LoginAuthComponent } from './auth/login-auth/login-auth.component';
 import { CarritoCompraComponent } from './components/carrito-compra/carrito-compra.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { LoginComponent } from './components/login/login.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { RegistroComponent } from './components/registro/registro.component';
+import { AdminGuard } from './guards/admin.guard';
 import { AuthGuard } from './guards/auth.guard';
 
 import { LayoutComponent } from './layout/layout.component';
@@ -56,14 +58,11 @@ const routes: Routes = [
         
         //para que cargar un modulo hijo 
       },
-      // {
-      //   path:'cuenta-usuario/:param',
-        
-      //   loadChildren:()=> import ('./components/cuenta-usuario/cuenta-usuario.module').then(m=> m.CuentaUsuarioModule),
-      //   canActivate:[AuthGuard]
-        
-      //   //para que cargar un modulo hijo 
-      // },
+      {
+        path:'admin',
+        // canActivate:[AdminGuard],
+        loadChildren:()=> import ('./components/admin/admin-routing.module').then(m=> m.AdminRoutingModule)
+      },
       {
         path:'login',component:LoginComponent
       },
@@ -80,33 +79,27 @@ const routes: Routes = [
       {
         path:'empieza-vender',component:EmpiezaVenderComponent
       },
-      {
-        path:'**',
-        component: PageNotFoundComponent
-      }
+      
 
-      // {
-      //   path:'auth',
-        
-      //   loadChildren:()=> import ('./auth/auth.module').then(m=> m.AuthModule)
-      //   //para que cargar un modulo hijo 
-      // },
+      
       
 
     ]
   },
-  
-//   {
-//     path:'demo',
-//     component: DemoComponent
-//   },
-//   {
-//     path:'admin',
-//     canActivate:[AdminGuard],
-//     loadChildren:()=> import ('./admin/admin-routing.module').then(m=> m.AdminRoutingModule)
-//   },
-
-
+  {
+    path:'auth',
+    // canActivate:[AdminGuard],
+    component: LoginAuthComponent
+  },
+  {
+    path:'**',
+    component: PageNotFoundComponent
+  },
+  {
+    path:'admin',
+    canActivate:[AdminGuard],
+    loadChildren:()=> import ('./admin/admin-routing.module').then(m=> m.AdminRoutingModule)
+  },
 ];
 
 @NgModule({

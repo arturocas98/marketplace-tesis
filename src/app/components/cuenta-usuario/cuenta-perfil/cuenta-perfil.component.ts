@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { DisputaService } from 'src/app/core/disputa/disputa.service';
+import { MensajeService } from 'src/app/core/mensaje/mensaje.service';
 import { OrdenesService } from 'src/app/core/ordenes/ordenes.service';
 import { TiendaService } from 'src/app/core/tienda/tienda.service';
 import { UsuarioService } from 'src/app/core/usuario/usuario.service';
@@ -42,7 +44,9 @@ export class CuentaPerfilComponent implements OnInit {
     public activatedRouter: ActivatedRoute,
     private http:HttpClient,
     private tiendaService:TiendaService,
-    private ordersService:OrdenesService
+    private ordersService:OrdenesService,
+    private disputesService:DisputaService,
+    private messagesService: MensajeService
   ) {
     this.validators = new MyValidators();
 
@@ -51,7 +55,12 @@ export class CuentaPerfilComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     this.preload = true;
-    this.cuenta_url  = this.activatedRouter.snapshot.params["param"]; 
+    
+		if(this.activatedRouter.snapshot.params["param"] != undefined){
+
+			this.cuenta_url = this.activatedRouter.snapshot.params["param"].split("&")[0];
+
+		}
     this.needValidation = this.validators.needValidation();
 
     this.usersService.authActivate().then(resp => {
@@ -74,6 +83,7 @@ export class CuentaPerfilComponent implements OnInit {
                 }
                 for(const i in respTienda){
                   this.store.push(respTienda[i]);
+
                   this.ordersService.getFilterData("tienda", respTienda[i].tienda)
 									.subscribe(resp=>{
 										
@@ -90,7 +100,57 @@ export class CuentaPerfilComponent implements OnInit {
 
 										}
 
+									});
+
+                  /*=============================================
+									Preguntamos si esta tienda tiene disputas
+									=============================================*/
+
+									this.disputesService.getFilterData("receptor", respTienda[i].tienda)
+									.subscribe(resp=>{
+										
+										if(Object.keys(resp).length > 0){
+
+											for(const i in resp){
+
+												if(resp[i].respuesta == undefined){								
+
+													this.disputes.push(resp[i]);
+
+												}				
+											
+											}
+
+										}
+
+
 									})
+
+									/*=============================================
+									Preguntamos si esta tienda tiene mensajes
+									=============================================*/
+
+									this.messagesService.getFilterData("receptor", respTienda[i].tienda)
+									.subscribe(resp=>{
+										
+										if(Object.keys(resp).length > 0){
+
+											for(const i in resp){
+
+												if(resp[i].answer == undefined){								
+
+													this.messages.push(resp[i]);	
+
+												}			
+											
+											}
+
+										}
+
+
+									})
+									
+
                 }
               });
           

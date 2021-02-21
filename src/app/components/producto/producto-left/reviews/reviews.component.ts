@@ -139,7 +139,7 @@ export class ReviewsComponent implements OnInit {
       =============================================*/
 
     this.itemReviews.push(JSON.parse(this.childItem["reviews"]));
-
+    console.log("item reviews:",this.itemReviews);
 
   }
 

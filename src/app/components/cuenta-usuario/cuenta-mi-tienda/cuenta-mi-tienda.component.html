@@ -7,7 +7,7 @@
     <ul class="ps-section__links">
         <li *ngIf="!es_vendedor" ><a href="cuenta-usuario/cuenta">Mi lista de deseos</a></li>
         <li *ngIf="!es_vendedor" ><a href="cuenta-usuario/cuenta/mis-compras">Mis compras</a></li>
-        <li class="active"><a href="cuenta-usuario/cuenta/mi-tienda">Mi Tienda</a></li>
+        <li class="active"><a href="cuenta-usuario/cuenta/mi-tienda">Mi Tiendas</a></li>
         <!-- <li class="active"  *ngIf="es_vendedor" ><a href="cuenta-usuario/cuenta/mi-tienda">Mi Tienda</a></li> -->
         <li><a href="cuenta-usuario/cuenta/mis-ventas">Mis ventas</a></li>
     </ul>
@@ -823,7 +823,7 @@
                             <div class="form-group__content">
 
                                 <select class="form-control formProduct" name="productSubCategory"
-                                    [(ngModel)]="productModel.sub_category" required>
+                                    [(ngModel)]="productModel.subcategoria" required>
 
                                     <option *ngFor="let subcategory of subcategories"
                                         [value]="subcategory.url+'_'+subcategory.grupo">{{subcategory.nombre}}
@@ -1577,7 +1577,7 @@
                             <div class="form-group__content">
 
                                 <select class="form-control formProduct" name="productSubCategory"
-                                    [(ngModel)]="productModel.sub_category" required>
+                                    [(ngModel)]="productModel.subcategoria" required>
 
                                     <option *ngFor="let subcategory of subcategories"
                                         [value]="subcategory.url+'_'+subcategory.grupo">{{subcategory.nombre}}

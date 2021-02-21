@@ -1,1 +1,148 @@
-<p>cuenta-mensajes works!</p>
+<!--=====================================
+Nav Account
+======================================-->
+
+<div class="ps-section__content">
+
+    <ul class="ps-section__links">
+    
+        <li><a href="cuenta-usuario/cuenta/mi-tienda">Mi tienda</a></li>
+        <li><a href="cuenta-usuario/cuenta/mis-ventas">Mis ventas</a></li>
+    </ul>
+
+    <div class="table-responsive mt-4">
+
+        <table class="table ps-table--whishlist dt-responsive" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+            width="100%">
+
+            <thead>
+
+                <tr>
+
+                    <th>Id del mensaje</th>
+
+                    <th>Url del producto</th>
+
+                    <th>Fecha del mensaje</th>
+
+                    <th>Emisor</th>
+
+                    <th>Receptor</th>
+
+                    <th>Mensaje</th>
+
+                    <th>Fecha de la respuesta</th>
+
+                    <th>Respuesta</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr *ngIf="messages.length == 0">
+
+                    <td colspan="8" class="text-center">No tienes mensajes!</td>
+
+                </tr>
+
+                <tr *ngFor="let message of messages; let i = index;">
+                    <td>
+                        {{idMessage[i]}}
+
+                        <div class="text-center" *ngIf="message.answer == null">
+                            <button type="button" class="btn btn-danger mt-2"
+                                (click)="answerMessage(idMessage[i])">Responder mensaje</button>
+                        </div>
+
+                    </td>
+
+                    <td>
+                        {{message.url_producto}}
+                    </td>
+
+                    <td>
+                        {{message.fecha_mensaje | date}}
+                    </td>
+
+                    <td>
+                        {{message.emisor}}
+                    </td>
+
+                    <td>
+                        {{message.receptor}}
+                    </td>
+
+                    <td>
+                        {{message.mensaje}}
+                    </td>
+
+                    <td>
+                        {{message.fecha_respuesta | date}}
+                    </td>
+
+                    <td>
+                        {{message.respuesta}}
+                    </td>
+
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!--=====================================
+   Modal para las mensajes
+   ======================================-->
+
+    <!-- The Modal -->
+    <div class="modal" id="answerMessage">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Responder mensaje</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+
+                        <div class="form-group">
+
+                            <label>Escriba su respuesta<span class="text-required" >*</span> </label>
+
+                            <div class="form-group__content">
+
+                                <textarea class="form-control" type="text" name="answer" [(ngModel)]="message.respuesta"
+                                    required></textarea>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+
+                        <div class="float-right">
+                            <button type="submit" class="btn btn-success btn-lg">Enviar</button>
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>

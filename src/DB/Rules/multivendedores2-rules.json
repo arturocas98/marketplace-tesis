@@ -13,5 +13,31 @@
             "usuario",
             "tienda"
         ]
+    },
+    "tienda": {
+        ".read": true,
+        ".write": "auth != null",
+        ".indexOn": [
+            "nombre",
+            "url",
+            "username",
+            "tienda"
+        ]
+    },
+    "disputa": {
+        ".read": true,
+        ".write": "auth != null",
+        ".indexOn": [
+            "orden",
+            "receptor"
+        ]
+    },
+    "mensaje": {
+        ".read": true,
+        ".write": "auth != null",
+        ".indexOn": [
+            "url_producto",
+            "receptor"
+        ]
     }
 }

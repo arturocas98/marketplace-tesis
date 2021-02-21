@@ -36,7 +36,7 @@ if(isset($_GET["key"]) && $_GET["key"] == "AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdV
 
 			<div>
 
-				Hi, '.$_POST["name"].':
+				Hola, '.$_POST["name"].':
 
 				<a href="https://marketplace-tesis.web.app/'.$_POST["url"].'">Haga clic en este enlace para obtener más información.
 				</a>

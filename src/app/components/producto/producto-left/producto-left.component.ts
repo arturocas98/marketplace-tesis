@@ -1,12 +1,14 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MensajeService } from 'src/app/core/mensaje/mensaje.service';
 import { ProductoService } from 'src/app/core/producto/producto.service';
 import { TiendaService } from 'src/app/core/tienda/tienda.service';
 import { UsuarioService } from 'src/app/core/usuario/usuario.service';
+import { Mensaje } from 'src/app/models/mensaje';
 import { environment } from 'src/environments/environment';
 import {
-  OwlCarouselConfig,
-  carouselNavigation,
+  Sweetalert,
   Rating,
   DinamicRating,
   DinamicReviews,
@@ -41,24 +43,34 @@ export class ProductoLeftComponent implements OnInit {
   totalReviews: String;
   oferta_valida: boolean = false;
   cantidad: number = 1;
-  summary:any[]=[];
-  es_vendedor:boolean = false;
+  summary: any[] = [];
+  es_vendedor: boolean = false;
+  messages: Mensaje;
+
+  email: string = environment.email;
+
+  questions: any[] = [];
   constructor(
     private activateRoute: ActivatedRoute,
     private productService: ProductoService,
     private userService: UsuarioService,
     private router: Router,
-    private tiendaService:TiendaService
-  ) { }
+    private tiendaService: TiendaService,
+    private messagesService: MensajeService,
+    private http: HttpClient
+  ) {
+    this.messages = new Mensaje();
+
+  }
 
   ngOnInit(): void {
     this.cargando = true;
-    this.userService.getFilterData("idToken",localStorage.getItem('idToken')).subscribe(resp=>{
-      for(const i in resp){
-        this.tiendaService.getFilterData('username',resp[i].username).subscribe(respTienda=>{
+    this.userService.getFilterData("idToken", localStorage.getItem('idToken')).subscribe(resp => {
+      for (const i in resp) {
+        this.tiendaService.getFilterData('username', resp[i].username).subscribe(respTienda => {
           if (Object.keys(respTienda).length > 0) {
             this.es_vendedor = true;
-          }else{
+          } else {
             this.es_vendedor = false;
           }
         });
@@ -67,7 +79,58 @@ export class ProductoLeftComponent implements OnInit {
     this.productService.getByFilter("url", this.activateRoute.snapshot.params["param"]).subscribe(resp => {
       console.log("resp:", resp);
       this.productsFnc(resp);
-    })
+    });
+
+    /*=============================================
+    Traer preguntas y respuestas del producto
+    =============================================*/
+    this.messagesService.getFilterData("url_producto", this.activateRoute.snapshot.params["param"])
+      .subscribe(resp => {
+
+        if (Object.keys(resp).length > 0) {
+
+          let count = 0;
+
+          for (const i in resp) {
+
+            count++;
+
+            this.tiendaService.getFilterData("tienda", resp[i].receptor)
+              .subscribe(resp1 => {
+
+                for (const f in resp1) {
+
+                  resp[i].store = resp1[f];
+                }
+
+
+              })
+
+            this.userService.getFilterData("username", resp[i].emisor)
+              .subscribe(resp1 => {
+
+                for (const f in resp1) {
+
+                  resp[i].user = resp1[f];
+                }
+
+
+              })
+
+            let localQuestions = this.questions;
+
+            setTimeout(function () {
+
+              localQuestions.push(resp[i]);
+
+            }, count * 1000)
+
+          }
+
+        }
+
+      })
+
   }
 
   productsFnc(response) {
@@ -103,7 +166,7 @@ export class ProductoLeftComponent implements OnInit {
       this.reviews.push(DinamicReviews.fnc(this.rating[index]));
 
       this.price.push(DinamicPrice.fnc(this.product[index]));
-     
+
       this.summary.push(JSON.parse(this.product[index].resumen));
 
 
@@ -177,12 +240,12 @@ export class ProductoLeftComponent implements OnInit {
     if (this.render_gallery) {
       this.render_gallery = false;
       $('ps-product__thumbnail').hide();
-      setTimeout(function(){
+      setTimeout(function () {
         SlickConfig.fnc();
         ProductLightbox.fnc();
         $('ps-product__thumbnail').show();
-      },i*100)
-     
+      }, i * 100)
+
     }
   }
 
@@ -230,22 +293,124 @@ export class ProductoLeftComponent implements OnInit {
 
   buyNow(product, unit, details) {
 
-   
+
 
     /*=============================================
     Agregar producto al carrito de compras
     =============================================*/
 
     let item = {
-      producto:product,
-      unidad:unit,
-      detalles:details,
+      producto: product,
+      unidad: unit,
+      detalles: details,
       url: 'checkout'
     }
-   
+
     this.userService.addShoppingCart(item);
 
   }
+
+  /*=============================================
+   Función para crear nueva pregunta
+   =============================================*/
+
+  newQuestion(question, url, store) {
+
+    this.messages.mensaje = question.value;
+    this.messages.url_producto = url;
+    this.messages.receptor = store;
+    this.messages.fecha_mensaje = new Date();
+
+    /*=============================================
+    Validar si este usuario está autenticado
+    =============================================*/
+
+    this.userService.authActivate().then(resp => {
+
+      if (!resp) {
+
+        Sweetalert.fnc("error", "Por favor inicia sesión para enviar tu pregunta", null);
+
+        return;
+
+      } else {
+
+        /*=============================================
+        Traer el correo de la tienda
+        =============================================*/
+
+        let emailStore = null;
+
+        this.tiendaService.getFilterData("tienda", store)
+          .subscribe(resp => {
+
+            for (const i in resp) {
+
+              emailStore = resp[i].email;
+            }
+
+          })
+
+        /*=============================================
+        Traer la información del usuario
+        =============================================*/
+
+        this.userService.getFilterData("idToken", localStorage.getItem("idToken"))
+          .subscribe(resp => {
+
+            for (const i in resp) {
+
+              this.messages.emisor = resp[i].username;
+
+              /*=============================================
+              Crear el mensaje en la base de datos
+              =============================================*/
+
+              this.messagesService.registerDatabase(this.messages, localStorage.getItem("idToken"))
+                .subscribe(resp => {
+
+                  if (resp["name"] != "") {
+
+                    /*=============================================
+                    Enviar notificación por correo electrónico
+                    =============================================*/
+
+                    const formData = new FormData();
+
+                    formData.append('email', 'yes');
+                    formData.append('comment', 'Haz recibido un nuevo mensaje');
+                    formData.append('url', 'account/messages');
+                    formData.append('address', emailStore);
+                    formData.append('name', store);
+
+                    this.http.post(this.email, formData)
+                      .subscribe(resp => {
+
+                        if (resp["status"] == 200) {
+
+                          Sweetalert.fnc("success", "El mensaje ha sido enviado!", "producto/" + url);
+
+                        }
+
+                      })
+
+                  }
+
+                }, err => {
+
+                  Sweetalert.fnc("error", err.error.error.message, null)
+
+                })
+            }
+
+          })
+
+      }
+
+    })
+
+  }
+
 
 
 

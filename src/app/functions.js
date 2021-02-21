@@ -793,7 +793,7 @@ export let Datepicker = {
       if ($(".ps-datepicker.dateTo").val() != "") {
         $(".btnUpdate").attr(
           "href",
-          "account/my-sales&" +
+          "cuenta-usuario/cuenta/mis-ventas&" +
             dateFrom +
             "&" +
             $(".ps-datepicker.dateTo").val()
@@ -804,7 +804,7 @@ export let Datepicker = {
     $(".ps-datepicker.dateTo").change(function () {
       $(".btnUpdate").attr(
         "href",
-        "account/my-sales&" +
+        "cuenta-usuario/cuenta/mis-ventas&" +
           $(".ps-datepicker.dateFrom").val() +
           "&" +
           $(this).val()
@@ -821,5 +821,17 @@ export let ChartJs = {
   fnc: function (config) {
     let ctx = document.getElementById("line-chart").getContext("2d");
     window.myLine = new Chart(ctx, config);
+    
+   
+
   },
 };
+
+export let ChartJsPie = {
+  fnc: function (config) {
+    var ctx = document.getElementById('pie-chart').getContext('2d');
+    window.myPie = new Chart(ctx, config); 
+  },
+};
+
+

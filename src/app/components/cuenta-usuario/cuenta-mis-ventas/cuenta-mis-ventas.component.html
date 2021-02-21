@@ -23,7 +23,7 @@ Nav Account
 
                     <div class="input-group-prepend">
 
-                        <span class="input-group-text" id="time-from">From</span>
+                        <span class="input-group-text" id="time-from">desde</span>
 
                     </div>
 
@@ -33,14 +33,14 @@ Nav Account
                 </div>
 
             </div>
-
+            
             <div class="col-lg-3 col-md-4 col-sm-6 col-12 ">
 
                 <div class="input-group">
 
                     <div class="input-group-prepend">
 
-                        <span class="input-group-text" id="time-form">To</span>
+                        <span class="input-group-text" id="time-form">hasta</span>
 
                     </div>
 
@@ -53,7 +53,7 @@ Nav Account
 
             <div class="col-lg-3 col-md-4 col-sm-6 col-12 ">
 
-                <a href="" class="ps-btn btnUpdate"><i class="icon-sync2"></i> Update</a>
+                <a href="" class="ps-btn btnUpdate"><i class="icon-magnifier"></i> Buscar</a>
 
             </div>
 
@@ -71,19 +71,19 @@ Nav Account
 
             <figure class="ps-block--vendor-status">
 
-                <figcaption>Total sales</figcaption>
+                <figcaption>Total de ventas</figcaption>
 
                 <table class="table ps-table ps-table--vendor-status">
 
                     <tbody>
 
                         <tr>
-                            <td>Store Profits</td>
+                            <td>Ganancias de la tienda</td>
                             <td>${{storeProfits.toFixed(2)}}</td>
                         </tr>
 
                         <tr>
-                            <td>Commissions</td>
+                            <td>Comisión del marketplace</td>
                             <td>${{commissions.toFixed(2)}}</td>
                         </tr>
 
@@ -104,13 +104,25 @@ Nav Account
        Gráfico de ventas
        ======================================-->
 
-        <div class="col-12">
+        <div class="col-6">
 
             <figure class="ps-block--vendor-status">
 
-                <figcaption>Sales Graph</figcaption>
+                <figcaption>Gráfico de ventas</figcaption>
 
                 <canvas id="line-chart" class="chartjs-render-monitor"></canvas>
+
+            </figure>
+
+        </div>
+
+        <div class="col-6">
+
+            <figure class="ps-block--vendor-status">
+
+                <figcaption>Gráfico productos</figcaption>
+
+                <canvas id="pie-chart" class="chartjs-render-monitor"></canvas>
 
             </figure>
 
@@ -124,7 +136,7 @@ Nav Account
 
             <figure class="ps-block--vendor-status">
 
-                <figcaption>Sales Table</figcaption>
+                <figcaption>Tabla de ventas</figcaption>
 
             </figure>
 
@@ -135,11 +147,11 @@ Nav Account
 
                     <thead>
                         <tr>
-                            <th>date</th>
-                            <th>Product</th>
-                            <th>Sold</th>
-                            <th>Price</th>
-                            <th>Commission</th>
+                            <th>Fecha</th>
+                            <th>Producto</th>
+                            <th>Vendido</th>
+                            <th>Precio</th>
+                            <th>Comisión</th>
                             <th>Total</th>
                         </tr>
                     </thead>
@@ -148,16 +160,16 @@ Nav Account
 
                         <tr *ngIf="sales.length == 0">
 
-                            <td colspan="6" class="text-center">You haven't sales!</td>
+                            <td colspan="6" class="text-center">No tienes ventas por el momento!</td>
 
                         </tr>
 
                         <tr *ngFor="let sale of sales">
-                            <td>{{sale.sales.date | date }}</td>
-                            <td><a href="product/{{sale.sales.url}}">{{sale.sales.product}}</a></td>
-                            <td>{{sale.sales.quantity}}</td>
-                            <td>${{sale.sales.unit_price}}</td>
-                            <td>${{sale.sales.commission}}</td>
+                            <td>{{sale.sales.fecha_emision | date }}</td>
+                            <td><a href="producto/{{sale.sales.url}}">{{sale.sales.producto}}</a></td>
+                            <td>{{sale.sales.cantidad}}</td>
+                            <td>${{sale.sales.precio_unitario}}</td>
+                            <td>${{sale.sales.comision}}</td>
                             <td>${{sale.sales.total}}</td>
                         </tr>
 
