@@ -601,6 +601,31 @@ export class CuentaNuevaTiendaComponent implements OnInit {
     }
 
     /*=============================================
+    Validamos el precio de envio de la tienda
+    =============================================*/
+
+    if ($(input).attr("name") == "storePrecioEnvio") {
+
+      /*=============================================
+      Validamos expresión regular de la dirección de la tienda
+      =============================================*/
+
+      let pattern = /[-\\0-9 ]{1,}/;
+
+      if (!pattern.test(input.value)) {
+
+        $(input).parent().addClass('was-validated');
+
+        input.value = "";
+
+        return;
+
+      }
+
+    }
+
+
+    /*=============================================
     Validamos las redes sociales de la tienda
     =============================================*/
 
@@ -1017,7 +1042,7 @@ export class CuentaNuevaTiendaComponent implements OnInit {
 
       if (f.invalid) {
 
-        Sweetalert.fnc("error", "Invalid Request", null);
+        Sweetalert.fnc("error", "Llene los campos obligatorios", null);
 
         return;
       }
@@ -1208,6 +1233,7 @@ export class CuentaNuevaTiendaComponent implements OnInit {
                         }
 
                         this.store.social = JSON.stringify(this.social);
+                        this.store.fecha_creacion = new Date();
 
                         /*=============================================
                         Consolidar fecha de creación del producto   

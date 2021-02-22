@@ -359,6 +359,36 @@ Nav Account
                             </div>
 
                             <!--=====================================
+                            Precio de envio
+                            ======================================-->
+                            
+                            <div class="form-group">
+                            
+                                <label>Precio de envio<sup class="text-danger">*</sup></label>
+
+                                <div class="form-group__content input-group">
+
+                                    <!-- <div class="input-group-append">
+                                        <span class="input-group-text">{{dialCode}}</span>
+                                    </div>
+                                     -->
+                                    <input type="text"
+                                    class="form-control formStore"
+                                    name="storePrecioEnvio"
+                                    pattern="[-\\0-9 ]{1,}"
+                                    maxLength="5"
+                                    [(ngModel)]="store.precio_envio"
+                                    #precio_envio
+                                    required>
+
+                                    <div class="valid-feedback">Valido</div>
+                                    <div class="invalid-feedback">Por favor rellene este campo..</div>
+
+                                </div>
+
+                            </div>
+
+                            <!--=====================================
                             Logo de la tienda
                             ======================================-->
 
@@ -1246,7 +1276,7 @@ Nav Account
                                     Días de entrega
                                     ======================================-->
 
-                                    <div class="col-12 col-lg-3">
+                                    <!-- <div class="col-12 col-lg-3">
                                         
                                         <label>Días de entrega<sup class="text-danger">*</sup></label>
 
@@ -1274,7 +1304,7 @@ Nav Account
 
                                         </div>    
 
-                                    </div>
+                                    </div> -->
 
                                     <!--=====================================
                                     Stock

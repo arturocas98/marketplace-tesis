@@ -160,6 +160,7 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
           this.storeModel.cover = respTienda[i].cover;
           this.storeModel.username = respTienda[i].username;
           this.storeModel.telefono = respTienda[i].telefono;
+          this.storeModel.precio_envio = respTienda[i].precio_envio;
 
 
         }
@@ -209,13 +210,13 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
           return item;
         });
 
-        console.log("tienda:", this.store);
-        console.log("social:", this.social['instagram']);
-        console.log("social_twitter:", this.social['twitter']);
+        // console.log("tienda:", this.store);
+        // console.log("social:", this.social['instagram']);
+        // console.log("social_twitter:", this.social['twitter']);
 
 
         this.productsService.getFilterDataStore("tienda", this.store[0].tienda).subscribe(resp => {
-          console.log("productos:", resp);
+          // console.log("productos:", resp);
           for (const i in resp) {
             this.products.push(resp[i]);
             this.idProducts = Object.keys(resp).toString().split(",");
@@ -277,20 +278,19 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
         $("table").animate({ "opacity": 1 });
         $(".preloadTable").animate({ "opacity": 0 });
         /*=============================================
-              Agregamos las calificaciones totales de la tienda
-              =============================================*/
+        Agregamos las calificaciones totales de la tienda
+        =============================================*/
 
         totalReviews.forEach((review, index) => {
 
           globalRating += review.length;
 
           for (const i in review) {
-
+            
             globalReviews += review[i].review
-
           }
         })
-        console.log("globalRating:", globalRating);
+        // console.log("globalRating:", globalRating);
         console.log("globalReviews:", globalReviews);
         //numero de estrellas del 1 al 5 
         let averageReviews = Math.round(globalReviews / globalRating);
@@ -312,7 +312,7 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
         Tomamos el Arreglo del promedio de calificaciones
         =============================================*/
         let averageRating = DinamicReviews.fnc(averageReviews);
-
+        // console.log("averageRating:",averageRating);
         /*=============================================
               Pintamos en el HTML el Select para el plugin Rating
               =============================================*/
@@ -429,6 +429,30 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
       =============================================*/
 
       let pattern = /^[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\"\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]{1,1000}$/;
+
+      if (!pattern.test(input.value)) {
+
+        $(input).parent().addClass('was-validated');
+
+        input.value = "";
+
+        return;
+
+      }
+
+    }
+
+    /*=============================================
+    Validamos el precio de envio de la tienda
+    =============================================*/
+
+    if ($(input).attr("name") == "storePrecioEnvio") {
+
+      /*=============================================
+      Validamos expresión regular de la dirección de la tienda
+      =============================================*/
+
+      let pattern = /^[-\\0-9 ]{1,}$/;
 
       if (!pattern.test(input.value)) {
 
@@ -688,11 +712,11 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
   }
 
   onSubmitStore(f: NgForm) {
-    console.log("submit:", f);
+    // console.log("submit:", f);
     /*=============================================
         Validación completa del formulario
         =============================================*/
-
+    console.log("f:",f);
     if (f.invalid) {
 
       Sweetalert.fnc("error", "Faltan campos por llenar o no cumplen el formato especificado", null);

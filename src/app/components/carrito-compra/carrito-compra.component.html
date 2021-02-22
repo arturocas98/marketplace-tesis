@@ -64,7 +64,7 @@
 
                                     <div class="ps-product__thumbnail">
 
-                                        <a href="producto/{{carrito.url}}"><img src="{{path}}img/products/{{carrito.categoria}}/{{carrito.imagen}}"
+                                        <a href="producto/{{carrito.url}}"><img src="{{path}}img/products/categorias/{{carrito.categoria}}/{{carrito.imagen}}"
                                                 alt=""></a>
 
                                     </div>
@@ -81,7 +81,7 @@
 
                             </td>
 
-                            <td class="ps-product pShoppingCart" > {{carrito.tienda}} </td>
+                            <td class="ps-product pShoppingCart" > {{carrito.tienda}} (Costo de envio ${{carrito.precio_envio}}) </td>
 
                             <td class="ps-product pShoppingCart" [innerHTML]="carrito.precio" ></td>
 
@@ -142,6 +142,7 @@
 
             </div> -->
             <!-- <p>Te falta $10 para el envio gratis!</p> -->
+            <p class="text-danger" >(*) El valor del envío se cobra por tienda, consulta los valores de cada tienda en el siguiente  <a style="font-weight: bold;" href="lista-tiendas" >enlace </a> </p>
 
             <div class="ps-section__cart-actions">
 

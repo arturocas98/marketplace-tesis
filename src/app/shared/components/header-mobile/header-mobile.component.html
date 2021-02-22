@@ -21,7 +21,7 @@
             <ul class="navigation__extra">
 
                 <li><a routerLink="/empieza-vender">Vender en el MarketPlace</a></li>
-                <li><a href="#">Lista de tiendas</a></li>
+                <li><a href="lista-tiendas">Lista de tiendas</a></li>
                 <li><i class="icon-telephone"></i> Linea directa:<strong> 1-800-123-5678</strong></li>
 
                 <!-- <li>
@@ -102,13 +102,22 @@
 
         <div class="navigation__right">
 
-            <div class="header__actions">
+            <div class="header__actions"   >
+                <div *ngIf="installEvent" class="ps-block--user-header">
+                    <a class="header__extra"   (click)="installByUser()">
+                        <i  style="margin-left: 12px;" class="icon-enter-down"></i>
+                    </a>
+                    <div class="ps-block__right">
+                        <p  style="margin-top: 10px;color:black;" >Instalar app</p>
 
+                    </div>
+                </div>
                 <!--=====================================
 					Cart
 					======================================-->
 
                 <div class="ps-cart--mini">
+                   
 
                     <a  *ngIf="!es_vendedor" class="header__extra" routerLink="/carrito-compra">
                         <i class="icon-bag2"></i><span><i>{{totalShoppingCart}}</i></span>
@@ -162,6 +171,8 @@
                     </div> -->
 
                 </div>
+
+               
 
                 <!--=====================================
 					Login and Register

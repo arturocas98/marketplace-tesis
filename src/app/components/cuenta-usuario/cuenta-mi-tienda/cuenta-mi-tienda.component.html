@@ -5,8 +5,8 @@
 <div *ngIf="preload" class="ps-section__content">
 
     <ul class="ps-section__links">
-        <li *ngIf="!es_vendedor" ><a href="cuenta-usuario/cuenta">Mi lista de deseos</a></li>
-        <li *ngIf="!es_vendedor" ><a href="cuenta-usuario/cuenta/mis-compras">Mis compras</a></li>
+        <li *ngIf="!es_vendedor"><a href="cuenta-usuario/cuenta">Mi lista de deseos</a></li>
+        <li *ngIf="!es_vendedor"><a href="cuenta-usuario/cuenta/mis-compras">Mis compras</a></li>
         <li class="active"><a href="cuenta-usuario/cuenta/mi-tienda">Mi Tiendas</a></li>
         <!-- <li class="active"  *ngIf="es_vendedor" ><a href="cuenta-usuario/cuenta/mi-tienda">Mi Tienda</a></li> -->
         <li><a href="cuenta-usuario/cuenta/mis-ventas">Mis ventas</a></li>
@@ -107,7 +107,8 @@
                     <div class="d-flex justify-content-between">
 
                         <div>
-                            <button class="btn btn-lg btn-warning my-3"  href="#formProduct" data-toggle="modal">Nuevo producto</button>
+                            <button class="btn btn-lg btn-warning my-3" href="#formProduct" data-toggle="modal">Nuevo
+                                producto</button>
                         </div>
 
                         <div>
@@ -204,24 +205,17 @@
                                     Acciones
                                     ======================================-->
                                     <div class="btn-group">
-        
-                                        <button
-                                           type="button" 
-                                           class="btn btn-warning rounded-circle mr-2"
-                                           (click)="editProduct(idProducts[i])">
+
+                                        <button type="button" class="btn btn-warning rounded-circle mr-2"
+                                            (click)="editProduct(idProducts[i])">
 
                                             <i class="fas fa-pencil-alt"></i>
 
                                         </button>
 
-                                        <button
-                                        type="button" 
-                                        class="btn btn-danger rounded-circle"
-                                        mwlConfirmationPopover
-                                        [popoverMessage]="popoverMessage"
-                                        placement="left"
-                                        (confirm)="deleteProduct(idProducts[i], products, i)"
-                                        >
+                                        <button type="button" class="btn btn-danger rounded-circle"
+                                            mwlConfirmationPopover [popoverMessage]="popoverMessage" placement="left"
+                                            (confirm)="deleteProduct(idProducts[i], products, i)">
 
                                             <i class="fas fa-trash"></i>
 
@@ -516,6 +510,29 @@
 
                                 <div class="valid-feedback">Valido</div>
                                 <div *ngIf="f.submitted && f.controls['storeAddress'].errors" class="text-danger">Por
+                                    favor rellene este campo</div>
+
+                            </div>
+
+                        </div>
+
+                        <!--=====================================
+                            Precio de envio
+                            ======================================-->
+
+                        <div class="form-group">
+
+                            <label>Precio de envio<sup class="text-danger">*</sup></label>
+
+                            <div class="form-group__content input-group">
+
+
+
+                                <input type="text" class="form-control" name="storePrecioEnvio" pattern="[-\\0-9 ]{1,}"
+                                    [(ngModel)]="storeModel.precio_envio" (change)="validate(precio_envio)" #precio_envio required>
+
+                                <div class="valid-feedback">Valido</div>
+                                <div *ngIf="f.submitted && f.controls['storePrecioEnvio'].errors" class="text-danger">Por
                                     favor rellene este campo</div>
 
                             </div>
@@ -876,7 +893,8 @@
 
                         <div class="form-group">
 
-                            <label>Resumen<sup class="text-danger">*</sup> Ex: La mejor fruta saludable para su organismo</label>
+                            <label>Resumen<sup class="text-danger">*</sup> Ex: La mejor fruta saludable para su
+                                organismo</label>
 
                             <div *ngFor="let inputSummary of summaryGroup; let i = index"
                                 class="form-group__content input-group mb-3">
@@ -896,7 +914,8 @@
 
                             </div>
 
-                            <button type="button" class="btn btn-primary mb-2" (click)="addInput('summary')">Añadir resumen</button>
+                            <button type="button" class="btn btn-primary mb-2" (click)="addInput('summary')">Añadir
+                                resumen</button>
 
                         </div>
 
@@ -1040,7 +1059,8 @@
                                     <div class="valid-feedback">Valido</div>
                                     <div class="invalid-feedback">Por favor rellene este campo</div>
 
-                                    <label class="custom-file-label" for="productDefaultBanner">Seleccionar archivo</label>
+                                    <label class="custom-file-label" for="productDefaultBanner">Seleccionar
+                                        archivo</label>
 
                                 </div>
 
@@ -1252,7 +1272,7 @@
 
                         </div>
 
-                    
+
                         <!--=====================================
                         Precio de venta, precio de envío, dias de entrega y stock
                         ======================================-->
@@ -1320,7 +1340,7 @@
                                 <!--=====================================
                                 Días de entrega
                                 ======================================-->
-
+<!-- 
                                 <div class="col-12 col-lg-3">
 
                                     <label>Tiempo de entrega<sup class="text-danger">*</sup></label>
@@ -1342,7 +1362,7 @@
 
                                     </div>
 
-                                </div>
+                                </div> -->
 
                                 <!--=====================================
                                 Stock
@@ -1630,7 +1650,8 @@
 
                         <div class="form-group">
 
-                            <label>Resumen<sup class="text-danger">*</sup> Ex: La mejor fruta saludable para su organismo</label>
+                            <label>Resumen<sup class="text-danger">*</sup> Ex: La mejor fruta saludable para su
+                                organismo</label>
 
                             <div *ngFor="let inputSummary of summaryGroup; let i = index"
                                 class="form-group__content input-group mb-3">
@@ -1650,7 +1671,8 @@
 
                             </div>
 
-                            <button type="button" class="btn btn-primary mb-2" (click)="addInput('summary')">Añadir resumen</button>
+                            <button type="button" class="btn btn-primary mb-2" (click)="addInput('summary')">Añadir
+                                resumen</button>
 
                         </div>
 
@@ -1794,7 +1816,8 @@
                                     <div class="valid-feedback">Valido</div>
                                     <div class="invalid-feedback">Por favor rellene este campo</div>
 
-                                    <label class="custom-file-label" for="productDefaultBanner">Seleccionar archivo</label>
+                                    <label class="custom-file-label" for="productDefaultBanner">Seleccionar
+                                        archivo</label>
 
                                 </div>
 
@@ -2006,7 +2029,7 @@
 
                         </div>
 
-                    
+
                         <!--=====================================
                         Precio de venta, precio de envío, dias de entrega y stock
                         ======================================-->

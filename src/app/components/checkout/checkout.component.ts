@@ -36,7 +36,8 @@ export class CheckoutComponent implements OnInit {
   envio: string = `<div  class="text-right"><h4>Envio <span class="valorEnvio"><div class="spinner-border"></div></span></h4></div>   `;
   totalPrice: any[] = [];
   subTotalPrice: any[] = [];
-  validateCoupon:boolean = false;
+  validateCoupon: boolean = false;
+  carrito_tienda: any[] = [];
   constructor(
     public router: Router,
     private userService: UsuarioService,
@@ -44,7 +45,7 @@ export class CheckoutComponent implements OnInit {
     private productService: ProductoService,
     private ordersService: OrdenesService,
     private ventaService: VentaService,
-    private tiendaService : TiendaService
+    private tiendaService: TiendaService
   ) {
     this.usuario = new Usuario();
     this.validators = new MyValidators();
@@ -53,8 +54,8 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if (Cookies.get('cupon') != undefined ) {
-      this.tiendaService.getFilterData("url",Cookies.get('cupon')).subscribe(res=>{
+    if (Cookies.get('cupon') != undefined) {
+      this.tiendaService.getFilterData("url", Cookies.get('cupon')).subscribe(res => {
         this.validateCoupon = true;
       });
     }
@@ -88,21 +89,45 @@ export class CheckoutComponent implements OnInit {
         this.productService.getByFilter('url', list[i].producto).subscribe(
           res => {
             for (const j in res) {
-              this.shoppingCart.push({
-                url: res[j].url,
-                nombre: res[j].nombre,
-                imagen: res[j].imagen,
-                tiempo_entrega: res[j].tiempo_entrega,
-                cantidad: list[i].unidad,
-                precio: DinamicPrice.fnc(res[j])[0],
-                shipping: res[j].shipping,
-                categoria: res[j].categoria,
-                tienda: res[j].tienda,
+              this.tiendaService.getFilterData("tienda", res[j].tienda).subscribe(respTienda => {
+                if (Object.keys(respTienda).length > 0) {
+
+                  for (const l in respTienda) {
+                    this.carrito_tienda.push({
+                      "tienda": respTienda[l].tienda,
+                      "precio_envio": respTienda[l].precio_envio
+                    })
+
+                    res[j].precio_envio = respTienda[l].precio_envio;
+
+                    this.shoppingCart.push({
+                      url: res[j].url,
+                      nombre: res[j].nombre,
+                      imagen: res[j].imagen,
+                      tiempo_entrega: res[j].tiempo_entrega,
+                      cantidad: list[i].unidad,
+                      precio: DinamicPrice.fnc(res[j])[0],
+                      shipping: res[j].shipping,
+                      categoria: res[j].categoria,
+                      tienda: res[j].tienda,
+                      precio_envio: res[j].precio_envio
+                    });
+                  }
+                  console.log("this shopping cart:", this.shoppingCart);
+
+                  this.shoppingCart.sort((a, b) => {
+                    return b.tienda - a.tienda;
+                  });
+
+                }
+
               });
 
+
             }
+
           }
-        )
+        );
       }
     } else {
       this.router.navigateByUrl('carrito-compra');
@@ -179,6 +204,7 @@ export class CheckoutComponent implements OnInit {
       let totalShoppingCart = this.totalShoppingCart;
       let localTotalPrice = this.totalPrice;
       let localSubTotalPrice = this.subTotalPrice;
+      let localCarritoTienda = this.carrito_tienda;
       setTimeout(function () {
 
         let price = $(".pCheckout .end-price");
@@ -195,7 +221,7 @@ export class CheckoutComponent implements OnInit {
           /*=============================================
           Sumar precio con envío
           =============================================*/
-          let shipping_price = Number($(price[i]).html()) + Number($(shipping[i]).html());
+          // let shipping_price = Number($(price[i]).html()) + Number($(shipping[i]).html());
 
           /*=============================================
           Multiplicar cantidad por precio con envío
@@ -219,12 +245,28 @@ export class CheckoutComponent implements OnInit {
           total_sin_envio += subTotal_sin_envio;
         }
         $(".subTotalSinEnvio").html(`$${total_sin_envio.toFixed(2)}`);
+
+        let tiendas_filter = [];
+        localCarritoTienda.reduce((res, value) => {
+          if (!res[value.tienda]) {
+
+            res[value.tienda] = { tienda: value.tienda, precio_envio: value.precio_envio }
+            tiendas_filter.push(res[value.tienda])
+
+          }
+          return res;
+
+        }, {});
+
+        tiendas_filter.forEach(tienda => {
+          valor_envio += tienda.precio_envio;
+        });
+        console.log("valor_envio:", valor_envio);
+
         if (total_sin_envio >= 25) {
-          // local_envio = true;
           valor_envio = 0;
           total_con_envio = total_sin_envio + valor_envio;
         } else {
-          valor_envio = 5;
           total_con_envio = total_sin_envio + valor_envio;
 
         }
@@ -246,7 +288,7 @@ export class CheckoutComponent implements OnInit {
           if (resp) {
             let totalRender = 0;
             this.shoppingCart.forEach((product, index) => {
-              totalRender ++;
+              totalRender++;
 
               this.productService.getByFilter("url", product.url)
                 .subscribe(resp => {
@@ -341,13 +383,13 @@ export class CheckoutComponent implements OnInit {
                           } else {
 
                             commision = Number(this.subTotalPrice[index]) * 0.25;
-                          unitPrice = Number(this.subTotalPrice[index]) * 0.75;
+                            unitPrice = Number(this.subTotalPrice[index]) * 0.75;
 
                           }
 
-                          console.log("comision:",commision);
-                          console.log("precio_unitario:",unitPrice);
-                          
+                          console.log("comision:", commision);
+                          console.log("precio_unitario:", unitPrice);
+
                           /*=============================================
                           Enviar información de la venta a la base de datos
                           =============================================*/
@@ -386,11 +428,11 @@ export class CheckoutComponent implements OnInit {
               Sweetalert.fnc("success", "Tu pedido se proceso correctamente", "cuenta-usuario/cuenta/mis-compras");
 
             }
-          }else{
+          } else {
 
 
             Sweetalert.fnc("error", "No se pudo realizar la transacción, intentelo nuevamente", null);
-  
+
           }
         })
 
