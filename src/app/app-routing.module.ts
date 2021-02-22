@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
-import { LoginAuthComponent } from './auth/login-auth/login-auth.component';
 import { CarritoCompraComponent } from './components/carrito-compra/carrito-compra.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { LoginComponent } from './components/login/login.component';
@@ -59,11 +58,6 @@ const routes: Routes = [
         //para que cargar un modulo hijo 
       },
       {
-        path:'admin',
-        // canActivate:[AdminGuard],
-        loadChildren:()=> import ('./components/admin/admin-routing.module').then(m=> m.AdminRoutingModule)
-      },
-      {
         path:'login',component:LoginComponent
       },
       {
@@ -87,18 +81,13 @@ const routes: Routes = [
     ]
   },
   {
-    path:'auth',
-    // canActivate:[AdminGuard],
-    component: LoginAuthComponent
+    path:'admin',
+    canActivate:[AdminGuard],
+    loadChildren:()=> import ('./admin/admin-routing.module').then(m=> m.AdminRoutingModule)
   },
   {
     path:'**',
     component: PageNotFoundComponent
-  },
-  {
-    path:'admin',
-    canActivate:[AdminGuard],
-    loadChildren:()=> import ('./admin/admin-routing.module').then(m=> m.AdminRoutingModule)
   },
 ];
 
