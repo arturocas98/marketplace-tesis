@@ -1,0 +1,151 @@
+<!--=====================================
+Breadcrumb
+======================================-->  
+
+<div class="ps-breadcrumb">
+
+    <div class="container">
+
+        <ul class="breadcrumb">
+
+            <li><a routerLink="/">Home</a></li>
+
+            <li>Lista de tiendas</li>
+
+        </ul>
+
+    </div>
+
+</div>
+
+<!--=====================================
+Store List
+======================================-->
+
+<section class="ps-store-list">
+	
+	<div class="container">
+	 	
+	 	<div class="ps-section__header">
+
+            <h3>Lista de tiendas</h3>
+
+        </div>
+
+        <div class="ps-section__wrapper">
+        	
+        	<div class="ps-section__center">
+
+        		<section class="ps-store-box">
+
+        			<div class="ps-section__header">
+        				
+        				<p>Mostrando {{stores.length}} de {{storeFound}} resultados</p>          
+
+    				 	<form class="form-inline" action="/action">
+                              
+							<label for="search pr-3">Buscar: </label>
+
+							<input type="search" class="ml-3" id="search" placeholder="Buscar tienda..." #search (change)="searchStore(search)">
+
+                        </form>
+
+                        <select 
+                         *ngIf="sortItems.length > 0"
+                        class="ps-select sortItems">
+							<option
+							*ngFor="let item of sortItems; let i = index"
+							[value]="sortValues[i]"
+							>{{item}}</option>
+						
+						</select>
+
+        			</div>
+
+        			<div class="ps-section__content">
+        				
+					  <div class="row">
+
+				  		<div
+				  		*ngIf="stores.length == 0"
+				  		class="col-12 text-center">	
+							<h3>No se encontraron tiendas</h3>
+				  		</div>
+
+		                    <div
+		                    *ngFor="let store of stores; let lastIndex = last"
+		                    class="col-lg-4 col-md-6 col-12">
+
+		                        <article class="ps-block--store">
+
+		                            <div class="ps-block__thumbnail bg--cover" style="background: url({{path}}img/stores/{{store.url}}/{{store.cover}});"></div>
+
+		                            <div class="ps-block__content">
+
+		                                <div class="ps-block__author">
+
+		                                    <a class="ps-block__user" routerLink="/search/{{store.tienda}}">
+
+		                                        <img src="{{path}}img/stores/{{store.url}}/{{store.logo}}" alt="">
+		                                    </a>
+		                                        
+		                                    <a class="ps-btn" routerLink="/search/{{store.tienda}}">Visitar tienda</a>
+
+		                                </div>
+
+		                                <h4>{{store.tienda}}</h4>
+
+		                                <p>{{store.direccion}}</p>
+
+		                                <ul class="ps-block__contact">
+
+		                                    <li>
+		                                        <i class="icon-envelope"></i>
+		                                        <a href="mailto:{{store.email}}">{{store.email}}</a>
+		                                    </li>
+
+		                                    <li>
+		                                        <i class="icon-telephone"></i>  {{store.telefono}}
+		                                    </li>
+											<!-- <i class="fas fa-shipping-fast"></i> -->
+											<li>
+		                                        <i class="fas fa-shipping-fast"></i>  $ {{store.precio_envio}}
+		                                    </li>
+
+
+		                                </ul>
+
+		                               
+
+		                            </div>
+
+		                        </article>
+
+		                        {{ lastIndex ? callback() : ""}}
+
+		                    </div>
+
+		                </div>
+
+	                  	<div class="ps-pagination">
+
+			                <ul class="pagination"
+			                [attr.data-total-pages]="totalPage"
+			                [attr.data-actual-page]="page"
+			                [attr.data-current-route]="currentRoute">
+			                    
+			                </ul>
+
+			            </div>
+
+        			</div>
+
+        		</section>
+
+        	</div>
+
+        </div>
+
+	</div>
+
+</section> 

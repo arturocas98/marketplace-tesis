@@ -20,6 +20,7 @@ import { DataTablesModule } from 'angular-datatables';
 import { CarritoCompraComponent } from './components/carrito-compra/carrito-compra.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ListaTiendasComponent } from './lista-tiendas/lista-tiendas.component';
 // import { NgxSummernoteModule } from 'ngx-summernote';
 
 @NgModule({
@@ -31,6 +32,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RegistroComponent,
     CarritoCompraComponent,
     CheckoutComponent,
+    ListaTiendasComponent,
   ],
   imports: [
     BrowserModule,

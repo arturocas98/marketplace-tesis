@@ -9,6 +9,7 @@ import { AdminGuard } from './guards/admin.guard';
 import { AuthGuard } from './guards/auth.guard';
 
 import { LayoutComponent } from './layout/layout.component';
+import { ListaTiendasComponent } from './lista-tiendas/lista-tiendas.component';
 import { EmpiezaVenderComponent } from './shared/components/empieza-vender/empieza-vender.component';
 // import { DemoComponent } from './demo/demo.component';
 // import { ContactComponent } from './contact/contact.component';
@@ -73,7 +74,12 @@ const routes: Routes = [
       {
         path:'empieza-vender',component:EmpiezaVenderComponent
       },
-      
+      {
+        path:'lista-tiendas',component:ListaTiendasComponent
+      },
+      {
+        path:'lista-tiendas/:param',component:ListaTiendasComponent
+      },
 
       
       

@@ -14,5 +14,6 @@ export class Tienda{
 	tienda:string;
 	url:string;
 	username:string;
-
+	fecha_creacion: Date
+	precio_envio:string
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SearchComponent } from 'src/app/components/search/search/search.component';
 import { CategoriaService } from 'src/app/core/categoria/categoria.service';
@@ -29,6 +29,8 @@ export class HeaderMobileComponent implements OnInit {
   public renderShopping: boolean = true;
   subTotal: string = `<h3>Sub Total:<strong class="subTotalHeader"><div class="spinner-border"></div></strong></h3>`;
   public es_vendedor:boolean = false;
+  installEvent = null;
+
   constructor(
     private categoriaService: CategoriaService,
     private subcategoriaService: SubcategoriaService,
@@ -243,6 +245,23 @@ export class HeaderMobileComponent implements OnInit {
 
     }
 
+  }
+
+  @HostListener('window:beforeinstallprompt', ['$event'])
+  onBeforeInstallPrompt(event: Event) {
+    console.log(event);
+    event.preventDefault();
+    this.installEvent = event;
+  }
+
+  installByUser() {
+    if (this.installEvent) {
+      this.installEvent.prompt();
+      this.installEvent.userChoice
+      .then(rta => {
+        console.log(rta);
+      });
+    }
   }
 
 }
