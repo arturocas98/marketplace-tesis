@@ -6,12 +6,13 @@ import { Usuario } from 'src/app/models/usuario';
 import { environment } from 'src/environments/environment';
 import { MyValidators } from '../utils/MyValidators';
 import { Capitalize, Sweetalert, DinamicPrice, Paypal } from '../../functions';
-import { ThrowStmt } from '@angular/compiler';
+import { ThisReceiver, ThrowStmt } from '@angular/compiler';
 import { ProductoService } from 'src/app/core/producto/producto.service';
 import { OrdenesService } from 'src/app/core/ordenes/ordenes.service';
 import { VentaService } from 'src/app/core/venta/venta.service';
 import * as Cookies from 'js-cookie';
 import { TiendaService } from 'src/app/core/tienda/tienda.service';
+import { OrdenService } from 'src/app/core/orden/orden.service';
 
 declare var jQuery: any;
 declare var $: any;
@@ -38,12 +39,15 @@ export class CheckoutComponent implements OnInit {
   subTotalPrice: any[] = [];
   validateCoupon: boolean = false;
   carrito_tienda: any[] = [];
+  total: number = 0;
+  id_orden: string = "";
   constructor(
     public router: Router,
     private userService: UsuarioService,
     public formBuilder: FormBuilder,
     private productService: ProductoService,
     private ordersService: OrdenesService,
+    private ordenService: OrdenService,
     private ventaService: VentaService,
     private tiendaService: TiendaService
   ) {
@@ -205,6 +209,7 @@ export class CheckoutComponent implements OnInit {
       let localTotalPrice = this.totalPrice;
       let localSubTotalPrice = this.subTotalPrice;
       let localCarritoTienda = this.carrito_tienda;
+      let localTotal = this.total;
       setTimeout(function () {
 
         let price = $(".pCheckout .end-price");
@@ -271,6 +276,8 @@ export class CheckoutComponent implements OnInit {
 
         }
         total = total_con_envio;
+        localTotal = total;
+        // localTotal = 26283238;
         $(".valorEnvio").html(`$${valor_envio.toFixed(2)}`)
         $(".totalCheckout").html(`$${total.toFixed(2)}`)
         localTotalPrice.push(total.toFixed(2));
@@ -287,147 +294,165 @@ export class CheckoutComponent implements OnInit {
         Paypal.fnc(this.totalPrice[0]).then(resp => {
           if (resp) {
             let totalRender = 0;
-            this.shoppingCart.forEach((product, index) => {
-              totalRender++;
 
-              this.productService.getByFilter("url", product.url)
-                .subscribe(resp => {
+            let bodyOrden = {
+              "direccion": this.form.controls['direccion'].value,
+              "telefono": this.form.controls['telefono'].value,
+              "total": this.totalPrice[0],
+              "email": this.form.controls['email'].value,
+              "informacion_adicional": this.form.controls['informacion_adicional'].value,
+              "usuario": this.usuario.username,
+              "fecha_emision": new Date()
+            }
 
-                  for (const i in resp) {
+            this.ordenService.registerDatabase(bodyOrden, localStorage.getItem('idToken')).subscribe(respOrden => {
+              // console.log("repsuesta_orden:", respOrden);
+              this.id_orden = respOrden['name'];
+              console.log("this.id_orden:", this.id_orden);
 
-                    let id = Object.keys(resp).toString();
+           
+              this.shoppingCart.forEach((product, index) => {
+                totalRender++;
 
-                    let value = {
+                this.productService.getByFilter("url", product.url)
+                  .subscribe(resp => {
 
-                      ventas: Number(resp[i].ventas) + Number(product.cantidad),
-                      stock: Number(resp[i].stock) - Number(product.cantidad),
+                    for (const i in resp) {
 
-                    }
+                      let id = Object.keys(resp).toString();
 
-                    this.productService.patchDataAuth(id, value, localStorage.getItem("idToken"))
-                      .subscribe(resp => {
+                      let value = {
 
-                      });
+                        ventas: Number(resp[i].ventas) + Number(product.cantidad),
+                        stock: Number(resp[i].stock) - Number(product.cantidad),
 
-                    /*=============================================
-                    Crear el proceso de entrega de la venta
-                    =============================================*/
-
-                    let moment = Math.floor(Number(product.tiempo_entrega) / 2);
-
-                    let sentDate = new Date();
-                    sentDate.setDate(sentDate.getDate() + moment);
-
-                    let deliveredDate = new Date();
-                    deliveredDate.setDate(deliveredDate.getDate() + Number(product.tiempo_entrega))
-
-                    let proccess = [
-
-                      {
-                        stage: "revisando",
-                        status: "ok",
-                        comment: "Hemos recibido su pedido, iniciamos el proceso de despacho",
-                        date: new Date()
-                      },
-
-                      {
-                        stage: "enviando",
-                        status: "pendiente",
-                        comment: "",
-                        date: sentDate
-                      },
-                      {
-                        stage: "entregado",
-                        status: "pendiente",
-                        comment: "",
-                        date: deliveredDate
                       }
 
-                    ]
+                      this.productService.patchDataAuth(id, value, localStorage.getItem("idToken"))
+                        .subscribe(resp => {
 
-                    let body = {
+                        });
 
-                      tienda: product.tienda,
-                      usuario: this.usuario.username,
-                      producto: product.nombre,
-                      url: product.url,
-                      imagen: product.imagen,
-                      categoria: product.categoria,
-                      // details:product.details,
-                      cantidad: product.cantidad,
-                      precio: this.subTotalPrice[index],
-                      email: this.form.controls['email'].value,
-                      telefono: this.form.controls['telefono'].value,
-                      direccion: this.form.controls['direccion'].value,
-                      informacion_adicional: this.form.controls['informacion_adicional'].value,
-                      proceso: JSON.stringify(proccess),
-                      estado: "pendiente"
+                      /*=============================================
+                      Crear el proceso de entrega de la venta
+                      =============================================*/
+
+                      let moment = Math.floor(Number(product.tiempo_entrega) / 2);
+
+                      let sentDate = new Date();
+                      sentDate.setDate(sentDate.getDate() + moment);
+
+                      let deliveredDate = new Date();
+                      deliveredDate.setDate(deliveredDate.getDate() + Number(product.tiempo_entrega))
+
+                      let proccess = [
+
+                        {
+                          stage: "revisando",
+                          status: "ok",
+                          comment: "Hemos recibido su pedido, iniciamos el proceso de despacho",
+                          date: new Date()
+                        },
+
+                        {
+                          stage: "enviando",
+                          status: "pendiente",
+                          comment: "",
+                          date: sentDate
+                        },
+                        {
+                          stage: "entregado",
+                          status: "pendiente",
+                          comment: "",
+                          date: deliveredDate
+                        }
+
+                      ]
+                      console.log("orden_id:", respOrden['name']);
+
+                      let body = {
+                        id_orden: respOrden['name'],
+                        tienda: product.tienda,
+                        // usuario: this.usuario.username,
+                        producto: product.nombre,
+                        url: product.url,
+                        imagen: product.imagen,
+                        categoria: product.categoria,
+                        // details:product.details,
+                        cantidad: product.cantidad,
+                        precio: this.subTotalPrice[index],
+                        proceso: JSON.stringify(proccess),
+                        estado: "pendiente"
+                      }
+
+                      this.ordersService.registerDatabase(body, localStorage.getItem("idToken"))
+                        .subscribe(resp => {
+                          /* La respuesta de la orden trae un name que es el id q me genera 
+                          firebase
+                          */
+                          if (resp['name'] != '') {
+                            let commision = 0;
+                            let unitPrice = 0;
+                            // commision = Number(this.subTotalPrice[index]) * 0.25;
+                            // unitPrice = Number(this.subTotalPrice[index]) * 0.75;
+                            if (this.validateCoupon) {
+
+                              commision = Number(this.subTotalPrice[index]) * 0.05;
+                              unitPrice = Number(this.subTotalPrice[index]) * 0.95;
+
+                            } else {
+
+                              commision = Number(this.subTotalPrice[index]) * 0.25;
+                              unitPrice = Number(this.subTotalPrice[index]) * 0.75;
+
+                            }
+
+                            console.log("comision:", commision);
+                            console.log("precio_unitario:", unitPrice);
+
+                            /*=============================================
+                            Enviar información de la venta a la base de datos
+                            =============================================*/
+
+                            let id_payment = localStorage.getItem("id_payment");
+
+                            let body = {
+
+                              id_order: resp["name"],
+                              client: this.usuario.username,
+                              producto: product.nombre,
+                              url: product.url,
+                              cantidad: product.cantidad,
+                              precio_unitario: unitPrice.toFixed(2),
+                              comision: commision.toFixed(2),
+                              total: this.subTotalPrice[index],
+                              metodo_pago: this.form.controls['metodo_pago'].value,
+                              id_pago: id_payment,
+                              fecha_emision: new Date(),
+                              estado: "pendiente"
+
+                            }
+
+                            this.ventaService.registerDatabase(body, localStorage.getItem("idToken"))
+                              .subscribe(resp => { })
+                          }
+                        });
+
 
                     }
 
-                    this.ordersService.registerDatabase(body, localStorage.getItem("idToken"))
-                      .subscribe(resp => {
-                        /* La respuesta de la orden trae un name que es el id q me genera 
-                        firebase
-                        */
-                        if (resp['name'] != '') {
-                          let commision = 0;
-                          let unitPrice = 0;
-                          // commision = Number(this.subTotalPrice[index]) * 0.25;
-                          // unitPrice = Number(this.subTotalPrice[index]) * 0.75;
-                          if (this.validateCoupon) {
+                  })
+              });
 
-                            commision = Number(this.subTotalPrice[index]) * 0.05;
-                            unitPrice = Number(this.subTotalPrice[index]) * 0.95;
+              if (totalRender == this.shoppingCart.length) {
+                localStorage.removeItem("list-shopping-cart");
+                Sweetalert.fnc("success", "Tu pedido se proceso correctamente", "cuenta-usuario/cuenta/mis-compras");
+  
+              }
 
-                          } else {
-
-                            commision = Number(this.subTotalPrice[index]) * 0.25;
-                            unitPrice = Number(this.subTotalPrice[index]) * 0.75;
-
-                          }
-
-                          console.log("comision:", commision);
-                          console.log("precio_unitario:", unitPrice);
-
-                          /*=============================================
-                          Enviar información de la venta a la base de datos
-                          =============================================*/
-
-                          let id_payment = localStorage.getItem("id_payment");
-
-                          let body = {
-
-                            id_order: resp["name"],
-                            client: this.usuario.username,
-                            producto: product.nombre,
-                            url: product.url,
-                            cantidad: product.cantidad,
-                            precio_unitario: unitPrice.toFixed(2),
-                            comision: commision.toFixed(2),
-                            total: this.subTotalPrice[index],
-                            metodo_pago: this.form.controls['metodo_pago'].value,
-                            id_pago: id_payment,
-                            fecha_emision: new Date(),
-                            estado: "pendiente"
-
-                          }
-
-                          this.ventaService.registerDatabase(body, localStorage.getItem("idToken"))
-                            .subscribe(resp => { })
-                        }
-                      });
-
-                  }
-
-                })
             });
 
-            if (totalRender == this.shoppingCart.length) {
-              localStorage.removeItem("list-shopping-cart");
-              Sweetalert.fnc("success", "Tu pedido se proceso correctamente", "cuenta-usuario/cuenta/mis-compras");
-
-            }
+            
           } else {
 
 

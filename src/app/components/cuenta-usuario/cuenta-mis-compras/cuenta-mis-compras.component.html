@@ -24,230 +24,65 @@
             <thead>
 
                 <tr>
-                    <!-- <th>Id de la orden</th> -->
+                    <th>Id de la orden</th>
 
-                    <th>Producto</th>
+                    <th>Cliente</th>
 
-                    <th>Proceso</th>
+                    <th>Dirección</th>
 
-                    <th>Precio</th>
+                    <th>Teléfono</th>
 
-                    <th>Cantidad</th>
+                    <th>Información adicional</th>
 
-                    <th>Review</th>
-
+                    <th>Total</th>
+                    <th></th>
                 </tr>
 
             </thead>
 
             <tbody>
 
-                <tr *ngIf="myShopping.length == 0">
+                <tr *ngIf="ordenes.length == 0">
 
                     <td colspan="5" class="text-center">Aún no tienes productos comprados</td>
 
                 </tr>
 
                 <!-- Product -->
-
-                <tr *ngFor="let product of myShopping; let i = index">
-
-                    <!-- <td>
-                        {{idOrders[i]}}
-                    </td> -->
+                <tr *ngFor="let orden of ordenes;let i = index;">
+                    <td>
+                        {{id_orden[i]}}
+                    </td>
 
                     <td>
-
-                        <div class="ps-product--cart">
-
-                            <!-- <div class="ps-product__thumbnail">
-
-                                <a href="producto/{{product.url}}">
-                                    <img src="{{path}}img/products/{{product.categoria}}/{{product.imagen}}">
-                                </a>
-
-                            </div> -->
-
-                            <div class="ps-product__content">
-
-                                <a href="producto/{{product.url}}">{{product.producto}} - {{product.tienda }} </a>
-
-                            </div>
-
-                        </div>
-
+                        {{orden.usuario}}
                     </td>
 
-                    <td style="height: 50px;" >
+                    <td>
+                        {{orden.direccion}}
+                    </td>
 
-                        <ul class="timeline">
+                    <td>
+                        {{orden.telefono}}
+                    </td>
 
-                            <!--=====================================
-                                            1 Momento: Órden de entrega recibida
-                                            ======================================-->
+                    <td>
+                        {{orden.informacion_adicional}}
+                    </td>
 
-                            <li *ngIf="process[i][0].stage == 'revisando' && process[i][0].status== 'ok'"
-                                class="success">
+                    <td class="price text-center">
+                        $ {{orden.total}}
+                    </td>
+                    <td>
+                        <a class="btn btn-success btn-xs" (click)="abrirProceso(id_orden[i])"><i class="fas fa-eye"></i>
+                        </a>
+                    </td>
 
-                                <h5>{{process[i][0].date | date}}</h5>
-                                <p class="text-success">Revisando <i class="fas fa-check"></i></p>
-                                <p>Comentarios: {{process[i][0].comment}}</p>
-
-                            </li>
-
-                            <!--=====================================
-                                            2 Momento: Cuando se envía el producto
-                                            ======================================-->
-
-                            <!-- Cuando el status es ok -->
-
-                            <li *ngIf="process[i][1].stage == 'enviando' && process[i][1].status == 'ok'"
-                                class="success">
-
-                                <h5>{{process[i][1].date | date}}</h5>
-                                <p class="text-success">Enviado <i class="fas fa-check"></i></p>
-                                <p>Comentarios: {{process[i][1].comment}}</p>
-
-                            </li>
-
-                            <!-- Cuando el status es pendiente -->
-
-                            <li *ngIf="process[i][1].stage == 'enviando' && process[i][1].status != 'ok'"
-                                class="process">
-                                <h5>{{process[i][1].date | date}}</h5>
-                                <p>Enviado</p>
-                                <button class="btn btn-primary" disabled>
-                                    <span class="spinner-border spinner-border-sm"></span>
-                                    En proceso
-                                </button>
-                            </li>
-
-                            <!--=====================================
-                                            3 Momento: Cuando se entrega el producto
-                                            ======================================-->
-
-                            <!-- Cuando el status es ok -->
-
-                            <li *ngIf="process[i][2].stage == 'entregado' && process[i][2].status == 'ok'"
-                                class="success">
-
-                                <h5>{{process[i][1].date | date}}</h5>
-                                <p class="text-success">Entrega <i class="fas fa-check"></i></p>
-                                <p>Comentarios: {{process[i][2].comment}}</p>
-
-                            </li>
-
-                            <!-- Cuando el status es pendiente -->
-
-                            <li *ngIf="process[i][2].stage == 'entregado' && process[i][2].status != 'ok'"
-                                class="process">
-                                <h5>{{process[i][2].date | date}}</h5>
-                                <p>Entrega</p>
-                                <button class="btn btn-primary" disabled>
-                                    <span class="spinner-border spinner-border-sm"></span>
-                                    En proceso
-                                </button>
-                            </li>
-
-                        </ul>
-
-                        <!--=====================================
-                        Apertura de una disputa si el producto aún no ha sido entregado
-                        ======================================-->
-
-                        <a *ngIf="process[i][2].stage == 'entregado' && process[i][2].status != 'ok'"
+                    <!-- <a *ngIf="process[i][2].stage == 'entregado' && process[i][2].status != 'ok'"
                             class="btn btn-danger btn-lg"
-                            (click)="newDispute(id_order[i], product.tienda, product.usuario)">Abrir disputa</a>
-
-                        <!--=====================================
-                        Visualizar las disputas
-                        ======================================-->
-
-                        <div *ngFor="let dispute of disputes" class="my-3">
-
-                            <div *ngIf="dispute.orden == id_order[i]">
-
-                                <div class="media border p-3">
-                                    <div class="media-body">
-                                        <h4><small><i>Fecha de disputa {{dispute.fecha_disputa | date }}</i></small></h4>
-                                        <p>{{dispute.message }}</p>
-                                    </div>
-
-                                    <img *ngIf="dispute.user.metodo_registro != 'directo'" src="{{dispute.user.imagen}}"
-                                        alt="John Doe" class="ml-3 mt-3 rounded-circle" style="width:60px;">
-
-                                    <img *ngIf="dispute.user.metodo_registro == 'directo'"
-                                        src="{{path}}img/users/{{dispute.user.username}}/{{dispute.user.imagen}}"
-                                        class="ml-3 mt-3 rounded-circle" style="width:60px;">
-                                </div>
-
-                                <div *ngIf="dispute.respuesta != null" class="media border p-3">
-
-                                    <img src="{{path}}img/stores/{{dispute.store.url}}/{{dispute.store.logo}}"
-                                        class="ml-3 mt-3 rounded-circle" style="width:60px;">
-                                    <div class="media-body text-right">
-                                        <h4><small><i>Fecha de respuesta {{dispute.fecha_respuesta | date }}</i></small></h4>
-                                        <p>{{dispute.respuesta }}</p>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <!--=====================================
-                        Permitimos la recompra si el producto ha sido entregado
-                        ======================================-->
-                        <a *ngIf="process[i][2].stage == 'entregado' && process[i][2].status == 'ok'"
-                            class="btn btn-warning btn-lg" href="producto/{{product.url}}">Comprar nuevamente</a>
-
-                    </td>
-
-                    <td class="price text-center">${{product.precio}}</td>
-
-                    <td class="text-center">{{product.cantidad}}</td>
-
-
-                    <!--=====================================
-                                    No permitir escribir comentarios del producto si aún no ha sido entregado
-                                    ======================================-->
-
-                    <td *ngIf="process[i][2].stage == 'entregado' && process[i][2].status != 'ok'">
-                        <div class="text-center  mt-2">
-
-                            <a class="btn btn-warning btn-lg disabled" href="#">Añadir comentario</a>
-
-                        </div>
-
-                    </td>
-
-                    <!--=====================================
-                                    Permitir escribir comentarios del producto si ha sido entregado
-                                    ======================================-->
-
-                    <td *ngIf="process[i][2].stage == 'entregado' && process[i][2].status == 'ok'">
-
-                        <div *ngFor="let item of reviews[i]; let iReview = index; let lastIndexReview = last"
-                            class="text-center  mt-2">
-
-                            <div *ngIf="item.name != undefined && item.name == product.usuario"
-                                class="br-theme-fontawesome-stars">
-
-                                <select class="ps-rating" data-read-only="true" [attr.reviews]="item.review">
-
-                                </select>
-
-                            </div>
-
-                            {{ lastIndexReview ? callback(iReview) : ""}}
-
-                        </div>
-
-                        <a class="btn btn-warning btn-lg" (click)="newReview(product.usuario,product.url)">Añadir comentario</a>
-
-                    </td>
-
+                            (click)="newDispute(id_order[i], product.tienda, product.usuario)">Abrir disputa</a> -->
                 </tr>
+
 
                 <!-- Product -->
 
@@ -257,6 +92,272 @@
 
     </div><!-- End My Shopping -->
 
+</div>
+
+<div class="modal" id="proceso" style="margin-left: 300px;overflow: auto !important;" >
+    <div class="modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                Proceso de la orden #215215
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="table-responsive">
+
+                    <table class="table ps-table--whishlist dt-responsive" datatable [dtOptions]="dtOptions"
+                        [dtTrigger]="dtTrigger" width="100%">
+
+                        <thead>
+
+                            <tr>
+                                <!-- <th>Id de la orden</th> -->
+
+                                <th>Producto</th>
+
+                                <th>Proceso</th>
+
+                                <th>Precio</th>
+
+                                <th>Cantidad</th>
+
+                                <th>Review</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <tr *ngIf="myShopping.length == 0">
+
+                                <td colspan="5" class="text-center">Aún no tienes productos comprados</td>
+
+                            </tr>
+
+                            <!-- Product -->
+
+                            <tr *ngFor="let product of myShopping; let i = index">
+
+                                <!-- <td>
+                                    {{idOrders[i]}}
+                                </td> -->
+
+                                <td>
+
+                                    <div class="ps-product--cart">
+
+                                        <!-- <div class="ps-product__thumbnail">
+            
+                                            <a href="producto/{{product.url}}">
+                                                <img src="{{path}}img/products/{{product.categoria}}/{{product.imagen}}">
+                                            </a>
+            
+                                        </div> -->
+
+                                        <div class="ps-product__content">
+
+                                            <a href="producto/{{product.url}}">{{product.producto}} - {{product.tienda
+                                                }} </a>
+
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+                                <td style="height: 50px;">
+
+                                    <ul class="timeline">
+
+                                        <!--=====================================
+                                                        1 Momento: Órden de entrega recibida
+                                                        ======================================-->
+
+                                        <li *ngIf="process[i][0].stage == 'revisando' && process[i][0].status== 'ok'"
+                                            class="success">
+
+                                            <h5>{{process[i][0].date | date}}</h5>
+                                            <p class="text-success">Revisando <i class="fas fa-check"></i></p>
+                                            <p>Comentarios: {{process[i][0].comment}}</p>
+
+                                        </li>
+
+                                        <!--=====================================
+                                                        2 Momento: Cuando se envía el producto
+                                                        ======================================-->
+
+                                        <!-- Cuando el status es ok -->
+
+                                        <li *ngIf="process[i][1].stage == 'enviando' && process[i][1].status == 'ok'"
+                                            class="success">
+
+                                            <h5>{{process[i][1].date | date}}</h5>
+                                            <p class="text-success">Enviado <i class="fas fa-check"></i></p>
+                                            <p>Comentarios: {{process[i][1].comment}}</p>
+
+                                        </li>
+
+                                        <!-- Cuando el status es pendiente -->
+
+                                        <li *ngIf="process[i][1].stage == 'enviando' && process[i][1].status != 'ok'"
+                                            class="process">
+                                            <h5>{{process[i][1].date | date}}</h5>
+                                            <p>Enviado</p>
+                                            <button class="btn btn-primary" disabled>
+                                                <span class="spinner-border spinner-border-sm"></span>
+                                                En proceso
+                                            </button>
+                                        </li>
+
+                                        <!--=====================================
+                                                        3 Momento: Cuando se entrega el producto
+                                                        ======================================-->
+
+                                        <!-- Cuando el status es ok -->
+
+                                        <li *ngIf="process[i][2].stage == 'entregado' && process[i][2].status == 'ok'"
+                                            class="success">
+
+                                            <h5>{{process[i][1].date | date}}</h5>
+                                            <p class="text-success">Entrega <i class="fas fa-check"></i></p>
+                                            <p>Comentarios: {{process[i][2].comment}}</p>
+
+                                        </li>
+
+                                        <!-- Cuando el status es pendiente -->
+
+                                        <li *ngIf="process[i][2].stage == 'entregado' && process[i][2].status != 'ok'"
+                                            class="process">
+                                            <h5>{{process[i][2].date | date}}</h5>
+                                            <p>Entrega</p>
+                                            <button class="btn btn-primary" disabled>
+                                                <span class="spinner-border spinner-border-sm"></span>
+                                                En proceso
+                                            </button>
+                                        </li>
+
+                                    </ul>
+
+                                    <!--=====================================
+                                    Apertura de una disputa si el producto aún no ha sido entregado
+                                    ======================================-->
+
+                                    <a *ngIf="process[i][2].stage == 'entregado' && process[i][2].status != 'ok'"
+                                        class="btn btn-danger btn-lg"
+                                        (click)="newDispute(id_order[i], product.tienda, product.usuario)">Abrir
+                                        disputa</a>
+
+                                    <!--=====================================
+                                    Visualizar las disputas
+                                    ======================================-->
+
+                                    <div *ngFor="let dispute of disputes" class="my-3">
+
+                                        <div *ngIf="dispute.orden == id_order[i]">
+
+                                            <div class="media border p-3">
+                                                <div class="media-body">
+                                                    <h4><small><i>Fecha de disputa {{dispute.fecha_disputa | date
+                                                                }}</i></small>
+                                                    </h4>
+                                                    <p>{{dispute.message }}</p>
+                                                </div>
+
+                                                <img *ngIf="dispute.user.metodo_registro != 'directo'"
+                                                    src="{{dispute.user.imagen}}" alt="John Doe"
+                                                    class="ml-3 mt-3 rounded-circle" style="width:60px;">
+
+                                                <img *ngIf="dispute.user.metodo_registro == 'directo'"
+                                                    src="{{path}}img/users/{{dispute.user.username}}/{{dispute.user.imagen}}"
+                                                    class="ml-3 mt-3 rounded-circle" style="width:60px;">
+                                            </div>
+
+                                            <div *ngIf="dispute.respuesta != null" class="media border p-3">
+
+                                                <img src="{{path}}img/stores/{{dispute.store.url}}/{{dispute.store.logo}}"
+                                                    class="ml-3 mt-3 rounded-circle" style="width:60px;">
+                                                <div class="media-body text-right">
+                                                    <h4><small><i>Fecha de respuesta {{dispute.fecha_respuesta | date
+                                                                }}</i></small>
+                                                    </h4>
+                                                    <p>{{dispute.respuesta }}</p>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <!--=====================================
+                                    Permitimos la recompra si el producto ha sido entregado
+                                    ======================================-->
+                                    <a *ngIf="process[i][2].stage == 'entregado' && process[i][2].status == 'ok'"
+                                        class="btn btn-warning btn-lg" href="producto/{{product.url}}">Comprar
+                                        nuevamente</a>
+
+                                </td>
+
+                                <td class="price text-center">${{product.precio}}</td>
+
+                                <td class="text-center">{{product.cantidad}}</td>
+
+
+                                <!--=====================================
+                                                No permitir escribir comentarios del producto si aún no ha sido entregado
+                                                ======================================-->
+
+                                <td *ngIf="process[i][2].stage == 'entregado' && process[i][2].status != 'ok'">
+                                    <div class="text-center  mt-2">
+
+                                        <a class="btn btn-warning btn-lg disabled" href="#">Añadir comentario</a>
+
+                                    </div>
+
+                                </td>
+
+                                <!--=====================================
+                                                Permitir escribir comentarios del producto si ha sido entregado
+                                                ======================================-->
+
+                                <td *ngIf="process[i][2].stage == 'entregado' && process[i][2].status == 'ok'">
+
+                                    <div *ngFor="let item of reviews[i]; let iReview = index; let lastIndexReview = last"
+                                        class="text-center  mt-2">
+
+                                        <div *ngIf="item.name != undefined && item.name == product.usuario"
+                                            class="br-theme-fontawesome-stars">
+
+                                            <select class="ps-rating" data-read-only="true"
+                                                [attr.reviews]="item.review">
+
+                                            </select>
+
+                                        </div>
+
+                                        {{ lastIndexReview ? callback(iReview) : ""}}
+
+                                    </div>
+
+                                    <a class="btn btn-warning btn-lg"
+                                        (click)="newReview(product.usuario,product.url)">Añadir
+                                        comentario</a>
+
+                                </td>
+
+                            </tr>
+
+                            <!-- Product -->
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
 
 <!-- The Modal -->

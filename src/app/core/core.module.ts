@@ -8,6 +8,7 @@ import { TiendaService } from './tienda/tienda.service';
 import { DisputaService } from './disputa/disputa.service';
 import { OrdenesService } from './ordenes/ordenes.service';
 import { MensajeService } from './mensaje/mensaje.service';
+import { OrdenService } from './orden/orden.service';
 
 
 
@@ -25,6 +26,7 @@ import { MensajeService } from './mensaje/mensaje.service';
     DisputaService,
     OrdenesService,
     MensajeService,
+    OrdenService
   ]
 })
 export class CoreModule { }

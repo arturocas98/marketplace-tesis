@@ -307,7 +307,7 @@ export class CuentaPerfilComponent implements OnInit {
       if (res['status'] == 200) {
         let body = {
 
-          "imagen": res ['data']
+          "imagen": res ['result']
         }
         this.usersService.update(this.id,body).subscribe(resp=>{
           if (resp['imagen'] != '' ) {

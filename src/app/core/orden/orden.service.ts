@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class OrdenesService {
+export class OrdenService {
   private url_api;
   constructor(
     private http: HttpClient 
@@ -14,12 +14,12 @@ export class OrdenesService {
   }
 
   registerDatabase(body:Object,idToken:string) {
-    return this.http.post(`${this.url_api}/orden_detalle.json?auth=${idToken}`, body);
+    return this.http.post(`${this.url_api}/orden.json?auth=${idToken}`, body);
   }
 
   getFilterData(orderBy:string, equalTo:string){
 
-		return this.http.get(`${this.url_api}/orden_detalle.json?orderBy="${orderBy}"&equalTo="${equalTo}"&print=pretty`);
+		return this.http.get(`${this.url_api}/orden.json?orderBy="${orderBy}"&equalTo="${equalTo}"&print=pretty`);
 
 	}
 
@@ -29,7 +29,7 @@ export class OrdenesService {
 
 	patchDataAuth(id:string, value:object, idToken:string){
 
-		return this.http.patch(`${this.url_api}/orden_detalle/${id}.json?auth=${idToken}`,value);
+		return this.http.patch(`${this.url_api}/orden/${id}.json?auth=${idToken}`,value);
 
 	}
 
