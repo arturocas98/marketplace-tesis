@@ -15,5 +15,5 @@ export class Tienda{
 	url:string;
 	username:string;
 	fecha_creacion: Date
-	precio_envio:string
+	precio_envio:number
 }

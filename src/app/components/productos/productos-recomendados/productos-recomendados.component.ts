@@ -63,7 +63,7 @@ export class ProductosRecomendadosComponent implements OnInit {
 
     this.productsService.getByFilter("categoria", params)
       .subscribe(resp1 => {
-
+        console.log("resp1:",resp1);
         if (Object.keys(resp1).length > 0) {
 
           this.productsFnc(resp1);

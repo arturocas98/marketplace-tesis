@@ -717,6 +717,7 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
         Validación completa del formulario
         =============================================*/
     console.log("f:",f);
+    // console.log("logoStore:",this.logoStore);
     if (f.invalid) {
 
       Sweetalert.fnc("error", "Faltan campos por llenar o no cumplen el formato especificado", null);
@@ -728,7 +729,7 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
     Alerta suave mientras se edita la tienda
     =============================================*/
 
-    Sweetalert.fnc("loading", "Loading...", null);
+    // Sweetalert.fnc("loading", "Loading...", null);
 
     /*=============================================
     Subir imagenes al servidor
@@ -754,6 +755,8 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
       }
 
     ]
+    console.log("allImages:",allImages);
+    // return;
 
     for (const i in allImages) {
 
@@ -764,10 +767,11 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
       formData.append('path', allImages[i].path);
       formData.append('width', allImages[i].width);
       formData.append('height', allImages[i].height);
-
       this.http.post(this.server, formData)
         .subscribe(resp => {
-
+          // console.log("respuesta1:",resp);
+          // return;
+      
           if (resp["status"] != null && resp["status"] == 200) {
 
             if (allImages[i].type == "logoStore") {

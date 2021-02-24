@@ -271,6 +271,7 @@ export class CuentaPerfilComponent implements OnInit {
 
   validateImage(e) {
     this.image = e.target.files[0];
+    console.log("this.image:",this.image);
 
     if(this.image["type"] !== "image/jpeg" && this.image["type"] !== "image/png"){
       Sweetalert.fnc('error', "La imagen debe ser jpg o png", null);
@@ -307,7 +308,7 @@ export class CuentaPerfilComponent implements OnInit {
       if (res['status'] == 200) {
         let body = {
 
-          "imagen": res ['data']
+          "imagen": res ['result']
         }
         this.usersService.update(this.id,body).subscribe(resp=>{
           if (resp['imagen'] != '' ) {

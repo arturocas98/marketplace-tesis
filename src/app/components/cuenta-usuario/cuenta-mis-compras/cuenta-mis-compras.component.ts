@@ -2,6 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { DisputaService } from 'src/app/core/disputa/disputa.service';
+import { OrdenService } from 'src/app/core/orden/orden.service';
 import { OrdenesService } from 'src/app/core/ordenes/ordenes.service';
 import { ProductoService } from 'src/app/core/producto/producto.service';
 import { TiendaService } from 'src/app/core/tienda/tienda.service';
@@ -34,10 +35,12 @@ export class CuentaMisComprasComponent implements OnInit, OnDestroy {
   method: string;
   idProduct: string;
   render: boolean = false;
-
-
+  ordenes: any[] = [];
+  id_orden: any[] = [];
+  id_orden_modal: any;
   constructor(
     private ordersService: OrdenesService,
+    private ordenService: OrdenService,
     private tiendaService: TiendaService,
     private disputesService: DisputaService,
     private usersService: UsuarioService,
@@ -80,109 +83,41 @@ export class CuentaMisComprasComponent implements OnInit, OnDestroy {
         this.es_vendedor = true;
       }
     });
-    this.ordersService.getFilterData("usuario", this.usuario)
-      .subscribe(resp => {
 
+    this.ordenService.getFilterData("usuario", this.usuario).subscribe(respOrden => {
+      // let id_orders = ;
+      if (Object.keys(respOrden).length > 0) {
         let load = 0;
 
-        for (const i in resp) {
-
+        for (const j in respOrden) {
           load++
-
-          this.myShopping.push(resp[i]);
-          this.process.push(JSON.parse(resp[i]["proceso"]));
-          this.id_order.push(i);
-
-          /*=============================================
-          Traemos las disputas
-          =============================================*/
-
-          this.id_order.forEach(order => {
-
-            this.disputesService.getFilterData("orden", order)
-              .subscribe(resp => {
-                // let tamanio = Object.keys(resp).length;
-                // console.log("disputas:", resp);
-                if (Object.keys(resp).length > 0) {
-
-                  let count = 0;
-
-                  for (const i in resp) {
-
-                    count++;
-
-                    this.tiendaService.getFilterData("tienda", resp[i].receptor)
-                      .subscribe(resp1 => {
-
-                        for (const f in resp1) {
-
-                          resp[i].store = resp1[f];
-                        }
-
-
-                      })
-
-                    this.usersService.getFilterData("username", resp[i].emisor)
-                      .subscribe(resp1 => {
-
-                        for (const f in resp1) {
-
-                          resp[i].user = resp1[f];
-                        }
-
-
-                    })
-                    console.log("disputas:",this.disputes);
-                    let localDisputes = this.disputes;
-
-                    setTimeout(function () {
-
-                      localDisputes.push(resp[i]);
-
-                    }, count * 1000)
-
-
-                  }
-
-                }
-
-
-              })
-
-
-          })
-
-
-          /*=============================================
-          Traemos las reseñas del producto
-          =============================================*/
-
-          this.productsService.getFilterDataMyStore("url", resp[i].url)
-            .subscribe(resp => {
-
-              for (const i in resp) {
-
-                this.reviews.push(JSON.parse(resp[i].reviews));
-
-              }
-
-
-            })
-
+          this.ordenes.push(respOrden[j]);
+          this.id_orden.push(j);
         }
-        /*=============================================
-        Pintar el render en DataTable
-        =============================================*/
 
-        if (load == this.myShopping.length) {
+
+        /*=============================================
+           Pintar el render en DataTable
+           =============================================*/
+        if (load == this.ordenes.length) {
 
           this.dtTrigger.next();
 
         }
 
         Rating.fnc();
+      }
 
-      })
+
+
+
+
+
+    });
+
+
+
+
 
   }
 
@@ -200,6 +135,113 @@ export class CuentaMisComprasComponent implements OnInit, OnDestroy {
         Abrir la ventana modal
         =============================================*/
     $("#newDispute").modal()
+
+  }
+  abrirProceso(id_order) {
+    this.id_orden_modal = id_order;
+    if (this.ordenes.length > 0) {
+      this.ordersService.getFilterData("id_orden", id_order)
+        .subscribe(resp => {
+
+          console.log("respuesta de ordenes:", resp);
+
+          for (const i in resp) {
+
+
+            this.myShopping.push(resp[i]);
+            this.process.push(JSON.parse(resp[i]["proceso"]));
+            this.id_order.push(i);
+
+            /*=============================================
+            Traemos las disputas
+            =============================================*/
+
+            this.id_order.forEach(order => {
+
+              this.disputesService.getFilterData("orden", order)
+                .subscribe(resp => {
+                  // let tamanio = Object.keys(resp).length;
+                  // console.log("disputas:", resp);
+                  if (Object.keys(resp).length > 0) {
+
+                    let count = 0;
+
+                    for (const i in resp) {
+
+                      count++;
+
+                      this.tiendaService.getFilterData("tienda", resp[i].receptor)
+                        .subscribe(resp1 => {
+
+                          for (const f in resp1) {
+
+                            resp[i].store = resp1[f];
+                          }
+
+
+                        })
+
+                      this.usersService.getFilterData("username", resp[i].emisor)
+                        .subscribe(resp1 => {
+
+                          for (const f in resp1) {
+
+                            resp[i].user = resp1[f];
+                          }
+
+
+                        })
+                      console.log("disputas:", this.disputes);
+                      let localDisputes = this.disputes;
+
+                      setTimeout(function () {
+
+                        localDisputes.push(resp[i]);
+
+                      }, count * 1000)
+
+
+                    }
+
+                  }
+
+
+                })
+
+
+            })
+
+
+            /*=============================================
+            Traemos las reseñas del producto
+            =============================================*/
+
+            this.productsService.getFilterDataMyStore("url", resp[i].url)
+              .subscribe(resp => {
+
+                for (const i in resp) {
+
+                  this.reviews.push(JSON.parse(resp[i].reviews));
+
+                }
+
+
+              })
+
+          }
+
+
+
+
+        })
+
+
+    }
+
+    /*=============================================
+        Abrir la ventana modal
+        =============================================*/
+    $("#proceso").modal()
 
   }
 

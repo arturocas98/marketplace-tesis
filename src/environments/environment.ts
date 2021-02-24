@@ -28,6 +28,7 @@ export const environment = {
   server:'http://localhost/marketplace-tesis/src/assets/img/index.php?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg',
   serverDelete : 'http://localhost/marketplace-tesis/src/assets/img/delete.php?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg',
   email:'http://localhost/marketplace-tesis/src/assets/email/index.php?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg'
+
 };
 
 /*

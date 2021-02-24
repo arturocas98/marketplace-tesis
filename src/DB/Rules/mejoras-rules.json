@@ -1,0 +1,18 @@
+{
+    "orden": {
+        ".read": true,
+        ".write": "auth != null",
+        ".indexOn": [
+            "usuario"
+        ]
+    },
+    "orden_detalle": {
+        ".read": true,
+        ".write": "auth != null",
+        ".indexOn": [
+            "usuario",
+            "tienda",
+            "id_orden"
+        ]
+    }
+}

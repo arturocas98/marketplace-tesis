@@ -12,7 +12,8 @@ if(isset($_GET["key"]) && $_GET["key"] == "AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdV
 		/*=============================================
 		Configuramos la ruta del directorio donde se guardará la imagen
 		=============================================*/
-
+		// echo(json_encode($_FILES['file']));
+		// die();
 		$directory = strtolower($_POST["path"].'/'.$_POST["folder"]);
 
 		/*=============================================

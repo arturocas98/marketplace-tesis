@@ -215,6 +215,8 @@ export class CarritoCompraComponent implements OnInit, OnDestroy {
         return res;
 
       }, {});
+
+      console.log("tiendas_filter:",tiendas_filter);
       
       tiendas_filter.forEach(tienda => {
         valor_envio += tienda.precio_envio;
