@@ -140,13 +140,13 @@ export class CuentaMisComprasComponent implements OnInit, OnDestroy {
   abrirProceso(id_order) {
     this.id_orden_modal = id_order;
     if (this.ordenes.length > 0) {
-      this.ordersService.getFilterData("id_orden", id_order)
-        .subscribe(resp => {
+      this.ordersService.getFilterData("id_orden", id_order).subscribe(resp => {
 
-          console.log("respuesta de ordenes:", resp);
+        console.log("respuesta de ordenes:", resp);
 
-          for (const i in resp) {
+        for (const i in resp) {
 
+          this.usersService.getFilterData("username", resp[i].emisor).subscribe(resp1 => {
 
             this.myShopping.push(resp[i]);
             this.process.push(JSON.parse(resp[i]["proceso"]));
@@ -208,8 +208,8 @@ export class CuentaMisComprasComponent implements OnInit, OnDestroy {
 
                 })
 
-
             })
+
 
 
             /*=============================================
@@ -228,12 +228,12 @@ export class CuentaMisComprasComponent implements OnInit, OnDestroy {
 
               })
 
-          }
+          });
+        }
+      });
 
 
 
-
-        })
 
 
     }

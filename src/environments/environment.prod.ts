@@ -8,7 +8,7 @@ export const environment = {
     databaseURL: "https://marketplace-tesis.firebaseio.com",
     projectId: "marketplace-tesis",
     storageBucket: "marketplace-tesis.appspot.com",
-    messagingSenderId: "205223564127",
+    7: "205223564127",
     appId: "1:205223564127:web:d8923a287be60d1ee95cea"
   },
   sign_in:"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg",
@@ -21,8 +21,8 @@ export const environment = {
   VerifyPasswordResetCode:'https://identitytoolkit.googleapis.com/v1/accounts:resetPassword?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg',
   ConfirmPasswordReset: 'https://identitytoolkit.googleapis.com/v1/accounts:resetPassword?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg',
   ChangePassword:'https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg',
-  server:'http://localhost/marketplace-tesis/src/assets/img/index.php?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg',
-  serverDelete : 'http://localhost/marketplace-tesis/src/assets/img/delete.php?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg',
-  email:'http://localhost/marketplace-tesis/src/assets/email/index.php?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg'
+  server:'https://organic-gye.herokuapp.com/marketplace-tesis/src/assets/img/index.php?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg',
+  serverDelete : 'https://organic-gye.herokuapp.com/marketplace-tesis/src/assets/img/delete.php?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg',
+  email:'https://organic-gye.herokuapp.com/marketplace-tesis/src/assets/email/index.php?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg'
 
 };
