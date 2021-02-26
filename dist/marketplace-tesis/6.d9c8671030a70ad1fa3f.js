@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[6],{"0Em7":function(n,t,o){"use strict";o.r(t),o.d(t,"AdminRoutingModule",function(){return c});var e=o("tyNb"),r=o("fXoL");const i=[{path:"",children:[{path:""}]}];let c=(()=>{class n{}return n.\u0275mod=r.Ib({type:n}),n.\u0275inj=r.Hb({factory:function(t){return new(t||n)},imports:[[e.e.forChild(i)],e.e]}),n})()}}]);
