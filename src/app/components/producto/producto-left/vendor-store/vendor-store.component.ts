@@ -18,7 +18,7 @@ export class VendorStoreComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("child item:",this.childItem);
-    this.storesService.getFilterData("nombre", this.childItem)
+    this.storesService.getFilterData("tienda", this.childItem)
       .subscribe(resp => {
         console.log("tiend:",resp);
         for (const i in resp) {

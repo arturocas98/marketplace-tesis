@@ -214,6 +214,7 @@ export class HeaderComponent implements OnInit {
 
 
   goSearch(value: string) {
+    console.log("value:",value);
     if (value.length == 0 || Search.fnc(value) == undefined) {
       return;
     }

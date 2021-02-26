@@ -75,7 +75,7 @@ Products found
 
                             <div class="ps-product__thumbnail">
 
-                                <a href="producto/{{product.url}}">
+                                <a routerLink="/producto/{{product.url}}">
                                     <img src="{{path}}img/products/categorias/{{product.categoria}}/{{product.imagen}}"
                                         alt="{{product.nombre}}">
                                 </a>
@@ -91,7 +91,7 @@ Products found
                                     </li>
 
                                     <li>
-                                        <a href="producto/{{product.url}}" data-toggle="tooltip" data-placement="top"
+                                        <a routerLink="/producto/{{product.url}}" data-toggle="tooltip" data-placement="top"
                                             title="ver">
                                             <i class="icon-eye"></i>
                                         </a>
@@ -109,11 +109,11 @@ Products found
 
                             <div class="ps-product__container">
 
-                                <a class="ps-product__vendor" href="#">{{product.tienda}}</a>
+                                <a class="ps-product__vendor" routerLink="/lista-tiendas/search&{{product.tienda}}">{{product.tienda}}</a>
 
                                 <div class="ps-product__content">
 
-                                    <a class="ps-product__title" href="producto/{{product.url}}">
+                                    <a class="ps-product__title" routerLink="/producto/{{product.url}}">
                                         {{product.nombre}}</a>
 
                                     <div class="ps-product__rating">
@@ -135,7 +135,7 @@ Products found
 
                                 <div class="ps-product__content hover">
 
-                                    <a class="ps-product__title" href="producto/{{product.url}}">
+                                    <a class="ps-product__title" routerLink="/producto/{{product.url}}">
                                         {{product.nombre}}</a>
 
                                     <div [innerHTML]="price[i][0]"></div>
@@ -182,7 +182,7 @@ Products found
 
                     <div class="ps-product__thumbnail">
 
-                        <a href="producto/{{product.url}}">
+                        <a routerLink="/producto/{{product.url}}">
                             <img src="{{path}}img/products/categorias/{{product.categoria}}/{{product.imagen}}"
                                 alt="{{product.nombre}}">
                         </a>
@@ -193,7 +193,7 @@ Products found
 
                         <div class="ps-product__content">
 
-                            <a class="ps-product__title" href="producto/{{product.url}}">
+                            <a class="ps-product__title" routerLink="/producto/{{product.url}}">
                                 {{product.nombre}}</a>
 
                             <div class="ps-product__rating">
@@ -210,7 +210,7 @@ Products found
                             </div>
 
                             <p class="ps-product__vendor">Vendedor:
-                                <a href="#">{{product.tienda}}</a>
+                                <a routerLink="/lista-tiendas/search&{{product.tienda}}">{{product.tienda}}</a>
                             </p>
 
                             <!-- <div [innerHTML]="product.resumen"></div> -->
@@ -235,7 +235,7 @@ Products found
 
                             <ul class="ps-product__actions">
                                 <li>
-                                    <a href="producto/{{product.url}}"><i class="icon-eye"></i>Ver</a>
+                                    <a routerLink="/producto/{{product.url}}"><i class="icon-eye"></i>Ver</a>
                                 </li>
                                 <li>
                                     <a  data-toggle="tooltip" style="cursor:pointer" *ngIf="!es_vendedor" (click)="addWishList(product.url)" data-placement="top" title="Añadir a la lista de deseos">

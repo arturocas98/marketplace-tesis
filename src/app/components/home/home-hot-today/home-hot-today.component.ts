@@ -58,17 +58,42 @@ export class HomeHotTodayComponent implements OnInit {
         )
         this.products.push(res[i]);
       }
-      for (const i in this.getProducts) {
-        this.fecha_oferta = new Date(
-          parseInt(this.getProducts[i]['oferta'][2].split("-")[0]),
-          parseInt(this.getProducts[i]['oferta'][2].split("-")[1]) - 1,
-          parseInt(this.getProducts[i]['oferta'][2].split("-")[2]),
-        )
-        if (this.now < this.fecha_oferta && this.getProducts[i]["stock"] > 0) {
-          this.indexes.push(i);
-          this.preload = false;
-        }
-      }
+      let count = 0;
+
+			for(i in this.getProducts){
+
+				count ++;
+
+				if(this.getProducts[i]["oferta"] != ""){
+
+					this.fecha_oferta = new Date(
+
+						parseInt(this.getProducts[i]["oferta"][2].split("-")[0]),
+						parseInt(this.getProducts[i]["oferta"][2].split("-")[1])-1,
+						parseInt(this.getProducts[i]["oferta"][2].split("-")[2])
+
+					)
+
+					if(this.now < this.fecha_oferta && this.getProducts[i]["stock"] > 0){
+
+						this.indexes.push(i);
+						
+
+					}
+
+				}
+
+			}
+
+			if(count == this.getProducts.length){
+
+				this.preload = false;
+			
+			}
+
+     
+
+
     })
   }
 
@@ -183,7 +208,7 @@ export class HomeHotTodayComponent implements OnInit {
             let offerDate;
             let today = new Date();
 
-            if (top20Array[i][f].oferta != "") {
+            if (top20Array[i][f].oferta != "[]") {
 
               offerDate = new Date(
 

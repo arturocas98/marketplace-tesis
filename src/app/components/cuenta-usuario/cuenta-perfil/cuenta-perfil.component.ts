@@ -312,7 +312,11 @@ export class CuentaPerfilComponent implements OnInit {
         }
         this.usersService.update(this.id,body).subscribe(resp=>{
           if (resp['imagen'] != '' ) {
-            Sweetalert.fnc('success','Tu foto se ha subido correctamente!','/cuenta-usuario/cuenta');
+            if(this.vendedor){
+              Sweetalert.fnc('success','Tu foto se ha subido correctamente!','/cuenta-usuario/cuenta/mi-tienda');
+            }else{
+              Sweetalert.fnc('success','Tu foto se ha subido correctamente!','/cuenta-usuario/cuenta');
+            }
           }
         });
       }

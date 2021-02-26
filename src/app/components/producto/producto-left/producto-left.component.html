@@ -160,7 +160,7 @@
 
             </div>
 
-            <div class="ps-product__shopping">
+            <div *ngIf="!es_vendedor" class="ps-product__shopping">
 
                 <figure>
 
@@ -183,12 +183,12 @@
 
                 </figure>
 
-                <a class="ps-btn ps-btn--black" style="cursor:pointer" (click)="addShoppingCart(p.url,1,[])">Añadir al
+                <a   class="ps-btn ps-btn--black" style="cursor:pointer" (click)="addShoppingCart(p.url,1,[])">Añadir al
                     carrito</a>
 
-                <a class="ps-btn" style="cursor:pointer" (click)="buyNow(p.url, 1, [])">Comprar ahora</a>
+                <a  class="ps-btn" style="cursor:pointer" (click)="buyNow(p.url, 1, [])">Comprar ahora</a>
 
-                <div class="ps-product__actions">
+                <div  class="ps-product__actions">
 
                     <a data-toggle="tooltip" style="cursor:pointer" (click)="addWishList(p.url)" data-placement="top"
                         title="Añadir a la lista de deseos">
@@ -221,7 +221,7 @@
 
             </div>
 
-            <div class="ps-product__sharing">
+            <!-- <div class="ps-product__sharing">
 
                 <a class="facebook" href="#">
                     <i class="fab fa-facebook"></i>
@@ -240,7 +240,7 @@
                     <i class="fab fa-instagram"></i>
                 </a>
 
-            </div>
+            </div> -->
 
         </div> <!-- End Product Info -->
 
@@ -260,7 +260,7 @@
             <!-- <li><a href="#tab-2">Especificaciones</a></li> -->
             <li><a href="#tab-3">Vendedor</a></li>
             <li><a href="#tab-4">Reviews ({{totalReviews}})</a></li>
-            <li><a href="#tab-5">Preguntas y respuestas</a></li>
+            <li><a *ngIf="!es_vendedor" href="#tab-5">Preguntas y respuestas</a></li>
 
         </ul>
 
@@ -290,7 +290,7 @@
 
             </div>
 
-            <div class="ps-tab" id="tab-5">
+            <div *ngIf="!es_vendedor" class="ps-tab" id="tab-5">
 
                 <div class="ps-block--questions-answers">
 

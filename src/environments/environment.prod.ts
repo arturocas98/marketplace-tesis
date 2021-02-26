@@ -21,8 +21,8 @@ export const environment = {
   VerifyPasswordResetCode:'https://identitytoolkit.googleapis.com/v1/accounts:resetPassword?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg',
   ConfirmPasswordReset: 'https://identitytoolkit.googleapis.com/v1/accounts:resetPassword?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg',
   ChangePassword:'https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg',
-  server:'https://organic-gye.herokuapp.com/marketplace-tesis/src/assets/img/index.php?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg',
-  serverDelete : 'https://organic-gye.herokuapp.com/marketplace-tesis/src/assets/img/delete.php?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg',
-  email:'https://organic-gye.herokuapp.com/marketplace-tesis/src/assets/email/index.php?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg'
+  server:'https://organic-gye.000webhostapp.com/assets/img/index.php?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg',
+  serverDelete : 'https://organic-gye.000webhostapp.com/assets/img/delete.php?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg',
+  email:'https://organic-gye.000webhostapp.com/assets/email/index.php?key=AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdVsg'
 
 };

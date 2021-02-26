@@ -170,7 +170,7 @@ export class ProductoLeftComponent implements OnInit {
       this.summary.push(JSON.parse(this.product[index].resumen));
 
 
-      if (this.product[index].oferta != '') {
+      if (this.product[index].oferta != '[]') {
         let today = new Date();
         let offerDate = new Date(
           parseInt(JSON.parse(this.product[index].oferta)[2].split("-")[0]),

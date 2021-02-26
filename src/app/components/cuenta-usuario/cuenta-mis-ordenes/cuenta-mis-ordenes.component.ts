@@ -5,8 +5,9 @@ import { VentaService } from 'src/app/core/venta/venta.service';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-declare var jQuery:any;
-declare var $:any;
+import { OrdenService } from 'src/app/core/orden/orden.service';
+declare var jQuery: any;
+declare var $: any;
 
 
 @Component({
@@ -14,10 +15,10 @@ declare var $:any;
   templateUrl: './cuenta-mis-ordenes.component.html',
   styleUrls: ['./cuenta-mis-ordenes.component.css']
 })
-export class CuentaMisOrdenesComponent implements OnInit,OnDestroy {
+export class CuentaMisOrdenesComponent implements OnInit, OnDestroy {
   @Input() childItem: any;
   dtOptions: DataTables.Settings = {};
-	dtTrigger: Subject<any> = new Subject();
+  dtTrigger: Subject<any> = new Subject();
   orders: any[] = [];
   idOrders: any[] = [];
   process: any[] = [];
@@ -30,10 +31,13 @@ export class CuentaMisOrdenesComponent implements OnInit,OnDestroy {
   // email: string = Email.url;
 
   // comentario
-  email:string = environment.email;
-  constructor(private ordersService: OrdenesService,
+  email: string = environment.email;
+  constructor(
+    private ordersService: OrdenesService,
     private salesService: VentaService,
-    private http: HttpClient) { }
+    private http: HttpClient,
+    private ordenService: OrdenService
+  ) { }
 
   ngOnInit(): void {
 
@@ -89,9 +93,11 @@ export class CuentaMisOrdenesComponent implements OnInit,OnDestroy {
 
             this.process.push(JSON.parse(resp[i].proceso));
 
+            // this.ordenService.getFilterData('')
+
           }
           // console.log("proceso:",this.process);
-          
+
 
           if (load == this.orders.length) {
 
@@ -112,8 +118,8 @@ export class CuentaMisOrdenesComponent implements OnInit,OnDestroy {
   nextProcess(idOrder, index) {
 
     this.editNextProcess = this.process[index];
-    console.log("edit next process:",this.process[index]);
-    
+    console.log("edit next process:", this.process[index]);
+
     /*=============================================
     Abrir la ventana modal
     =============================================*/

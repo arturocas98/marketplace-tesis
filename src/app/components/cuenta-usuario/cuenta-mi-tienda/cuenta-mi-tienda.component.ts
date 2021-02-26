@@ -12,6 +12,7 @@ import { Producto } from 'src/app/models/producto';
 import { Tienda } from 'src/app/models/tienda';
 import { environment } from 'src/environments/environment';
 import { DinamicRating, DinamicReviews, Tooltip, Rating, Sweetalert, Capitalize, CreateUrl } from '../../../functions';
+import { MyValidators } from '../../utils/MyValidators';
 declare var jQuery: any;
 declare var $: any;
 @Component({
@@ -96,6 +97,7 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
   idProduct: string = null;
   editProductAction: boolean = false;
   popoverMessage: string = 'Estas seguro de eliminar el producto?';
+  validators: MyValidators;
   constructor(
     private tiendaService: TiendaService,
     private productsService: ProductoService,
@@ -106,6 +108,7 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
   ) {
     this.storeModel = new Tienda();
     this.productModel = new Producto();
+    this.validators = new MyValidators();
   }
 
   ngOnInit(): void {
@@ -243,6 +246,13 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
             return product;
 
           });
+
+          console.log("this.products:",this.products);
+
+          // this.products.sort((a,b)=>{
+          //   return a.fecha_creacion - b.fecha_creacion;
+          // })
+
           // console.log("total_review:",this.totalReviews.length);
           if (this.loadProduct == this.products.length) {
             this.dtTrigger.next();
@@ -261,8 +271,10 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
               this.categories.push(resp[i]);
             }
 
-          })
-
+          });
+        this.productModel.imagen = `assets/img/products/default/default-image.jpg`;
+        // this.productModel.default_banner = `assets/img/products/default/default-banner.jpg`;
+        // this.hSlider["IMG tag"] = `assets/img/products/default/default-horizontal-slider.jpg`;
         this.preload = true;
       }
     });
@@ -286,7 +298,7 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
           globalRating += review.length;
 
           for (const i in review) {
-            
+
             globalReviews += review[i].review
           }
         })
@@ -557,25 +569,25 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
     Validamos los TAGS de los Banner's y Slider's
     =============================================*/
 
-    if ($(input).attr("tags") == "tags") {
+    // if ($(input).attr("tags") == "tags") {
 
-      /*=============================================
-      Validamos expresión regular
-      =============================================*/
+    //   /*=============================================
+    //   Validamos expresión regular
+    //   =============================================*/
 
-      let pattern = /^[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\'\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]{1,50}$/;
+    //   let pattern = /^[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\'\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]{1,50}$/;
 
-      if (!pattern.test(input.value)) {
+    //   if (!pattern.test(input.value)) {
 
-        $(input).parent().addClass('was-validated');
+    //     $(input).parent().addClass('was-validated');
 
-        input.value = "";
+    //     input.value = "";
 
-        return;
+    //     return;
 
-      }
+    //   }
 
-    }
+    // }
 
 
     /*=============================================
@@ -675,7 +687,7 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
 
     if (image["type"] !== "image/jpeg" && image["type"] !== "image/png") {
 
-      Sweetalert.fnc("error", "The image must be in JPG or PNG format", null)
+      Sweetalert.fnc("error", "La imagen debe ser en formato JPG o PNG", null)
 
       return;
     }
@@ -686,7 +698,7 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
 
     else if (image["size"] > 2000000) {
 
-      Sweetalert.fnc("error", "Image must not weigh more than 2MB", null)
+      Sweetalert.fnc("error", "La imagen pesa más de 2MB", null)
 
       return;
     }
@@ -716,7 +728,7 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
     /*=============================================
         Validación completa del formulario
         =============================================*/
-    console.log("f:",f);
+    console.log("f:", f);
     // console.log("logoStore:",this.logoStore);
     if (f.invalid) {
 
@@ -755,7 +767,7 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
       }
 
     ]
-    console.log("allImages:",allImages);
+    console.log("allImages:", allImages);
     // return;
 
     for (const i in allImages) {
@@ -771,7 +783,7 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
         .subscribe(resp => {
           // console.log("respuesta1:",resp);
           // return;
-      
+
           if (resp["status"] != null && resp["status"] == 200) {
 
             if (allImages[i].type == "logoStore") {
@@ -955,7 +967,7 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
   =============================================*/
 
   editProduct(idProduct) {
-    
+
     this.idProduct = idProduct;
 
     /*=============================================
@@ -983,6 +995,7 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
         this.productModel.ventas = resp["ventas"];
         this.productModel.imagen = resp["imagen"];
         this.productModel.default_banner = resp["default_banner"];
+        // console.log("banner por defecto:",this.productModel.default_banner);
         this.productModel.precio = resp["precio"];
         // this.productModel.shipping = resp["shipping"];
         this.productModel.tiempo_entrega = resp["tiempo_entrega"];
@@ -1037,7 +1050,7 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
         this.hSlider["H3-4s tag"] = JSON.parse(resp["horizontal_slider"])["H3-4s tag"];
         this.hSlider["Button tag"] = JSON.parse(resp["horizontal_slider"])["Button tag"];
         this.hSlider["IMG tag"] = JSON.parse(resp["horizontal_slider"])["IMG tag"];
-
+        console.log("banner horizontal:",this.hSlider['IMG tag']);
         /*=============================================
         Carga de las ofertas del producto
         =============================================*/
@@ -1208,6 +1221,7 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
 
     ]
 
+    
     for (const i in allImages) {
 
       const formData = new FormData();
@@ -1220,7 +1234,7 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
 
       this.http.post(this.server, formData)
         .subscribe(resp => {
-
+          console.log("respuesta:",resp);
           if (resp["status"] != null && resp["status"] == 200) {
 
             if (allImages[i].type == "imageProduct") {
@@ -1241,7 +1255,6 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
                   .subscribe(resp => { })
 
               }
-
               this.productModel.imagen = resp["result"];
 
             }
@@ -1264,7 +1277,6 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
                   .subscribe(resp => { })
 
               }
-
               this.productModel.default_banner = resp["result"];
 
             }
@@ -1315,9 +1327,9 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
               =============================================*/
 
               this.productModel.feedback = {
-
-                type: "review",
-                comment: "Tu producto esta en revisión"
+                // cambiar por review
+                type: "approved",
+                comment: "Tu producto esta aprobado"
 
               }
 
@@ -1674,6 +1686,14 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
     }
 
   }
+
+  public validaStock(e) {
+    var key = window.event ? e.which : e.keyCode;
+    if (key < 48 || key > 57) {
+      e.preventDefault();
+    }
+  }
+
 
   ngOnDestroy() {
     this.dtTrigger.unsubscribe();

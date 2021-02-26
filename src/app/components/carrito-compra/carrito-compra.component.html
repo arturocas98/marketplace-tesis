@@ -8,7 +8,7 @@
 
         <ul class="breadcrumb">
 
-            <li><a href="index.html">Home</a></li>
+            <li><a routerLink="/">Home</a></li>
 
             <li>Carrito de compras</li>
 
@@ -62,16 +62,16 @@
 
                                 <div class="ps-product--cart">
 
-                                    <div class="ps-product__thumbnail">
+                                    <!-- <div class="ps-product__thumbnail">
 
                                         <a href="producto/{{carrito.url}}"><img src="{{path}}img/products/categorias/{{carrito.categoria}}/{{carrito.imagen}}"
                                                 alt=""></a>
 
-                                    </div>
+                                    </div> -->
 
                                     <div class="ps-product__content">
 
-                                        <a href="product/{{ carrito.url }}">{{carrito.nombre}}</a>
+                                        <a routerLink="/producto/{{ carrito.url }}">{{carrito.nombre}}</a>
 
                                         <!-- <p>Sold By:<strong> YOUNG SHOP</strong></p> -->
 
@@ -142,7 +142,7 @@
 
             </div> -->
             <!-- <p>Te falta $10 para el envio gratis!</p> -->
-            <p class="text-danger" >(*) El valor del envío se cobra por tienda, consulta los valores de cada tienda en el siguiente  <a style="font-weight: bold;" href="lista-tiendas" >enlace </a> </p>
+            <p class="text-danger" >(*) El valor del envío se cobra por tienda, consulta los valores de cada tienda en el siguiente  <a style="font-weight: bold;" routerLink="/lista-tiendas" >enlace </a> </p>
 
             <div class="ps-section__cart-actions">
 
@@ -151,7 +151,7 @@
                     <i class="icon-arrow-left"></i> Seguir comprando
                 </a>
 
-                <a  *ngIf="shoppingCart.length > 0" class="ps-btn" href="checkout">
+                <a  *ngIf="shoppingCart.length > 0" class="ps-btn" routerLink="/checkout">
                     Proceder a pagar <i class="icon-arrow-right"></i>
                 </a>
 

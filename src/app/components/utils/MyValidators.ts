@@ -34,7 +34,7 @@ export class MyValidators {
 
     public soloNumeros(e) {
         var key = window.event ? e.which : e.keyCode;
-        if (key < 48 || key > 57) {
+        if (key < 46 || key > 57) {
             e.preventDefault();
         }
     }

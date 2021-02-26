@@ -2591,11 +2591,11 @@ textarea.form-control {
 }
 
 .form-group--number button.up {
-  right: 10px;
+  right: 5px;
 }
 
 .form-group--number button.down {
-  left: 10px;
+  left: 7px;
 }
 
 .form-group--number .form-control {

@@ -192,7 +192,7 @@ export class CuentaNuevaTiendaComponent implements OnInit {
   defaultBannerImg: File = null;
   hSliderImg: File = null;
   // vSliderImg: File = null;
-
+  validators: MyValidators
   /*=============================================
   Constructor
   =============================================*/
@@ -207,6 +207,7 @@ export class CuentaNuevaTiendaComponent implements OnInit {
 
     this.store = new Tienda();
     this.product = new Producto();
+    this.validators = new MyValidators();
 
   }
 
@@ -363,7 +364,7 @@ export class CuentaNuevaTiendaComponent implements OnInit {
       Agregar imagen del producto por defecto
       =============================================*/
 
-      this.product.imagen = `assets/img/products/default/default-image.jpg`;
+      // this.product.imagen = `assets/img/products/default/default-image.jpg`;
 
       /*=============================================
       Agregar Imagen Banner Top por defecto
@@ -375,13 +376,13 @@ export class CuentaNuevaTiendaComponent implements OnInit {
       Agregar Imagen Banner Default por defecto
       =============================================*/
 
-      this.product.default_banner = `assets/img/products/default/default-banner.jpg`;
+      // this.product.default_banner = `assets/img/products/default/default-banner.jpg`;
 
       /*=============================================
       Agregar Imagen Slide Horizontal por defecto
       =============================================*/
 
-      this.hSlider["IMG tag"] = `assets/img/products/default/default-horizontal-slider.jpg`;
+      // this.hSlider["IMG tag"] = `assets/img/products/default/default-horizontal-slider.jpg`;
 
       /*=============================================
      Agregar Imagen Slide Vertical por defecto
@@ -741,7 +742,7 @@ export class CuentaNuevaTiendaComponent implements OnInit {
 
           input.value = "";
 
-          Sweetalert.fnc("error", "The product exceeds 100 units", null)
+          Sweetalert.fnc("error", "El producto excede las 100 unidades", null)
 
           return;
 
@@ -1046,7 +1047,6 @@ export class CuentaNuevaTiendaComponent implements OnInit {
 
         return;
       }
-
       /*=============================================
       Alerta suave mientras se registra la tienda y el producto
       =============================================*/
@@ -1130,276 +1130,275 @@ export class CuentaNuevaTiendaComponent implements OnInit {
 
         this.http.post(this.server, formData).subscribe(resp => {
           console.log("img 1:", resp);
-          if (resp["status"] == 200) {
 
-            switch (allImages[i].type) {
+          if (resp["status"] != null && resp["status"] == 200) {
 
-              case "logoStore":
-                this.store.logo = resp["result"];
-                break;
+            if (allImages[i].type == "logoStore") {
+              this.store.logo = resp["result"];
 
-              case "coverStore":
-                this.store.cover = resp["result"];
-                break;
+            }
+            if (allImages[i].type == "coverStore") {
+              this.store.cover = resp["result"];
 
-              case "imageProduct":
-                this.product.imagen = resp["result"];
-                break;
+            }
+            if (allImages[i].type == "imageProduct") {
 
-              // case "topBannerImg":
-              //   this.topBanner["IMG tag"] = resp["result"];
-              //   break;
 
-              case "defaultBannerImg":
-                this.product.default_banner = resp["result"];
-                break;
-
-              case "hSliderImg":
-                this.hSlider["IMG tag"] = resp["result"];
-                break;
-
-              // case "vSliderImg":
-              //   this.product.vertical_slider = resp["result"];
-              //   break;
+              this.product.imagen = resp["result"];
 
             }
 
-            countAllImages++
+            if (allImages[i].type == "defaultBannerImg") {
 
-            /*=============================================
+
+              this.product.default_banner = resp["result"];
+
+            }
+
+            if (allImages[i].type == "hSliderImg") {
+
+
+
+              this.hSlider["IMG tag"] = resp["result"];
+
+            }
+          }
+
+
+          countAllImages++
+
+          /*=============================================
             Preguntamos cuando termina de subir todas las imágenes
             =============================================*/
 
-            if (countAllImages == allImages.length) {
+          if (countAllImages == allImages.length) {
 
-              /*=============================================
-              Subir galería al servidor
-              =============================================*/
-              let countGallery = 0;
-              let newGallery = [];
+            /*=============================================
+            Subir galería al servidor
+            =============================================*/
+            let countGallery = 0;
+            let newGallery = [];
 
-              for (const i in this.gallery) {
+            for (const i in this.gallery) {
 
-                const formData = new FormData();
+              const formData = new FormData();
 
-                formData.append('file', this.gallery[i]);
-                formData.append('folder', `${this.product.categoria.split("_")[1]}/gallery`);
-                formData.append('path', 'products/categorias');
-                formData.append('width', '1000');
-                formData.append('height', '1000');
+              formData.append('file', this.gallery[i]);
+              formData.append('folder', `${this.product.categoria.split("_")[1]}/gallery`);
+              formData.append('path', 'products/categorias');
+              formData.append('width', '1000');
+              formData.append('height', '1000');
 
-                this.http.post(this.server, formData)
-                  .subscribe(resp => {
+              this.http.post(this.server, formData)
+                .subscribe(resp => {
 
-                    console.log("img2",resp);
-                    
-                    if (resp["status"] == 200) {
+                  console.log("img2", resp);
 
-                      newGallery.push(resp["result"]);
+                  if (resp["status"] != null && resp["status"] == 200) {
 
-                      this.product.galeria = JSON.stringify(newGallery);
+                    newGallery.push(resp["result"]);
 
-                      countGallery++;
+                    this.product.galeria = JSON.stringify(newGallery);
+
+                    countGallery++;
+
+                    /*=============================================
+                    Preguntamos cuando termina de subir toda la galería
+                    =============================================*/
+                    if (countGallery == this.gallery.length) {
 
                       /*=============================================
-                      Preguntamos cuando termina de subir toda la galería
-                      =============================================*/
-                      if (countGallery == this.gallery.length) {
-
-                        /*=============================================
-                        Consolidar número telefónico de la tienda
-                        =============================================*/
-
-                        // this.store.telefono = `${this.dialCode}-${this.store.telefono}`;
-
-                        /*=============================================
-                        Consolidar cantidad de productos para la tienda
-                        =============================================*/
-
-                        this.store.productos = 1;
-
-                        /*=============================================
-                        Consolidar redes sociales para la tienda
-                        =============================================*/
-
-                        for (const i in Object.keys(this.social)) {
-
-                          if (this.social[Object.keys(this.social)[i]] != "") {
-
-                            this.social[Object.keys(this.social)[i]] = `https://${Object.keys(this.social)[i]}.com/${this.social[Object.keys(this.social)[i]]}`
-
-                          }
-
-                        }
-
-                        this.store.social = JSON.stringify(this.social);
-                        this.store.fecha_creacion = new Date();
-
-                        /*=============================================
-                        Consolidar fecha de creación del producto   
-                        =============================================*/
-
-                        this.product.fecha_creacion = new Date();
-
-                        /*=============================================
-                        Consolidar el feedback para el producto
-                        =============================================*/
-
-                        this.product.feedback = {
-
-                          type: "review",
-                          comment: "Tu producto está en revisión"
-
-                        }
-
-                        this.product.feedback = JSON.stringify(this.product.feedback);
-
-                        /*=============================================
-                        Consolidar categoria para el producto
-                        =============================================*/
-
-                        this.product.categoria = this.product.categoria.split("_")[1];
-
-
-                        /*=============================================
-                        Consolidar lista de títulos para el producto
-                        =============================================*/
-
-                        this.product.grupo = this.product.subcategoria.split("_")[1];
-
-                        /*=============================================
-                      Consolidar sub-categoria para el producto
+                      Consolidar número telefónico de la tienda
                       =============================================*/
 
-                        this.product.subcategoria = this.product.subcategoria.split("_")[0];
+                      // this.store.telefono = `${this.dialCode}-${this.store.telefono}`;
 
-                        /*=============================================
-                        Consolidar el nombre de la tienda para el producto
-                        =============================================*/
+                      /*=============================================
+                      Consolidar cantidad de productos para la tienda
+                      =============================================*/
 
-                        this.product.tienda = this.store.tienda;
+                      this.store.productos = 1;
 
-                        /*=============================================
-                        Consolidar calificaciones para el producto
-                        =============================================*/
+                      /*=============================================
+                      Consolidar redes sociales para la tienda
+                      =============================================*/
 
-                        this.product.reviews = "[]";
+                      for (const i in Object.keys(this.social)) {
 
-                        /*=============================================
-                        Consolidar las ventas y las vistas del producto
-                        =============================================*/
+                        if (this.social[Object.keys(this.social)[i]] != "") {
 
-                        this.product.ventas = 0;
-                        this.product.vistas = 0;
-
-                        /*=============================================
-                        Consolidar resumen del producto 
-                        =============================================*/
-
-                        let newSummary = [];
-
-                        for (const i in this.summaryGroup) {
-
-                          newSummary.push(this.summaryGroup[i].input);
-                          this.product.resumen = JSON.stringify(newSummary);
+                          this.social[Object.keys(this.social)[i]] = `https://${Object.keys(this.social)[i]}.com/${this.social[Object.keys(this.social)[i]]}`
 
                         }
-
-                        
-
-
-
-                        /*=============================================
-                         Consolidar palabras claves para el producto
-                        =============================================*/
-                        let newTags = [];
-
-                        for (const i in this.tags) {
-
-                          newTags.push(this.tags[i].value);
-
-
-                        }
-
-                        this.product.etiquetas = JSON.stringify(newTags).toLowerCase();
-
-                        /*=============================================
-                        Consolidar Top Banner del producto
-                        =============================================*/
-
-                        // this.product.top_banner = JSON.stringify(this.topBanner);
-
-                        /*=============================================
-                        Consolidar Horizontal Slider del producto
-                        =============================================*/
-
-                        this.product.horizontal_slider = JSON.stringify(this.hSlider);
-
-                        /*=============================================
-                        Consolidar Video del producto
-                        =============================================*/
-
-                        // this.product.video = JSON.stringify(this.video);
-
-                        /*=============================================
-                        Consolidar Oferta
-                        =============================================*/
-
-                        if (this.offer.length > 0) {
-
-                          this.product.oferta = JSON.stringify(this.offer);
-
-                        } else {
-
-                          this.product.oferta = "[]";
-                        }
-
-
-                        /*=============================================
-                        Crear la tienda en la BD
-                        =============================================*/
-                        console.log("tienda:",this.store);
-                        
-                        this.storesService.registerDatabase(this.store, localStorage.getItem("idToken"))
-                          .subscribe(resp => {
-                            console.log("respuesta_tienda:",resp);
-                            if (resp["name"] != "") {
-
-                              /*=============================================
-                              Crear el producto en la BD
-                              =============================================*/
-                              console.log("producto:",this.product);
-                              this.productsService.registerDatabase(this.product, localStorage.getItem("idToken"))
-                                .subscribe(resp => {
-                                  console.log("respuesta_producto:",resp);
-                                  
-                                  if (resp["name"] != "") {
-
-                                    Sweetalert.fnc("success", "La tienda y el producto se han creado correctamente", "cuenta-usuario/cuenta/mi-tienda");
-
-                                  }
-
-                                }, err => {
-
-                                  Sweetalert.fnc("error", err.error.error.message, null)
-
-                                })
-                            }
-
-
-                          }, err => {
-
-                            Sweetalert.fnc("error", err.error.error.message, null)
-
-                          })
 
                       }
 
+                      this.store.social = JSON.stringify(this.social);
+                      this.store.fecha_creacion = new Date();
+
+                      /*=============================================
+                      Consolidar fecha de creación del producto   
+                      =============================================*/
+
+                      this.product.fecha_creacion = new Date();
+
+                      /*=============================================
+                      Consolidar el feedback para el producto
+                      =============================================*/
+
+                      this.product.feedback = {
+                        // cambiar por review
+                        type: "approved",
+                        comment: "Tu producto está disponible"
+
+                      }
+
+                      this.product.feedback = JSON.stringify(this.product.feedback);
+
+                      /*=============================================
+                      Consolidar categoria para el producto
+                      =============================================*/
+
+                      this.product.categoria = this.product.categoria.split("_")[1];
+
+
+                      /*=============================================
+                      Consolidar lista de títulos para el producto
+                      =============================================*/
+
+                      this.product.grupo = this.product.subcategoria.split("_")[1];
+
+                      /*=============================================
+                    Consolidar sub-categoria para el producto
+                    =============================================*/
+
+                      this.product.subcategoria = this.product.subcategoria.split("_")[0];
+
+                      /*=============================================
+                      Consolidar el nombre de la tienda para el producto
+                      =============================================*/
+
+                      this.product.tienda = this.store.tienda;
+
+                      /*=============================================
+                      Consolidar calificaciones para el producto
+                      =============================================*/
+
+                      this.product.reviews = "[]";
+
+                      /*=============================================
+                      Consolidar las ventas y las vistas del producto
+                      =============================================*/
+
+                      this.product.ventas = 0;
+                      this.product.vistas = 0;
+
+                      /*=============================================
+                      Consolidar resumen del producto 
+                      =============================================*/
+
+                      let newSummary = [];
+
+                      for (const i in this.summaryGroup) {
+
+                        newSummary.push(this.summaryGroup[i].input);
+                        this.product.resumen = JSON.stringify(newSummary);
+
+                      }
+
+
+
+
+
+                      /*=============================================
+                       Consolidar palabras claves para el producto
+                      =============================================*/
+                      let newTags = [];
+
+                      for (const i in this.tags) {
+
+                        newTags.push(this.tags[i].value);
+
+
+                      }
+
+                      this.product.etiquetas = JSON.stringify(newTags).toLowerCase();
+
+                      /*=============================================
+                      Consolidar Top Banner del producto
+                      =============================================*/
+
+                      // this.product.top_banner = JSON.stringify(this.topBanner);
+
+                      /*=============================================
+                      Consolidar Horizontal Slider del producto
+                      =============================================*/
+
+                      this.product.horizontal_slider = JSON.stringify(this.hSlider);
+
+                      /*=============================================
+                      Consolidar Video del producto
+                      =============================================*/
+
+                      // this.product.video = JSON.stringify(this.video);
+
+                      /*=============================================
+                      Consolidar Oferta
+                      =============================================*/
+
+                      if (this.offer.length > 0) {
+
+                        this.product.oferta = JSON.stringify(this.offer);
+
+                      } else {
+
+                        this.product.oferta = "[]";
+                      }
+
+
+                      /*=============================================
+                      Crear la tienda en la BD
+                      =============================================*/
+                      console.log("tienda:", this.store);
+
+                      this.storesService.registerDatabase(this.store, localStorage.getItem("idToken"))
+                        .subscribe(resp => {
+                          console.log("respuesta_tienda:", resp);
+                          if (resp["name"] != "") {
+
+                            /*=============================================
+                            Crear el producto en la BD
+                            =============================================*/
+                            console.log("producto:", this.product);
+                            this.productsService.registerDatabase(this.product, localStorage.getItem("idToken"))
+                              .subscribe(resp => {
+                                console.log("respuesta_producto:", resp);
+
+                                if (resp["name"] != "") {
+
+                                  Sweetalert.fnc("success", "La tienda y el producto se han creado correctamente", "cuenta-usuario/cuenta/mi-tienda");
+
+                                }
+
+                              }, err => {
+
+                                Sweetalert.fnc("error", err.error.error.message, null)
+
+                              })
+                          }
+
+
+                        }, err => {
+
+                          Sweetalert.fnc("error", err.error.error.message, null)
+
+                        })
+
                     }
 
-                  })
+                  }
 
-              }
+                })
 
             }
 
@@ -1412,6 +1411,13 @@ export class CuentaNuevaTiendaComponent implements OnInit {
 
     })
 
+  }
+
+  public validaStock(e) {
+    var key = window.event ? e.which : e.keyCode;
+    if (key < 48 || key > 57) {
+      e.preventDefault();
+    }
   }
 
 }

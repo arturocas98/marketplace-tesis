@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     public activatedRouter: ActivatedRoute,
     public router: Router,
     private afAuth: AngularFireAuth,
-    private storeService:TiendaService
+    private storeService: TiendaService
 
 
   ) {
@@ -184,7 +184,7 @@ export class LoginComponent implements OnInit {
 
       this.usuarioService.getFilterData("email", this.usuario.email).subscribe(res1 => {
         console.log(res1);
-        
+
         for (const i in res1) {
           if (res1[i].confirmar_correo) {
 
@@ -215,7 +215,7 @@ export class LoginComponent implements OnInit {
                   } else {
                     localStorage.setItem("rememberMe", "yes");
                   }
-                  this.storeService.getFilterData('username',res1[i].username).subscribe(respTienda=>{
+                  this.storeService.getFilterData('username', res1[i].username).subscribe(respTienda => {
                     if (Object.keys(respTienda).length > 0) {
                       // window.open('cuenta-usuario/cuenta/mi-tienda', '_top');
                       this.router.navigate(['/cuenta-usuario/cuenta/mi-tienda']);
@@ -303,6 +303,165 @@ export class LoginComponent implements OnInit {
 
   }
 
+  googleRegister() {
+    let localUsersService = this.usuarioService;
+    let localUser = this.usuario;
+    let localStoreService = this.storeService;
+
+    // Initialize Firebase
+    // firebase.initializeApp(environment.firebase);
+
+    this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider).then(function (result) {
+      localUsersService.getFilterData("email", result.user.email)
+        .subscribe(resp => {
+
+          if (Object.keys(resp).length > 0) {
+            loginFirebaseDatabase(result, localUser, localUsersService, localStoreService)
+          } else {
+            registerFirebaseDatabase(result, localUser, localUsersService);
+            // loginFirebaseDatabase(result, localUser, localUsersService, localStoreService)
+          }
+        });
+
+
+    }).catch(function (error) {
+      var errorMessage = error.message;
+
+      Sweetalert.fnc("error", errorMessage, "registro");
+    });
+
+    function registerFirebaseDatabase(result, localUser, localUsersService: UsuarioService) {
+
+      var user = result.user;
+
+      if (user.P) {
+
+        localUser.displayName = user.displayName;
+        localUser.email = user.email;
+        localUser.idToken = user.b.b.i;
+        localUser.metodo_registro = "google";
+        localUser.username = user.email.split('@')[0];
+        localUser.imagen = user.photoURL;
+
+        /*=============================================
+        Evitar que se dupliquen los registros en Firebase Database
+        =============================================*/
+
+        localUsersService.getFilterData("email", user.email)
+          .subscribe(resp => {
+
+            if (Object.keys(resp).length > 0) {
+
+              // Sweetalert.fnc("error", `Ya ha iniciado sesión con este correo, registrese con un correo diferente`, "login")
+
+            } else {
+
+              localUsersService.registerDatabase(localUser)
+                .subscribe(resp => {
+
+                  if (resp["name"] != "") {
+
+                    loginFirebaseDatabase(result, localUser, localUsersService, localStoreService)
+
+                  }
+
+                })
+
+            }
+
+          })
+
+      }
+
+    }
+
+    function loginFirebaseDatabase(result, localUser, localUsersService: UsuarioService, localStoreService: TiendaService) {
+
+      var user = result.user;
+      console.log("usuario:", user);
+      if (user.P) {
+
+        localUsersService.getFilterData("email", user.email)
+          .subscribe(resp => {
+            console.log("localusersevice:",resp);
+            // if (Object.keys(resp).length > 0) {
+
+
+
+            // } else {
+
+            //   Sweetalert.fnc("error", "Esta cuenta no esta registrada", "registro")
+
+            // }
+
+            if (resp[Object.keys(resp)[0]].metodo_registro == "google") {
+
+              /*=============================================
+              Actualizamos el idToken en Firebase
+              =============================================*/
+
+              let id = Object.keys(resp).toString();
+
+              let body = {
+
+                idToken: user.b.b.i
+              }
+              console.log("id_token:", body.idToken);
+              localUsersService.update(id, body)
+                .subscribe(resp => {
+
+                  /*=============================================
+                  Almacenamos el Token de seguridad en el localstorage
+                  =============================================*/
+
+                  localStorage.setItem("idToken", user.b.b.i);
+
+                  /*=============================================
+                  Almacenamos el email en el localstorage
+                  =============================================*/
+
+                  localStorage.setItem("email", user.email);
+
+                  /*=============================================
+                  Almacenamos la fecha de expiración localstorage
+                  =============================================*/
+
+                  let today = new Date();
+
+                  today.setSeconds(3600);
+
+                  localStorage.setItem("expiresIn", today.getTime().toString());
+
+                  /*=============================================
+                  Redireccionar al usuario a la página de su cuenta
+                  =============================================*/
+                  let username = user.email.split('@')[0];
+                  console.log("username", username);
+                  localStoreService.getFilterData('username', username).subscribe(respTienda => {
+                    console.log("respTienda:", respTienda);
+                    if (Object.keys(respTienda).length > 0) {
+
+                      window.open("/cuenta-usuario/cuenta/mi-tienda", "_top");
+
+                    } else {
+                      window.open("/cuenta-usuario/cuenta", "_top");
+                    }
+                  });
+
+
+                })
+
+            }
+
+
+          })
+
+
+      }
+    }
+
+  }
+
   googleLogin() {
 
     let localUsersService = this.usuarioService;
@@ -384,12 +543,11 @@ export class LoginComponent implements OnInit {
                     Redireccionar al usuario a la página de su cuenta
                     =============================================*/
                     let username = user.email.split('@')[0];
-                    console.log("username",username);
-                    localStoreService.getFilterData('username',username).subscribe(respTienda=>{
-                      console.log("respTienda:",respTienda);
+                    console.log("username", username);
+                    localStoreService.getFilterData('username', username).subscribe(respTienda => {
+                      console.log("respTienda:", respTienda);
                       if (Object.keys(respTienda).length > 0) {
-                        // window.open('cuenta-usuario/cuenta/mi-tienda', '_top');
-                        // this.router.navigate(['/cuenta-usuario/cuenta/mi-tienda']);
+
                         window.open("/cuenta-usuario/cuenta/mi-tienda", "_top");
 
                       } else {
@@ -397,8 +555,6 @@ export class LoginComponent implements OnInit {
                       }
                     });
 
-                    // this.router:Router;
-                    // this.router.navigate(['/cuenta-usuario/cuenta']);
 
                   })
 
@@ -522,7 +678,7 @@ export class LoginComponent implements OnInit {
 
   }
 
-  
+
 
 
 }

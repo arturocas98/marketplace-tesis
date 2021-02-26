@@ -532,8 +532,9 @@ export let DinamicPrice = {
     let arrayPrice = [];
     let offerDate;
     let today = new Date();
-
-    if (response.oferta != "") {
+    // console.log("oferta:",response.oferta);
+    if (response.oferta != '[]') {
+      // console.log("entro");
       offerDate = new Date(
         parseInt(JSON.parse(response.oferta)[2].split("-")[0]),
         parseInt(JSON.parse(response.oferta)[2].split("-")[1]) - 1,

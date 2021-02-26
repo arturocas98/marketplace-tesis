@@ -32,7 +32,7 @@ export class CallToActionComponent implements OnInit {
           let value;
           let offer;
 
-          if (response.oferta != "") {
+          if (response.oferta != "[]") {
 
             type = JSON.parse(response.oferta)[0];
             value = JSON.parse(response.oferta)[1];

@@ -108,17 +108,7 @@ export class CuentaMisComprasComponent implements OnInit, OnDestroy {
         Rating.fnc();
       }
 
-
-
-
-
-
     });
-
-
-
-
-
   }
 
   /*=============================================

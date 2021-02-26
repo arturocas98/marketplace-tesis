@@ -42,14 +42,14 @@
                     <div class="col-xl-7 col-lg-8 col-sm-12">
 
                         <div class="ps-form__billing-info">
-                            <label for="" class="text-danger" > Requerido <sup class="text-danger" >*</sup> </label>
+                            <label for="" class="text-danger"> Requerido <sup class="text-danger">*</sup> </label>
 
                             <h3 class="ps-form__heading">Datos de facturación</h3>
 
 
                             <div class="form-group">
 
-                                <label>Nombres<sup class="text-danger" >*</sup></label>
+                                <label>Nombres<sup class="text-danger">*</sup></label>
 
                                 <div class="form-group__content">
 
@@ -91,7 +91,7 @@
 
                             <div class="form-group">
 
-                                <label>Correo <sup class="text-danger" >*</sup></label>
+                                <label>Correo <sup class="text-danger">*</sup></label>
 
                                 <div class="form-group__content">
 
@@ -127,7 +127,7 @@
 
                             <div class="form-group">
 
-                                <label>Telefono<sup class="text-danger" >*</sup></label>
+                                <label>Telefono<sup class="text-danger">*</sup></label>
 
                                 <div class="form-group__content">
 
@@ -149,7 +149,7 @@
 
                             <div class="form-group">
 
-                                <label>Dirección<sup class="text-danger" >*</sup></label>
+                                <label>Dirección<sup class="text-danger">*</sup></label>
 
                                 <div class="form-group__content">
 
@@ -187,7 +187,7 @@
 
                                 <div class="form-group__content">
 
-                                    <textarea  formControlName="informacion_adicional" class="form-control" rows="7"
+                                    <textarea formControlName="informacion_adicional" class="form-control" rows="7"
                                         placeholder="Notas o indicaciones especiales para hacer tu envio"></textarea>
 
                                 </div>
@@ -262,31 +262,34 @@
                                            
                                         </div> -->
 
-                                        <div [innerHTML]="subTotalSinEnvio" ></div>
-                                        <div [innerHTML]="envio" ></div>
+                                        <div [innerHTML]="subTotalSinEnvio"></div>
+                                        <div [innerHTML]="envio"></div>
                                         <div [innerHTML]="totalP"></div>
-                                            
-                                        
+
+
                                     </div>
 
                                 </div>
 
                                 <hr class="py-3">
 
+                                <h3 class="ps-form__heading">Selecciona tu método de pago <sup
+                                        class="text-danger">*</sup> </h3>
+                                <div *ngIf="form.get('metodo_pago').invalid">
+                                    <p class="text-danger" *ngIf="form.get('metodo_pago').hasError('required')">
+                                        El campo
+                                        es requerido </p>
+                                </div>
+
                                 <div class="form-group">
-                                    <h3 class="ps-form__heading">Selecciona tu método de pago <sup class="text-danger" >*</sup> </h3>
-                                    <div *ngIf="form.get('metodo_pago').invalid">
-                                        <p class="text-danger" *ngIf="form.get('metodo_pago').hasError('required')">
-                                            El campo
-                                            es requerido </p>
-                                    </div>
+
 
 
                                     <div class="ps-radio">
 
                                         <input class="form-control" formControlName="metodo_pago" type="radio"
-                                            id="pay-paypal" value="paypal" checked>
-                                        
+                                            id="pay-paypal" value="paypal">
+
 
                                         <label for="pay-paypal">Pagar con paypal <span><img
                                                     src="{{path}}img/payment-method/paypal.jpg"
@@ -300,8 +303,8 @@
 
                                     <div class="ps-radio">
 
-                                        <input class="form-control" type="radio" id="pay-payu" name="payment-method"
-                                            value="payu">
+                                        <input class="form-control" formControlName="metodo_pago" type="radio"
+                                            id="pay-efectivo" value="efectivo">
 
                                         <label for="pay-payu">Pago contra entrega <span><img
                                                     src="{{path}}img/payment-method/pago_entrega.jpg"
@@ -311,24 +314,24 @@
 
                                 </div> -->
 
-                                <!-- <div class="form-group">
+                                <div class="form-group">
 
                                     <div class="ps-radio">
 
                                         <input class="form-control" formControlName="metodo_pago" type="radio"
-                                            id="pay-mercadopago" value="mercado-pago">
+                                            id="pay-mercadopago" value="efectivo">
 
 
-                                        <label for="pay-mercadopago">Paga envio contra entrega?
+                                        <label for="pay-mercadopago">Pago contra entrega
                                             <span>
-                                                <img src="{{path}}img/payment-method/mercado_pago.jpg" class="w-50">
+                                                <img src="{{path}}img/payment-method/pago_entrega.jpg" class="w-50">
                                             </span>
                                         </label>
 
                                     </div>
 
 
-                                </div> -->
+                                </div>
 
                                 <button type="submit" class="ps-btn ps-btn--fullwidth">Proceder a pagar</button>
 
