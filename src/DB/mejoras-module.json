@@ -6,7 +6,7 @@
             "imagen": "alimentos.jpg",
             "nombre": "Alimentos",
             "url": "alimentos",
-            "vistas": 354
+            "vistas": 383
         },
         {
             "grupo": "[\"Granos\",\"Harinas\"]",
@@ -14,7 +14,7 @@
             "imagen": "al-granel.jpg",
             "nombre": "Al granel",
             "url": "al-granel",
-            "vistas": 11
+            "vistas": 15
         },
         {
             "grupo": "[\"Aceites\",\"Cremas\"]",
@@ -22,7 +22,7 @@
             "imagen": "cuidado-personal.jpg",
             "nombre": "Cuidado personal",
             "url": "cuidado-personal",
-            "vistas": 34
+            "vistas": 41
         },
         {
             "grupo": "[\"Gaseosas\",\"Lacteas\"]",
@@ -30,7 +30,7 @@
             "imagen": "bebidas.jpg",
             "nombre": "Bebidas",
             "url": "bebidas",
-            "vistas": 27
+            "vistas": 28
         },
         {
             "grupo": "[\"Mermeladas\",\"Dulces\"]",
@@ -38,10 +38,17 @@
             "imagen": "snacks.jpg",
             "nombre": "Snacks",
             "url": "snacks",
-            "vistas": 13
+            "vistas": 35
         }
     ],
     "disputa": {
+        "-MU_1ryfLMx4S6otuwkP": {
+            "emisor": "tesis.ug2020",
+            "fecha_disputa": "2021-02-27T19:50:53.425Z",
+            "mensaje": "Mal mal mal etc etc",
+            "orden": "-MU_1geXBBlTMoZG4h3p",
+            "receptor": "Digitalworld Us"
+        },
         "id": "hsakjshak61"
     },
     "mensaje": {
@@ -66,6 +73,99 @@
             "receptor": "Digitalworld Us",
             "respuesta": "Si tiene proteinas estimado!",
             "url_producto": "jengibre"
+        },
+        "-MUVwzKylOFor2cGhq40": {
+            "emisor": "santav2374",
+            "fecha_mensaje": "2021-02-27T00:46:59.979Z",
+            "mensaje": "",
+            "receptor": "La Tienda Organica De Guayaquil",
+            "url_producto": "dulce-de-higo"
+        },
+        "-MUVwzzMzWhvwDZzC-8A": {
+            "emisor": "santav2374",
+            "fecha_mensaje": "2021-02-27T00:47:02.770Z",
+            "mensaje": "",
+            "receptor": "La Tienda Organica De Guayaquil",
+            "url_producto": "dulce-de-higo"
+        },
+        "-MUVx-3hrX_9tEaHr3bM": {
+            "emisor": "santav2374",
+            "fecha_mensaje": "2021-02-27T00:47:03.287Z",
+            "mensaje": "",
+            "receptor": "La Tienda Organica De Guayaquil",
+            "url_producto": "dulce-de-higo"
+        },
+        "-MUVx-6GqU--oISC4FM-": {
+            "emisor": "santav2374",
+            "fecha_mensaje": "2021-02-27T00:47:03.287Z",
+            "mensaje": "",
+            "receptor": "La Tienda Organica De Guayaquil",
+            "url_producto": "dulce-de-higo"
+        }
+    },
+    "orden": {
+        "-MUHGIo-4K5_lC98KvgE": {
+            "direccion": "Lomas de urdesa villa 282",
+            "email": "santav2374@gmail.com",
+            "fecha_emision": "2021-02-24T04:21:28.722Z",
+            "informacion_adicional": "",
+            "telefono": "0838264829",
+            "total": "4.43",
+            "usuario": "santav2374"
+        },
+        "-MUHJO56RT310r5NMnCU": {
+            "direccion": "Lomas de urdesa villa 282",
+            "email": "santav2374@gmail.com",
+            "fecha_emision": "2021-02-24T04:34:56.787Z",
+            "informacion_adicional": "",
+            "telefono": "0838264829",
+            "total": "11.28",
+            "usuario": "santav2374"
+        },
+        "-MUQzm2uz0Eg9znZlQ-T": {
+            "direccion": "Lomas de urdesa villa 282",
+            "email": "santav2374@gmail.com",
+            "fecha_emision": "2021-02-26T01:41:06.384Z",
+            "informacion_adicional": "",
+            "telefono": "0838264829",
+            "total": "59.11",
+            "usuario": "santav2374"
+        },
+        "-MUVL0nz4GoUOtEMKOAz": {
+            "direccion": "Lomas de urdesa villa 282",
+            "email": "santav2374@gmail.com",
+            "fecha_emision": "2021-02-26T21:56:46.049Z",
+            "informacion_adicional": "",
+            "telefono": "0838264829",
+            "total": "4.43",
+            "usuario": "santav2374"
+        },
+        "-MU_1gZ11P-n13vOKwGz": {
+            "direccion": "Samanes norte de guayaquil",
+            "email": "tesis.ug2020@gmail.com",
+            "fecha_emision": "2021-02-27T19:50:25.992Z",
+            "informacion_adicional": "",
+            "telefono": "0982172612",
+            "total": "5.80",
+            "usuario": "tesis.ug2020"
+        },
+        "-MUas_AbXIqovyShLBVP": {
+            "direccion": "coop.la gaviota Mz 2260 Villa 13",
+            "email": "elisantacruz26@gmail.com",
+            "fecha_emision": "2021-02-28T04:25:23.391Z",
+            "informacion_adicional": "",
+            "telefono": "0991844410",
+            "total": "8.00",
+            "usuario": "elisantacruz26"
+        },
+        "-MUat2hc5WlmdxEYiplw": {
+            "direccion": "coop.la gaviota Mz 2260 Villa 13",
+            "email": "elisantacruz26@gmail.com",
+            "fecha_emision": "2021-02-28T04:27:31.920Z",
+            "informacion_adicional": "",
+            "telefono": "0991844410",
+            "total": "13.00",
+            "usuario": "elisantacruz26"
         }
     },
     "orden_detalle": {
@@ -142,7 +242,7 @@
             "imagen": "9700.jpg",
             "informacion_adicional": "",
             "precio": "1.43",
-            "proceso": "[{\"stage\":\"revisando\",\"status\":\"ok\",\"comment\":\"Hemos recibido su pedido, iniciamos el proceso de despacho\",\"date\":\"2021-02-21T16:57:06.721Z\"},{\"stage\":\"enviando\",\"status\":\"pendiente\",\"comment\":\"\",\"date\":\"2021-02-24T16:57:06.721Z\"},{\"stage\":\"entregado\",\"status\":\"pendiente\",\"comment\":\"\",\"date\":\"2021-02-27T16:57:06.721Z\"}]",
+            "proceso": "[{\"stage\":\"revisando\",\"status\":\"ok\",\"comment\":\"Hemos recibido su pedido, iniciamos el proceso de despacho\",\"date\":\"2021-02-21T16:57:06.721Z\"},{\"stage\":\"enviando\",\"status\":\"ok\",\"comment\":\"\",\"date\":\"2021-02-24T16:57:06.721Z\"},{\"stage\":\"entregado\",\"status\":\"pendiente\",\"comment\":\"\",\"date\":\"2021-02-27T16:57:06.721Z\"}]",
             "producto": "Kiwi",
             "telefono": "0838264829",
             "tienda": "La Tienda Organica De Guayaquil",
@@ -164,6 +264,172 @@
             "tienda": "Digitalworld Us",
             "url": "tomatillo",
             "usuario": "santav2374"
+        },
+        "-MUGlP9gArjsif0v8P4f": {
+            "cantidad": 1,
+            "categoria": "alimentos",
+            "direccion": "Lomas de urdesa villa 282",
+            "email": "santav2374@gmail.com",
+            "estado": "pendiente",
+            "imagen": "9700.jpg",
+            "informacion_adicional": "",
+            "precio": "1.43",
+            "proceso": "[{\"stage\":\"revisando\",\"status\":\"ok\",\"comment\":\"Hemos recibido su pedido, iniciamos el proceso de despacho\",\"date\":\"2021-02-24T02:02:05.072Z\"},{\"stage\":\"enviando\",\"status\":\"pendiente\",\"comment\":\"\",\"date\":\"2021-02-27T02:02:05.072Z\"},{\"stage\":\"entregado\",\"status\":\"pendiente\",\"comment\":\"\",\"date\":\"2021-03-02T02:02:05.072Z\"}]",
+            "producto": "Kiwi",
+            "telefono": "0838264829",
+            "tienda": "La Tienda Organica De Guayaquil",
+            "url": "kiwi",
+            "usuario": "santav2374"
+        },
+        "-MUH5lqdK6bXKhEv8Wpl": {
+            "cantidad": 1,
+            "categoria": "cuidado-personal",
+            "estado": "pendiente",
+            "id_orden": "-MUH5llJ8LLmHtGMFpww",
+            "imagen": "co_1.jpg",
+            "precio": "18.75",
+            "proceso": "[{\"stage\":\"revisando\",\"status\":\"ok\",\"comment\":\"Hemos recibido su pedido, iniciamos el proceso de despacho\",\"date\":\"2021-02-24T03:35:27.691Z\"},{\"stage\":\"enviando\",\"status\":\"pendiente\",\"comment\":\"\",\"date\":\"2021-02-26T03:35:27.691Z\"},{\"stage\":\"entregado\",\"status\":\"pendiente\",\"comment\":\"\",\"date\":\"2021-03-01T03:35:27.691Z\"}]",
+            "producto": "Aceite de coco",
+            "tienda": "Digitalworld Us",
+            "url": "aceite-de-coco"
+        },
+        "-MUH5lqixLLmiFc65MJo": {
+            "cantidad": 1,
+            "categoria": "snacks",
+            "estado": "pendiente",
+            "id_orden": "-MUH5lkBRMZ7gNTGGLq9",
+            "imagen": "5.jpg",
+            "precio": "15.00",
+            "proceso": "[{\"stage\":\"revisando\",\"status\":\"ok\",\"comment\":\"Hemos recibido su pedido, iniciamos el proceso de despacho\",\"date\":\"2021-02-24T03:35:27.660Z\"},{\"stage\":\"enviando\",\"status\":\"pendiente\",\"comment\":\"\",\"date\":\"2021-02-26T03:35:27.660Z\"},{\"stage\":\"entregado\",\"status\":\"pendiente\",\"comment\":\"\",\"date\":\"2021-03-01T03:35:27.660Z\"}]",
+            "producto": "Mermelada de tomate",
+            "tienda": "Digitalworld Us",
+            "url": "mermelada-tomate"
+        },
+        "-MUH92PvGpJ3ZscOey4o": {
+            "cantidad": 1,
+            "categoria": "alimentos",
+            "estado": "pendiente",
+            "id_orden": "",
+            "imagen": "9700.jpg",
+            "precio": "1.43",
+            "proceso": "[{\"stage\":\"revisando\",\"status\":\"ok\",\"comment\":\"Hemos recibido su pedido, iniciamos el proceso de despacho\",\"date\":\"2021-02-24T03:49:46.278Z\"},{\"stage\":\"enviando\",\"status\":\"pendiente\",\"comment\":\"\",\"date\":\"2021-02-27T03:49:46.278Z\"},{\"stage\":\"entregado\",\"status\":\"pendiente\",\"comment\":\"\",\"date\":\"2021-03-02T03:49:46.278Z\"}]",
+            "producto": "Kiwi",
+            "tienda": "La Tienda Organica De Guayaquil",
+            "url": "kiwi"
+        },
+        "-MUH92UhTx6jAkimnpZY": {
+            "cantidad": 1,
+            "categoria": "cuidado-personal",
+            "estado": "pendiente",
+            "id_orden": "",
+            "imagen": "co_1.jpg",
+            "precio": "18.75",
+            "proceso": "[{\"stage\":\"revisando\",\"status\":\"ok\",\"comment\":\"Hemos recibido su pedido, iniciamos el proceso de despacho\",\"date\":\"2021-02-24T03:49:46.331Z\"},{\"stage\":\"enviando\",\"status\":\"pendiente\",\"comment\":\"\",\"date\":\"2021-02-26T03:49:46.331Z\"},{\"stage\":\"entregado\",\"status\":\"pendiente\",\"comment\":\"\",\"date\":\"2021-03-01T03:49:46.331Z\"}]",
+            "producto": "Aceite de coco",
+            "tienda": "Digitalworld Us",
+            "url": "aceite-de-coco"
+        },
+        "-MUH92Ul1suOBi9klzRl": {
+            "cantidad": 1,
+            "categoria": "alimentos",
+            "estado": "pendiente",
+            "id_orden": "",
+            "imagen": "rom_1.jpg",
+            "precio": "4.00",
+            "proceso": "[{\"stage\":\"revisando\",\"status\":\"ok\",\"comment\":\"Hemos recibido su pedido, iniciamos el proceso de despacho\",\"date\":\"2021-02-24T03:49:46.365Z\"},{\"stage\":\"enviando\",\"status\":\"pendiente\",\"comment\":\"\",\"date\":\"2021-02-26T03:49:46.365Z\"},{\"stage\":\"entregado\",\"status\":\"pendiente\",\"comment\":\"\",\"date\":\"2021-03-01T03:49:46.365Z\"}]",
+            "producto": "Romero",
+            "tienda": "Digitalworld Us",
+            "url": "romero"
+        },
+        "-MUHJOEZC3Opm7q4umCB": {
+            "cantidad": 1,
+            "categoria": "alimentos",
+            "estado": "pendiente",
+            "id_orden": "-MUHJO56RT310r5NMnCU",
+            "imagen": "j_1.jpg",
+            "precio": "2.85",
+            "proceso": "[{\"stage\":\"revisando\",\"status\":\"ok\",\"comment\":\"Hemos recibido su pedido, iniciamos el proceso de despacho\",\"date\":\"2021-02-24T04:34:57.353Z\"},{\"stage\":\"enviando\",\"status\":\"pendiente\",\"comment\":\"\",\"date\":\"2021-02-26T04:34:57.353Z\"},{\"stage\":\"entregado\",\"status\":\"pendiente\",\"comment\":\"\",\"date\":\"2021-03-01T04:34:57.353Z\"}]",
+            "producto": "Jengibre",
+            "tienda": "Digitalworld Us",
+            "url": "jengibre"
+        },
+        "-MUHJOEftEHAgGTHfcE8": {
+            "cantidad": 1,
+            "categoria": "alimentos",
+            "estado": "pendiente",
+            "id_orden": "-MUHJO56RT310r5NMnCU",
+            "imagen": "9700.jpg",
+            "precio": "1.43",
+            "proceso": "[{\"stage\":\"revisando\",\"status\":\"ok\",\"comment\":\"Hemos recibido su pedido, iniciamos el proceso de despacho\",\"date\":\"2021-02-24T04:34:57.332Z\"},{\"stage\":\"enviando\",\"status\":\"pendiente\",\"comment\":\"\",\"date\":\"2021-02-27T04:34:57.332Z\"},{\"stage\":\"entregado\",\"status\":\"pendiente\",\"comment\":\"\",\"date\":\"2021-03-02T04:34:57.332Z\"}]",
+            "producto": "Kiwi",
+            "tienda": "La Tienda Organica De Guayaquil",
+            "url": "kiwi"
+        },
+        "-MUQzm8yH8iigs5VC4-H": {
+            "cantidad": 2,
+            "categoria": "alimentos",
+            "estado": "pendiente",
+            "id_orden": "-MUQzm2uz0Eg9znZlQ-T",
+            "imagen": "9700.jpg",
+            "precio": "2.86",
+            "proceso": "[{\"stage\":\"revisando\",\"status\":\"ok\",\"comment\":\"Hemos recibido su pedido, iniciamos el proceso de despacho\",\"date\":\"2021-02-26T01:41:06.745Z\"},{\"stage\":\"enviando\",\"status\":\"pendiente\",\"comment\":\"\",\"date\":\"2021-03-01T01:41:06.744Z\"},{\"stage\":\"entregado\",\"status\":\"pendiente\",\"comment\":\"\",\"date\":\"2021-03-04T01:41:06.745Z\"}]",
+            "producto": "Kiwi",
+            "tienda": "La Tienda Organica De Guayaquil",
+            "url": "kiwi"
+        },
+        "-MUQzm9UpvzGgpu5OVRX": {
+            "cantidad": 3,
+            "categoria": "cuidado-personal",
+            "estado": "pendiente",
+            "id_orden": "-MUQzm2uz0Eg9znZlQ-T",
+            "imagen": "co_1.jpg",
+            "precio": "56.25",
+            "proceso": "[{\"stage\":\"revisando\",\"status\":\"ok\",\"comment\":\"Hemos recibido su pedido, iniciamos el proceso de despacho\",\"date\":\"2021-02-26T01:41:06.769Z\"},{\"stage\":\"enviando\",\"status\":\"pendiente\",\"comment\":\"\",\"date\":\"2021-02-28T01:41:06.769Z\"},{\"stage\":\"entregado\",\"status\":\"pendiente\",\"comment\":\"\",\"date\":\"2021-03-03T01:41:06.769Z\"}]",
+            "producto": "Aceite de coco",
+            "tienda": "Digitalworld Us",
+            "url": "aceite-de-coco"
+        },
+        "-MUVL0x4emAJ-B0qHT6e": {
+            "-MUVNkmfGXkdvsK3EMRO": {
+                "estado": "entregado",
+                "proceso": "[{\"stage\":\"revisando\",\"status\":\"ok\",\"comment\":\"Hemos recibido su pedido, iniciamos el proceso de despacho\",\"date\":\"2021-02-26T21:56:46.525Z\"},{\"stage\":\"enviando\",\"status\":\"ok\",\"comment\":\"\",\"date\":\"2021-03-01T21:56:46.525Z\"},{\"stage\":\"entregado\",\"status\":\"ok\",\"comment\":\"\",\"date\":\"2021-03-04T21:56:46.525Z\"}]"
+            },
+            "cantidad": 1,
+            "categoria": "alimentos",
+            "estado": "entregado",
+            "id_orden": "-MUVL0nz4GoUOtEMKOAz",
+            "imagen": "9700.jpg",
+            "precio": "1.43",
+            "proceso": "[{\"stage\":\"revisando\",\"status\":\"ok\",\"comment\":\"Hemos recibido su pedido, iniciamos el proceso de despacho\",\"date\":\"2021-02-26T21:56:46.525Z\"},{\"stage\":\"enviando\",\"status\":\"ok\",\"comment\":\"\",\"date\":\"2021-03-01T21:56:46.525Z\"},{\"stage\":\"entregado\",\"status\":\"ok\",\"comment\":\"\",\"date\":\"2021-03-04T21:56:46.525Z\"}]",
+            "producto": "Kiwi",
+            "tienda": "La Tienda Organica De Guayaquil",
+            "url": "kiwi"
+        },
+        "-MU_1geXBBlTMoZG4h3p": {
+            "cantidad": 1,
+            "categoria": "alimentos",
+            "estado": "pendiente",
+            "id_orden": "-MU_1gZ11P-n13vOKwGz",
+            "imagen": "tom_1.jpg",
+            "precio": "1.80",
+            "proceso": "[{\"stage\":\"revisando\",\"status\":\"ok\",\"comment\":\"Hemos recibido su pedido, iniciamos el proceso de despacho\",\"date\":\"2021-02-27T19:50:26.412Z\"},{\"stage\":\"enviando\",\"status\":\"pendiente\",\"comment\":\"\",\"date\":\"2021-03-01T19:50:26.412Z\"},{\"stage\":\"entregado\",\"status\":\"pendiente\",\"comment\":\"\",\"date\":\"2021-03-04T19:50:26.412Z\"}]",
+            "producto": "Tomatillo",
+            "tienda": "Digitalworld Us",
+            "url": "tomatillo",
+            "usuario": "tesis.ug2020"
+        },
+        "-MUat2ru805QIpgvaQlk": {
+            "cantidad": 1,
+            "categoria": "al-granel",
+            "estado": "pendiente",
+            "id_orden": "-MUat2hc5WlmdxEYiplw",
+            "imagen": "1515.jpg",
+            "precio": "10.00",
+            "proceso": "[{\"stage\":\"revisando\",\"status\":\"ok\",\"comment\":\"Hemos recibido su pedido, iniciamos el proceso de despacho\",\"date\":\"2021-02-28T04:27:32.525Z\"},{\"stage\":\"enviando\",\"status\":\"pendiente\",\"comment\":\"\",\"date\":null},{\"stage\":\"entregado\",\"status\":\"pendiente\",\"comment\":\"\",\"date\":null}]",
+            "producto": "prueba produccion",
+            "tienda": "La Tienda Organica De Guayaquil",
+            "url": "prueba-produccion",
+            "usuario": "elisantacruz26"
         }
     },
     "producto": {
@@ -186,13 +452,13 @@
             "resumen": "[\"Unrestrained and portable active stereo speaker\", \"Free from the confines of wires and chords\", \"20 hours of portable capabilities\", \"Double-ended Coil Cord with 3.5mm Stereo Plugs Included\", \"3/4 Dome Tweeters: 2X and 4 Woofer: 1X\"]",
             "reviews": "[{\"review\":4, \"comment\":\"Lorem Ipsum\"},{\"review\":5, \"comment\":\"Lorem Ipsum\"},{\"review\":4, \"comment\":\"Lorem Ipsum\"},{\"review\":3, \"comment\":\"Lorem Ipsum\"},{\"review\":4, \"comment\":\"Lorem Ipsum\"},{\"review\":5, \"comment\":\"Lorem Ipsum\"},{\"review\":5, \"comment\":\"Lorem Ipsum\"}]",
             "shipping": 5,
-            "stock": 89,
+            "stock": 99,
             "subcategoria": "de-frutas",
             "tiempo_entrega": 5,
             "tienda": "Digitalworld Us",
             "top_banner": "{\"H3 tag\":\"40%\",\"P1 tag\":\"Descuento\", \"H4 tag\":\"En todas las categorias\", \"P2 tag\":\"Ingresa el codigo\", \"Span tag\":\"Ventas2020\",\"Button tag\":\"Comprar ahora\",\"IMG tag\":\"header-promotion-1.jpg\"}",
             "url": "mermelada-tomate",
-            "ventas": 102,
+            "ventas": 1,
             "vertical_slider": "snacks-1.jpg",
             "video": "[\"youtube\",\"Sl5FaskVpD4\"]",
             "vistas": 137
@@ -550,6 +816,234 @@
             "url": "kiwi",
             "ventas": 0,
             "vistas": 13
+        },
+        "-MUVdvVufVeqeZYm-tME": {
+            "categoria": "snacks",
+            "default_banner": "1128.jpg",
+            "descripcion": "<p>El dulce de higos es uno de esos postres que representan la esencia de \nEcuador, son deliciosos y sencillos. El proceso para preparar los higos \nes un poco largo, tarda casi tres días, pero vale la pena la espera, es \nel toque ideal para el final a una buena comida.</p>",
+            "etiquetas": "[\"dulces\",\"higo\",\"snacks\"]",
+            "fecha_creacion": "2021-02-26T23:23:42.031Z",
+            "feedback": "{\"type\":\"approved\",\"comment\":\"Tu producto esta en revisión\"}",
+            "galeria": "[\"434.jpg\",\"6752.jpg\",\"5690.jpg\"]",
+            "grupo": "Dulces",
+            "horizontal_slider": "{\"H4 tag\":\"Hasta agotar stock\",\"H3-1 tag\":\"Dulces tradicionales\",\"H3-2 tag\":\"come saludable\",\"H3-3 tag\":\"Hasta el\",\"H3-4s tag\":\"10%\",\"Button tag\":\"Comprar ahora\",\"IMG tag\":\"3380.jpg\"}",
+            "imagen": "8467.jpg",
+            "nombre": "dulce de higo",
+            "oferta": "[]",
+            "precio": 1,
+            "resumen": "[\"Fruta saludable para el organismo\"]",
+            "reviews": "[]",
+            "stock": 100,
+            "subcategoria": "endulzantes",
+            "tienda": "La Tienda Organica De Guayaquil",
+            "url": "dulce-de-higo",
+            "ventas": 0,
+            "vistas": 0
+        },
+        "-MUaVKT9Z_wSchVf6nZf": {
+            "categoria": "bebidas",
+            "descripcion": "<p>El Kéfir&nbsp;es un producto&nbsp;<span style=\"background-image: none; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">lácteo</span>&nbsp;parecido al yogur líquido,&nbsp;<span style=\"background-image: none; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">fermentado</span>&nbsp;a través de la acción de un conjunto de&nbsp;<span style=\"background-image: none; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">levaduras</span>&nbsp;(<span style=\"background-image: none; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">hongos</span>) y&nbsp;<span style=\"background-image: none; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">bacterias</span>&nbsp;(<span style=\"background-image: none; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">lactobacilos</span>).&nbsp;<span style=\"font-size: 14px; color: rgb(32, 33, 34); font-family: sans-serif;\">&nbsp;</span>En general aporta minerales, especialmente el&nbsp;<span style=\"background-image: none; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">calcio</span>,&nbsp;<span style=\"background-image: none; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">magnesio</span>&nbsp;y&nbsp;<span style=\"background-image: none; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">fósforo</span>; rico en vitaminas del grupo B (<span style=\"background-image: none; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">B1</span>,&nbsp;<span style=\"background-image: none; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">B5</span>,&nbsp;<span style=\"background-image: none; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">B9</span>&nbsp;y&nbsp;<span style=\"background-image: none; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">B12</span>,&nbsp;<span style=\"background-image: none; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">biotina</span>) y&nbsp;<span style=\"background-image: none; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">vitamina K</span>; aminoácidos esenciales, como el&nbsp;<span style=\"background-image: none; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">triptófano</span>&nbsp;y proteínas de fácil digestión.</p><p><br></p>",
+            "etiquetas": "[\"probióticos\",\"proteína\",\"lácteos\"]",
+            "fecha_creacion": "2021-02-28T02:39:31.067Z",
+            "feedback": "{\"type\":\"approved\",\"comment\":\"Tu producto está disponible\"}",
+            "galeria": "[\"3061.png\",\"5134.png\"]",
+            "grupo": "Gaseosas",
+            "horizontal_slider": "{\"H4 tag\":\"\",\"H3-1 tag\":\"\",\"H3-2 tag\":\"\",\"H3-3 tag\":\"\",\"H3-4s tag\":\"\",\"Button tag\":\"\",\"IMG tag\":\"\"}",
+            "imagen": "6692.png",
+            "nombre": "Kéfir 1125 ml",
+            "oferta": "[]",
+            "precio": "6.30",
+            "resumen": "[\"Aumenta la inmunidad\",\"Apoya la digesitión y combate el SII\",\"Contiene 100 veces más probióticos que el yogurt\"]",
+            "reviews": "[]",
+            "stock": "20",
+            "subcategoria": "sin-gas",
+            "tienda": "La Granola Feliz",
+            "url": "kefir-1125-ml",
+            "ventas": 0,
+            "vistas": 0
+        },
+        "-MUaqRqnpCFiFoz94sPn": {
+            "categoria": "snacks",
+            "descripcion": "<p>Barra de granola con ingredientes andinos y costeños, llenas de ingredientes ricos en ácidos grasos esenciales, es decir, alimentos ricos en CALORIAS QUE NUTREN.</p><hr><p>Ingredientes:</p><ul><li>Ajonjolí</li><li>Sésamo</li><li>Avena</li><li>Coco</li><li>Amaranto</li><li>Arándanos</li><li>Panela</li></ul>",
+            "etiquetas": "[\"barra\",\"energética\",\"granola\"]",
+            "fecha_creacion": "2021-02-28T04:16:10.576Z",
+            "feedback": "{\"type\":\"approved\",\"comment\":\"Tu producto esta aprobado\"}",
+            "galeria": "[\"6529.png\",\"8794.png\",\"3352.png\"]",
+            "grupo": "Dulces",
+            "horizontal_slider": "{\"H4 tag\":\"\",\"H3-1 tag\":\"\",\"H3-2 tag\":\"\",\"H3-3 tag\":\"\",\"H3-4s tag\":\"\",\"Button tag\":\"\",\"IMG tag\":\"\"}",
+            "imagen": "9036.png",
+            "nombre": "Barra Granolera",
+            "oferta": "[]",
+            "precio": "1.03",
+            "resumen": "[\"No tiene excesos de endulzantes\",\"No tiene grasas saturadas\"]",
+            "reviews": "[]",
+            "stock": "45",
+            "subcategoria": "integrales",
+            "tienda": "La Granola Feliz",
+            "url": "barra-granolera",
+            "ventas": 0,
+            "vistas": 0
+        },
+        "-MUee5fMu8KV7WZDlWFl": {
+            "categoria": "snacks",
+            "default_banner": "6435.png",
+            "descripcion": "<p>Es altamente rico en antioxidantes necesarios para proteger el organismo de enfermedades coronarias. El consumo regular de maní, por su contenido en vitamina E, ayudaría a prevenir la enfermedad de Alzheimer.</p><hr><p><span style=\"color: rgb(204, 204, 204); font-family: &quot;Work Sans&quot;, sans-serif; font-size: 16px;\">Características principales:</span></p><ul><li>Gracias a la presencia de minerales, su consumo favorece la formación ósea, las funciones del cerebro y la conservación de dientes sanos.</li><li>Es bajo en sodio y rico en potasio, lo cual protege contra la hipertensión arterial y evita la retención de líquidos.<br></li><li>Contiene ácido fólico, fundamental en la formación de células nuevas en el cuerpo y especialmente recomendado durante el embarazo, para prevenir malformaciones del tubo neural.</li><li>Los ácidos grasos intervienen en las defensas inmunológicas.</li><li>Mejora la digestión, por la presencia de fibras.</li><li>Su contenido de niacina es importante para el mantenimiento de una piel saludable.</li><li>Es una alternativa saludable para personas con anemia.</li><li>Es un práctico combatiente de la fatiga.</li></ul>",
+            "etiquetas": "[\"desayunos\",\"granola\"]",
+            "fecha_creacion": "2021-02-28T22:00:40.988Z",
+            "feedback": "{\"type\":\"approved\",\"comment\":\"Tu producto esta aprobado\"}",
+            "galeria": "[\"9737.png\"]",
+            "grupo": "Dulces",
+            "horizontal_slider": "{\"H4 tag\":\"\",\"H3-1 tag\":\"\",\"H3-2 tag\":\"\",\"H3-3 tag\":\"\",\"H3-4s tag\":\"\",\"Button tag\":\"\",\"IMG tag\":\"\"}",
+            "imagen": "8803.png",
+            "nombre": "Granola Manabí",
+            "oferta": "[]",
+            "precio": "3.5",
+            "resumen": "[\"Contiene un 8% de tiamina que interviene en el buen funcionamiento del sistema nervioso.\",\"Es muy energético y nutritivo.\",\"Contribuye a la prevención de la osteoporosis.\"]",
+            "reviews": "[]",
+            "stock": "15",
+            "subcategoria": "integrales",
+            "tienda": "La Granola Feliz",
+            "url": "granola-manabi",
+            "ventas": 0,
+            "vistas": 0
+        },
+        "-MUeeqLEL8iRP6lbvhML": {
+            "categoria": "snacks",
+            "default_banner": "3708.png",
+            "descripcion": "<p>Descripción de Granola Muesli</p><ul><li>Característica / Ventaja 1</li><li>Característica / Ventaja 2</li><li>Característica / Ventaja 3</li><li>Característica / Ventaja 4</li></ul>",
+            "etiquetas": "[\"granola\",\"muesli\",\"desayunos\",\"cenas\"]",
+            "fecha_creacion": "2021-02-28T22:03:56.382Z",
+            "feedback": "{\"type\":\"approved\",\"comment\":\"Tu producto esta aprobado\"}",
+            "galeria": "[\"6035.png\"]",
+            "grupo": "Dulces",
+            "horizontal_slider": "{\"H4 tag\":\"\",\"H3-1 tag\":\"\",\"H3-2 tag\":\"\",\"H3-3 tag\":\"\",\"H3-4s tag\":\"\",\"Button tag\":\"\",\"IMG tag\":\"\"}",
+            "imagen": "7667.png",
+            "nombre": "Granola Muesli",
+            "oferta": "[]",
+            "precio": "3.45",
+            "resumen": "[\"Resumen del producto 1\",\"Resumen del producto 2\",\"Resumen del producto 3\"]",
+            "reviews": "[]",
+            "stock": "25",
+            "subcategoria": "integrales",
+            "tienda": "La Granola Feliz",
+            "url": "granola-muesli",
+            "ventas": 0,
+            "vistas": 0
+        },
+        "-MUegSbBEg5oG3LSQgaP": {
+            "categoria": "bebidas",
+            "default_banner": "3752.png",
+            "descripcion": "<p>El Kéfir es un producto lácteo parecido al yogur líquido, fermentado a través de la acción de un conjunto de levaduras (hongos) y bacterias (lactobacilos).&nbsp; En general aporta minerales, especialmente el calcio, magnesio y fósforo; rico en vitaminas del grupo B (B1, B5, B9 y B12, biotina) y vitamina K; aminoácidos esenciales, como el triptófano y proteínas de fácil digestión.<br></p>",
+            "etiquetas": "[\"kefir\",\"probioticos\",\"leche\"]",
+            "fecha_creacion": "2021-02-28T22:10:59.524Z",
+            "feedback": "{\"type\":\"approved\",\"comment\":\"Tu producto esta aprobado\"}",
+            "galeria": "[\"8538.png\"]",
+            "grupo": "Lacteas",
+            "horizontal_slider": "{\"H4 tag\":\"\",\"H3-1 tag\":\"\",\"H3-2 tag\":\"\",\"H3-3 tag\":\"\",\"H3-4s tag\":\"\",\"Button tag\":\"\",\"IMG tag\":\"\"}",
+            "imagen": "7130.png",
+            "nombre": "Kéfir 300ml",
+            "oferta": "[]",
+            "precio": "3.5",
+            "resumen": "[\"Aumenta la inmunidad\",\"Apoya la digestión y combate el SII\",\"Contiene 100 veces más probióticos que el yogurt\"]",
+            "reviews": "[]",
+            "stock": "10",
+            "subcategoria": "vegetales",
+            "tienda": "La Granola Feliz",
+            "url": "kefir-300ml",
+            "ventas": 0,
+            "vistas": 0
+        },
+        "-MUehrW5dkh27qEhyAAy": {
+            "categoria": "snacks",
+            "default_banner": "1756.png",
+            "descripcion": "<p>Descripción de Granola Valentina</p><ul><li>Característica / Ventaja del producto 1</li><li>Característica / Ventaja del producto 1</li><li>Característica / Ventaja del producto 1</li><li>Característica / Ventaja del producto 1</li></ul>",
+            "etiquetas": "[\"granola\",\"desayunos\",\"cenas\"]",
+            "fecha_creacion": "2021-02-28T22:17:07.589Z",
+            "feedback": "{\"type\":\"approved\",\"comment\":\"Tu producto esta aprobado\"}",
+            "galeria": "[\"3747.png\"]",
+            "grupo": "Dulces",
+            "horizontal_slider": "{\"H4 tag\":\"\",\"H3-1 tag\":\"\",\"H3-2 tag\":\"\",\"H3-3 tag\":\"\",\"H3-4s tag\":\"\",\"Button tag\":\"\",\"IMG tag\":\"\"}",
+            "imagen": "5032.png",
+            "nombre": "Granola Valentina",
+            "oferta": "[]",
+            "precio": "3",
+            "resumen": "[\"Resumen del producto 1\",\"Resumen del producto 2\",\"Resumen del producto 3\"]",
+            "reviews": "[]",
+            "stock": "25",
+            "subcategoria": "integrales",
+            "tienda": "La Granola Feliz",
+            "url": "granola-valentina",
+            "ventas": 0,
+            "vistas": 0
+        },
+        "-MUeiQmnJwObJtdtGG-e": {
+            "categoria": "bebidas",
+            "default_banner": "497.png",
+            "descripcion": "<p>El Kéfir es un producto lácteo parecido al yogur líquido, fermentado a través de la acción de un conjunto de levaduras (hongos) y bacterias (lactobacilos).&nbsp; En general aporta minerales, especialmente el calcio, magnesio y fósforo; rico en vitaminas del grupo B (B1, B5, B9 y B12, biotina) y vitamina K; aminoácidos esenciales, como el triptófano y proteínas de fácil digestión.<br></p>",
+            "etiquetas": "[\"kefir\",\"leche\",\"probióticos\"]",
+            "fecha_creacion": "2021-02-28T22:19:36.209Z",
+            "feedback": "{\"type\":\"approved\",\"comment\":\"Tu producto esta aprobado\"}",
+            "galeria": "[\"521.png\"]",
+            "grupo": "Lacteas",
+            "horizontal_slider": "{\"H4 tag\":\"\",\"H3-1 tag\":\"\",\"H3-2 tag\":\"\",\"H3-3 tag\":\"\",\"H3-4s tag\":\"\",\"Button tag\":\"\",\"IMG tag\":\"\"}",
+            "imagen": "5120.png",
+            "nombre": "Kéfir 420ml",
+            "oferta": "[]",
+            "precio": "3",
+            "resumen": "[\"Aumenta la inmunidad\",\"Apoya la digestión y combate el SII\",\"Contiene 100 veces más probióticos que el yogurt\"]",
+            "reviews": "[]",
+            "stock": "10",
+            "subcategoria": "vegetales",
+            "tienda": "La Granola Feliz",
+            "url": "kefir-420ml",
+            "ventas": 0,
+            "vistas": 0
+        },
+        "-MUem5IzzCPQ5miAw-cx": {
+            "categoria": "snacks",
+            "default_banner": "5561.png",
+            "descripcion": "<p>Descripción del producto Granola Oro</p><ul><li>Característica / Ventaja Granola Oro</li><li>Característica / Ventaja Granola Oro</li><li>Característica / Ventaja Granola Oro</li><li>Característica / Ventaja Granola Oro</li><li>Característica / Ventaja Granola Oro</li></ul>",
+            "etiquetas": "[\"granola\",\"oro\",\"desayunos\",\"cenas\"]",
+            "fecha_creacion": "2021-02-28T22:35:36.917Z",
+            "feedback": "{\"type\":\"approved\",\"comment\":\"Tu producto esta aprobado\"}",
+            "galeria": "[\"2549.png\"]",
+            "grupo": "Dulces",
+            "horizontal_slider": "{\"H4 tag\":\"\",\"H3-1 tag\":\"\",\"H3-2 tag\":\"\",\"H3-3 tag\":\"\",\"H3-4s tag\":\"\",\"Button tag\":\"\",\"IMG tag\":\"\"}",
+            "imagen": "6821.png",
+            "nombre": "Granola Oro",
+            "oferta": "[]",
+            "precio": "3.80",
+            "resumen": "[\"Resumen sobre la Granola Oro\",\"Resumen sobre la Granola Oro\",\"Resumen sobre la Granola Oro\"]",
+            "reviews": "[]",
+            "stock": "15",
+            "subcategoria": "integrales",
+            "tienda": "La Granola Feliz",
+            "url": "granola-oro",
+            "ventas": 0,
+            "vistas": 0
+        },
+        "-MUemvZ92vQeEk0KNPH-": {
+            "categoria": "snacks",
+            "default_banner": "791.png",
+            "descripcion": "<p>Descripción de producto Barra de Quinua</p><ul><li>Característica / Ventaja de Granola de Quinua</li><li>Característica / Ventaja de Granola de Quinua</li><li>Característica / Ventaja de Granola de Quinua</li><li>Característica / Ventaja de Granola de Quinua</li></ul>",
+            "etiquetas": "[\"granola\",\"quinua\",\"energético\",\"barra\"]",
+            "fecha_creacion": "2021-02-28T22:39:15.012Z",
+            "feedback": "{\"type\":\"approved\",\"comment\":\"Tu producto esta aprobado\"}",
+            "galeria": "[\"1209.png\"]",
+            "grupo": "Dulces",
+            "horizontal_slider": "{\"H4 tag\":\"\",\"H3-1 tag\":\"\",\"H3-2 tag\":\"\",\"H3-3 tag\":\"\",\"H3-4s tag\":\"\",\"Button tag\":\"\",\"IMG tag\":\"\"}",
+            "imagen": "6396.png",
+            "nombre": "Barra de Quinua",
+            "oferta": "[]",
+            "precio": "1.03",
+            "resumen": "[\"Resumen del producto Granola de Quinua\",\"Resumen del producto Granola de Quinua\",\"Resumen del producto Granola de Quinua\"]",
+            "reviews": "[]",
+            "stock": "25",
+            "subcategoria": "integrales",
+            "tienda": "La Granola Feliz",
+            "url": "barra-de-quinua",
+            "ventas": 0,
+            "vistas": 0
         }
     },
     "subcategoria": {
@@ -560,7 +1054,7 @@
             "nombre": "Medicinales",
             "stock": 10,
             "url": "medicinales",
-            "vistas": 8
+            "vistas": 12
         },
         "1": {
             "categoria": "Alimentos",
@@ -569,7 +1063,7 @@
             "nombre": "Aromaticas",
             "stock": 10,
             "url": "aromaticas",
-            "vistas": 6
+            "vistas": 7
         },
         "2": {
             "categoria": "Alimentos",
@@ -578,7 +1072,7 @@
             "nombre": "Citricas",
             "stock": 10,
             "url": "citricas",
-            "vistas": 10
+            "vistas": 12
         },
         "3": {
             "categoria": "Alimentos",
@@ -596,7 +1090,7 @@
             "nombre": "De grano",
             "stock": 10,
             "url": "de-grano",
-            "vistas": 23
+            "vistas": 24
         },
         "5": {
             "categoria": "Alimentos",
@@ -614,7 +1108,7 @@
             "nombre": "De tallo",
             "stock": 10,
             "url": "de-tallo",
-            "vistas": 46
+            "vistas": 47
         },
         "7": {
             "categoria": "Al granel",
@@ -641,7 +1135,7 @@
             "nombre": "Con gluten",
             "stock": 10,
             "url": "con-gluten",
-            "vistas": 5
+            "vistas": 6
         },
         "10": {
             "categoria": "Al granel",
@@ -650,7 +1144,7 @@
             "nombre": "Sin gluten",
             "stock": 10,
             "url": "sin-gluten",
-            "vistas": 5
+            "vistas": 6
         },
         "11": {
             "categoria": "Cuidado personal",
@@ -713,7 +1207,7 @@
             "nombre": "Vegetales",
             "stock": 10,
             "url": "vegetales",
-            "vistas": 12
+            "vistas": 13
         },
         "18": {
             "categoria": "Bebidas",
@@ -761,7 +1255,7 @@
             "vistas": 2
         },
         "7,21": {
-            "vistas": 5
+            "vistas": 4
         }
     },
     "tienda": {
@@ -776,7 +1270,7 @@
             "fecha_creacion": "2021-01-01T04:02:53.415Z",
             "logo": "logo-1.jpg",
             "nombre": "Digitalworld Us",
-            "precio_envio": "6",
+            "precio_envio": "4.80",
             "productos": 10,
             "resumen": "La mejor tienda de guayaquil...",
             "social": "{\"facebook\":\"https://facebook.com/facebook.com\",\"instagram\":\"https://instagram.com/arturocas.98\",\"twitter\":\"https://twitter.com/twitter.com\",\"linkedin\":\"https://linkedin.com/linkedin.com\",\"youtube\":\"\"}",
@@ -800,6 +1294,22 @@
             "tienda": "La Tienda Organica De Guayaquil",
             "url": "la-tienda-organica-de-guayaquil",
             "username": "Arturo2374"
+        },
+        "-MUaVKPGUZWsCLWGGcqp": {
+            "acerca_de": "Granola Feliz es una familia artesana que combina frutos secos, avena, semillas y frutas deshidratadas de la región andina y costeña, junto al ingrediente esencial: AMOR Y CONCIENCIA.",
+            "cover": "4773.png",
+            "direccion": "Av. Leopoldo Carrera, Los Ceibos, Guayaquil",
+            "email": "luisalex45@hotmail.com",
+            "fecha_creacion": "2021-02-28T02:39:31.067Z",
+            "logo": "9990.png",
+            "precio_envio": "3",
+            "productos": 1,
+            "resumen": "Granola Feliz es una familia artesana que combina frutos secos, avena, semillas y frutas deshidratad...",
+            "social": "{\"facebook\":\"https://facebook.com/GranolaFeliz.KuyaniProductosArtesanales\",\"instagram\":\"https://instagram.com/granolafeliz\",\"twitter\":\"https://twitter.com/GranolaFeliz\",\"linkedin\":\"\",\"youtube\":\"\"}",
+            "telefono": "0967965137",
+            "tienda": "La Granola Feliz",
+            "url": "la-granola-feliz",
+            "username": "la granola feliz"
         }
     },
     "usuario": {
@@ -809,8 +1319,8 @@
             "direccion": "Guayaquil",
             "displayName": "arturo castro ",
             "email": "arturocastro98@hotmail.com",
-            "idToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjBlYmMyZmI5N2QyNWE1MmQ5MjJhOGRkNTRiZmQ4MzhhOTk4MjE2MmIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vbWFya2V0cGxhY2UtdGVzaXMiLCJhdWQiOiJtYXJrZXRwbGFjZS10ZXNpcyIsImF1dGhfdGltZSI6MTYxNDEyMTY5MywidXNlcl9pZCI6InFHOFV2MnVZTUdaVEZVMzZDVFl5bzVESEFWSjIiLCJzdWIiOiJxRzhVdjJ1WU1HWlRGVTM2Q1RZeW81REhBVkoyIiwiaWF0IjoxNjE0MTIxNjkzLCJleHAiOjE2MTQxMjUyOTMsImVtYWlsIjoiYXJ0dXJvY2FzdHJvOThAaG90bWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJhcnR1cm9jYXN0cm85OEBob3RtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.sMmFI2ZLDOOZuVj9Hc38AmXm9FfQIzdbjpXVxrVmO1tzodg_raT8k46kL21CWxGIk3mscCEl1-ZxXLXi0o5vjrjD1GC3F3hwtH3-qE4hNlgyiYcbUYFsOFoAQpegaaYcXIPnTV77SNLQCQSZSZxz8X7hxlom_E3ETl1cD-NEJrXUqbeaOhiK8i1_BokAhse7LZI7HPMls8iSIYaY-UHfBWFGu05d5RgJKWavFLlCVF7J0T6b6Uo2kD_xUyQl2cBnLcvNO0_VotT3NaUr5GypRufQNY9HTb2821I5YQMlU7wy5ttMSjDoFFHUVw1quuvC2SzQtex1OFs1HvpQy8yBCA",
-            "imagen": "9233.jpg",
+            "idToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImM0ZWFhZjkxM2VlNWY0MDY0YmE2NjUzN2M0Njk3YzY5OGE3NGYwODIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vbWFya2V0cGxhY2UtdGVzaXMiLCJhdWQiOiJtYXJrZXRwbGFjZS10ZXNpcyIsImF1dGhfdGltZSI6MTYxNDUzMDAzNSwidXNlcl9pZCI6InFHOFV2MnVZTUdaVEZVMzZDVFl5bzVESEFWSjIiLCJzdWIiOiJxRzhVdjJ1WU1HWlRGVTM2Q1RZeW81REhBVkoyIiwiaWF0IjoxNjE0NTMwMDM1LCJleHAiOjE2MTQ1MzM2MzUsImVtYWlsIjoiYXJ0dXJvY2FzdHJvOThAaG90bWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJhcnR1cm9jYXN0cm85OEBob3RtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.Mf9eY5kJEdeAvbB-PssYL6W68jfl2_hvNtKEZbKkL6eOBMTBe6QhQFc0fIKpj1UcKIJSPYJ-jBxfxOSTcRNqBO-dWy1AhzS_qQpU-JZVl1H8gPbvuuwC4gg8vfdp5APSUDJz0bfmHoddB2C94YYWoVmTxOJTjtlyMM78t2R03CivPPHE8oAfeMw-RtE9jPmLyI6FwV-3lb-WVzGV486ful4kKVYJMu9TNo2sljUO7pU4mFaXb1K-1E06J2hjy8l5r3Yxf7Z5I0C0TgVo2Zan7xsjStHGsJQjFbnyyKIHmS5KJYoSx99zLU9HUxUpx0uZuHwHtYd83wmnrMXBqPqDdg",
+            "imagen": "4778.jpg",
             "metodo_registro": "directo",
             "nombres": "arturo",
             "telefono": "0959523779",
@@ -821,37 +1331,29 @@
             "direccion": "Quito",
             "displayName": "Arturo Castro",
             "email": "arturocas2006@gmail.com",
-            "idToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjBlYmMyZmI5N2QyNWE1MmQ5MjJhOGRkNTRiZmQ4MzhhOTk4MjE2MmIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiQXJ0dXJvIENhc3RybyIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS0vQU9oMTRHZ3lJZFdGeWsteWxLRWcwZ195eVRoSFhPbTZCUkhCcFVOaHBQN1paUT1zOTYtYyIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9tYXJrZXRwbGFjZS10ZXNpcyIsImF1ZCI6Im1hcmtldHBsYWNlLXRlc2lzIiwiYXV0aF90aW1lIjoxNjE0MTI4NDA2LCJ1c2VyX2lkIjoicDlnUTViRnI5T1RaRFpOeG93OTNJQ1Jjdkd6MiIsInN1YiI6InA5Z1E1YkZyOU9UWkRaTnhvdzkzSUNSY3ZHejIiLCJpYXQiOjE2MTQxMjg0MDYsImV4cCI6MTYxNDEzMjAwNiwiZW1haWwiOiJhcnR1cm9jYXMyMDA2QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7Imdvb2dsZS5jb20iOlsiMTE2NTU1NjgzMDA5MzQ0NDMzMzE1Il0sImVtYWlsIjpbImFydHVyb2NhczIwMDZAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoiZ29vZ2xlLmNvbSJ9fQ.NPF2fwddUlcbfzfpF7SoPSYlhUrSJgiBdCMMNm0YKDna9tNJt9EClOAzGCrFOdU8BJQ-6dqaz38UKYfaKoy-UTFGEaW6jlIfjIlCzLG6dUUIAxXhrNbEXxrjGKF25HcOLG2J4evq7EP5Ge6EXMwkytIRJI0uue6MREXJc-DJd2Ir5ikIpMTPom3qGQJ2OQ0dNGhuHshZRVl6j-Ryl4nMzG9yb4zafWM-Mk48UtUa1YeyUeWL0ayMUcDra1v9P9Z8OlG-j1D6tMtDy3ViFHo1mNLstRJCanckz_2qkkjPHM_67NY2KSVbcwFEtnFXkB-H98Ps_eZeBHPtPc0LEWZ3Kg",
+            "idToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImM0ZWFhZjkxM2VlNWY0MDY0YmE2NjUzN2M0Njk3YzY5OGE3NGYwODIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiQXJ0dXJvIENhc3RybyIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS0vQU9oMTRHZ3lJZFdGeWsteWxLRWcwZ195eVRoSFhPbTZCUkhCcFVOaHBQN1paUT1zOTYtYyIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9tYXJrZXRwbGFjZS10ZXNpcyIsImF1ZCI6Im1hcmtldHBsYWNlLXRlc2lzIiwiYXV0aF90aW1lIjoxNjE0NTM1MTk5LCJ1c2VyX2lkIjoicDlnUTViRnI5T1RaRFpOeG93OTNJQ1Jjdkd6MiIsInN1YiI6InA5Z1E1YkZyOU9UWkRaTnhvdzkzSUNSY3ZHejIiLCJpYXQiOjE2MTQ1MzUxOTksImV4cCI6MTYxNDUzODc5OSwiZW1haWwiOiJhcnR1cm9jYXMyMDA2QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7Imdvb2dsZS5jb20iOlsiMTE2NTU1NjgzMDA5MzQ0NDMzMzE1Il0sImVtYWlsIjpbImFydHVyb2NhczIwMDZAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoiZ29vZ2xlLmNvbSJ9fQ.uyFK3RR_uVWjHlWdrCkyCwW5AC5Q59SSzVcuv8PaUH9q5XhyFpZ9yk5N5NZkbV2aDOdDvxGD2wAFufOGlgGEmW4-5gG8cnpSPB7vBf_cAbex-hUQ3NSHs39er81IYcpeP_7C8AYpv4rFMThVJxatTUfdAiB1FR6IcLl6_QXqzMr_uEUHO6SoguqUHaQZrcjnx6S8lrGJ1NC30hzlLiQLR3j5cOhR6u0GukrjvKDmcijJOKuT_CUrLWkChjzJ575PgGeBPBn1p_rt8t0hkJI8kSKM4Xd3jsv-TpR0yhORQxhSN_3DQ5uh9x0QW9q4yApEo-VZV0H9VR_Dk1fEPDS_KA",
             "imagen": "https://lh3.googleusercontent.com/a-/AOh14GgyIdWFyk-ylKEg0g_yyThHXOm6BRHBpUNhpP7ZZQ=s96-c",
             "metodo_registro": "google",
             "telefono": "095923779",
             "username": "arturocas2006",
             "wishlist": "[\"naranja\",\"tomatillo\",\"romero\",\"manzana\",\"pitahaya\",\"laurel\"]"
         },
-        "-MSeGUOpXWPDO1Vc_CML": {
-            "apellidos": "Santa cruz",
-            "confirmar_correo": false,
-            "displayName": "Doris Santa cruz ",
-            "email": "doris@gmail.com",
-            "metodo_registro": "directo",
-            "nombres": "Doris",
-            "username": "dorissa"
-        },
         "-MSeHdl16SIAc6_B0pmY": {
             "direccion": "coop.la gaviota Mz 2260 Villa 13",
             "displayName": "eli santacruz",
             "email": "elisantacruz26@gmail.com",
-            "idToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjBlYmMyZmI5N2QyNWE1MmQ5MjJhOGRkNTRiZmQ4MzhhOTk4MjE2MmIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiZWxpIHNhbnRhY3J1eiIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS0vQU9oMTRHalVtXzZQelZWcklvNVdvb3lIcjc4bWdRU3hORTA4dzR0LVNmQ19WQT1zOTYtYyIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9tYXJrZXRwbGFjZS10ZXNpcyIsImF1ZCI6Im1hcmtldHBsYWNlLXRlc2lzIiwiYXV0aF90aW1lIjoxNjEzOTk3NTYwLCJ1c2VyX2lkIjoiSmxkN0VqdDRpbFlLcDcxeGFPeWJqZHNpWUEwMyIsInN1YiI6IkpsZDdFanQ0aWxZS3A3MXhhT3liamRzaVlBMDMiLCJpYXQiOjE2MTM5OTc1NjAsImV4cCI6MTYxNDAwMTE2MCwiZW1haWwiOiJlbGlzYW50YWNydXoyNkBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjEwNDAyMjA0ODcxOTA5MzAwNTQxOCJdLCJlbWFpbCI6WyJlbGlzYW50YWNydXoyNkBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJnb29nbGUuY29tIn19.PjrlT3WgRvndxmNG3ajhSOptEUftjiwHSEG1tXE46w1BY3DnlFylO01jSWSkozl8o9hURQ0Krxe88IHZn-rNqqYzoMBP6zIuRx5mcIHM8cMTUEoq4mgT29RLEIxXjR5olYWYZecfV6ymFMVWKM4f47sFmhkcB56oRKwIVtdX6OrztlXQ3cAnAQH5MyPpJLk9TvHpubat9tCXLyUrLpEVZ7-O4wgANrAwN6J1el-QxWRhUF_koXQNxJM31DALxwWwQlUKy1yAlx9Wz6jrQTvj3Q9CNsa57jnVYs-cFO0zXILRzW3QgQ4p7GZLAj5i1Rk96eufFcCZGis3uzGoQUWEgg",
+            "idToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImM0ZWFhZjkxM2VlNWY0MDY0YmE2NjUzN2M0Njk3YzY5OGE3NGYwODIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiZWxpIHNhbnRhY3J1eiIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS0vQU9oMTRHalVtXzZQelZWcklvNVdvb3lIcjc4bWdRU3hORTA4dzR0LVNmQ19WQT1zOTYtYyIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9tYXJrZXRwbGFjZS10ZXNpcyIsImF1ZCI6Im1hcmtldHBsYWNlLXRlc2lzIiwiYXV0aF90aW1lIjoxNjE0NDg3ODUyLCJ1c2VyX2lkIjoiSmxkN0VqdDRpbFlLcDcxeGFPeWJqZHNpWUEwMyIsInN1YiI6IkpsZDdFanQ0aWxZS3A3MXhhT3liamRzaVlBMDMiLCJpYXQiOjE2MTQ0ODc4NTIsImV4cCI6MTYxNDQ5MTQ1MiwiZW1haWwiOiJlbGlzYW50YWNydXoyNkBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjEwNDAyMjA0ODcxOTA5MzAwNTQxOCJdLCJlbWFpbCI6WyJlbGlzYW50YWNydXoyNkBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJnb29nbGUuY29tIn19.YkJxdddlPcRRlN2Vq3pT68BWNgFaF7TwTfzmkKqK7V9NiHEQm7O541wRgNv-n9rEW5U5IhRUb19uK3OYr2TiXS1Wi2kwVIPcAwF9o0BLyCmgjBmD4RAbC5YN8DuWseHVB79ocNw0NG5XGu4Qqb_fuggchLrB_2ddIWP8WioAkyY86BxWcIO8Om3ZRCMXDtcdqbi85MvQqlskjTh6DkJYCbOP-jF7_gqvF0TGo1uB9a8MJ7ayU_ggzL1YZgYzQrhMrgc5AL_SVKVJ83cTRm1nfb1kiELOG6se5tmaLNzDnOQNRn06WkVUDYhSXQMMPeQ79csvRjnDXtcuBk_XOLNMdA",
             "imagen": "https://lh3.googleusercontent.com/a-/AOh14GjUm_6PzVVrIo5WooyHr78mgQSxNE08w4t-SfC_VA=s96-c",
             "metodo_registro": "google",
             "telefono": "0991844410",
-            "username": "elisantacruz26"
+            "username": "elisantacruz26",
+            "wishlist": "[\"prueba-produccion\"]"
         },
         "-MTWmWQZT_V0-mq6mhoa": {
             "direccion": "Samanes norte de guayaquil",
             "displayName": "tesis 2020",
             "email": "tesis.ug2020@gmail.com",
-            "idToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjBlYmMyZmI5N2QyNWE1MmQ5MjJhOGRkNTRiZmQ4MzhhOTk4MjE2MmIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGVzaXMgMjAyMCIsInBpY3R1cmUiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLVFrVUpaM00wV0tBL0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFBL0FNWnV1Y2wyZnZxdVFjMFoxazVoWFpvaUF1ZnJRSU9hUEEvczk2LWMvcGhvdG8uanBnIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL21hcmtldHBsYWNlLXRlc2lzIiwiYXVkIjoibWFya2V0cGxhY2UtdGVzaXMiLCJhdXRoX3RpbWUiOjE2MTM4MzM3NzksInVzZXJfaWQiOiI4S2ZlUk9pUjMyZU93WnpnTEhOZmJNODlVYjQyIiwic3ViIjoiOEtmZVJPaVIzMmVPd1p6Z0xITmZiTTg5VWI0MiIsImlhdCI6MTYxMzgzMzc3OSwiZXhwIjoxNjEzODM3Mzc5LCJlbWFpbCI6InRlc2lzLnVnMjAyMEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjExNTQ3Nzc0MzgwNDg5MzU1NTg3OSJdLCJlbWFpbCI6WyJ0ZXNpcy51ZzIwMjBAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoiZ29vZ2xlLmNvbSJ9fQ.DhxcRTyvobTCxZpi0gbPAa9YJpZ7ZiKzOb3OKlApY0HVs2fFz9IDLPrkV3Myw56RMB92ENK06lEaCW61OEbncBB1FxWqwTv5uFo4Th74Nl9i9tSG4xNxbQXShnQJIa-vvjqx-V_hqqsJ6akRk-4Ec6DVSym04XYBuMJy4PPMTT8I5KQiwPnt1yWY_2X82VirOevDNQuX6KY7h--Ntk9QYB29j9Vmn11PwZ3rZPbl0OGQg-gNo8Q6Hjb8Otggab_Y6DZ8kOeWuAjp3yqkbPVOURhTLpiVwDblBlMUOLQrMAkLaB2s0UvSJNhV2krBake5ms46weFKuYmynHAEiWl56A",
+            "idToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjBlYmMyZmI5N2QyNWE1MmQ5MjJhOGRkNTRiZmQ4MzhhOTk4MjE2MmIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGVzaXMgMjAyMCIsInBpY3R1cmUiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLVFrVUpaM00wV0tBL0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFBL0FNWnV1Y2wyZnZxdVFjMFoxazVoWFpvaUF1ZnJRSU9hUEEvczk2LWMvcGhvdG8uanBnIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL21hcmtldHBsYWNlLXRlc2lzIiwiYXVkIjoibWFya2V0cGxhY2UtdGVzaXMiLCJhdXRoX3RpbWUiOjE2MTQ0NTUyOTYsInVzZXJfaWQiOiI4S2ZlUk9pUjMyZU93WnpnTEhOZmJNODlVYjQyIiwic3ViIjoiOEtmZVJPaVIzMmVPd1p6Z0xITmZiTTg5VWI0MiIsImlhdCI6MTYxNDQ1NTI5NiwiZXhwIjoxNjE0NDU4ODk2LCJlbWFpbCI6InRlc2lzLnVnMjAyMEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjExNTQ3Nzc0MzgwNDg5MzU1NTg3OSJdLCJlbWFpbCI6WyJ0ZXNpcy51ZzIwMjBAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoiZ29vZ2xlLmNvbSJ9fQ.MjckKxfUuYl8fNdv8MKTx4Yw_3QApTpcM07fzIakig-hPSJJseF7Hh83XXPNSzggAA2Jye22GyUjAGQ2qtXwoX-3EE0Ldp28BBFoe0_C9DjKLzpq5QzoRHp2ms3HywNiGsWfVvsKHCtrlzPnj6epKCJzTbhDtA0QlEHP3SjDPbji1FpzS4LN9XV6NYKac8rLoQMUhK9PaLrVU7G9E3n8GjNY4q7NvY__9LruEFICMQlYH_hZeBbgRTPmFgS57YQvk_tYV39RI34A5eKbp6geXs8GzUY23BBfosWznop-HKmwLeu6_A36VJXugwhjAZ-4VV5E-jrOXr6KPCbuRLyzIQ",
             "imagen": "https://lh4.googleusercontent.com/-QkUJZ3M0WKA/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucl2fvquQc0Z1k5hXZoiAufrQIOaPA/s96-c/photo.jpg",
             "metodo_registro": "google",
             "telefono": "0982172612",
@@ -861,12 +1363,38 @@
             "direccion": "Lomas de urdesa villa 282",
             "displayName": "santa villamar",
             "email": "santav2374@gmail.com",
-            "idToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjBlYmMyZmI5N2QyNWE1MmQ5MjJhOGRkNTRiZmQ4MzhhOTk4MjE2MmIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoic2FudGEgdmlsbGFtYXIiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hQRHk4VnlqaVVCNC1QR0pIbFFSVnVxSWk0WUpIVFRQUlg3YThVPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL21hcmtldHBsYWNlLXRlc2lzIiwiYXVkIjoibWFya2V0cGxhY2UtdGVzaXMiLCJhdXRoX3RpbWUiOjE2MTQxMjgzNjEsInVzZXJfaWQiOiJQanNXcXlMMHE4TnljUzl6enJxdHRJNXBIdlgyIiwic3ViIjoiUGpzV3F5TDBxOE55Y1M5enpycXR0STVwSHZYMiIsImlhdCI6MTYxNDEyODM2MSwiZXhwIjoxNjE0MTMxOTYxLCJlbWFpbCI6InNhbnRhdjIzNzRAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZ29vZ2xlLmNvbSI6WyIxMTM4MTU0MzY2ODEzMjQ3OTc5MDMiXSwiZW1haWwiOlsic2FudGF2MjM3NEBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJnb29nbGUuY29tIn19.mh2qi_HJD7CJbM0V1d-gECCkkAhCQ2Sk7O98-oes-3NgIXiqSW_2dLHS9xDms3ZpVyOYtW9rBMitEgaeiY3aXzWq_XOJhqSylrQEvcPa8RNIJRPcIQnolgD9CbFhRHzzMwkNCcGgPqRbOo3N2SIG3djnD0Y7_0qjTOUqHDFafioEIAvOQCBJzIKvU35wsV3O0k2uQ6zflZvtNKcChUkdrfVKePfFiKHb_rSDtsWuwetMDM-xFu-XF185oE2zNWQhjZV19ITJcTmYClzR5T_fzfmVv4Vb6rTYv9ulAvJ7vDLXL2HeSBHBHDOUOaulsYbpJ0w7Sv-IOimeSLPwXFGzMg",
+            "idToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImM0ZWFhZjkxM2VlNWY0MDY0YmE2NjUzN2M0Njk3YzY5OGE3NGYwODIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoic2FudGEgdmlsbGFtYXIiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2hQRHk4VnlqaVVCNC1QR0pIbFFSVnVxSWk0WUpIVFRQUlg3YThVPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL21hcmtldHBsYWNlLXRlc2lzIiwiYXVkIjoibWFya2V0cGxhY2UtdGVzaXMiLCJhdXRoX3RpbWUiOjE2MTQ1NDM2MjYsInVzZXJfaWQiOiJQanNXcXlMMHE4TnljUzl6enJxdHRJNXBIdlgyIiwic3ViIjoiUGpzV3F5TDBxOE55Y1M5enpycXR0STVwSHZYMiIsImlhdCI6MTYxNDU0MzYyNiwiZXhwIjoxNjE0NTQ3MjI2LCJlbWFpbCI6InNhbnRhdjIzNzRAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZ29vZ2xlLmNvbSI6WyIxMTM4MTU0MzY2ODEzMjQ3OTc5MDMiXSwiZW1haWwiOlsic2FudGF2MjM3NEBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJnb29nbGUuY29tIn19.GxfEWPff8-kT5xQtqkJ1FFs5J428xCE1nUsMmYa8Mep77p2LAUrcUoew28oqtQ5A9virImqsS2d6PsSFo5BiKZiK9zboPB-Dy8fnW587DXF2i52cxvzeA4O8h2xK8YTmT7ILsITQ3flU8VglQ-SM8ES5yHbkq_oF-5B3bm-r4qnfbOXN_1FJNFp-ilafCewSZYHAXfFCZts_iQLSm5GDbnK2v7GYvdGn6-dxLKOJOz-OLe27iPXkYgGhXzceiBc29YRxFaSt34VJXZ2LO4QFtEt8eAhucfp6O2sPyb0krAEGqwep1e9OUAIWEjSMnFNOjtD-Qi0PMmCoQIdCXkWG1Q",
             "imagen": "https://lh3.googleusercontent.com/a-/AOh14GhPDy8VyjiUB4-PGJHlQRVuqIi4YJHTTPRX7a8U=s96-c",
             "metodo_registro": "google",
             "telefono": "0838264829",
             "username": "santav2374",
-            "wishlist": "[\"romero\",\"kiwi\",\"jengibre\"]"
+            "wishlist": "[\"romero\",\"kiwi\",\"jengibre\",\"mermelada-tomate\",\"aceite-de-coco\"]"
+        },
+        "-MUaAYMurypvw1AEJ9NH": {
+            "apellidos": "Tienda",
+            "confirmar_correo": true,
+            "displayName": "Primera Tienda ",
+            "email": "luisalex45@hotmail.com",
+            "idToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImM0ZWFhZjkxM2VlNWY0MDY0YmE2NjUzN2M0Njk3YzY5OGE3NGYwODIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vbWFya2V0cGxhY2UtdGVzaXMiLCJhdWQiOiJtYXJrZXRwbGFjZS10ZXNpcyIsImF1dGhfdGltZSI6MTYxNDU0OTI5NywidXNlcl9pZCI6InFBTXdOZFZkc1FYdW0xeXd2RjIzMzRneFlPeDIiLCJzdWIiOiJxQU13TmRWZHNRWHVtMXl3dkYyMzM0Z3hZT3gyIiwiaWF0IjoxNjE0NTQ5Mjk3LCJleHAiOjE2MTQ1NTI4OTcsImVtYWlsIjoibHVpc2FsZXg0NUBob3RtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbImx1aXNhbGV4NDVAaG90bWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.jByvyCW68FCGR-HNJR3Xtc4Zb5S_BzdZsAWImaVtYS0GaO3gSJyTd_-TZdpoIGod3NouFhcIb5Ghs27juPdIV8vcAw7yD5pf24unVG0W9huvFEFx0arH6Ac3qpxLsEekua4SXAvKfbk8W_kqCxGJP_AwEf4YWUCnRnYvzvZcIroU6gbqS6i_U11nbzbcX4e6MqEy06DECQkFPS6XOOnLBZQGXfB2mUVkyw_2CXqgBnGqw_C2GtBVO7ArrXXjNkfYu2xVFVQGiWgwPUZSqoHH2FEjJ8n_JjkrA8Ya7d66w1a7CaEsuaGRQxZ6FgkhucIk25BLQdlSoUh4UUFsMme7KQ",
+            "metodo_registro": "directo",
+            "nombres": "Primera",
+            "username": "la granola feliz"
+        },
+        "-MUePkYzjhrW7VTlHhQd": {
+            "displayName": "Arturo Castro",
+            "email": "prueba.023732@gmail.com",
+            "idToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImM0ZWFhZjkxM2VlNWY0MDY0YmE2NjUzN2M0Njk3YzY5OGE3NGYwODIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiQXJ0dXJvIENhc3RybyIsInBpY3R1cmUiOiJodHRwczovL2xoNS5nb29nbGV1c2VyY29udGVudC5jb20vLWxnQkh1ejFDdUFnL0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFBL0FNWnV1Y2xqNkRoXzJ6RGtGM2NkMTFxM01HRmgwRTJENVEvczk2LWMvcGhvdG8uanBnIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL21hcmtldHBsYWNlLXRlc2lzIiwiYXVkIjoibWFya2V0cGxhY2UtdGVzaXMiLCJhdXRoX3RpbWUiOjE2MTQ1NDU2NDIsInVzZXJfaWQiOiJWNlFjejhDeDhkVFhDN1NhYjJETjFBV3U1Ym4yIiwic3ViIjoiVjZRY3o4Q3g4ZFRYQzdTYWIyRE4xQVd1NWJuMiIsImlhdCI6MTYxNDU0NTY0MiwiZXhwIjoxNjE0NTQ5MjQyLCJlbWFpbCI6InBydWViYS4wMjM3MzJAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZ29vZ2xlLmNvbSI6WyIxMTYyOTc2NjkyNTg5NzM2NDY1NjciXSwiZW1haWwiOlsicHJ1ZWJhLjAyMzczMkBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJnb29nbGUuY29tIn19.M_8sL7ZnTls9HR7HSPPevA_aj3IEDwLiMLuc4aUgcZ89Ijq3bop2FsFd_4JBUOrqL97xOGYhsbB36yL5O2n_DPoCvP0bWsBNQNyDVx80xM_PoqzyAdxeftHjFb1zRc6MXU97VCYzEoZ9x9FjvlEC51J7uIC54slG_nvmmxVCc2chhCXDZW7XsR9CwYoDe_cZaOrp5rutD6eJL4D4RSEt1VylkNjV4IraEyx5UZWLzy_-jSknbatg62Qwqb7MSD-SpIQlPLpJKWIhBufrTfY3Oy5bJTGUBvUTo41b33MLJTPsGOEthb9rmQrZWTyq_Av5hQCkpYm5BDStLrRwcKKsMg",
+            "imagen": "https://lh5.googleusercontent.com/-lgBHuz1CuAg/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclj6Dh_2zDkF3cd11q3MGFh0E2D5Q/s96-c/photo.jpg",
+            "metodo_registro": "google",
+            "username": "prueba.023732"
+        },
+        "-MUePrLYoiuDENFHsn-a": {
+            "displayName": "Alex Gomez",
+            "email": "alexcreations.ag@gmail.com",
+            "idToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImM0ZWFhZjkxM2VlNWY0MDY0YmE2NjUzN2M0Njk3YzY5OGE3NGYwODIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiQWxleCBHb21leiIsInBpY3R1cmUiOiJodHRwczovL2xoNS5nb29nbGV1c2VyY29udGVudC5jb20vLUVVa1N4XzgxZldVL0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFBL0FNWnV1Y2tWSUVQOERabV9walo4VFdHaWhVQWc3WnFWQ3cvczk2LWMvcGhvdG8uanBnIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL21hcmtldHBsYWNlLXRlc2lzIiwiYXVkIjoibWFya2V0cGxhY2UtdGVzaXMiLCJhdXRoX3RpbWUiOjE2MTQ1NDU2NDYsInVzZXJfaWQiOiJnWUMyZkZxUWdBUzM3enBncE9PT093Zzd0UEYzIiwic3ViIjoiZ1lDMmZGcVFnQVMzN3pwZ3BPT09Pd2c3dFBGMyIsImlhdCI6MTYxNDU0NTY0NiwiZXhwIjoxNjE0NTQ5MjQ2LCJlbWFpbCI6ImFsZXhjcmVhdGlvbnMuYWdAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZ29vZ2xlLmNvbSI6WyIxMTE4NTgwOTExNjYyNjk1NDUyNjQiXSwiZW1haWwiOlsiYWxleGNyZWF0aW9ucy5hZ0BnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJnb29nbGUuY29tIn19.Fz4ChksjvFTftlWGqksv2HP-zddhvTO9Xeht3fGink6zmjUgjca8m8GLu8VF6GQWpjP6QQr8Q4JocY373UPAjUbfkO-aCjILfJ5W9_TY3SMrGZULooi7-NHa7HcOtdoLx8r7JIF_BbioFzLGT7mQY3qEQ0wNxsOVX7t5OGwZknSH99bSUQKuhfVei7jNuspubMCbnqmbvnhkISpYt-6TVcDhDI_vbQk1P5U4cDIWncMb4pxJVvyIoSpL1LFqKmtHY3Z6lpG2MN8IXB1O-RIUTR8PARyNo-hbru36y2JjAN6GxfyWjpa1eOXqvxMRoCYHIZovo_GUmzsKr6QhFoqKEQ",
+            "imagen": "https://lh5.googleusercontent.com/-EUkSx_81fWU/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuckVIEP8DZm_pjZ8TWGihUAg7ZqVCw/s96-c/photo.jpg",
+            "metodo_registro": "google",
+            "username": "alexcreations.ag"
         }
     },
     "venta": {
@@ -953,6 +1481,283 @@
             "producto": "Tomatillo",
             "total": "1.80",
             "url": "tomatillo"
+        },
+        "-MUGlPE6Qqn9rd70Kztw": {
+            "cantidad": 1,
+            "client": "santav2374",
+            "comision": "0.36",
+            "estado": "pendiente",
+            "fecha_emision": "2021-02-24T02:02:05.525Z",
+            "id_order": "-MUGlP9gArjsif0v8P4f",
+            "id_pago": "8XB5714652839962E",
+            "metodo_pago": "paypal",
+            "precio_unitario": "1.07",
+            "producto": "Kiwi",
+            "total": "1.43",
+            "url": "kiwi"
+        },
+        "-MUGtvtNIdfrMbbjcuX8": {
+            "cantidad": 1,
+            "client": "santav2374",
+            "comision": "3.75",
+            "estado": "pendiente",
+            "fecha_emision": "2021-02-24T02:39:20.331Z",
+            "id_order": "-MUGtvl39TSu5ai1S0SL",
+            "id_pago": "6AD93471UT652463F",
+            "metodo_pago": "paypal",
+            "precio_unitario": "11.25",
+            "producto": "Mermelada de tomate",
+            "total": "15.00",
+            "url": "mermelada-tomate"
+        },
+        "-MUGyjF49NMZjh1KUPvu": {
+            "cantidad": 5,
+            "client": "santav2374",
+            "comision": "1.79",
+            "estado": "pendiente",
+            "fecha_emision": "2021-02-24T03:00:20.210Z",
+            "id_order": "-MUGyj5_yZt78FQB31xY",
+            "id_pago": "9L918534S1723562F",
+            "metodo_pago": "paypal",
+            "precio_unitario": "5.36",
+            "producto": "Kiwi",
+            "total": "7.15",
+            "url": "kiwi"
+        },
+        "-MUGzoX2_f5FmQMvb9VN": {
+            "cantidad": 1,
+            "client": "santav2374",
+            "comision": "4.69",
+            "estado": "pendiente",
+            "fecha_emision": "2021-02-24T03:05:04.091Z",
+            "id_order": "-MUGzoRV3X9qL3su7kT3",
+            "id_pago": "5A652655GM061471V",
+            "metodo_pago": "paypal",
+            "precio_unitario": "14.06",
+            "producto": "Aceite de coco",
+            "total": "18.75",
+            "url": "aceite-de-coco"
+        },
+        "-MUH1hirw8kuwKo2oOBr": {
+            "cantidad": 3,
+            "client": "santav2374",
+            "comision": "11.25",
+            "estado": "pendiente",
+            "fecha_emision": "2021-02-24T03:17:42.542Z",
+            "id_order": "-MUH1hadETwD1pk-xiKT",
+            "id_pago": "9CC61781DH2566007",
+            "metodo_pago": "paypal",
+            "precio_unitario": "33.75",
+            "producto": "Mermelada de tomate",
+            "total": "45.00",
+            "url": "mermelada-tomate"
+        },
+        "-MUH5lwM577S_ynmE9r4": {
+            "cantidad": 1,
+            "client": "santav2374",
+            "comision": "4.69",
+            "estado": "pendiente",
+            "fecha_emision": "2021-02-24T03:35:28.459Z",
+            "id_order": "-MUH5lqdK6bXKhEv8Wpl",
+            "id_pago": "3SK7100111998420S",
+            "metodo_pago": "paypal",
+            "precio_unitario": "14.06",
+            "producto": "Aceite de coco",
+            "total": "18.75",
+            "url": "aceite-de-coco"
+        },
+        "-MUH5lwaVnIe0nWXI_sT": {
+            "cantidad": 1,
+            "client": "santav2374",
+            "comision": "3.75",
+            "estado": "pendiente",
+            "fecha_emision": "2021-02-24T03:35:28.467Z",
+            "id_order": "-MUH5lqixLLmiFc65MJo",
+            "id_pago": "3SK7100111998420S",
+            "metodo_pago": "paypal",
+            "precio_unitario": "11.25",
+            "producto": "Mermelada de tomate",
+            "total": "15.00",
+            "url": "mermelada-tomate"
+        },
+        "-MUH92crMoc8759GQPXH": {
+            "cantidad": 1,
+            "client": "santav2374",
+            "comision": "0.36",
+            "estado": "pendiente",
+            "fecha_emision": "2021-02-24T03:49:47.387Z",
+            "id_order": "-MUH92PvGpJ3ZscOey4o",
+            "id_pago": "4VB03276UT559915L",
+            "metodo_pago": "paypal",
+            "precio_unitario": "1.07",
+            "producto": "Kiwi",
+            "total": "1.43",
+            "url": "kiwi"
+        },
+        "-MUH92dG8-KAoKgo851J": {
+            "cantidad": 1,
+            "client": "santav2374",
+            "comision": "4.69",
+            "estado": "pendiente",
+            "fecha_emision": "2021-02-24T03:49:47.466Z",
+            "id_order": "-MUH92UhTx6jAkimnpZY",
+            "id_pago": "4VB03276UT559915L",
+            "metodo_pago": "paypal",
+            "precio_unitario": "14.06",
+            "producto": "Aceite de coco",
+            "total": "18.75",
+            "url": "aceite-de-coco"
+        },
+        "-MUH92fIYv30aMfwZw65": {
+            "cantidad": 1,
+            "client": "santav2374",
+            "comision": "1.00",
+            "estado": "pendiente",
+            "fecha_emision": "2021-02-24T03:49:47.702Z",
+            "id_order": "-MUH92Ul1suOBi9klzRl",
+            "id_pago": "4VB03276UT559915L",
+            "metodo_pago": "paypal",
+            "precio_unitario": "3.00",
+            "producto": "Romero",
+            "total": "4.00",
+            "url": "romero"
+        },
+        "-MUHF3dBuD3crf2mpVah": {
+            "cantidad": 1,
+            "client": "santav2374",
+            "comision": "0.36",
+            "estado": "pendiente",
+            "fecha_emision": "2021-02-24T04:16:04.395Z",
+            "id_order": "-MUHF3ZGTQPlFcwubKSn",
+            "id_pago": "09M50158RC946705F",
+            "metodo_pago": "paypal",
+            "precio_unitario": "1.07",
+            "producto": "Kiwi",
+            "total": "1.43",
+            "url": "kiwi"
+        },
+        "-MUHIh3FhgF26ZxAhFU1": {
+            "cantidad": 1,
+            "client": "santav2374",
+            "comision": "0.36",
+            "estado": "pendiente",
+            "fecha_emision": "2021-02-24T04:31:56.450Z",
+            "id_order": "-MUHIh-8R2WWZlaHXdAN",
+            "id_pago": "3PV76109KN257503V",
+            "metodo_pago": "paypal",
+            "precio_unitario": "1.07",
+            "producto": "Kiwi",
+            "total": "1.43",
+            "url": "kiwi"
+        },
+        "-MUHIh3rx0RgZo3vQrMV": {
+            "cantidad": 1,
+            "client": "santav2374",
+            "comision": "0.71",
+            "estado": "pendiente",
+            "fecha_emision": "2021-02-24T04:31:56.479Z",
+            "id_order": "-MUHIh-_P9a9AbZ5vBCO",
+            "id_pago": "3PV76109KN257503V",
+            "metodo_pago": "paypal",
+            "precio_unitario": "2.14",
+            "producto": "Jengibre",
+            "total": "2.85",
+            "url": "jengibre"
+        },
+        "-MUHJOJjzJnFMBN0EYIG": {
+            "cantidad": 1,
+            "client": "santav2374",
+            "comision": "0.71",
+            "estado": "pendiente",
+            "fecha_emision": "2021-02-24T04:34:57.682Z",
+            "id_order": "-MUHJOEZC3Opm7q4umCB",
+            "id_pago": "3MF77042E4345984Y",
+            "metodo_pago": "paypal",
+            "precio_unitario": "2.14",
+            "producto": "Jengibre",
+            "total": "2.85",
+            "url": "jengibre"
+        },
+        "-MUHJOKAL7VW_nZbf3RG": {
+            "cantidad": 1,
+            "client": "santav2374",
+            "comision": "0.36",
+            "estado": "pendiente",
+            "fecha_emision": "2021-02-24T04:34:57.700Z",
+            "id_order": "-MUHJOEftEHAgGTHfcE8",
+            "id_pago": "3MF77042E4345984Y",
+            "metodo_pago": "paypal",
+            "precio_unitario": "1.07",
+            "producto": "Kiwi",
+            "total": "1.43",
+            "url": "kiwi"
+        },
+        "-MUQzmCmOmWS_f7f6v7c": {
+            "cantidad": 2,
+            "client": "santav2374",
+            "comision": "0.71",
+            "estado": "pendiente",
+            "fecha_emision": "2021-02-26T01:41:07.013Z",
+            "id_order": "-MUQzm8yH8iigs5VC4-H",
+            "id_pago": "69761617X77850025",
+            "metodo_pago": "paypal",
+            "precio_unitario": "2.15",
+            "producto": "Kiwi",
+            "total": "2.86",
+            "url": "kiwi"
+        },
+        "-MUQzmDQ9Bv8FBfN8xMV": {
+            "cantidad": 3,
+            "client": "santav2374",
+            "comision": "14.06",
+            "estado": "pendiente",
+            "fecha_emision": "2021-02-26T01:41:07.039Z",
+            "id_order": "-MUQzm9UpvzGgpu5OVRX",
+            "id_pago": "69761617X77850025",
+            "metodo_pago": "paypal",
+            "precio_unitario": "42.19",
+            "producto": "Aceite de coco",
+            "total": "56.25",
+            "url": "aceite-de-coco"
+        },
+        "-MUVL1-u4-kbwibAN3al": {
+            "cantidad": 1,
+            "client": "santav2374",
+            "comision": "0.36",
+            "estado": "exitoso",
+            "fecha_emision": "2021-02-26T21:56:46.857Z",
+            "id_order": "-MUVL0x4emAJ-B0qHT6e",
+            "metodo_pago": "efectivo",
+            "precio_unitario": "1.07",
+            "producto": "Kiwi",
+            "total": "1.43",
+            "url": "kiwi"
+        },
+        "-MU_1ginpvKad852xWeo": {
+            "cantidad": 1,
+            "client": "tesis.ug2020",
+            "comision": "0.45",
+            "estado": "pendiente",
+            "fecha_emision": "2021-02-27T19:50:26.687Z",
+            "id_order": "-MU_1geXBBlTMoZG4h3p",
+            "metodo_pago": "efectivo",
+            "precio_unitario": "1.35",
+            "producto": "Tomatillo",
+            "total": "1.80",
+            "url": "tomatillo"
+        },
+        "-MUat2ydr_n6PvLJnC2f": {
+            "cantidad": 1,
+            "client": "elisantacruz26",
+            "comision": "2.50",
+            "estado": "pendiente",
+            "fecha_emision": "2021-02-28T04:27:33.002Z",
+            "id_order": "-MUat2ru805QIpgvaQlk",
+            "metodo_pago": "efectivo",
+            "precio_unitario": "7.50",
+            "producto": "prueba produccion",
+            "total": "10.00",
+            "url": "prueba-produccion"
         }
     }
 }

@@ -54,7 +54,7 @@ export class CarritoCompraComponent implements OnInit, OnDestroy {
                   for (const l in respTienda) {
                     this.carrito_tienda.push({
                       "tienda": respTienda[l].tienda,
-                      "precio_envio": respTienda[l].precio_envio
+                      "precio_envio": Number(respTienda[l].precio_envio)
                     })
 
                     res[j].precio_envio = respTienda[l].precio_envio;

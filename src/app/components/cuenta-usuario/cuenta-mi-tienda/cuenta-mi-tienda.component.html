@@ -443,9 +443,9 @@
                             <div class="form-group__content">
 
                                 <textarea class="form-control" rows="7"
-                                    placeholder="Notes about your store in maximum 1000 characters, ex: We are a store specialized in technology..."
-                                    name="storeAbout"
-                                    pattern="[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\'\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]{1,1000}"
+                                    placeholder="Información acerca de tu tienda, ejemplo: somos una tienda especializada en ..."
+                                    name="storeAbout" maxLength="1000"
+                                    pattern="[A-Za-z0-9\s]{1,1000}"
                                     [(ngModel)]="storeModel.acerca_de" (change)="validate(about)" #about
                                     required></textarea>
 
@@ -492,7 +492,7 @@
 
 
                                 <input type="text" class="form-control" name="storePhone" pattern="[-\\0-9 ]{1,}"
-                                    [(ngModel)]="storeModel.telefono" (change)="validate(phone)" #phone required>
+                                    [(ngModel)]="storeModel.telefono"  maxLength="10" (change)="validate(phone)" #phone required>
 
                                 <div class="valid-feedback">Valido</div>
                                 <div *ngIf="f.submitted && f.controls['storePhone'].errors" class="text-danger">Por
@@ -1254,8 +1254,8 @@
 
 
                                         <input type="text" class="form-control formProduct" name="price"
-                                            pattern="[-\\0-9 ]{1,}" maxLength="6"
-                                            (keypress)="validators.soloNumeros($event)" tags="prices"
+                                             maxLength="6"
+                                            (keypress)="validators.soloNumeros($event)" 
                                             [(ngModel)]="productModel.precio" #price required>
 
                                         <div class="valid-feedback">Valido</div>
@@ -1349,10 +1349,9 @@
                                         </span>
                                     </div>
 
-                                    <input type="number" class="form-control" name="value_offer" [(ngModel)]="offer[1]"
-                                        min="0" maxLength="4" (keypress)="validators.soloNumeros($event)" step="any"
-                                        pattern="[.\\,\\0-9]{1,}" (change)="validate(value_offer)" #value_offer
-                                        tags="prices">
+                                    <input type="text" class="form-control" name="value_offer" [(ngModel)]="offer[1]"
+                                        min="0" maxLength="6" (keypress)="validators.soloNumeros($event)" step="any"
+                                        #value_offer>
 
                                     <div class="valid-feedback">Valido</div>
                                     <div class="invalid-feedback">Por favor rellene este campo</div>

@@ -385,7 +385,7 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
         Validamos expresión regular de la información de la tienda
         =============================================*/
 
-      let pattern = /^[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\"\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]{1,1000}$/;
+      let pattern = /^[A-Za-z0-9\s]{1,1000}$/;
 
       if (!pattern.test(input.value)) {
 
@@ -590,23 +590,23 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
     Validamos el precio de envío y el precio de venta
     =============================================*/
 
-    if ($(input).attr("tags") == "prices") {
+    // if ($(input).attr("tags") == "prices") {
 
-      /*=============================================
-      Validamos expresión regular
-      =============================================*/
+    //   /*=============================================
+    //   Validamos expresión regular
+    //   =============================================*/
 
-      let pattern = /^[.\\,\\0-9]{1,}$/;
+    //   let pattern = /^[.\\,\\0-9]{1,}$/;
 
-      if (!pattern.test(input.value)) {
+    //   if (!pattern.test(input.value)) {
 
-        $(input).parent().addClass('was-validated');
+    //     $(input).parent().addClass('was-validated');
 
-        return;
+    //     return;
 
-      }
+    //   }
 
-    }
+    // }
 
     /*=============================================
    Validamos dias de entrega y stock
@@ -1313,7 +1313,7 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
                       /*=============================================
                       Crear el producto en la BD
                       =============================================*/
-
+                      this.storeModel.productos +=1;
                       this.productsService.registerDatabase(this.productModel, localStorage.getItem("idToken"))
                         .subscribe(resp => {
 

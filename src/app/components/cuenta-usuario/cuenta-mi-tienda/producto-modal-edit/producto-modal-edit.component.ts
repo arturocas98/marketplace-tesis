@@ -128,7 +128,7 @@ export class ProductoModalEditComponent implements OnInit {
 
     this.productsService.getById(this.producto_id)
       .subscribe(resp => {
-        console.log("respuesta producto_edit:",resp);
+        // console.log("respuesta producto_edit:",resp);
         this.productModel.nombre = resp["nombre"];
         this.productModel.url = resp["url"];
         this.productModel.categoria = resp["categoria"];
@@ -313,23 +313,23 @@ export class ProductoModalEditComponent implements OnInit {
     Validamos el precio de envío y el precio de venta
     =============================================*/
 
-    if ($(input).attr("tags") == "prices") {
+    // if ($(input).attr("tags") == "prices") {
 
-      /*=============================================
-      Validamos expresión regular
-      =============================================*/
+    //   /*=============================================
+    //   Validamos expresión regular
+    //   =============================================*/
 
-      let pattern = /^[.\\,\\0-9]{1,}$/;
+    //   let pattern = /^[.\\,\\0-9]{1,}$/;
 
-      if (!pattern.test(input.value)) {
+    //   if (!pattern.test(input.value)) {
 
-        $(input).parent().addClass('was-validated');
+    //     $(input).parent().addClass('was-validated');
 
-        return;
+    //     return;
 
-      }
+    //   }
 
-    }
+    // }
 
     /*=============================================
    Validamos dias de entrega y stock
@@ -483,7 +483,8 @@ export class ProductoModalEditComponent implements OnInit {
     /*=============================================
     Validar que el producto esté correctamente creado
     =============================================*/
-
+    console.log("f:",f);
+    
     let formProduct = $(".formProduct");
 
     for (let i = 0; i < formProduct.length; i++) {
@@ -512,7 +513,7 @@ export class ProductoModalEditComponent implements OnInit {
     =============================================*/
 
 
-    if (this.gallery.length == 0) {
+    if (this.editGallery.length == 0 && this.gallery.length == 0) {
 
       Sweetalert.fnc("error", "La galería esta vacía", null);
 
@@ -810,7 +811,7 @@ export class ProductoModalEditComponent implements OnInit {
                         Editar el producto en la BD
                         =============================================*/
 
-                      this.productsService.patchDataAuth(this.idProduct, this.productModel, localStorage.getItem("idToken"))
+                      this.productsService.patchDataAuth(this.producto_id, this.productModel, localStorage.getItem("idToken"))
                         .subscribe(resp => {
 
                           Sweetalert.fnc("success", "El producto ha sido actualizado correctamente", "cuenta-usuario/cuenta/mi-tienda");
@@ -842,7 +843,7 @@ export class ProductoModalEditComponent implements OnInit {
               Editar el producto en la BD
               =============================================*/
 
-              this.productsService.patchDataAuth(this.idProduct, this.productModel, localStorage.getItem("idToken"))
+              this.productsService.patchDataAuth(this.producto_id, this.productModel, localStorage.getItem("idToken"))
                 .subscribe(resp => {
 
                   Sweetalert.fnc("success", "El producto ha sido actualizado correctamente", "cuenta-usuario/cuenta/mi-tienda");
