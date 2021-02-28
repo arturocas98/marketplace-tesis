@@ -22,6 +22,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ListaTiendasComponent } from './lista-tiendas/lista-tiendas.component';
 // import { NgxSummernoteModule } from 'ngx-summernote';
+// import { ModalModule } from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,8 @@ import { ListaTiendasComponent } from './lista-tiendas/lista-tiendas.component';
     DataTablesModule,
     // NgxSummernoteModule
     BrowserAnimationsModule,
+    // ModalModule.forRoot(),
+
   ],
   providers: [],
   bootstrap: [AppComponent]

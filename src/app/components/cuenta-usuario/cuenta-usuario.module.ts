@@ -20,7 +20,8 @@ import { CuentaMisVentasComponent } from './cuenta-mis-ventas/cuenta-mis-ventas.
 import { CuentaMisOrdenesComponent } from './cuenta-mis-ordenes/cuenta-mis-ordenes.component';
 import { CuentaDisputasComponent } from './cuenta-disputas/cuenta-disputas.component';
 import { CuentaMensajesComponent } from './cuenta-mensajes/cuenta-mensajes.component';
-
+import { ProductoModalEditComponent } from './cuenta-mi-tienda/producto-modal-edit/producto-modal-edit.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { CuentaMensajesComponent } from './cuenta-mensajes/cuenta-mensajes.compo
     CuentaMisVentasComponent, 
     CuentaMisOrdenesComponent, 
     CuentaDisputasComponent, 
-    CuentaMensajesComponent,
+    CuentaMensajesComponent, 
+    ProductoModalEditComponent,
     
   ],
   imports: [
@@ -51,6 +53,7 @@ import { CuentaMensajesComponent } from './cuenta-mensajes/cuenta-mensajes.compo
     NgxSummernoteModule,
     NgxDropzoneModule,
     TagInputModule,
+    ModalModule.forRoot()
 
   ]
 })
