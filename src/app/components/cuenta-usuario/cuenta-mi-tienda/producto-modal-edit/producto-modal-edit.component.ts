@@ -400,24 +400,30 @@ export class ProductoModalEditComponent implements OnInit {
   }
 
   validateImage(e, tagPicture) {
+    console.log("evento:",e);
+    this.defaultBannerImg = e.target.files[0];
+    console.log("defult_banner:",this.defaultBannerImg);
+    // switch (tagPicture) {
 
-    switch (tagPicture) {
+    //   case "changeImage":
+    //     this.imageProduct = e.target.files[0];
+    //     break;
 
-      case "changeImage":
-        this.imageProduct = e.target.files[0];
-        break;
+    //   case "changeDefaultBanner":
+    //     this.defaultBannerImg = e.target.files[0];
+    //     break;
 
-      case "changeDefaultBanner":
-        this.defaultBannerImg = e.target.files[0];
-        break;
-
-      case "changeHSlider":
-        this.hSliderImg = e.target.files[0];
-        break;
+    //   case "changeHSlider":
+    //     this.hSliderImg = e.target.files[0];
+    //     break;
 
 
-    }
+    // }
+    
+    // console.log("image product:",this.imageProduct);
+    // console.log("h slider:",this.hSliderImg);
 
+    
     let image = e.target.files[0];
 
     /*=============================================
@@ -538,7 +544,7 @@ export class ProductoModalEditComponent implements OnInit {
     Alerta suave mientras se registra la tienda y el producto
     =============================================*/
 
-    Sweetalert.fnc("loading", "Cargando...", null);
+    // Sweetalert.fnc("loading", "Cargando...", null);
 
     /*=============================================
     Subir imagenes al servidor
@@ -547,7 +553,7 @@ export class ProductoModalEditComponent implements OnInit {
     let folder = "";
 
 
-    folder = this.productModel.categoria.split("_")[1];
+    folder = this.productModel.categoria;
 
 
     let countAllImages = 0;
@@ -582,7 +588,7 @@ export class ProductoModalEditComponent implements OnInit {
 
     ]
 
-
+    console.log("all images:",allImages);
     for (const i in allImages) {
 
       const formData = new FormData();

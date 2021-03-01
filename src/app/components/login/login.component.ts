@@ -183,66 +183,72 @@ export class LoginComponent implements OnInit {
       Sweetalert.fnc("loading", "Cargando ... ", null);
 
       this.usuarioService.getFilterData("email", this.usuario.email).subscribe(res1 => {
-        console.log(res1);
-
-        for (const i in res1) {
-          if (res1[i].confirmar_correo) {
-
-            this.setValues();
-            this.usuario.return_secure_token = true;
-            this.usuarioService.loginAuth(this.usuario).subscribe(res2 => {
-              console.log(res2);
-
-              let id = Object.keys(res1).toString();
-
-              let value = {
-                idToken: res2['idToken']
-              }
-
-              this.usuarioService.update(id, value).subscribe(res3 => {
-                if (res3['idToken'] != '') {
-                  Sweetalert.fnc("close", null, null);
-                  localStorage.setItem("idToken", res3['idToken']);
-                  localStorage.setItem("email", res2['email']);
-                  let today = new Date();
-                  today.setSeconds(res2['expiresIn']);
-                  localStorage.setItem("expiresIn", today.getTime().toString());
-
-                  //almacenamos recuerdame en el storage
-                  console.log("recuerdame:", this.recuerdame);
-                  if (!this.recuerdame) {
-                    localStorage.setItem("rememberMe", "no");
-                  } else {
-                    localStorage.setItem("rememberMe", "yes");
-                  }
-                  this.storeService.getFilterData('username', res1[i].username).subscribe(respTienda => {
-                    if (Object.keys(respTienda).length > 0) {
-                      // window.open('cuenta-usuario/cuenta/mi-tienda', '_top');
-                      this.router.navigate(['/cuenta-usuario/cuenta/mi-tienda']);
-                    } else {
-                      this.router.navigate(['/cuenta-usuario/cuenta']);
-                    }
-                  });
+        // console.log(res1);
+        if (Object.keys(res1).length > 0) {
+          for (const i in res1) {
+            if (res1[i].confirmar_correo) {
+  
+              this.setValues();
+              this.usuario.return_secure_token = true;
+              this.usuarioService.loginAuth(this.usuario).subscribe(res2 => {
+                console.log(res2);
+  
+                let id = Object.keys(res1).toString();
+  
+                let value = {
+                  idToken: res2['idToken']
                 }
-              })
-
-
-            }, err => {
-              (err.error.error.message == 'EMAIL_NOT_FOUND') ? Sweetalert.fnc("error", err.error.error.message == 'EMAIL_NOT_FOUND' ? 'El correo o la contraseña son incorrectas' : '', null)
-                : Sweetalert.fnc("error", err.error.error.message == 'INVALID_PASSWORD' ? 'El correo  o la contraseña son incorrectas' : '', null);
-            });
-          } else {
-            Sweetalert.fnc("error", "Necesita confirmar su correo electrónico(revise el spam)", null);
+  
+                this.usuarioService.update(id, value).subscribe(res3 => {
+                  if (res3['idToken'] != '') {
+                    Sweetalert.fnc("close", null, null);
+                    localStorage.setItem("idToken", res3['idToken']);
+                    localStorage.setItem("email", res2['email']);
+                    let today = new Date();
+                    today.setSeconds(res2['expiresIn']);
+                    localStorage.setItem("expiresIn", today.getTime().toString());
+  
+                    //almacenamos recuerdame en el storage
+                    // console.log("recuerdame:", this.recuerdame);
+                    if (!this.recuerdame) {
+                      localStorage.setItem("rememberMe", "no");
+                    } else {
+                      localStorage.setItem("rememberMe", "yes");
+                    }
+                    this.storeService.getFilterData('username', res1[i].username).subscribe(respTienda => {
+                      if (Object.keys(respTienda).length > 0) {
+                        // window.open('cuenta-usuario/cuenta/mi-tienda', '_top');
+                        this.router.navigate(['/cuenta-usuario/cuenta/mi-tienda']);
+                      } else {
+                        this.router.navigate(['/cuenta-usuario/cuenta']);
+                      }
+                    });
+                  }
+                })
+  
+  
+              }, err => {
+                (err.error.error.message == 'EMAIL_NOT_FOUND') ? Sweetalert.fnc("error", err.error.error.message == 'EMAIL_NOT_FOUND' ? 'El correo o la contraseña son incorrectas' : '', null)
+                  : Sweetalert.fnc("error", err.error.error.message == 'INVALID_PASSWORD' ? 'El correo  o la contraseña son incorrectas' : '', null);
+              });
+            } else {
+              Sweetalert.fnc("error", "Necesita confirmar su correo electrónico(revise el spam)", null);
+            }
+  
+  
           }
-
-
+        }else{
+          Sweetalert.fnc("error", "Cuenta no registrada", null);
         }
+        
 
 
 
 
 
 
+      },err=>{
+        console.log("error:",err);
       });
 
     } else {
@@ -264,7 +270,9 @@ export class LoginComponent implements OnInit {
         console.log("reestablecer:", res);
         Sweetalert.fnc('success', 'Revisa tu correo para cambiar tu contraseña', "login");
 
-      })
+      },err=>{
+        Sweetalert.fnc('error', 'Correo no registrado', null);
+      });
     } else {
       return;
     }

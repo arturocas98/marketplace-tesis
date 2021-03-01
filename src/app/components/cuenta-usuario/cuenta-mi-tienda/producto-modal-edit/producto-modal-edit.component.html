@@ -253,14 +253,15 @@
 
                 <div class="custom-file">
 
-                    <input type="file" class="custom-file-input" id="productDefaultBanner" accept="image/*"
-                        maxSize="2000000" (change)="validateImage($event,'changeDefaultBanner')">
+                    <input type="file" class="custom-file-input" id="productDefaultBanner"
+                        accept="image/*" maxSize="2000000" (change)="validateImage($event,'changeDefaultBanner')">
 
                     <div class="valid-feedback">Valido</div>
                     <div class="invalid-feedback">Por favor rellene este campo</div>
 
                     <label class="custom-file-label" for="productDefaultBanner">Seleccionar
                         archivo</label>
+
 
                 </div>
 
@@ -486,8 +487,7 @@
 
                         <input type="text" class="form-control formProduct" name="price"
                             [(ngModel)]="productModel.precio" min="0" maxLength="6" step="any"
-                            (keypress)="validators.soloNumeros($event)" 
-                            #price  required>
+                            (keypress)="validators.soloNumeros($event)" #price required>
 
 
 
@@ -581,9 +581,8 @@
                         </span>
                     </div>
 
-                    <input type="text" class="form-control" name="value_offer" [(ngModel)]="offer[1]" min="0"
-                        step="any" maxLength="6" (keypress)="validators.soloNumeros($event)" 
-                        #value_offer >
+                    <input type="text" class="form-control" name="value_offer" [(ngModel)]="offer[1]" min="0" step="any"
+                        maxLength="6" (keypress)="validators.soloNumeros($event)" #value_offer>
 
                     <div class="valid-feedback">Valido</div>
                     <div class="invalid-feedback">Por favor rellene este campo</div>
@@ -624,7 +623,7 @@
             </div>
 
         </div>
-        
+
 
     </form>
 

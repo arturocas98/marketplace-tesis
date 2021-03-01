@@ -1,0 +1,95 @@
+<!-- Modal Header -->
+<div class="modal-header">
+    <h4 class="modal-title text-center">Formulario de aprobación</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRefEdit.hide()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body p-5 text-left">
+    <form [formGroup]="form" (ngSubmit)="onSubmitProduct($event)">
+
+
+        <div class="form-group">
+
+            <label>Nombre<sup class="text-danger">*</sup></label>
+
+            <div class="form-group__content">
+
+                <input type="text" class="form-control formAprobacion" name="nombre"
+                    formControlName="nombre"  required readonly>
+
+               
+
+            </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Tienda<sup class="text-danger">*</sup></label>
+
+            <div class="form-group__content">
+
+                <input type="text" class="form-control" 
+                    formControlName="tienda"  required readonly>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Estado</label>
+
+            <div class="form-group__content">
+                <section class="example-section">
+                    <mat-slide-toggle
+                        class="example-margin"
+                        [color]="color"
+                        [checked]="checked"
+                        formControlName="estado"
+                        (change)="changeStatus(estado)"
+                        #estado
+                        >
+                      
+                    </mat-slide-toggle>
+                  </section>
+               
+            </div>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Comentario<sup class="text-danger">*</sup></label>
+
+            <div class="form-group__content">
+
+                <input type="text" class="form-control" 
+                    formControlName="comentario"  required readonly>
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <div class="form-group submtit">
+
+
+
+
+                <button mat-raised-button color="primary">Guardar</button>
+
+            </div>
+
+        </div>
+
+
+    </form>
+
+
+
+
+</div>

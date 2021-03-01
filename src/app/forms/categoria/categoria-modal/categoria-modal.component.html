@@ -1,0 +1,125 @@
+<!-- Modal Header -->
+<div class="modal-header">
+    <h4 class="modal-title text-center">Formulario de categoría</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRefAdd.hide()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body p-5 text-left">
+    <form (ngSubmit)="onSubmitCategoria(p)" #p="ngForm">
+
+
+        <!--=====================================
+        Nombre del producto
+        ======================================-->
+
+        <div class="form-group">
+
+            <label>Nombre<sup class="text-danger">*</sup></label>
+
+            <div class="form-group__content">
+
+                <input type="text" class="form-control formCategoria" name="nombre"
+                    pattern="[A-Za-z0-9ñÑáéíóúÁÉÍÓÚ ]{1,}" [(ngModel)]="categoria.nombre" (change)="validate(nombre)"
+                    #nombre required>
+
+                <div class="valid-feedback">Valido</div>
+                <div class="invalid-feedback">Por favor rellene este campo</div>
+
+            </div>
+
+        </div>
+
+        <!--=====================================
+                      Url del producto
+                      ======================================-->
+
+        <div class="form-group">
+
+            <label>URL de la subcategoría<sup class="text-danger">*</sup></label>
+
+            <div class="form-group__content">
+
+                <input type="text" class="form-control formCategoria" name="url" [(ngModel)]="categoria.url" readonly
+                    required>
+
+                <div class="valid-feedback">Valido</div>
+                <div class="invalid-feedback">Por favor rellene este campo</div>
+
+            </div>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Grupo<sup class="text-danger">*</sup></label>
+
+            <div class="form-group__content">
+
+                <tag-input class="form-control formCategoria" type="text" name="productTags" [(ngModel)]="tags"
+                    [maxItems]='5'></tag-input>
+
+                <div class="valid-feedback">Valido</div>
+                <div class="invalid-feedback">Por favor rellene este campo</div>
+
+            </div>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Imagen de la galería<sup class="text-danger">*</sup></label>
+
+            <div class="form-group__content">
+
+                <label class="pb-5" for="productImage">
+
+                    <img src="{{categoria.imagen}}" class="img-fluid changeImage">
+
+
+
+                </label>
+
+                <div class="custom-file">
+
+                    <input type="file" class="custom-file-input formCategoria" id="categoriaImage" accept="image/*"
+                        maxSize="2000000" (change)="validateImage($event, 'changeImage')" required>
+
+                    <div class="valid-feedback">Valido</div>
+                    <div class="invalid-feedback">Por favor rellene este campo</div>
+
+                    <label class="custom-file-label" for="categoriaImage">Seleccionar archivo</label>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+
+
+
+        <div class="modal-footer">
+
+            <div class="form-group submtit">
+
+
+
+
+                <button mat-raised-button color="primary">Guardar</button>
+
+            </div>
+
+        </div>
+
+
+    </form>
+
+
+
+
+</div>

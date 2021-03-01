@@ -512,7 +512,7 @@ export class CuentaNuevaTiendaComponent implements OnInit {
       Validamos expresión regular de la información de la tienda
       =============================================*/
 
-      let pattern = /^[A-Za-z0-9\s]{1,1000}$/;
+      let pattern = /[A-Za-z0-9\s]{1,1000}/;
 
       if (!pattern.test(input.value)) {
 

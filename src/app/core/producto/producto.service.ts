@@ -45,6 +45,11 @@ export class ProductoService {
 
     );
   }
+  
+  getAllAdmin(){
+    let url = this.url_api + "/producto.json"
+    return this.http.get(url);
+  }
 
   getLimit(startAt: string, limitToFirst: number) {
     let url = this.url_api + `/producto.json?orderBy="$key"&startAt="${startAt}"&limitToFirst=${limitToFirst}&print=pretty`;

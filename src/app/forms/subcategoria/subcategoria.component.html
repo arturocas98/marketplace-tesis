@@ -1,0 +1,52 @@
+<mat-card class="shipping-card">
+  <mat-card-header>
+    <mat-card-title>Subcategoria</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="ps-section__right">
+
+
+      <div class="d-flex justify-content-between">
+
+        <div>
+          <button mat-raised-button color="primary" (click)="addSubcategoria()">Nueva
+            Subcategoria</button>
+        </div>
+      </div>
+      <br>
+      <table class="table dt-responsive" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" width="100%"
+        >
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Categoría</th>
+            <th scope="col">Grupo</th>
+
+            <th scope="col">Vistas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let subcategoria of subcategorias;let i=index;let lastIndex=last;">
+            <th> {{i+1}}</th>
+            <td>{{ subcategoria.nombre }}</td>
+            <td>{{ subcategoria.categoria }}</td>
+            <td>{{subcategoria.grupo}}</td>
+            <td>{{ subcategoria.vistas }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- 
+        <div class="d-flex justify-content-center preloadTable">
+          <div class="spinner-border text-muted my-3"></div>
+
+        </div> -->
+
+    </div>
+
+
+
+  </mat-card-content>
+
+</mat-card>
+
