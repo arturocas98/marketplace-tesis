@@ -99,7 +99,7 @@ export class CheckoutComponent implements OnInit {
                   for (const l in respTienda) {
                     this.carrito_tienda.push({
                       "tienda": respTienda[l].tienda,
-                      "precio_envio": respTienda[l].precio_envio
+                      "precio_envio": Number(respTienda[l].precio_envio)
                     })
 
                     res[j].precio_envio = respTienda[l].precio_envio;
@@ -368,22 +368,25 @@ export class CheckoutComponent implements OnInit {
                         }
 
                       ]
-                      console.log("orden_id:", respOrden['name']);
-
+                      // console.log("orden_id:", respOrden['name']);
                       let body = {
                         id_orden: respOrden['name'],
                         tienda: product.tienda,
-                        // usuario: this.usuario.username,
+                        usuario: this.usuario.username,
                         producto: product.nombre,
                         url: product.url,
                         imagen: product.imagen,
                         categoria: product.categoria,
-                        // details:product.details,
                         cantidad: product.cantidad,
                         precio: this.subTotalPrice[index],
+                        email: this.form.controls['email'].value,
+                        telefono: this.form.controls['telefono'].value,
+                        direccion: this.form.controls['direccion'].value,
                         proceso: JSON.stringify(proccess),
                         estado: "pendiente"
+  
                       }
+                      
 
                       this.ordersService.registerDatabase(body, localStorage.getItem("idToken"))
                         .subscribe(resp => {
@@ -547,11 +550,14 @@ export class CheckoutComponent implements OnInit {
                     url: product.url,
                     imagen: product.imagen,
                     categoria: product.categoria,
-                    // details:product.details,
                     cantidad: product.cantidad,
                     precio: this.subTotalPrice[index],
+                    email: this.form.controls['email'].value,
+                    telefono: this.form.controls['telefono'].value,
+                    direccion: this.form.controls['direccion'].value,
                     proceso: JSON.stringify(proccess),
                     estado: "pendiente"
+
                   }
 
                   this.ordersService.registerDatabase(body, localStorage.getItem("idToken"))

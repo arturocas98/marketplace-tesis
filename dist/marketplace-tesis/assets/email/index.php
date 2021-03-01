@@ -37,8 +37,8 @@ if(isset($_GET["key"]) && $_GET["key"] == "AIzaSyAhIFsYyuMjThfQhH_2IQnI3yUR9LgdV
 			<div>
 
 				Hola, '.$_POST["name"].':
-
-				<a href="https://marketplace-tesis.web.app/'.$_POST["url"].'">Haga clic en este enlace para obtener más información.
+				
+				<a href="http://organic-gye.000webhostapp.com/'.$_POST["url"].'">Haga clic en este enlace para obtener más información.
 				</a>
 
 				Si no solicitó verificar esta dirección, puede ignorar este correo electrónico.

@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DisputaService } from 'src/app/core/disputa/disputa.service';
 import { MensajeService } from 'src/app/core/mensaje/mensaje.service';
 import { OrdenesService } from 'src/app/core/ordenes/ordenes.service';
+import { ProductoService } from 'src/app/core/producto/producto.service';
 import { TiendaService } from 'src/app/core/tienda/tienda.service';
 import { UsuarioService } from 'src/app/core/usuario/usuario.service';
 import { environment } from 'src/environments/environment';
@@ -38,6 +39,7 @@ export class CuentaPerfilComponent implements OnInit {
   ordersPending : number = 0;
   disputes: any[] = [];
   messages: any[] = [];
+  productos: number = 0;
   constructor(
     private usersService: UsuarioService,
     public formBuilder: FormBuilder,
@@ -46,7 +48,8 @@ export class CuentaPerfilComponent implements OnInit {
     private tiendaService:TiendaService,
     private ordersService:OrdenesService,
     private disputesService:DisputaService,
-    private messagesService: MensajeService
+    private messagesService: MensajeService,
+    private productoService: ProductoService
   ) {
     this.validators = new MyValidators();
 
@@ -137,7 +140,7 @@ export class CuentaPerfilComponent implements OnInit {
 
 											for(const i in resp){
 
-												if(resp[i].answer == undefined){								
+												if(resp[i].respuesta == undefined){								
 
 													this.messages.push(resp[i]);	
 
@@ -147,6 +150,18 @@ export class CuentaPerfilComponent implements OnInit {
 
 										}
 
+
+									})
+
+
+                  /*=============================================
+									Preguntamos si tiene productos
+									=============================================*/
+
+                  this.productoService.getByFilter("tienda", respTienda[i].tienda)
+									.subscribe(resp=>{
+                    this.productos = resp.length;
+                      // console.log("respuesta:",resp);
 
 									})
 									

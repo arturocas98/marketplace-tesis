@@ -265,7 +265,7 @@ export class CuentaMisOrdenesComponent implements OnInit, OnDestroy {
 
         this.http.post(this.email, formData)
           .subscribe(resp => {
-
+            console.log("respuesta:",resp);
             if (resp["status"] == 200) {
 
               Sweetalert.fnc("success", "El pedido se actualizó correctamente", "/cuenta-usuario/cuenta/mis-ordenes");
