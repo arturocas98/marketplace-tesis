@@ -29,7 +29,13 @@ export class FooterComponent implements OnInit {
 
   getCategorias(){
     this.categoriasService.getAll().subscribe(res=>{
-      this.categorias = res;
+      for (const i in res) {
+        this.categorias.push(res[i]);
+      }
+
+      // this.categorias = res;
+      // console.log("categorias:",this.categorias);
+      
       for (const i in res) {
         this.categoria_list.push(res[i].nombre);
       }
@@ -53,6 +59,8 @@ export class FooterComponent implements OnInit {
                 }
               )
             }
+            // console.log("subcategorias:",subcategorias);
+            
             for (const i in subcategorias) {
               if (categoria == subcategorias[i].categoria) {
                 $(`[categorias-footer='${categoria}']`).append(

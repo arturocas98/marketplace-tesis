@@ -13,6 +13,11 @@ export class OrdenesService {
     this.url_api = environment.url_api;
   }
 
+  getAll(){
+    let url = this.url_api+ "/orden_detalle.json"
+    return this.http.get(url);
+  }
+
   registerDatabase(body:Object,idToken:string) {
     return this.http.post(`${this.url_api}/orden_detalle.json?auth=${idToken}`, body);
   }

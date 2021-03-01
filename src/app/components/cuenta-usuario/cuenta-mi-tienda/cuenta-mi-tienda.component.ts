@@ -385,7 +385,7 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
         Validamos expresión regular de la información de la tienda
         =============================================*/
 
-      let pattern = /^[A-Za-z0-9\s]{1,1000}$/;
+      let pattern = /[A-Za-z0-9\s]{1,1000}/;
 
       if (!pattern.test(input.value)) {
 
@@ -683,7 +683,7 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
 
     if (image["type"] !== "image/jpeg" && image["type"] !== "image/png") {
 
-      Sweetalert.fnc("error", "The image must be in JPG or PNG format", null)
+      Sweetalert.fnc("error", "La imagen debe ser en formato PNG o JPG", null)
 
       return;
     }
@@ -694,7 +694,7 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
 
     else if (image["size"] > 2000000) {
 
-      Sweetalert.fnc("error", "Image must not weigh more than 2MB", null)
+      Sweetalert.fnc("error", "La imagen no debe pesar más de 2MB", null)
 
       return;
     }
@@ -736,7 +736,7 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
     Alerta suave mientras se edita la tienda
     =============================================*/
 
-    Sweetalert.fnc("loading", "Loading...", null);
+    Sweetalert.fnc("loading", "Cargando...", null);
 
     /*=============================================
     Subir imagenes al servidor
@@ -762,7 +762,6 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
       }
 
     ]
-
     for (const i in allImages) {
 
       const formData = new FormData();

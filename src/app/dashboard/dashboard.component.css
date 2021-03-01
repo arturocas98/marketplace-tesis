@@ -1,0 +1,48 @@
+.grid-container {
+  margin: 20px;
+}
+
+.dashboard-card {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+}
+
+.more-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+.dashboard-card-content {
+  text-align: center;
+}
+
+
+/* CARDS HEADER */
+
+.dash-widget-header {
+  align-items: center;
+  display: flex;
+}
+
+
+.dash-widget-icon {
+  align-items: center;
+  border-radius: 10px;
+  color: #fff;
+  display: inline-flex;
+  font-size: 40px;
+  height: 80px;
+  justify-content: center;
+  text-align: center;
+  width: 80px;
+  background-color: #ff0080;
+}
+
+.dash-widget-info {
+  margin-left: auto;
+  text-align: right;
+}

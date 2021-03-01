@@ -1,0 +1,113 @@
+<!-- Modal Header -->
+<div class="modal-header">
+    <h4 class="modal-title text-center">Formulario de subcategoría</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRefAdd.hide()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body p-5 text-left">
+    <form (ngSubmit)="onSubmitProduct(p)" #p="ngForm">
+
+        <!--=====================================
+        Nombre del producto
+        ======================================-->
+
+        <div class="form-group">
+
+            <label>Nombre<sup class="text-danger">*</sup></label>
+
+            <div class="form-group__content">
+
+                <input type="text" class="form-control formSubcategoria" name="nombre"
+                    pattern="[A-Za-z0-9ñÑáéíóúÁÉÍÓÚ ]{1,}" [(ngModel)]="subcategoria.nombre" (change)="validate(nombre)"
+                    #nombre required>
+
+                <div class="valid-feedback">Valido</div>
+                <div class="invalid-feedback">Por favor rellene este campo</div>
+
+            </div>
+
+        </div>
+
+        <!--=====================================
+                      Url del producto
+                      ======================================-->
+
+        <div class="form-group">
+
+            <label>URL de la subcategoría<sup class="text-danger">*</sup></label>
+
+            <div class="form-group__content">
+
+                <input type="text" class="form-control formSubcategoria" name="url" [(ngModel)]="subcategoria.url"
+                    readonly required>
+
+                <div class="valid-feedback">Valido</div>
+                <div class="invalid-feedback">Por favor rellene este campo</div>
+
+            </div>
+
+        </div>
+
+        <!--=====================================
+                      Categoría del producto
+                      ======================================-->
+
+        <div class="form-group">
+
+            <label>Categoría<sup class="text-danger">*</sup></label>
+
+            <div class="form-group__content">
+
+                <select class="form-control formSubcategoria" name="categoria" [(ngModel)]="subcategoria.categoria"
+                    required (change)="changeCategory(inputCategory)"#inputCategory  >
+
+                    <option *ngFor="let category of categorias" [value]="category.nombre">
+                        {{category.nombre}}</option>
+
+                </select>
+            </div>
+
+        </div>
+
+        <div  class="form-group">
+
+            <label>Grupo<sup class="text-danger">*</sup></label>
+
+            <div class="form-group__content">
+
+                <select class="form-control formSubcategoria" name="categoria" [(ngModel)]="subcategoria.grupo"
+                    required>
+
+                    <option *ngFor="let grupo of grupos;let i = index;" [value]="grupo.nombre"  >
+                        {{grupo.nombre}}</option>
+
+                </select>
+            </div>
+
+        </div>
+
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+
+            <div class="form-group submtit">
+
+
+
+
+                <button mat-raised-button color="primary">Guardar</button>
+
+            </div>
+
+        </div>
+
+
+    </form>
+
+
+
+
+</div>
