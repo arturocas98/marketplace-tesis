@@ -2,7 +2,6 @@ import { trigger } from '@angular/animations';
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
 import { CategoriaService } from 'src/app/core/categoria/categoria.service';
 import { SubcategoriaService } from 'src/app/core/categoria/sub_categoria.service';
@@ -13,8 +12,6 @@ import { Producto } from 'src/app/models/producto';
 import { Tienda } from 'src/app/models/tienda';
 import { environment } from 'src/environments/environment';
 import { DinamicRating, DinamicReviews, Tooltip, Rating, Sweetalert, Capitalize, CreateUrl } from '../../../functions';
-import { MyValidators } from '../../utils/MyValidators';
-import { ProductoModalEditComponent } from './producto-modal-edit/producto-modal-edit.component';
 declare var jQuery: any;
 declare var $: any;
 @Component({
@@ -24,7 +21,6 @@ declare var $: any;
 })
 export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
   @Input() usuario: string;
-  public bsModalRefEdit: BsModalRef;
   server: string = environment.server;
   serverDelete: string = environment.serverDelete;
   path: string = environment.url_image;
@@ -98,21 +94,18 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
   offer: any[] = [];
   idProducts: any[] = [];
   idProduct: string = null;
+  editProductAction: boolean = false;
   popoverMessage: string = 'Estas seguro de eliminar el producto?';
-  validators: MyValidators;
   constructor(
     private tiendaService: TiendaService,
     private productsService: ProductoService,
     private usersService: UsuarioService,
     private categoriesService: CategoriaService,
     private subCategoriesService: SubcategoriaService,
-    private http: HttpClient,
-    private modalService: BsModalService,
-
+    private http: HttpClient
   ) {
     this.storeModel = new Tienda();
     this.productModel = new Producto();
-    this.validators = new MyValidators();
   }
 
   ngOnInit(): void {
@@ -217,13 +210,13 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
           return item;
         });
 
-        console.log("tienda:", this.store);
-        console.log("social:", this.social['instagram']);
-        console.log("social_twitter:", this.social['twitter']);
+        // console.log("tienda:", this.store);
+        // console.log("social:", this.social['instagram']);
+        // console.log("social_twitter:", this.social['twitter']);
 
 
         this.productsService.getFilterDataStore("tienda", this.store[0].tienda).subscribe(resp => {
-          console.log("productos:", resp);
+          // console.log("productos:", resp);
           for (const i in resp) {
             this.products.push(resp[i]);
             this.idProducts = Object.keys(resp).toString().split(",");
@@ -275,6 +268,8 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
     });
   }
 
+ 
+
   callback(i, totalReviews) {
     if (!this.render) {
       this.render = true;
@@ -285,8 +280,8 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
         $("table").animate({ "opacity": 1 });
         $(".preloadTable").animate({ "opacity": 0 });
         /*=============================================
-              Agregamos las calificaciones totales de la tienda
-              =============================================*/
+        Agregamos las calificaciones totales de la tienda
+        =============================================*/
 
         totalReviews.forEach((review, index) => {
 
@@ -295,10 +290,9 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
           for (const i in review) {
 
             globalReviews += review[i].review
-
           }
         })
-        console.log("globalRating:", globalRating);
+        // console.log("globalRating:", globalRating);
         console.log("globalReviews:", globalReviews);
         //numero de estrellas del 1 al 5 
         let averageReviews = Math.round(globalReviews / globalRating);
@@ -320,15 +314,13 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
         Tomamos el Arreglo del promedio de calificaciones
         =============================================*/
         let averageRating = DinamicReviews.fnc(averageReviews);
-
+        // console.log("averageRating:",averageRating);
         /*=============================================
               Pintamos en el HTML el Select para el plugin Rating
               =============================================*/
 
         $(".br-theme-fontawesome-stars").html(`
-
 					 <select class="ps-rating reviewsOption" data-read-only="true"></select>
-
             	`)
 
         /*=============================================
@@ -338,9 +330,7 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
         for (let i = 0; i < averageRating.length; i++) {
 
           $(".reviewsOption").append(`
-
 						 <option value="${averageRating[i]}">${i + 1}</option>
-
             		`)
 
         }
@@ -385,7 +375,7 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
         Validamos expresión regular de la información de la tienda
         =============================================*/
 
-      let pattern = /[A-Za-z0-9\s]{1,1000}/;
+      let pattern = /^[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\"\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]{1,1000}$/;
 
       if (!pattern.test(input.value)) {
 
@@ -454,25 +444,25 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
     Validamos el precio de envio de la tienda
     =============================================*/
 
-    // if ($(input).attr("name") == "storePrecioEnvio") {
+    if ($(input).attr("name") == "storePrecioEnvio") {
 
-    //   /*=============================================
-    //   Validamos expresión regular de la dirección de la tienda
-    //   =============================================*/
+      /*=============================================
+      Validamos expresión regular de la dirección de la tienda
+      =============================================*/
 
-    //   let pattern = /^[-\\0-9 ]{1,}$/;
+      let pattern = /^[-\\0-9 ]{1,}$/;
 
-    //   if (!pattern.test(input.value)) {
+      if (!pattern.test(input.value)) {
 
-    //     $(input).parent().addClass('was-validated');
+        $(input).parent().addClass('was-validated');
 
-    //     input.value = "";
+        input.value = "";
 
-    //     return;
+        return;
 
-    //   }
+      }
 
-    // }
+    }
 
     /*=============================================
     Validamos las redes sociales de la tienda
@@ -590,23 +580,23 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
     Validamos el precio de envío y el precio de venta
     =============================================*/
 
-    // if ($(input).attr("tags") == "prices") {
+    if ($(input).attr("tags") == "prices") {
 
-    //   /*=============================================
-    //   Validamos expresión regular
-    //   =============================================*/
+      /*=============================================
+      Validamos expresión regular
+      =============================================*/
 
-    //   let pattern = /^[.\\,\\0-9]{1,}$/;
+      let pattern = /^[.\\,\\0-9]{1,}$/;
 
-    //   if (!pattern.test(input.value)) {
+      if (!pattern.test(input.value)) {
 
-    //     $(input).parent().addClass('was-validated');
+        $(input).parent().addClass('was-validated');
 
-    //     return;
+        return;
 
-    //   }
+      }
 
-    // }
+    }
 
     /*=============================================
    Validamos dias de entrega y stock
@@ -683,7 +673,7 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
 
     if (image["type"] !== "image/jpeg" && image["type"] !== "image/png") {
 
-      Sweetalert.fnc("error", "La imagen debe ser en formato PNG o JPG", null)
+      Sweetalert.fnc("error", "The image must be in JPG or PNG format", null)
 
       return;
     }
@@ -694,7 +684,7 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
 
     else if (image["size"] > 2000000) {
 
-      Sweetalert.fnc("error", "La imagen no debe pesar más de 2MB", null)
+      Sweetalert.fnc("error", "Image must not weigh more than 2MB", null)
 
       return;
     }
@@ -720,11 +710,11 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
   }
 
   onSubmitStore(f: NgForm) {
-    console.log("submit:", f);
+    // console.log("submit:", f);
     /*=============================================
         Validación completa del formulario
         =============================================*/
-
+    console.log("f:", f);
     if (f.invalid) {
 
       Sweetalert.fnc("error", "Faltan campos por llenar o no cumplen el formato especificado", null);
@@ -736,7 +726,7 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
     Alerta suave mientras se edita la tienda
     =============================================*/
 
-    Sweetalert.fnc("loading", "Cargando...", null);
+    Sweetalert.fnc("loading", "Loading...", null);
 
     /*=============================================
     Subir imagenes al servidor
@@ -762,6 +752,7 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
       }
 
     ]
+
     for (const i in allImages) {
 
       const formData = new FormData();
@@ -965,15 +956,137 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
     Alerta suave mientras se carga el formulario de edición
     =============================================*/
 
-    // Sweetalert.fnc("loading", "Cargando...", null);
+    Sweetalert.fnc("loading", "Cargando...", null);
 
     /*=============================================
     Traemos la data del producto
     =============================================*/
 
-    const initialState = { producto_id: idProduct };
-    this.bsModalRefEdit = this.modalService.show(ProductoModalEditComponent, Object.assign({}, { class: 'modal-lg', initialState }));
+    this.editProductAction = true;
 
+    this.productsService.getById(idProduct)
+      .subscribe(resp => {
+
+        this.productModel.nombre = resp["nombre"];
+        this.productModel.url = resp["url"];
+        this.productModel.categoria = resp["categoria"];
+        this.productModel.subcategoria = resp["subcategoria"];
+        this.productModel.grupo = resp["grupo"];
+        this.productModel.descripcion = resp["descripcion"];
+        this.productModel.vistas = resp["vistas"];
+        this.productModel.ventas = resp["ventas"];
+        this.productModel.imagen = resp["imagen"];
+        this.productModel.default_banner = resp["default_banner"];
+        this.productModel.precio = resp["precio"];
+        // this.productModel.shipping = resp["shipping"];
+        this.productModel.tiempo_entrega = resp["tiempo_entrega"];
+        this.productModel.stock = resp["stock"];
+
+        /*=============================================
+        Cargar el resumen del producto
+        =============================================*/
+
+        this.summaryGroup = [];
+
+        JSON.parse(resp["resumen"]).forEach(value => {
+
+          this.summaryGroup.push({
+
+            input: value
+
+          })
+
+        })
+
+
+        /*=============================================
+        Cargar las etiquetas del producto
+        =============================================*/
+
+        JSON.parse(resp["etiquetas"]).forEach(item => {
+
+          this.tags.push(item)
+
+        })
+
+        /*=============================================
+        Cargar la galería del producto
+        =============================================*/
+        this.editGallery = [];
+        JSON.parse(resp["galeria"]).forEach(item => {
+
+          this.editGallery.push(item)
+
+        })
+
+
+        /*=============================================
+        Carga del slide horizontal del producto
+        =============================================*/
+
+        this.hSlider["H4 tag"] = JSON.parse(resp["horizontal_slider"])["H4 tag"];
+        this.hSlider["H3-1 tag"] = JSON.parse(resp["horizontal_slider"])["H3-1 tag"];
+        this.hSlider["H3-2 tag"] = JSON.parse(resp["horizontal_slider"])["H3-2 tag"];
+        this.hSlider["H3-3 tag"] = JSON.parse(resp["horizontal_slider"])["H3-3 tag"];
+        this.hSlider["H3-4s tag"] = JSON.parse(resp["horizontal_slider"])["H3-4s tag"];
+        this.hSlider["Button tag"] = JSON.parse(resp["horizontal_slider"])["Button tag"];
+        this.hSlider["IMG tag"] = JSON.parse(resp["horizontal_slider"])["IMG tag"];
+
+        /*=============================================
+        Carga de las ofertas del producto
+        =============================================*/
+
+        if (resp["oferta"] != "") {
+
+          JSON.parse(resp["oferta"]).forEach(value => {
+
+            this.offer.push(value);
+
+          })
+
+        }
+
+        // console.log("oferta:", this.offer[3]);
+        /*=============================================
+        Abrir la ventana modal
+        =============================================*/
+        $("#editProduct").modal()
+
+        /*=============================================
+        Cerrar la Alerta suave
+        =============================================*/
+
+        Sweetalert.fnc("close", "", null);
+
+      })
+
+  }
+
+  addProduct(){
+    this.productModel = new Producto();
+    this.productModel.descripcion = "";
+    // this.summaryGroup = [];
+    this.summaryGroup = [{
+
+      input: ''
+  
+    }];
+    this.tags = [];
+    this.offer = [];
+    this.hSlider = {
+
+      "H4 tag": "",
+      "H3-1 tag": "",
+      "H3-2 tag": "",
+      "H3-3 tag": "",
+      "H3-4s tag": "",
+      "Button tag": "",
+      "IMG tag": ""
+    };
+    this.editProductAction = false;
+    Sweetalert.fnc("loading", "Cargando...", null);
+    $("#formProduct").modal();
+    Sweetalert.fnc("close", "", null);
   }
 
 
@@ -1030,15 +1143,27 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
     Validamos que la galería tenga como mínimo una sola imagen
     =============================================*/
 
+    if (!this.editProductAction) {
 
-    if (this.gallery.length == 0) {
+      if (this.gallery.length == 0) {
 
-      Sweetalert.fnc("error", "La galería esta vacía", null);
+        Sweetalert.fnc("error", "La galería esta vacía", null);
 
-      return;
+        return;
+
+      }
+
+    } else {
+
+      if (this.editGallery.length == 0 && this.gallery.length == 0) {
+
+        Sweetalert.fnc("error", "La galería esta vacía", null);
+
+        return;
+
+      }
 
     }
-
 
     /*=============================================
     Validación completa del formulario
@@ -1063,11 +1188,14 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
 
     let folder = "";
 
+    if (!this.editProductAction) {
 
+      folder = this.productModel.categoria.split("_")[1];
 
-    folder = this.productModel.categoria.split("_")[1];
+    } else {
 
-
+      folder = this.productModel.categoria;
+    }
 
     let countAllImages = 0;
 
@@ -1117,16 +1245,69 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
           if (resp["status"] != null && resp["status"] == 200) {
 
             if (allImages[i].type == "imageProduct") {
+
+              if (this.editProductAction) {
+
+                /*=============================================
+                Borrar antigua imagen del servidor
+                =============================================*/
+
+                const formData = new FormData();
+
+                let fileDelete = `${allImages[i].path}/${allImages[i].folder}/${this.productModel.imagen}`;
+
+                formData.append("fileDelete", fileDelete);
+
+                this.http.post(this.serverDelete, formData)
+                  .subscribe(resp => { })
+
+              }
+
               this.productModel.imagen = resp["result"];
+
             }
 
             if (allImages[i].type == "defaultBannerImg") {
+
+              if (this.editProductAction) {
+
+                /*=============================================
+                Borrar antigua imagen del servidor
+                =============================================*/
+
+                const formData = new FormData();
+
+                let fileDelete = `${allImages[i].path}/${allImages[i].folder}/${this.productModel.default_banner}`;
+
+                formData.append("fileDelete", fileDelete);
+
+                this.http.post(this.serverDelete, formData)
+                  .subscribe(resp => { })
+
+              }
 
               this.productModel.default_banner = resp["result"];
 
             }
 
             if (allImages[i].type == "hSliderImg") {
+
+              if (this.editProductAction) {
+
+                /*=============================================
+                Borrar antigua imagen del servidor
+                =============================================*/
+
+                const formData = new FormData();
+
+                let fileDelete = `${allImages[i].path}/${allImages[i].folder}/${this.hSlider["IMG tag"]}`;
+
+                formData.append("fileDelete", fileDelete);
+
+                this.http.post(this.serverDelete, formData)
+                  .subscribe(resp => { })
+
+              }
 
               this.hSlider["IMG tag"] = resp["result"];
 
@@ -1142,67 +1323,66 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
           if (countAllImages == allImages.length) {
 
 
+            if (!this.editProductAction) {
 
-            /*=============================================
-            Consolidar fecha de creación del producto   
+              /*=============================================
               Consolidar fecha de creación del producto   
-            Consolidar fecha de creación del producto   
-            =============================================*/
+              =============================================*/
 
-            this.productModel.fecha_creacion = new Date();
+              this.productModel.fecha_creacion = new Date();
 
-            /*=============================================
-            Consolidar el feedback para el producto
-            =============================================*/
+              /*=============================================
+              Consolidar el feedback para el producto
+              =============================================*/
 
-            this.productModel.feedback = {
-              // cambiar por review
-              type: "approved",
-              comment: "Tu producto esta aprobado"
+              this.productModel.feedback = {
+
+                type: "review",
+                comment: "Tu producto esta en revisión"
+
+              }
+
+              this.productModel.feedback = JSON.stringify(this.productModel.feedback);
+
+
+              /*=============================================
+              Consolidar categoria para el producto
+              =============================================*/
+
+              this.productModel.categoria = this.productModel.categoria.split("_")[1];
+
+              /*=============================================
+              Consolidar lista de títulos para el producto
+              =============================================*/
+
+              this.productModel.grupo = this.productModel.subcategoria.split("_")[1];
+
+              /*=============================================
+              Consolidar sub-categoria para el producto
+              =============================================*/
+
+              this.productModel.subcategoria = this.productModel.subcategoria.split("_")[0];
+
+
+              /*=============================================
+              Consolidar el nombre de la tienda para el producto
+              =============================================*/
+
+              this.productModel.tienda = this.storeModel.tienda;
+
+              /*=============================================
+              Consolidar calificaciones para el producto
+              =============================================*/
+
+              this.productModel.reviews = "[]";
+
+              /*=============================================
+              Consolidar las ventas y las vistas del producto
+              =============================================*/
+              this.productModel.ventas = 0;
+              this.productModel.vistas = 0;
 
             }
-
-            this.productModel.feedback = JSON.stringify(this.productModel.feedback);
-
-
-            /*=============================================
-            Consolidar categoria para el producto
-            =============================================*/
-
-            this.productModel.categoria = this.productModel.categoria.split("_")[1];
-
-            /*=============================================
-            Consolidar lista de títulos para el producto
-            =============================================*/
-
-            this.productModel.grupo = this.productModel.subcategoria.split("_")[1];
-
-            /*=============================================
-            Consolidar sub-categoria para el producto
-            =============================================*/
-
-            this.productModel.subcategoria = this.productModel.subcategoria.split("_")[0];
-
-
-            /*=============================================
-            Consolidar el nombre de la tienda para el producto
-            =============================================*/
-
-            this.productModel.tienda = this.storeModel.tienda;
-
-            /*=============================================
-            Consolidar calificaciones para el producto
-            =============================================*/
-
-            this.productModel.reviews = "[]";
-
-            /*=============================================
-            Consolidar las ventas y las vistas del producto
-            =============================================*/
-            this.productModel.ventas = 0;
-            this.productModel.vistas = 0;
-
-
 
 
             /*=============================================
@@ -1272,6 +1452,44 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
             if (this.gallery.length > 0) {
 
               /*=============================================
+              Actualizar galería
+              =============================================*/
+
+              if (this.editProductAction) {
+
+                /*=============================================
+                Borrar Imagen de galería del servidor
+                =============================================*/
+
+                for (const i in this.deleteGallery) {
+
+                  /*=============================================
+                  Borrar antigua imagen del servidor
+                  =============================================*/
+
+                  const formData = new FormData();
+
+                  let fileDelete = `products/categorias/${folder}/gallery/${this.deleteGallery[i]}`;
+
+                  formData.append("fileDelete", fileDelete);
+
+                  this.http.post(this.serverDelete, formData)
+                    .subscribe(resp => { })
+
+                }
+
+                /*=============================================
+                Agregar imagenes nuevas al array de la galería
+                =============================================*/
+
+                for (const i in this.editGallery) {
+
+                  newGallery.push(this.editGallery[i]);
+                }
+
+              }
+
+              /*=============================================
               Subimos imágenes nuevas de la galería al servidor
               =============================================*/
 
@@ -1308,26 +1526,47 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
 
                       this.productModel.galeria = JSON.stringify(newGallery);
 
+                      if (!this.editProductAction) {
 
-                      /*=============================================
-                      Crear el producto en la BD
-                      =============================================*/
-                      this.storeModel.productos +=1;
-                      this.productsService.registerDatabase(this.productModel, localStorage.getItem("idToken"))
-                        .subscribe(resp => {
+                        /*=============================================
+                        Crear el producto en la BD
+                        =============================================*/
 
-                          if (resp["name"] != "") {
+                        this.productsService.registerDatabase(this.productModel, localStorage.getItem("idToken"))
+                          .subscribe(resp => {
 
-                            Sweetalert.fnc("success", "El producto se ha creado correctamente", "cuenta-usuario/cuenta/mi-tienda");
+                            if (resp["name"] != "") {
 
-                          }
+                              Sweetalert.fnc("success", "El producto se ha creado correctamente", "cuenta-usuario/cuenta/mi-tienda");
 
-                        }, err => {
+                            }
 
-                          Sweetalert.fnc("error", err.error.error.message, null)
+                          }, err => {
 
-                        })
+                            Sweetalert.fnc("error", err.error.error.message, null)
 
+                          })
+
+                      } else {
+
+                        /*=============================================
+                        Editar el producto en la BD
+                        =============================================*/
+
+                        this.productsService.patchDataAuth(this.idProduct, this.productModel, localStorage.getItem("idToken"))
+                          .subscribe(resp => {
+
+                            Sweetalert.fnc("success", "El producto ha sido actualizado correctamente", "cuenta-usuario/cuenta/mi-tienda");
+
+
+                          }, err => {
+
+                            Sweetalert.fnc("error", err.error.error.message, null)
+
+                          })
+
+
+                      }
 
 
                     }
@@ -1457,15 +1696,9 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
 
   }
 
-  public validaStock(e) {
-    var key = window.event ? e.which : e.keyCode;
-    if (key < 48 || key > 57) {
-      e.preventDefault();
-    }
-  }
-
   ngOnDestroy() {
     this.dtTrigger.unsubscribe();
   }
 
 }
+

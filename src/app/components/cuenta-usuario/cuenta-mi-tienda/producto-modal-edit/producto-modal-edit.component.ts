@@ -416,14 +416,15 @@ export class ProductoModalEditComponent implements OnInit {
         this.imageProduct = e.target.files[0];
         break;
 
-      case "changeDefaultBanner":
-        this.defaultBannerImg = e.target.files[0];
-        break;
+    //   case "changeHSlider":
+    //     this.hSliderImg = e.target.files[0];
+    //     break;
 
-      case "changeHSlider":
-        this.hSliderImg = e.target.files[0];
-        break;
 
+    // }
+    
+    // console.log("image product:",this.imageProduct);
+    // console.log("h slider:",this.hSliderImg);
 
     }
     console.log("Image product:",this.imageProduct);

@@ -264,7 +264,7 @@ export class CheckoutComponent implements OnInit {
         }, {});
 
         tiendas_filter.forEach(tienda => {
-          valor_envio += tienda.precio_envio;
+          valor_envio += Number(tienda.precio_envio);
         });
         console.log("valor_envio:", valor_envio);
 
@@ -273,7 +273,7 @@ export class CheckoutComponent implements OnInit {
           total_con_envio = total_sin_envio + valor_envio;
         } else {
           total_con_envio = total_sin_envio + valor_envio;
-
+          console.log("total_con_envio:", total_con_envio);
         }
         total = total_con_envio;
         localTotal = total;
@@ -373,7 +373,7 @@ export class CheckoutComponent implements OnInit {
                       let body = {
                         id_orden: respOrden['name'],
                         tienda: product.tienda,
-                        // usuario: this.usuario.username,
+                        usuario: this.usuario.username,
                         producto: product.nombre,
                         url: product.url,
                         imagen: product.imagen,
@@ -382,7 +382,10 @@ export class CheckoutComponent implements OnInit {
                         cantidad: product.cantidad,
                         precio: this.subTotalPrice[index],
                         proceso: JSON.stringify(proccess),
-                        estado: "pendiente"
+                        estado: "pendiente",
+                        direccion: this.form.controls['direccion'].value,
+                        telefono: this.form.controls['telefono'].value,
+                        email: this.form.controls['email'].value,
                       }
 
                       this.ordersService.registerDatabase(body, localStorage.getItem("idToken"))
@@ -551,7 +554,10 @@ export class CheckoutComponent implements OnInit {
                     cantidad: product.cantidad,
                     precio: this.subTotalPrice[index],
                     proceso: JSON.stringify(proccess),
-                    estado: "pendiente"
+                    estado: "pendiente",
+                    direccion: this.form.controls['direccion'].value,
+                    telefono: this.form.controls['telefono'].value,
+                    email: this.form.controls['email'].value,
                   }
 
                   this.ordersService.registerDatabase(body, localStorage.getItem("idToken"))
