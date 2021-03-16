@@ -54,7 +54,10 @@ export class HomePromotionsComponent implements OnInit {
             this.categoria.push(res[i].categoria);
             this.url.push(res[i].url);
           }
+          console.log("banner_default",this.banner_default);
         }
+        
+        
       )
      
     })

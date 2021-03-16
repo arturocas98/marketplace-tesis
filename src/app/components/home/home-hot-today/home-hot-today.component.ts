@@ -138,10 +138,15 @@ export class HomeHotTodayComponent implements OnInit {
       =============================================*/
       // cambiar
       // Math.ceil(block/4)
+      let count = 0;
       for (let i = 0; i < Math.ceil(block / 4); i++) {
-
+        count ++;
         this.topSalesBlock.push(i);
 
+      }
+
+      if(count == this.topSalesBlock.length){
+        this.topSalesBlock.pop();
       }
 
     })
@@ -331,6 +336,8 @@ export class HomeHotTodayComponent implements OnInit {
 
         let oferta = JSON.parse($(oferta_1[i]).attr("oferta"));
         let precio = JSON.parse($(oferta_1[i]).attr("precio"));
+        console.log("oferta 2:",oferta[2]);
+        
         if (oferta[0] == 'Descuento') {
           $(oferta_1[i]).html(
 
@@ -352,8 +359,8 @@ export class HomeHotTodayComponent implements OnInit {
           $(oferta_2[i]).html(`$${oferta[1]}`)
 
         }
-
-        $(oferta_3[i]).attr("data-time",
+        if(oferta[2] != undefined ){
+          $(oferta_3[i]).attr("data-time",
 
           new Date(
 
@@ -364,6 +371,8 @@ export class HomeHotTodayComponent implements OnInit {
           )
 
         )
+        }
+        
 
 
 

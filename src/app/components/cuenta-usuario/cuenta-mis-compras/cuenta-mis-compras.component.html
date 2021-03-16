@@ -34,6 +34,10 @@
 
                     <th>Fecha de emisión</th>
 
+                    <th> Subtotal </th>
+
+                    <th>Envio</th>
+
                     <th>Total</th>
                     <th></th>
                 </tr>
@@ -70,6 +74,14 @@
                         {{orden.fecha_emision|date}}
                     </td>
 
+                    <td class="text-center" >
+                        $ {{  orden.envio ?(orden.total - orden.envio).toFixed(2): '' }}
+                    </td>
+
+                    <td class="text-center" >
+                        $ {{ orden.envio?orden.envio:''}}
+                    </td>
+
                     <td class="price text-center">
                         $ {{orden.total}}
                     </td>
@@ -96,11 +108,11 @@
 
 </div>
 
-<div class="modal" id="proceso" style="margin-left: 300px;overflow: auto !important;" >
+<div class="modal" id="proceso" style="margin-left: 300px;overflow: auto !important;">
     <div class="modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                Proceso de la orden {{id_orden_modal}}
+                Detalle de la orden {{id_orden_modal}}
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
@@ -119,11 +131,14 @@
 
                                 <th>Proceso</th>
 
-                                <th>Precio</th>
+                                <th>Review</th>
 
                                 <th>Cantidad</th>
 
-                                <th>Review</th>
+                                <th>Precio Unitario </th>
+
+                                <th>Total</th>
+                              
 
                             </tr>
 
@@ -300,11 +315,6 @@
 
                                 </td>
 
-                                <td class="price text-center">${{product.precio}}</td>
-
-                                <td class="text-center">{{product.cantidad}}</td>
-
-
                                 <!--=====================================
                                                 No permitir escribir comentarios del producto si aún no ha sido entregado
                                                 ======================================-->
@@ -319,8 +329,8 @@
                                 </td>
 
                                 <!--=====================================
-                                                Permitir escribir comentarios del producto si ha sido entregado
-                                                ======================================-->
+                                                                Permitir escribir comentarios del producto si ha sido entregado
+                                                                ======================================-->
 
                                 <td *ngIf="process[i][2].stage == 'entregado' && process[i][2].status == 'ok'">
 
@@ -347,9 +357,16 @@
 
                                 </td>
 
+
+
+                                <td class="text-center">{{product.cantidad}}</td>
+
+                                <td class="text-center"> {{product?.precio_unitario}} </td>
+
+                                <td class="price text-center">${{product?.subtotal}}</td>
+
                             </tr>
 
-                            <!-- Product -->
 
                         </tbody>
 

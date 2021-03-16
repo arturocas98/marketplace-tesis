@@ -1,0 +1,69 @@
+<mat-card class="shipping-card">
+    <mat-card-header>
+        <mat-card-title>Categoria</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="ps-section__right">
+
+
+            <div class="d-flex justify-content-between">
+
+                <!-- <div>
+            <button mat-raised-button color="primary" (click)="addCategoria()">Nueva
+              categoria</button>
+          </div> -->
+            </div>
+            <br>
+            <table class="table dt-responsive" width="100%">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Producto</th>
+                        <th scope="col">Tienda</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Fecha de creación</th>
+                        <th scope="col" ></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let producto of productos;let i=index;let lastIndex=last;">
+                        <th> {{i+1}}</th>
+                        <td>{{ producto.nombre }}</td>
+                        <td>{{producto.tienda}}</td>
+                        <td>
+                            <!-- {{ producto.feedback.type=='approved' ?'aprobado': 'En revisión' }} -->
+                            <h4>
+                                <span *ngIf="producto.feedback.type == 'approved'" data-toggle="tooltip"
+                                    title="{{producto.feedback.comment}}" class="badge badge-success">
+                                    <a >Aprobado</a>
+                                </span>
+
+                                <span *ngIf="producto.feedback.type == 'review'" data-toggle="tooltip"
+                                    title="{{producto.feedback.comment}}" class="badge badge-warning">En
+                                    revisión</span>
+                            </h4>
+                        </td>
+                        <td>{{ producto.fecha_creacion|date }}</td>
+                        <td > 
+                            <button mat-raised-button class="btn btn-success" (click)="editProduct(idProducts[i])">Editar</button>
+                            <!-- <button mat-raised-button color="warn" (click)="deleteProduct(producto)" >Eliminar</button> -->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- 
+          <div class="d-flex justify-content-center preloadTable">
+            <div class="spinner-border text-muted my-3"></div>
+  
+          </div> -->
+
+        </div>
+
+        <!-- <mat-paginator #paginator [length]="productos.length" [pageIndex]="0" [pageSize]="50"
+            [pageSizeOptions]="[25, 50, 100, 250]">
+        </mat-paginator> -->
+
+
+    </mat-card-content>
+
+</mat-card>

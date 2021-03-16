@@ -39,7 +39,7 @@ export class CuentaPerfilComponent implements OnInit {
   ordersPending : number = 0;
   disputes: any[] = [];
   messages: any[] = [];
-  productos: number = 0;
+  productos:any [] = [];
   constructor(
     private usersService: UsuarioService,
     public formBuilder: FormBuilder,
@@ -49,7 +49,8 @@ export class CuentaPerfilComponent implements OnInit {
     private ordersService:OrdenesService,
     private disputesService:DisputaService,
     private messagesService: MensajeService,
-    private productoService: ProductoService
+    private productService: ProductoService,
+
   ) {
     this.validators = new MyValidators();
 
@@ -110,15 +111,15 @@ export class CuentaPerfilComponent implements OnInit {
 									=============================================*/
 
 									this.disputesService.getFilterData("receptor", respTienda[i].tienda)
-									.subscribe(resp=>{
+									.subscribe(respDisputa=>{
 										
-										if(Object.keys(resp).length > 0){
+										if(Object.keys(respDisputa).length > 0){
 
-											for(const i in resp){
+											for(const i in respDisputa){
 
-												if(resp[i].respuesta == undefined){								
+												if(respDisputa[i].respuesta == undefined){								
 
-													this.disputes.push(resp[i]);
+													this.disputes.push(respDisputa[i]);
 
 												}				
 											
@@ -134,13 +135,14 @@ export class CuentaPerfilComponent implements OnInit {
 									=============================================*/
 
 									this.messagesService.getFilterData("receptor", respTienda[i].tienda)
-									.subscribe(resp=>{
-										
-										if(Object.keys(resp).length > 0){
+									.subscribe(respMensaje=>{
+										console.log("mensajes_respta:",respMensaje);
+                    
+										if(Object.keys(respMensaje).length > 0){
 
-											for(const i in resp){
+											for(const i in respMensaje){
 
-												if(resp[i].respuesta == undefined){								
+												if(respMensaje[i].respuesta == undefined){								
 
 													this.messages.push(resp[i]);	
 
@@ -153,15 +155,17 @@ export class CuentaPerfilComponent implements OnInit {
 
 									})
 
-
-                  /*=============================================
-									Preguntamos si tiene productos
-									=============================================*/
-
-                  this.productoService.getByFilter("tienda", respTienda[i].tienda)
+                  this.productService.getByFilter("tienda", respTienda[i].tienda)
 									.subscribe(resp=>{
-                    this.productos = resp.length;
-                      // console.log("respuesta:",resp);
+										
+										if(Object.keys(resp).length > 0){
+
+                      for(const i in resp){
+                        this.productos.push(resp[i]);
+                      }
+
+										}
+
 
 									})
 									

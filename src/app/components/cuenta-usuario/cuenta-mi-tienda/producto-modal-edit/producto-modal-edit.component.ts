@@ -400,24 +400,35 @@ export class ProductoModalEditComponent implements OnInit {
   }
 
   validateImage(e, tagPicture) {
-
+    console.log("evento:",e);
+    this.imageProduct = e.target.files[0];
     switch (tagPicture) {
+
+      case "changeLogo":
+        this.logoStore = e.target.files[0];
+        break;
+
+      case "changeCover":
+        this.coverStore = e.target.files[0];
+        break;
 
       case "changeImage":
         this.imageProduct = e.target.files[0];
         break;
 
-      case "changeDefaultBanner":
-        this.defaultBannerImg = e.target.files[0];
-        break;
+    //   case "changeHSlider":
+    //     this.hSliderImg = e.target.files[0];
+    //     break;
 
-      case "changeHSlider":
-        this.hSliderImg = e.target.files[0];
-        break;
 
+    // }
+    
+    // console.log("image product:",this.imageProduct);
+    // console.log("h slider:",this.hSliderImg);
 
     }
-
+    console.log("Image product:",this.imageProduct);
+    
     let image = e.target.files[0];
 
     /*=============================================
@@ -426,7 +437,7 @@ export class ProductoModalEditComponent implements OnInit {
 
     if (image["type"] !== "image/jpeg" && image["type"] !== "image/png") {
 
-      Sweetalert.fnc("error", "La imagen debe ser en formato JPG o PNG", null)
+      Sweetalert.fnc("error", "La imagen debe ser en formato PNG o JPG", null)
 
       return;
     }
@@ -437,7 +448,7 @@ export class ProductoModalEditComponent implements OnInit {
 
     else if (image["size"] > 2000000) {
 
-      Sweetalert.fnc("error", "La imagen pesa más de 2MB", null)
+      Sweetalert.fnc("error", "La imagen no debe pesar más de 2MB", null)
 
       return;
     }
@@ -462,6 +473,7 @@ export class ProductoModalEditComponent implements OnInit {
     }
   }
 
+
   removeGallery(pic) {
 
     this.editGallery.forEach((name, index) => {
@@ -483,8 +495,9 @@ export class ProductoModalEditComponent implements OnInit {
     /*=============================================
     Validar que el producto esté correctamente creado
     =============================================*/
-    console.log("f:",f);
-    
+    // console.log("f:",f);
+    // console.log("Image product:",this.imageProduct);
+
     let formProduct = $(".formProduct");
 
     for (let i = 0; i < formProduct.length; i++) {
@@ -538,7 +551,7 @@ export class ProductoModalEditComponent implements OnInit {
     Alerta suave mientras se registra la tienda y el producto
     =============================================*/
 
-    Sweetalert.fnc("loading", "Cargando...", null);
+    // Sweetalert.fnc("loading", "Cargando...", null);
 
     /*=============================================
     Subir imagenes al servidor
@@ -547,7 +560,7 @@ export class ProductoModalEditComponent implements OnInit {
     let folder = "";
 
 
-    folder = this.productModel.categoria.split("_")[1];
+    folder = this.productModel.categoria;
 
 
     let countAllImages = 0;
@@ -581,7 +594,6 @@ export class ProductoModalEditComponent implements OnInit {
       }
 
     ]
-
 
     for (const i in allImages) {
 

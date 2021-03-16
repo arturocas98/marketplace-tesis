@@ -533,7 +533,7 @@ export let DinamicPrice = {
     let offerDate;
     let today = new Date();
     // console.log("oferta:",response.oferta);
-    if (response.oferta != '[]') {
+    if (response.oferta != "[]") {
       // console.log("entro");
       offerDate = new Date(
         parseInt(JSON.parse(response.oferta)[2].split("-")[0]),
@@ -776,6 +776,12 @@ export let Datepicker = {
       format: "yyyy-mm-dd",
     });
 
+    $(".ps-datepicker.dateFromAdmin").datepicker({
+      endDate: new Date(),
+      todayHighlight: true,
+      format: "yyyy-mm-dd",
+    });
+
     $(".ps-datepicker.dateFrom").change(function () {
       $(".ps-datepicker.dateTo").attr("readonly", false);
 
@@ -802,11 +808,47 @@ export let Datepicker = {
       }
     });
 
+    $(".ps-datepicker.dateFromAdmin").change(function () {
+      $(".ps-datepicker.dateToAdmin").attr("readonly", false);
+
+      let dateFrom = $(this).val();
+
+      $(".ps-datepicker.dateToAdmin").val(dateFrom);
+
+      $(".ps-datepicker.dateToAdmin").datepicker({
+        startDate: dateFrom,
+        datesDisabled: dateFrom,
+        format: "yyyy-mm-dd",
+        endDate: new Date(),
+        todayHighlight: true,
+      });
+
+      if ($(".ps-datepicker.dateToAdmin").val() != "") {
+        $(".btnUpdateAdmin").attr(
+          "href",
+          "admin/dashboard/" +
+            dateFrom +
+            "&" +
+            $(".ps-datepicker.dateToAdmin").val()
+        );
+      }
+    });
+
     $(".ps-datepicker.dateTo").change(function () {
       $(".btnUpdate").attr(
         "href",
         "cuenta-usuario/cuenta/mis-ventas&" +
           $(".ps-datepicker.dateFrom").val() +
+          "&" +
+          $(this).val()
+      );
+    });
+
+    $(".ps-datepicker.dateToAdmin").change(function () {
+      $(".btnUpdateAdmin").attr(
+        "href",
+        "admin/dashboard/" +
+          $(".ps-datepicker.dateFromAdmin").val() +
           "&" +
           $(this).val()
       );
@@ -822,17 +864,12 @@ export let ChartJs = {
   fnc: function (config) {
     let ctx = document.getElementById("line-chart").getContext("2d");
     window.myLine = new Chart(ctx, config);
-    
-   
-
   },
 };
 
 export let ChartJsPie = {
   fnc: function (config) {
-    var ctx = document.getElementById('pie-chart').getContext('2d');
-    window.myPie = new Chart(ctx, config); 
+    var ctx = document.getElementById("pie-chart").getContext("2d");
+    window.myPie = new Chart(ctx, config);
   },
 };
-
-

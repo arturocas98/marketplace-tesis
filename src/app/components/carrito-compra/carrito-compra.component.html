@@ -22,7 +22,7 @@
     Shopping Car
     ======================================-->
 
-<div class="ps-section--shopping ps-shopping-cart"  > 
+<div class="ps-section--shopping ps-shopping-cart">
 
     <div class="container">
 
@@ -38,26 +38,26 @@
 
                 <table class="table">
 
-                    <thead class="thead-light" >
+                    <thead class="thead-light">
 
-                        <tr style="text-transform: uppercase;font-size: 16px;" >
+                        <tr style="text-transform: uppercase;font-size: 16px;">
 
-                            <th >Producto</th>
+                            <th>Producto</th>
                             <th>Tienda</th>
-                            <th  >Precio</th>
-                            <th  >Cantidad</th>
-                            <th  >Total</th>
-                            <th  ></th>
+                            <th>Cantidad</th>
+                            <th>Precio unitario</th>
+                            <th>Total</th>
+                            <th></th>
 
                         </tr>
 
                     </thead>
 
                     <tbody>
-                        <tr *ngIf="shoppingCart.length == 0" >
-                            <td colspan="6"  class="text-center" > No se han encontrado productos </td>
+                        <tr *ngIf="shoppingCart.length == 0">
+                            <td colspan="6" class="text-center"> No se han encontrado productos </td>
                         </tr>
-                        <tr *ngFor="let carrito of shoppingCart;let index = i; let lastIndex=last;" >
+                        <tr *ngFor="let carrito of shoppingCart;let index = i; let lastIndex=last;">
                             <td>
 
                                 <div class="ps-product--cart">
@@ -81,38 +81,41 @@
 
                             </td>
 
-                            <td class="ps-product pShoppingCart" > {{carrito.tienda}} (Costo de envio ${{carrito.precio_envio}}) </td>
-
-                            <td class="ps-product pShoppingCart" [innerHTML]="carrito.precio" ></td>
-
-                            <!-- <td class="text-center">$ <span class="sShoppingCart" > {{ carrito.shipping }} </span> </td> -->
-
+                            <td class="ps-product pShoppingCart"> {{carrito.tienda}} (Costo de envio
+                                ${{carrito.precio_envio}}) </td>
 
                             <td>
 
-                                <div class="form-group--number quantity" style="max-width: 100px;" >
+                                <div class="form-group--number quantity" style="max-width: 100px;">
 
                                     <button class="up" (click)="changeCantidad(quantity.value, 1, 'up',carrito.url)">
                                         +</button>
-    
-                                        <button class="down" (click)="changeCantidad(quantity.value, 1, 'down',carrito.url)">
+
+                                    <button class="down"
+                                        (click)="changeCantidad(quantity.value, 1, 'down',carrito.url)">
                                         -</button>
-    
-                                        <input class="form-control qShoppingCart" type="number" value="{{carrito.cantidad}}" min="1" max="100" step="1" #quantity (change)="changeCantidad(quantity.value, 0, null,carrito.url)">
+
+                                    <input class="form-control qShoppingCart" type="number" value="{{carrito.cantidad}}"
+                                        min="1" max="100" step="1" #quantity
+                                        (change)="changeCantidad(quantity.value, 0, null,carrito.url)">
 
                                 </div>
 
                             </td>
 
-                            <td  class="subTotalPrice">
+                            <td class="ps-product pShoppingCart" [innerHTML]="carrito.precio"></td>
+
+                            <!-- <td class="text-center">$ <span class="sShoppingCart" > {{ carrito.shipping }} </span> </td> -->
+
+                            <td class="subTotalPrice">
                                 <div class="spinner-border subTotalPriceM">
 
                                 </div>
-                            </td>                             
+                            </td>
 
                             <td>
 
-                                <a style="cursor:pointer"(click)="removeProduct(carrito.url)">
+                                <a style="cursor:pointer" (click)="removeProduct(carrito.url)">
                                     <i class="icon-cross"></i>
                                 </a>
 
@@ -128,21 +131,21 @@
 
             <hr>
 
-            <div *ngIf="shoppingCart.length > 0" class="justify-content-end flex-column flex-column-reverse" 
-                 >
-                    <div [innerHTML]="subTotalSinEnvio" ></div>
-                    <div [innerHTML]="envio" ></div>
+            <div *ngIf="shoppingCart.length > 0" class="justify-content-end flex-column flex-column-reverse">
+                <div [innerHTML]="subTotalSinEnvio"></div>
+                <div [innerHTML]="envio"></div>
 
-                    
-                    <div [innerHTML]="totalP" ></div>
 
-                
+                <div [innerHTML]="totalP"></div>
+
+
             </div>
             <!-- <div class="ps-section">
 
             </div> -->
             <!-- <p>Te falta $10 para el envio gratis!</p> -->
-            <p class="text-danger" >(*) El valor del envío se cobra por tienda, consulta los valores de cada tienda en el siguiente  <a style="font-weight: bold;" routerLink="/lista-tiendas" >enlace </a> </p>
+            <p class="text-danger">(*) El valor del envío se cobra por tienda, consulta los valores de cada tienda en el
+                siguiente <a style="font-weight: bold;" routerLink="/lista-tiendas">enlace </a> </p>
 
             <div class="ps-section__cart-actions">
 
@@ -151,7 +154,7 @@
                     <i class="icon-arrow-left"></i> Seguir comprando
                 </a>
 
-                <a  *ngIf="shoppingCart.length > 0" class="ps-btn" routerLink="/checkout">
+                <a *ngIf="shoppingCart.length > 0" class="ps-btn" routerLink="/checkout">
                     Proceder a pagar <i class="icon-arrow-right"></i>
                 </a>
 

@@ -1,0 +1,159 @@
+<div class="grid-container">
+  <h1 class="mat-h1">Dashboard</h1>
+
+  <div class="row">
+    <div class="col-xl-4 col-sm-6 col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="dash-widget-header">
+            <span class="dash-widget-icon bg-primary">
+              <i class="far fa-user"></i>
+            </span>
+            <div class="dash-widget-info">
+              <h3>{{usuarios.length}}</h3>
+              <h4 class="text-muted">Usuarios</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-4 col-sm-6 col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="dash-widget-header">
+            <span class="dash-widget-icon bg-primary">
+              <i class="fas fa-store"></i>
+            </span>
+            <div class="dash-widget-info">
+              <h3>4</h3>
+              <h4 class="text-muted">Tiendas</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-4 col-sm-6 col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="dash-widget-header">
+            <span class="dash-widget-icon bg-primary">
+              <i class="fas fa-parachute-box"></i>
+            </span>
+            <div class="dash-widget-info">
+              <h3>{{productos}}</h3>
+              <h4 class="text-muted">Productos no aprobados</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--=====================================
+   Selección de fecha
+   ======================================-->
+
+  <form class="ps-form--vendor-datetimepicker mt-5">
+    <label for=""> Filtros por fechas </label>
+    <div class="row">
+
+      <div class="col-lg-3 col-md-4 col-sm-6 col-12 ">
+
+        <div class="input-group">
+
+          <div class="input-group-prepend">
+
+            <span class="input-group-text" id="time-from">desde</span>
+
+          </div>
+
+          <input type="text" class="form-control ps-datepicker dateFromAdmin" aria-label="Username"
+            aria-describedby="time-from" autocomplete="off" value="{{dateFrom}}" required>
+
+        </div>
+
+      </div>
+
+      <div class="col-lg-3 col-md-4 col-sm-6 col-12 ">
+
+        <div class="input-group">
+
+          <div class="input-group-prepend">
+
+            <span class="input-group-text" id="time-form">hasta</span>
+
+          </div>
+
+          <input type="text" class="form-control ps-datepicker dateToAdmin" aria-label="Username"
+            aria-describedby="time-to" autocomplete="off" value="{{dateTo}}" readonly required>
+
+        </div>
+
+      </div>
+
+      <div class="col-lg-3 col-md-4 col-sm-6 col-12 ">
+
+        <a href="" class="ps-btn btnUpdateAdmin"><i class="icon-magnifier"></i> Buscar</a>
+
+      </div>
+
+    </div>
+
+    <label for=""> Filtros rápidos </label>
+    <div class="row">
+      <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-2">
+        <a href="admin/dashboard/{{today}}&{{today}}" class="ps-btn"><i class="icon-magnifier"></i>
+          Hoy</a>
+      </div>
+
+      <div class="col-lg-3 col-md-4 col-sm-6 col-12 ">
+        <a href="admin/dashboard/{{last_month}}&{{today}}" class="ps-btn"><i
+            class="icon-magnifier"></i> Último mes</a>
+      </div>
+    </div>
+
+
+  </form>
+
+
+  <div class="row">
+
+    <div class="col-xl-6 col-sm-12 col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="col-lg-12 col-sm-12">
+            Ganancias del marketplace
+            <figure class="ps-block--vendor-status">
+
+
+              <canvas id="line-chart" class="chartjs-render-monitor"></canvas>
+
+            </figure>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-6 col-sm-12 col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="col-lg-12 col-sm-12">
+            Pagos a tiendas
+            <figure class="ps-block--vendor-status">
+
+              <canvas id="pie-chart" class="chartjs-render-monitor"></canvas>
+
+            </figure>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>

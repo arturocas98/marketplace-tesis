@@ -1,22 +1,47 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-// import { NavComponent } from './nav/nav.component';
-// import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent } from '../dashboard/dashboard.component';
+import { AprobacionProductosComponent } from '../forms/aprobacion-productos/aprobacion-productos.component';
+import { CategoriaComponent } from '../forms/categoria/categoria.component';
+import { SubcategoriaComponent } from '../forms/subcategoria/subcategoria.component';
+import { NavComponent } from '../nav/nav.component';
 
 
 const routes: Routes = [
   {
+    // path:'', component: DashboardComponent
     path: '',
-    // component: NavComponent,
-    children: [
-      
+    component: NavComponent,
+    children:[
       {
-        path: '',
-        // component: DashboardComponent
+        path:'',
+        redirectTo:'/admin/dashboard',
+        pathMatch:'full'
       },
-      
+      {
+        path:'dashboard',
+        component:DashboardComponent
+      },
+      {
+        path:'dashboard/:param',
+        component:DashboardComponent
+      },
+      {
+        path:'categoria',
+        component:CategoriaComponent
+      },
+      {
+        path:'subcategoria',
+        component:SubcategoriaComponent
+      },
+      {
+        path:'aprobacion',
+        component:AprobacionProductosComponent
+      }
     ]
-  }
+    
+  },
+ 
 ];
 
 @NgModule({
