@@ -1,6 +1,6 @@
 <mat-card class="shipping-card">
   <mat-card-header>
-    <mat-card-title>Categoria</mat-card-title>
+    <mat-card-title>Categoría</mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <div class="ps-section__right">
@@ -12,34 +12,65 @@
           <button mat-raised-button color="primary" (click)="addCategoria()">Nueva
             categoria</button>
         </div>
+
+        <mat-form-field class="search-form-field" floatLabel="never">
+          <input matInput [(ngModel)]="searchKey" placeholder="Buscar" autocomplete="off" (keyup)="applyFilter()">
+          <button mat-button matSuffix mat-icon-button aria-label="Clear"*ngIf="searchKey"  (click)="onSearchClear()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+
       </div>
       <br>
-      <table class="table dt-responsive"  width="100%"
-        >
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Grupo</th>
-            <th scope="col">Url</th>
-            <th scope="col">Vistas</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let subcategoria of categorias;let i=index;let lastIndex=last;">
-            <th> {{i+1}}</th>
-            <td>{{ subcategoria.nombre }}</td>
-            <td>{{subcategoria.grupo}}</td>
-            <td>{{ subcategoria.url }}</td>
-            <td>{{ subcategoria.vistas }}</td>
-          </tr>
-        </tbody>
-      </table>
-      <!-- 
-        <div class="d-flex justify-content-center preloadTable">
-          <div class="spinner-border text-muted my-3"></div>
 
-        </div> -->
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="nro">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let element;let i =index;"> {{i+1}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+            <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="grupo">
+            <th mat-header-cell *matHeaderCellDef> Grupo </th>
+            <td mat-cell *matCellDef="let element"> {{element.grupo}} </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="url">
+            <th mat-header-cell *matHeaderCellDef> Url </th>
+            <td mat-cell *matCellDef="let element"> {{element.url}} </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="vistas">
+            <th mat-header-cell *matHeaderCellDef> Vistas </th>
+            <td mat-cell *matCellDef="let element"> {{element.vistas}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef>  </th>
+            <td mat-cell *matCellDef="let element"> 
+              <button mat-icon-button><mat-icon>edit</mat-icon></button>
+              <button mat-icon-button color="warn"><mat-icon>delete_outline</mat-icon></button> 
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+       
+      </div>
+
 
     </div>
 
@@ -48,4 +79,3 @@
   </mat-card-content>
 
 </mat-card>
-

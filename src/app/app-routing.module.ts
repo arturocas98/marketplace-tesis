@@ -90,12 +90,7 @@ const routes: Routes = [
   },
   {
     path:'admin',
-    canActivate:[AdminGuard],
-    loadChildren:()=> import ('./admin/admin-routing.module').then(m=> m.AdminRoutingModule)
-  }, 
-  {
-    path:'admin/:param',
-    canActivate:[AdminGuard],
+    // canActivate:[AdminGuard],
     loadChildren:()=> import ('./admin/admin-routing.module').then(m=> m.AdminRoutingModule)
   },  
   {

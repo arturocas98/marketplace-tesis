@@ -23,6 +23,10 @@ const routes: Routes = [
         component:DashboardComponent
       },
       {
+        path:'dashboard/:param',
+        component:DashboardComponent
+      },
+      {
         path:'categoria',
         component:CategoriaComponent
       },

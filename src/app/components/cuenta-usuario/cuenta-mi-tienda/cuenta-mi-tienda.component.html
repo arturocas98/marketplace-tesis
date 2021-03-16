@@ -159,7 +159,7 @@
 
                                 <th>Stock</th>
 
-                                <th>Tiempo de entrega</th>
+                                <th>Fecha de creación</th>
 
                                 <th>Oferta</th>
 
@@ -215,7 +215,9 @@
 
                                         <button type="button" class="btn btn-danger rounded-circle"
                                             mwlConfirmationPopover [popoverMessage]="popoverMessage" placement="left"
-                                            (confirm)="deleteProduct(idProducts[i], products, i)">
+                                            (confirm)="deleteProduct(idProducts[i], products, i)"
+                                            [cancelText]='cancelTxt' [confirmText]='confirmTxt' 
+                                            >
 
                                             <i class="fas fa-trash"></i>
 
@@ -246,13 +248,13 @@
                                         class="badge badge-danger p-2">{{product.stock}}</span>
                                 </td>
 
-                                <td>{{product.tiempo_entrega}} días</td>
+                                <td>{{product.fecha_creacion|date}}</td>
 
                                 <td>
                                     <div *ngIf="product.oferta.length > 0">
                                         {{product.oferta[0]}}:
-                                        <span *ngIf="product.oferta[0] == 'Disccount'">{{product.oferta[1]}}%</span>
-                                        <span *ngIf="product.oferta[0] == 'Fixed'">${{product.oferta[1]}}</span>
+                                        <span *ngIf="product.oferta[0] == 'Descuento'">{{product.oferta[1]}}%</span>
+                                        <span *ngIf="product.oferta[0] == 'Fijo'">${{product.oferta[1]}}</span>
                                     </div>
                                 </td>
 
@@ -435,15 +437,14 @@
                             <div class="form-group__content">
 
                                 <textarea class="form-control" rows="7"
-                                    placeholder="Notes about your store in maximum 1000 characters, ex: We are a store specialized in technology..."
-                                    name="storeAbout"
-                                    pattern="[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\'\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]{1,1000}"
-                                    [(ngModel)]="storeModel.acerca_de" (change)="validate(about)" #about
-                                    required></textarea>
+                                placeholder="Información acerca de tu tienda, ejemplo: somos una tienda especializada en ..."
+                                name="storeAbout" maxLength="1000"
+                                [(ngModel)]="storeModel.acerca_de" (change)="validate(about)" #about
+                                required></textarea>
 
-                                <div class="valid-feedback">Valido</div>
-                                <div *ngIf="f.submitted && f.controls['storeAbout'].errors" class="invalid-feedback">Por
-                                    favor rellene este campo</div>
+                            <div class="valid-feedback">Valido</div>
+                            <div *ngIf="f.submitted && f.controls['storeAbout'].errors" class="invalid-feedback">Por
+                                favor rellene este campo</div>
 
                             </div>
 
@@ -528,11 +529,13 @@
 
 
 
-                                <input type="text" class="form-control" name="storePrecioEnvio" pattern="[-\\0-9 ]{1,}"
-                                    [(ngModel)]="storeModel.precio_envio" (change)="validate(precio_envio)" #precio_envio required>
+                                <input type="text" class="form-control" name="storePrecioEnvio" 
+                                    [(ngModel)]="storeModel.precio_envio" (keypress)="validators.soloNumeros($event)"
+                                    maxLength="6" required>
 
                                 <div class="valid-feedback">Valido</div>
-                                <div *ngIf="f.submitted && f.controls['storePrecioEnvio'].errors" class="text-danger">Por
+                                <div *ngIf="f.submitted && f.controls['storePrecioEnvio'].errors" class="text-danger">
+                                    Por
                                     favor rellene este campo</div>
 
                             </div>
@@ -843,7 +846,7 @@
                                     [(ngModel)]="productModel.subcategoria" required>
 
                                     <option *ngFor="let subcategory of subcategories"
-                                        [value]="subcategory.url+'_'+subcategory.grupo">{{subcategory.nombre}}
+                                        [value]="subcategory.url+'_'+subcategory.grupo"> {{subcategory.grupo}} - {{subcategory.nombre}}
                                     </option>
 
                                 </select>
@@ -1297,10 +1300,12 @@
                                             </span>
                                         </div>
 
-                                        <input type="number" class="form-control formProduct" name="price"
-                                            [(ngModel)]="productModel.precio" min="0" step="any"
-                                            pattern="[.\\,\\0-9]{1,}" (change)="validate(price)" #price tags="prices"
-                                            required>
+
+
+                                        <input type="text" class="form-control formProduct" name="price"
+                                             maxLength="6"
+                                            (keypress)="validators.soloNumeros($event)" 
+                                            [(ngModel)]="productModel.precio" #price required>
 
                                         <div class="valid-feedback">Valido</div>
                                         <div class="invalid-feedback">Por favor rellene este campo</div>
@@ -1366,9 +1371,10 @@
                                             </span>
                                         </div>
 
-                                        <input type="number" class="form-control formProduct" name="stock"
-                                            [(ngModel)]="productModel.stock" min="0" max="100" pattern="[0-9]{1,}"
-                                            (change)="validate(stock)" #stock tags="intNumber" required>
+                                        <input type="text" class="form-control formProduct" name="stock"
+                                            [(ngModel)]="productModel.stock" min="0" maxLength="4" pattern="[0-9]{1,}"
+                                            (keypress)="validaStock($event)" (change)="validate(stock)" #stock
+                                            tags="intNumber" required>
 
                                         <div class="valid-feedback">Valido</div>
                                         <div class="invalid-feedback">Por favor rellene este campo</div>

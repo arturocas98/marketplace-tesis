@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 import { OrdenesService } from 'src/app/core/ordenes/ordenes.service';
 import { VentaService } from 'src/app/core/venta/venta.service';
 import { Datepicker, ChartJs, ChartJsPie } from '../../../functions';
-
+import * as moment from 'moment';
 @Component({
 	selector: 'app-cuenta-mis-ventas',
 	templateUrl: './cuenta-mis-ventas.component.html',
@@ -31,10 +31,19 @@ export class CuentaMisVentasComponent implements OnInit, OnDestroy {
 	productName: any[] = [];
 	cantidadProduct: any[] = [];
 	graphPie: any[] = [];
-
+	today: any;
+	last_month: any;
 	constructor(private ordersService: OrdenesService,
 		private salesService: VentaService,
-		private activatedRoute: ActivatedRoute) { }
+		private activatedRoute: ActivatedRoute
+	) {
+		this.today = moment().format("YYYY-MM-DD");
+		var last_month = moment().subtract(30, 'days');
+		this.last_month = last_month.format("YYYY-MM-DD");
+		console.log("today:", this.today);
+		console.log("last_month:", this.last_month);
+
+	}
 
 	ngOnInit(): void {
 
@@ -117,6 +126,19 @@ export class CuentaMisVentasComponent implements OnInit, OnDestroy {
 											// console.log("entro if");
 											this.sales.push(resp[i]);
 											// console.log("ventas:", this.sales);
+
+										
+
+											this.sales.sort(function (a, b) {
+												
+												
+												return (a.sales.fecha_emision.substr(0, 10) - b.sales.fecha_emision.substr(0, 10))
+								
+											})
+
+											// console.log("ventas sort:" ,this.sales);
+											
+
 											/*=============================================
 											Filtramos ventas por fechas
 											=============================================*/
@@ -204,7 +226,7 @@ export class CuentaMisVentasComponent implements OnInit, OnDestroy {
 													return res;
 												}, {});
 
-												console.log("graph pie:", this.graphPie)
+												// console.log("graph pie:", this.graphPie)
 
 												/*=============================================
 												Ordenamos el arreglo en fecha de menor a mayor
@@ -244,9 +266,9 @@ export class CuentaMisVentasComponent implements OnInit, OnDestroy {
 
 
 
-												console.log("productName:",this.productName);
-												console.log("cantiad product :",this.cantidadProduct);
-												console.log("dataProfit:",this.dataProfit);
+												// console.log("productName:", this.productName);
+												// console.log("cantiad product :", this.cantidadProduct);
+												// console.log("dataProfit:", this.dataProfit);
 												/*=============================================
 												Extraer el valor máximo de las ventas
 												=============================================*/
@@ -274,11 +296,10 @@ export class CuentaMisVentasComponent implements OnInit, OnDestroy {
 														scales: {
 															yAxes: [{
 																ticks: {
-																	min: 0,
-																	max: Math.ceil(max / 1000) * 1000
+																	beginAtZero: true
 																}
 															}]
-														}
+														},
 													}
 												};
 												var randomScalingFactor = function () {
@@ -290,9 +311,14 @@ export class CuentaMisVentasComponent implements OnInit, OnDestroy {
 														datasets: [{
 															data: this.cantidadProduct,
 															backgroundColor: [
+																"#7dcea0",
 																'#b1cc43',
 																'#cc9043',
 																'#0099cc',
+																"#FFA07A",
+																"#9370DB",
+																"#FFE4E1",
+																
 															],
 															label: 'Dataset 1'
 														}],

@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DisputaService } from 'src/app/core/disputa/disputa.service';
 import { MensajeService } from 'src/app/core/mensaje/mensaje.service';
 import { OrdenesService } from 'src/app/core/ordenes/ordenes.service';
+import { ProductoService } from 'src/app/core/producto/producto.service';
 import { TiendaService } from 'src/app/core/tienda/tienda.service';
 import { UsuarioService } from 'src/app/core/usuario/usuario.service';
 import { environment } from 'src/environments/environment';
@@ -38,6 +39,7 @@ export class CuentaPerfilComponent implements OnInit {
   ordersPending : number = 0;
   disputes: any[] = [];
   messages: any[] = [];
+  productos:any [] = [];
   constructor(
     private usersService: UsuarioService,
     public formBuilder: FormBuilder,
@@ -46,7 +48,9 @@ export class CuentaPerfilComponent implements OnInit {
     private tiendaService:TiendaService,
     private ordersService:OrdenesService,
     private disputesService:DisputaService,
-    private messagesService: MensajeService
+    private messagesService: MensajeService,
+    private productService: ProductoService,
+
   ) {
     this.validators = new MyValidators();
 
@@ -107,15 +111,15 @@ export class CuentaPerfilComponent implements OnInit {
 									=============================================*/
 
 									this.disputesService.getFilterData("receptor", respTienda[i].tienda)
-									.subscribe(resp=>{
+									.subscribe(respDisputa=>{
 										
-										if(Object.keys(resp).length > 0){
+										if(Object.keys(respDisputa).length > 0){
 
-											for(const i in resp){
+											for(const i in respDisputa){
 
-												if(resp[i].respuesta == undefined){								
+												if(respDisputa[i].respuesta == undefined){								
 
-													this.disputes.push(resp[i]);
+													this.disputes.push(respDisputa[i]);
 
 												}				
 											
@@ -131,19 +135,34 @@ export class CuentaPerfilComponent implements OnInit {
 									=============================================*/
 
 									this.messagesService.getFilterData("receptor", respTienda[i].tienda)
-									.subscribe(resp=>{
-										
-										if(Object.keys(resp).length > 0){
+									.subscribe(respMensaje=>{
+										console.log("mensajes_respta:",respMensaje);
+                    
+										if(Object.keys(respMensaje).length > 0){
 
-											for(const i in resp){
+											for(const i in respMensaje){
 
-												if(resp[i].answer == undefined){								
+												if(respMensaje[i].respuesta == undefined){								
 
 													this.messages.push(resp[i]);	
 
 												}			
 											
 											}
+
+										}
+
+
+									})
+
+                  this.productService.getByFilter("tienda", respTienda[i].tienda)
+									.subscribe(resp=>{
+										
+										if(Object.keys(resp).length > 0){
+
+                      for(const i in resp){
+                        this.productos.push(resp[i]);
+                      }
 
 										}
 

@@ -12,6 +12,7 @@ import { Producto } from 'src/app/models/producto';
 import { Tienda } from 'src/app/models/tienda';
 import { environment } from 'src/environments/environment';
 import { DinamicRating, DinamicReviews, Tooltip, Rating, Sweetalert, Capitalize, CreateUrl } from '../../../functions';
+import { MyValidators } from '../../utils/MyValidators';
 declare var jQuery: any;
 declare var $: any;
 @Component({
@@ -96,6 +97,10 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
   idProduct: string = null;
   editProductAction: boolean = false;
   popoverMessage: string = 'Estas seguro de eliminar el producto?';
+  validators:MyValidators;
+  cancelTxt : string = "Cancelar";
+  confirmTxt : string = "Confirmar";
+
   constructor(
     private tiendaService: TiendaService,
     private productsService: ProductoService,
@@ -106,6 +111,7 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
   ) {
     this.storeModel = new Tienda();
     this.productModel = new Producto();
+    this.validators = new MyValidators();
   }
 
   ngOnInit(): void {
@@ -369,28 +375,28 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
       Validamos la información de la tienda
       =============================================*/
 
-    if ($(input).attr("name") == "storeAbout") {
+    // if ($(input).attr("name") == "storeAbout") {
 
-      /*=============================================
-        Validamos expresión regular de la información de la tienda
-        =============================================*/
+    //   /*=============================================
+    //     Validamos expresión regular de la información de la tienda
+    //     =============================================*/
 
-      let pattern = /^[-\\(\\)\\=\\%\\&\\$\\;\\_\\*\\"\\#\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]{1,1000}$/;
+    //   let pattern = /[A-Za-z0-9\s]{1,1000}/;
 
-      if (!pattern.test(input.value)) {
+    //   if (!pattern.test(input.value)) {
 
-        $(input).parent().addClass('was-validated');
+    //     $(input).parent().addClass('was-validated');
 
-        input.value = "";
+    //     input.value = "";
 
-        return;
+    //     return;
 
-      } else {
+    //   } else {
 
-        this.storeModel.resumen = input.value.substr(0, 100) + "...";
-      }
+    //     this.storeModel.resumen = input.value.substr(0, 100) + "...";
+    //   }
 
-    }
+    // }
 
     /*=============================================
     Validamos el teléfono de la tienda
@@ -440,29 +446,7 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
 
     }
 
-    /*=============================================
-    Validamos el precio de envio de la tienda
-    =============================================*/
-
-    if ($(input).attr("name") == "storePrecioEnvio") {
-
-      /*=============================================
-      Validamos expresión regular de la dirección de la tienda
-      =============================================*/
-
-      let pattern = /^[-\\0-9 ]{1,}$/;
-
-      if (!pattern.test(input.value)) {
-
-        $(input).parent().addClass('was-validated');
-
-        input.value = "";
-
-        return;
-
-      }
-
-    }
+   
 
     /*=============================================
     Validamos las redes sociales de la tienda
@@ -608,25 +592,13 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
       Validamos expresión regular
       =============================================*/
 
-      let pattern = /^[0-9]{1,}$/;
+      if ($(input).attr("name") == "stock" && input.value > 100) {
 
-      if (!pattern.test(input.value)) {
+        input.value = "";
 
-        $(input).parent().addClass('was-validated');
+        Sweetalert.fnc("error", "El producto ha excedido las 100 unidades", null)
 
         return;
-
-      } else {
-
-        if ($(input).attr("name") == "stock" && input.value > 100) {
-
-          input.value = "";
-
-          Sweetalert.fnc("error", "El producto ha excedido las 100 unidades", null)
-
-          return;
-
-        }
 
       }
 
@@ -726,7 +698,7 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
     Alerta suave mientras se edita la tienda
     =============================================*/
 
-    Sweetalert.fnc("loading", "Loading...", null);
+    Sweetalert.fnc("loading", "Cargando...", null);
 
     /*=============================================
     Subir imagenes al servidor
@@ -1694,6 +1666,13 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
 
     }
 
+  }
+
+  public validaStock(e) {
+    var key = window.event ? e.which : e.keyCode;
+    if (key < 48 || key > 57) {
+      e.preventDefault();
+    }
   }
 
   ngOnDestroy() {

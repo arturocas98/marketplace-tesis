@@ -1,5 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
 import { CategoriaService } from 'src/app/core/categoria/categoria.service';
@@ -20,7 +23,11 @@ export class SubcategoriaComponent  implements OnInit,OnDestroy{
   categorias : any [] = [];
   subcategoria: Subcategoria;
   public bsModalRefAdd: BsModalRef;
-
+  displayedColumns: string[] = ['nro','nombre', 'categoria', 'grupo', 'vistas','acciones'];
+  dataSource:MatTableDataSource<Subcategoria>;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  searchKey: string = "";
   constructor(
     private fb: FormBuilder,
     private subcategoriaService: SubcategoriaService,
@@ -31,44 +38,7 @@ export class SubcategoriaComponent  implements OnInit,OnDestroy{
   }
 
   ngOnInit(){
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      processing: true,
-      language: {
-        processing: "Procesando...",
-        search: "Buscar:",
-        lengthMenu: "Mostrar _MENU_ elementos",
-        info: "Mostrando desde _START_ al _END_ de _TOTAL_ elementos",
-        infoEmpty: "Mostrando ningún elemento.",
-        infoFiltered: "(filtrado _MAX_ elementos total)",
-        infoPostFix: "",
-        loadingRecords: "Cargando registros...",
-        zeroRecords: "No se encontraron registros",
-        emptyTable: "No hay datos disponibles en la tabla",
-        paginate: {
-          first: "Primero",
-          previous: "Anterior",
-          next: "Siguiente",
-          last: "Último"
-        },
-        aria: {
-          sortAscending: ": Activar para ordenar la tabla en orden ascendente",
-          sortDescending: ": Activar para ordenar la tabla en orden descendente"
-        }
-      }
-    }
     this.getSubcategorias();
-    // this.getCategorias();
-  }
-
-  getCategorias(){
-    this.categoriaService.getAll().subscribe(resp=>{
-      // console.log("Respuesta:",resp);
-      for(const i in resp){
-        this.categorias.push(resp[i]);
-
-      }
-    });
   }
 
   getSubcategorias(){
@@ -78,6 +48,10 @@ export class SubcategoriaComponent  implements OnInit,OnDestroy{
         this.subcategorias.push(resp[i]);
 
       }
+      this.dataSource = new MatTableDataSource(this.subcategorias);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.paginator._intl.itemsPerPageLabel = 'Items por página';
+      this.dataSource.sort = this.sort;
       if (this.loadProduct == this.subcategorias.length) {
         this.dtTrigger.next();
       }
@@ -102,6 +76,15 @@ export class SubcategoriaComponent  implements OnInit,OnDestroy{
       this.subcategorias = [];
       this.getSubcategorias();
     });
+  }
+
+  onSearchClear() {
+    this.searchKey = "";
+    this.applyFilter();
+  }
+
+  applyFilter() {
+    this.dataSource.filter = this.searchKey.trim().toLowerCase();
   }
 
   ngOnDestroy() {

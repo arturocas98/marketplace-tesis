@@ -41,6 +41,7 @@ export class CheckoutComponent implements OnInit {
   carrito_tienda: any[] = [];
   total: number = 0;
   id_orden: string = "";
+  valor_envio: number = 0;
   constructor(
     public router: Router,
     private userService: UsuarioService,
@@ -111,6 +112,7 @@ export class CheckoutComponent implements OnInit {
                       tiempo_entrega: res[j].tiempo_entrega,
                       cantidad: list[i].unidad,
                       precio: DinamicPrice.fnc(res[j])[0],
+                      precio_sin_oferta: res[j].precio,
                       shipping: res[j].shipping,
                       categoria: res[j].categoria,
                       tienda: res[j].tienda,
@@ -210,6 +212,7 @@ export class CheckoutComponent implements OnInit {
       let localSubTotalPrice = this.subTotalPrice;
       let localCarritoTienda = this.carrito_tienda;
       let localTotal = this.total;
+      let localValorEnvio = this.valor_envio;
       setTimeout(function () {
 
         let price = $(".pCheckout .end-price");
@@ -266,6 +269,7 @@ export class CheckoutComponent implements OnInit {
         tiendas_filter.forEach(tienda => {
           valor_envio += Number(tienda.precio_envio);
         });
+        // localValorEnvio = valor_envio;
         console.log("valor_envio:", valor_envio);
 
         if (total_sin_envio >= 25) {
@@ -273,10 +277,11 @@ export class CheckoutComponent implements OnInit {
           total_con_envio = total_sin_envio + valor_envio;
         } else {
           total_con_envio = total_sin_envio + valor_envio;
-          console.log("total_con_envio:", total_con_envio);
+          // console.log("total_con_envio:", total_con_envio);
         }
         total = total_con_envio;
         localTotal = total;
+        console.log("local ValorEnvio:", localValorEnvio);
         // localTotal = 26283238;
         $(".valorEnvio").html(`$${valor_envio.toFixed(2)}`)
         $(".totalCheckout").html(`$${total.toFixed(2)}`)
@@ -289,6 +294,24 @@ export class CheckoutComponent implements OnInit {
   onSubmit() {
     if (this.form.valid) {
       Sweetalert.fnc("loading", "Cargando ... ", null);
+     
+      let tiendas_filter = [];
+      
+      this.carrito_tienda.reduce((res, value) => {
+        if (!res[value.tienda]) {
+
+          res[value.tienda] = { tienda: value.tienda, precio_envio: value.precio_envio }
+          tiendas_filter.push(res[value.tienda])
+
+        }
+        return res;
+
+      }, {});
+      this.valor_envio = 0;
+      tiendas_filter.forEach(tienda => {
+        this.valor_envio += Number(tienda.precio_envio);
+      });
+      console.log("valor de envio submit:", this.valor_envio);
       if (this.form.controls['metodo_pago'].value == 'paypal') {
         Sweetalert.fnc('html', `<div id="paypal-button-container"></div>`, null);
         Paypal.fnc(this.totalPrice[0]).then(resp => {
@@ -297,6 +320,7 @@ export class CheckoutComponent implements OnInit {
 
             let bodyOrden = {
               "direccion": this.form.controls['direccion'].value,
+              "envio": this.valor_envio,
               "telefono": this.form.controls['telefono'].value,
               "total": this.totalPrice[0],
               "email": this.form.controls['email'].value,
@@ -313,6 +337,7 @@ export class CheckoutComponent implements OnInit {
 
               this.shoppingCart.forEach((product, index) => {
                 totalRender++;
+                // console.log("shopping cart:",this.shoppingCart);
 
                 this.productService.getByFilter("url", product.url)
                   .subscribe(resp => {
@@ -369,6 +394,9 @@ export class CheckoutComponent implements OnInit {
 
                       ]
                       console.log("orden_id:", respOrden['name']);
+                      let price = $(".pCheckout .end-price");
+                      let precio_oferta = Number($(price[index]).html());
+                      console.log("precio de oferta:", precio_oferta);
 
                       let body = {
                         id_orden: respOrden['name'],
@@ -380,7 +408,8 @@ export class CheckoutComponent implements OnInit {
                         categoria: product.categoria,
                         // details:product.details,
                         cantidad: product.cantidad,
-                        precio: this.subTotalPrice[index],
+                        precio_unitario: precio_oferta,
+                        subtotal: this.subTotalPrice[index],
                         proceso: JSON.stringify(proccess),
                         estado: "pendiente",
                         direccion: this.form.controls['direccion'].value,
@@ -432,7 +461,8 @@ export class CheckoutComponent implements OnInit {
                               metodo_pago: this.form.controls['metodo_pago'].value,
                               id_pago: id_payment,
                               fecha_emision: new Date(),
-                              estado: "pendiente"
+                              estado: "pendiente",
+                              tienda: product.tienda,
 
                             }
 
@@ -469,6 +499,7 @@ export class CheckoutComponent implements OnInit {
 
         let bodyOrden = {
           "direccion": this.form.controls['direccion'].value,
+          "envio": this.valor_envio,
           "telefono": this.form.controls['telefono'].value,
           "total": this.totalPrice[0],
           "email": this.form.controls['email'].value,
@@ -480,12 +511,12 @@ export class CheckoutComponent implements OnInit {
         this.ordenService.registerDatabase(bodyOrden, localStorage.getItem('idToken')).subscribe(respOrden => {
           // console.log("repsuesta_orden:", respOrden);
           this.id_orden = respOrden['name'];
-          console.log("this.id_orden:", this.id_orden);
+          // console.log("this.id_orden:", this.id_orden);
 
 
           this.shoppingCart.forEach((product, index) => {
             totalRender++;
-
+            console.log("shopping cart:", this.shoppingCart);
             this.productService.getByFilter("url", product.url)
               .subscribe(resp => {
 
@@ -540,7 +571,10 @@ export class CheckoutComponent implements OnInit {
                     }
 
                   ]
-                  console.log("orden_id:", respOrden['name']);
+                  // console.log("orden_id:", respOrden['name']);
+                  let price = $(".pCheckout .end-price");
+                  let precio_oferta = Number($(price[index]).html());
+                  console.log("precio de oferta:", precio_oferta);
 
                   let body = {
                     id_orden: respOrden['name'],
@@ -552,7 +586,8 @@ export class CheckoutComponent implements OnInit {
                     categoria: product.categoria,
                     // details:product.details,
                     cantidad: product.cantidad,
-                    precio: this.subTotalPrice[index],
+                    precio_unitario: precio_oferta,
+                    subtotal: this.subTotalPrice[index],
                     proceso: JSON.stringify(proccess),
                     estado: "pendiente",
                     direccion: this.form.controls['direccion'].value,
@@ -604,7 +639,8 @@ export class CheckoutComponent implements OnInit {
                           metodo_pago: this.form.controls['metodo_pago'].value,
                           // id_pago: id_payment,
                           fecha_emision: new Date(),
-                          estado: "pendiente"
+                          estado: "pendiente",
+                          tienda: product.tienda,
 
                         }
 

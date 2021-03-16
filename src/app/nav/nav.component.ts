@@ -18,4 +18,10 @@ export class NavComponent {
 
   constructor(private breakpointObserver: BreakpointObserver) {}
 
+  logout(){
+    localStorage.removeItem('token_auth');
+    localStorage.removeItem('email_auth');
+    window.open('auth/login', '_top')
+  }
+
 }

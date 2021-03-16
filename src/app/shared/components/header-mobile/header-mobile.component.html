@@ -72,7 +72,7 @@
                             <ul class="ps-list--categories">
                                 <li *ngFor="let categoria of categorias;let lastIndex=last"
                                     class="current-menu-item menu-item-has-children">
-                                    <a routerLink="productos/{{categoria.url}}">
+                                    <a href="productos/{{categoria.url}}">
                                         <strong>{{categoria.nombre}}</strong>
                                     </a>
                                     <span class="sub-toggle">

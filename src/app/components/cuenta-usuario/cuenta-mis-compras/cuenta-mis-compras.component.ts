@@ -128,6 +128,7 @@ export class CuentaMisComprasComponent implements OnInit, OnDestroy {
 
   }
   abrirProceso(id_order) {
+    this.myShopping = [];
     this.id_orden_modal = id_order;
     if (this.ordenes.length > 0) {
       this.ordersService.getFilterData("id_orden", id_order).subscribe(resp => {

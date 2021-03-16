@@ -1248,7 +1248,7 @@ export class CuentaNuevaTiendaComponent implements OnInit {
 
                       this.product.feedback = {
                         // cambiar por review
-                        type: "approved",
+                        type: "review",
                         comment: "Tu producto está disponible"
 
                       }
