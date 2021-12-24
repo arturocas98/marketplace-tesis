@@ -295,7 +295,7 @@ export class CuentaMiTiendaComponent implements OnInit, OnDestroy {
 
           for (const i in review) {
 
-            globalReviews += review[i].review
+            globalReviews += Number(review[i].review)
           }
         })
         // console.log("globalRating:", globalRating);

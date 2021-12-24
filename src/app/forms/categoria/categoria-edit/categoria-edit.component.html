@@ -1,0 +1,112 @@
+<!-- Modal Header -->
+<div class="modal-header">
+    <h4 class="modal-title text-center">Formulario de aprobación</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRefEdit.hide()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body p-5 text-left">
+    <form  (ngSubmit)="onSubmitProduct(p)" #p="ngForm">
+
+
+        <div class="form-group">
+
+            <label>Nombre</label>
+
+            <div class="form-group__content">
+
+                <input type="text" class="form-control" name="nombre"  [(ngModel)]="categoria.nombre"  readonly>
+
+
+
+            </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>URL</label>
+
+            <div class="form-group__content">
+
+                <input type="text" class="form-control"  name="url" [(ngModel)]="categoria.url" readonly>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Grupos</label>
+
+            <!-- <div class="form-group__content">
+
+                <input type="text" class="form-control" name="grupo" [(ngModel)]="categoria.grupo"  readonly>
+
+                
+            </div> -->
+
+            <div class="form-group__content">
+
+                <tag-input class="form-control formCategoria" [placeholder]="textGroup" [secondaryPlaceholder]='textGroup2'  type="text" name="categoriaTags" [(ngModel)]="tags"
+                    [maxItems]='5'></tag-input>
+
+                <div class="valid-feedback">Valido</div>
+                <div class="invalid-feedback">Por favor rellene este campo</div>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Imagen de la categoría<sup class="text-danger">*</sup></label>
+            <div class="form-group__content">
+
+                <label class="pb-5" for="productImage">
+
+                    <img src="{{path}}img/products/categorias/{{categoria.url}}/{{categoria.imagen}}"
+                        class="img-fluid changeImage">
+
+                </label>
+
+                <div class="custom-file">
+
+                    <input type="file" class="custom-file-input formCategoria" id="productImage" accept="image/*"
+                        maxSize="2000000" (change)="validateImage($event, 'changeImage')" required>
+
+                    <div class="valid-feedback">Valido</div>
+                    <div class="invalid-feedback">Por favor rellene este campo</div>
+
+                    <label class="custom-file-label" for="productImage">Seleccionar archivo</label>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="modal-footer">
+
+            <div class="form-group submtit">
+
+
+
+
+                <button mat-raised-button color="primary">Editar</button>
+
+            </div>
+
+        </div>
+
+
+    </form>
+
+
+
+
+</div>

@@ -29,9 +29,26 @@ export class CategoriaService {
     return this.http.get(url);
   }
 
+  patchDataAuth(id:String, value:Object,idToken: string){
+
+    return this.http.patch(`${this.url_api}/categoria/${id}.json?auth=${idToken}`, value);
+
+	}
+
   patchData(id:String, value:Object){
 
 		return this.http.patch(`${this.url_api}/categoria/${id}.json`,value);
+
+	}
+
+  getById(value: string) {
+
+    return this.http.get(`${this.url_api}/categoria/${value}.json`);
+  }
+
+  deleteDataAuth(id:string, idToken:string){
+
+		return this.http.delete(`${this.url_api}/categoria/${id}.json?auth=${idToken}`);
 
 	}
 }

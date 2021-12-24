@@ -38,9 +38,11 @@ export class AprobacionProductosComponent implements OnInit {
         this.idProducts = Object.keys(resp).toString().split(",");
       }
       this.productos.map((producto,index)=>{
+        producto.numero = index;
         producto.feedback = JSON.parse(producto.feedback);
       });
-
+      // console.log("productos:",this.productos);
+      
       this.dataSource = new MatTableDataSource(this.productos);
       this.dataSource.paginator = this.paginator;
       this.dataSource.paginator._intl.itemsPerPageLabel = 'Items por página';
@@ -52,6 +54,7 @@ export class AprobacionProductosComponent implements OnInit {
 
 
   editProduct(id:string ){
+    
     const initialState = { producto_id: id };
     this.bsModalRefEdit = this.modalService.show(AprobacionModalComponent, Object.assign({}, { class: 'modal-lg', initialState }));
     this.bsModalRefEdit.content.onClose.subscribe(resp=>{

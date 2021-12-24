@@ -35,4 +35,10 @@ export class GrupoService {
         return this.http.patch(`${this.url_api}/grupo/${id}.json`, value);
 
     }
+
+    deleteDataAuth(id:string, idToken:string){
+
+		return this.http.delete(`${this.url_api}/grupo/${id}.json?auth=${idToken}`);
+
+	}
 }

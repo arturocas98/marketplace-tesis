@@ -1,69 +1,93 @@
 <mat-card class="shipping-card">
     <mat-card-header>
-        <mat-card-title>Categoria</mat-card-title>
+        <mat-card-title>Aprobación de productos</mat-card-title>
     </mat-card-header>
     <mat-card-content>
         <div class="ps-section__right">
 
-
             <div class="d-flex justify-content-between">
 
-                <!-- <div>
-            <button mat-raised-button color="primary" (click)="addCategoria()">Nueva
-              categoria</button>
-          </div> -->
+                <mat-form-field class="search-form-field" floatLabel="never">
+                    <input matInput [(ngModel)]="searchKey" placeholder="Buscar" autocomplete="off"
+                        (keyup)="applyFilter()">
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey"
+                        (click)="onSearchClear()">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+
             </div>
             <br>
-            <table class="table dt-responsive" width="100%">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Producto</th>
-                        <th scope="col">Tienda</th>
-                        <th scope="col">Estado</th>
-                        <th scope="col">Fecha de creación</th>
-                        <th scope="col" ></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let producto of productos;let i=index;let lastIndex=last;">
-                        <th> {{i+1}}</th>
-                        <td>{{ producto.nombre }}</td>
-                        <td>{{producto.tienda}}</td>
-                        <td>
-                            <!-- {{ producto.feedback.type=='approved' ?'aprobado': 'En revisión' }} -->
-                            <h4>
-                                <span *ngIf="producto.feedback.type == 'approved'" data-toggle="tooltip"
-                                    title="{{producto.feedback.comment}}" class="badge badge-success">
-                                    <a >Aprobado</a>
-                                </span>
 
-                                <span *ngIf="producto.feedback.type == 'review'" data-toggle="tooltip"
-                                    title="{{producto.feedback.comment}}" class="badge badge-warning">En
-                                    revisión</span>
-                            </h4>
+            <div class="mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource">
+
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="nro">
+                        <th mat-header-cell *matHeaderCellDef> No. </th>
+                        <td mat-cell *matCellDef="let element;let i =index;"> {{element.numero +1 }} </td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="nombre">
+                        <th mat-header-cell *matHeaderCellDef> Producto </th>
+                        <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+                    </ng-container>
+
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="tienda">
+                        <th mat-header-cell *matHeaderCellDef> Tienda </th>
+                        <td mat-cell *matCellDef="let element"> {{element.tienda}} </td>
+                    </ng-container>
+
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="feedback">
+                        <th mat-header-cell *matHeaderCellDef> Estado </th>
+                        <td mat-cell *matCellDef="let element">
+                            <!-- {{element.feedback}}  -->
+                            <span *ngIf="element.feedback.type == 'approved'" data-toggle="tooltip"
+                                title="{{element.feedback.comment}}" class="badge badge-success">
+                                <a>Aprobado</a>
+                            </span>
+
+                            <span *ngIf="element.feedback.type == 'review'" data-toggle="tooltip"
+                                title="{{element.feedback.comment}}" class="badge badge-warning">En
+                                revisión</span>
                         </td>
-                        <td>{{ producto.fecha_creacion|date }}</td>
-                        <td > 
-                            <button mat-raised-button class="btn btn-success" (click)="editProduct(idProducts[i])">Editar</button>
-                            <!-- <button mat-raised-button color="warn" (click)="deleteProduct(producto)" >Eliminar</button> -->
+                    </ng-container>
+
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="fecha_creacion">
+                        <th mat-header-cell *matHeaderCellDef> Fecha de creación </th>
+                        <td mat-cell *matCellDef="let element"> {{element.fecha_creacion |date}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="acciones">
+                        <th mat-header-cell *matHeaderCellDef> </th>
+                        <td mat-cell *matCellDef="let element;let i =index;">
+                            <button mat-icon-button (click)="editProduct(idProducts[element.numero])">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                            <!-- <button mat-icon-button color="warn">
+                                <mat-icon>delete_outline</mat-icon>
+                            </button> -->
                         </td>
-                    </tr>
-                </tbody>
-            </table>
-            <!-- 
-          <div class="d-flex justify-content-center preloadTable">
-            <div class="spinner-border text-muted my-3"></div>
-  
-          </div> -->
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                    <!-- <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':dataSource!=null}"></mat-footer-row>
+                  <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}"></mat-footer-row> -->
+
+                </table>
+
+                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+            </div>
+
+
 
         </div>
-
-        <!-- <mat-paginator #paginator [length]="productos.length" [pageIndex]="0" [pageSize]="50"
-            [pageSizeOptions]="[25, 50, 100, 250]">
-        </mat-paginator> -->
-
-
     </mat-card-content>
 
 </mat-card>

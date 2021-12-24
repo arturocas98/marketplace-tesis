@@ -50,6 +50,7 @@ import { AprobacionModalComponent } from './forms/aprobacion-productos/aprobacio
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { CategoriaModalComponent } from './forms/categoria/categoria-modal/categoria-modal.component'; 
 import { TagInputModule } from 'ngx-chips';
+import { CategoriaEditComponent } from './forms/categoria/categoria-edit/categoria-edit.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,6 +70,7 @@ import { TagInputModule } from 'ngx-chips';
     AprobacionProductosComponent,
     AprobacionModalComponent,
     CategoriaModalComponent,
+    CategoriaEditComponent,
   ],
   imports: [
     BrowserModule,

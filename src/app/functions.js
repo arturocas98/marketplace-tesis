@@ -446,6 +446,20 @@ export let Sweetalert = {
 
         break;
 
+      case "confirm-delete":
+        if (url == null) {
+          Swal.fire({
+            title: text,
+            icon: "warning",
+            showConfirmButton: true,
+            showCancelButton: true,
+            confirmButtonText: "Confirmar",
+            cancelButtonText: "Cancelar",
+            width: "46rem",
+          });
+        } 
+        break;
+
       case "close":
         Swal.close();
 
